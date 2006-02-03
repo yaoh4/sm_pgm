@@ -301,10 +301,10 @@ function sortGrantList(sortCriteria)
    document.forms[0].submit();
  
 }
-function openYourGrantsWindow(applId)
+function openYourGrantsWindow(applId, grantsUrl)
 { 
 
-  var url = "https://i2e-dev.nci.nih.gov/yourgrants/jsp/GrantDetails.jsp?applId=" + applId;
+  var url = grantsUrl + "/yourgrants/jsp/GrantDetails.jsp?applId=" + applId;
   var winName = "YourGrants";
   var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
  

@@ -79,6 +79,7 @@ build/war/pgm/RereferReferralComplete.jsp -text
 build/war/pgm/SearchGrantsForPDA.jsp -text
 build/war/pgm/SearchGrantsForReferral.jsp -text
 build/war/pgm/SentErrorEmail.jsp -text
+build/war/pgm/Status.jsp -text
 build/war/pgm/Stylesheets/PgmStyleSheet.css -text
 build/war/pgm/Stylesheets/main.css -text
 build/war/pgm/Stylesheets/otherappsmenu.css -text
@@ -120,6 +121,7 @@ build/war/pgm/WEB-INF/lib/log4j-1.2.8.jar -text
 build/war/pgm/WEB-INF/lib/log4j-props.jar -text
 build/war/pgm/WEB-INF/lib/log4j.properties -text
 build/war/pgm/WEB-INF/lib/odmg.jar -text
+build/war/pgm/WEB-INF/lib/ojdbc14.jar -text
 build/war/pgm/WEB-INF/lib/spring-aop.jar -text
 build/war/pgm/WEB-INF/lib/spring-beans.dtd -text
 build/war/pgm/WEB-INF/lib/spring-context.jar -text
