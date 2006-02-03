@@ -229,6 +229,10 @@ deploy/properties/hibernate.cfg.xml -text
 deploy/properties/hibernate.properties -text
 deploy/properties/log4j.properties -text
 deploy/properties/pgm.properties -text
+deploy/properties/test/hibernate.cfg.xml -text
+deploy/properties/test/hibernate.properties -text
+deploy/properties/test/log4j.properties -text
+deploy/properties/test/pgm.properties -text
 lib/aopalliance.jar -text
 lib/c3p0-0.8.5.jar -text
 lib/c3p0-oracle-thin-extras-0.8.5.jar -text
