@@ -14,6 +14,7 @@ import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject;
+import gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo;
 import java.util.*;
 
 import javax.servlet.http.*;
@@ -30,6 +31,7 @@ public class FormatGrantListTag extends TagSupport {
   private boolean grantSelected;
   private String mSelectedGrantsKey;
   private Integer mKey;
+  private String grantsUrl="";
 
   public static String className = "";
   public static String borderClassName = "";
@@ -53,6 +55,11 @@ public class FormatGrantListTag extends TagSupport {
     try {
       HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
       JspWriter out = pageContext.getOut();
+      HttpSession session = request.getSession();
+      ServletContext sc = session.getServletContext();
+      ApplicationInfo ai = (ApplicationInfo) sc.getAttribute("applicationInfo");
+	  grantsUrl = ai.getApplicationKey("GRANTS_DETAILS_URL");
+	  System.out.println("*** grantsURL is ***** " + grantsUrl);
 	  StringBuffer buf = new StringBuffer();
       mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
       Map referralQueryResults = (Map) request.getSession().getAttribute(ApplicationConstants.QUERY_RESULTS);
@@ -101,7 +108,7 @@ public class FormatGrantListTag extends TagSupport {
 	  }
       buf.append("<td headers=\"header01\" width=\"16%\" class=" + className + ">");
 
-      buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
+      buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	  if(obj.getWithdrawn() ){
 		 buf.append("<br> Withdrawn in IMPAC II</td>");
 	  }

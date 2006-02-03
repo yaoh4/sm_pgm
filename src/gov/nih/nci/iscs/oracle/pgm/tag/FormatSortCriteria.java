@@ -39,6 +39,7 @@ public class FormatSortCriteria extends TagSupport {
   public static String PD_START_DATE = "Project Director Start Date, ";
   public static String ARA_MATCH = "ARA Status Code, ";
   public static String DUAL_CA = "Dual Cancer Activity Code, ";
+  public static String CURR_REFERRAL_DATE_SORT = "Referred Date, ";
 
 
   public String getFormName() {
@@ -98,6 +99,9 @@ public class FormatSortCriteria extends TagSupport {
 	  }
       if (mSortColumn.equalsIgnoreCase(ApplicationConstants.DUAL_CA_SORT)) {
 		  mResults = DUAL_CA + FULL_GRANT_NUMBER;
+	  }
+      if (mSortColumn.equalsIgnoreCase(ApplicationConstants.CURR_REFERRAL_DATE_SORT)) {
+		  mResults = CURR_REFERRAL_DATE_SORT + FULL_GRANT_NUMBER;
 	  }
 	  // did we match?
 	  if(mResults == null) {
