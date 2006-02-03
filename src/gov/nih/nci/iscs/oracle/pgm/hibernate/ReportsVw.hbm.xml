@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw" 
+    table="REPORTS_VW"
+>
+
+    <composite-id>
+        <key-property 
+            name="repId" 
+            column="REP_ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="reportName" 
+            column="REPORT_NAME" 
+            type="java.lang.String"
+            length="75"
+        />
+        <key-property 
+            name="crystalId" 
+            column="CRYSTAL_ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="rusId" 
+            column="RUS_ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="applicationName" 
+            column="APPLICATION_NAME" 
+            type="java.lang.String"
+            length="50"
+        />
+        <key-property 
+            name="moduleName" 
+            column="MODULE_NAME" 
+            type="java.lang.String"
+            length="50"
+        />
+        <key-property 
+            name="sequenceNum" 
+            column="SEQUENCE_NUM" 
+            type="java.lang.Long"
+            length="3"
+        />
+        <key-property 
+            name="rfrId" 
+            column="RFR_ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="formatType" 
+            column="FORMAT_TYPE" 
+            type="java.lang.String"
+            length="20"
+        />
+        <key-property 
+            name="displayName" 
+            column="DISPLAY_NAME" 
+            type="java.lang.String"
+            length="75"
+        />
+    </composite-id>    
+
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

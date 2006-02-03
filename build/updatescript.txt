@@ -1,0 +1,19 @@
+update
+		appl_process_statuses_t 
+      set end_date = null
+      where
+		nat_appl_id = 6293672 and
+		pss_code = 'REF';
+		
+delete from
+		appl_process_statuses_t 
+           where
+		nat_appl_id = 6293672 and
+		pss_code = 'PDACC';
+		
+		
+delete from application_pds_t where
+                   Appl_id = 6293672;
+                   
+
+delete from process_statuses_t where non_id = 1827 and code = 'PDACC';
