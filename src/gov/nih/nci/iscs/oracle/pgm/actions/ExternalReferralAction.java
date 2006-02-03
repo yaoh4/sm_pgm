@@ -1,5 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
 
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
@@ -117,5 +119,45 @@ public class ExternalReferralAction extends NciPgmAction{
    }
    return url;
  }
+
+ public boolean verifyUser(HttpServletRequest request, HttpServletResponse response)
+        throws UserLoginException, Exception
+    {
+        boolean returnValue = false;
+        HttpSession session = request.getSession(true);
+
+        NciUser nu = (NciUser)session.getAttribute("nciuser");
+        if(nu != null && nu.isValid())
+        {
+            returnValue = verifyUserForApp(request, response);
+        } else
+        {
+            String remoteUser = (String)request.getParameter("ldapID");
+            if(remoteUser != null && !remoteUser.equals(""))
+            {
+                NciUserImpl nui = new NciUserImpl();
+                StringBuffer ru = new StringBuffer(50);
+                if(remoteUser.indexOf("cn=") >= 0)
+                {
+                    int cnIdx = remoteUser.indexOf("cn=");
+                    for(int i = cnIdx + 3; i < remoteUser.length() && remoteUser.charAt(i) != ','; i++)
+                        ru.append(remoteUser.charAt(i));
+
+                } else
+                {
+                    ru.append(remoteUser);
+                }
+                nui.setUserId(ru.toString());
+                if(setUserAttributes(nui, request)) {
+					session.setAttribute("nciuser", nui);
+                    returnValue = verifyUserForApp(request, response);
+				} else {
+				   logger.error("User Priviledges denied - 1!!! ");
+					return false;
+				}
+            }
+        }
+        return returnValue;
+    }
 
 }
