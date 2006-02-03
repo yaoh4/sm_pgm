@@ -45,13 +45,9 @@ public class StatusAction extends Action {
        mStatusForm = (StatusForm) form;
        mAction = mStatusForm.getRequestAction();
         try {
-		  System.out.println("**** about to prcess getLdapUser *** " );
           String ldapUserId = getLdapUser(request, response);
-		  System.out.println("**** complted process getLdapUser *** " + ldapUserId);
           String oracleUserId = checkLdapStatus(request, response, ldapUserId);
-		  System.out.println("**** complted process checkLdapStatus *** " + oracleUserId);
           checkPGMStatus(request, response, oracleUserId);
-		  System.out.println("**** complted process checkPGMStatus *** ");
         }
         catch(Exception e)
         {
