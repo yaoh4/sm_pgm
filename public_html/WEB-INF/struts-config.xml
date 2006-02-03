@@ -11,6 +11,7 @@
       <form-bean name="pdAssignmentForm" type="gov.nih.nci.iscs.oracle.pgm.forms.PdAssignmentForm" dynamic="false"/> 
       <form-bean name="externalReferralSearchForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ExternalReferralForm" dynamic="false"/> 
       <form-bean name="grantSearchErrorForm" type="gov.nih.nci.iscs.oracle.pgm.forms.GrantSearchErrorForm" dynamic="false"/> 
+      <form-bean name="statusForm" type="gov.nih.nci.iscs.oracle.pgm.forms.StatusForm" dynamic="false"/> 
   </form-beans>
  
   <!-- Global forwards -->
@@ -155,6 +156,13 @@
             <forward name="success" path="/SentErrorEmail.jsp" />
             <forward name="continue" path="/GrantSearchErrorPage.jsp" />
       </action>
+      <action name="statusForm"
+            path="/Status" 
+            type="gov.nih.nci.iscs.oracle.pgm.actions.StatusAction"
+            scope="request"
+            validate="false">
+            <forward name="continue" path="/Status.jsp" />
+    </action>
 
     </action-mappings> 
 

@@ -367,6 +367,7 @@ public_html/RereferReferralComplete.jsp -text
 public_html/SearchGrantsForPDA.jsp -text
 public_html/SearchGrantsForReferral.jsp -text
 public_html/SentErrorEmail.jsp -text
+public_html/Status.jsp -text
 public_html/Stylesheets/PgmStyleSheet.css -text
 public_html/Stylesheets/main.css -text
 public_html/Stylesheets/otherappsmenu.css -text
