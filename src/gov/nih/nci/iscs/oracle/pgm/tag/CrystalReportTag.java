@@ -54,10 +54,10 @@ public class CrystalReportTag extends TagSupport {
       // Generate the report only if the report type selected is not null
 
       if ((mReportAction != null)&&(mReportAction.equalsIgnoreCase("run"))&&(mReportDetails != null)&&(mTempReportId != null)) {
-         String vCrystalUrl = applInfo.getApplicationKey("crystal.server.url");
-         String vApsName = applInfo.getApplicationKey("crystal.server.apsname");
-         String vApsUser = applInfo.getApplicationKey("crystal.server.apsuser");
-         String vApsAuthType = applInfo.getApplicationKey("crystal.server.apsauthtype");
+         String vCrystalUrl = applInfo.getApplicationKey("CRYSTAL.SERVER.URL");
+         String vApsName = applInfo.getApplicationKey("CRYSTAL.SERVER.APSNAME");
+         String vApsUser = applInfo.getApplicationKey("CRYSTAL.SERVER.APSUSER");
+         String vApsAuthType = applInfo.getApplicationKey("CRYSTAL.SERVER.APSAUTHTYPE");
          String vAuthUrl = "&apsname="+vApsName+"&user="+vApsUser+"&apsauthtype="+vApsAuthType;
          String vExportFormat = "";
 
