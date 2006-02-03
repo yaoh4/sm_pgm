@@ -1,0 +1,134 @@
+package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl;
+
+
+import java.util.*;
+import java.text.SimpleDateFormat;
+import net.sf.hibernate.type.Type;
+
+import java.util.List;
+import java.util.Iterator;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Types;
+import javax.sql.DataSource;
+import net.sf.hibernate.HibernateException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.springframework.jdbc.object.MappingSqlQuery;
+import org.springframework.jdbc.object.SqlUpdate;
+import org.springframework.jdbc.core.SqlParameter;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.GrantReferalDao;
+import org.springframework.orm.hibernate.HibernateTemplate;
+import org.springframework.orm.hibernate.SessionFactoryUtils;
+import org.springframework.orm.hibernate.support.HibernateDaoSupport;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.GrantReferalDao;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.ProcessStatusesT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.ProcessStatusesTPK;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.ApplProcessStatusesT;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper.GrantReferalDaoImplHelper;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.ApplProcessStatusesT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.ApplCancerActivitiesT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.CancerActivitiesT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.CancerActivityPdsT;
+import org.springframework.orm.hibernate.HibernateInterceptor;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.GrantReferalDao;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPersonOrgRolesT;
+///import org.springframework.transaction.PlatformTransactionManager;
+import net.sf.hibernate.Session;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
+
+
+import net.sf.hibernate.Hibernate;
+import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
+public class GrantReferalDaoImpl extends HibernateDaoSupport implements  GrantReferalDao {
+
+   /** Logger for this class and subclasses */
+    protected final Log logger = LogFactory.getLog(getClass());
+    private String oReferalMessage = null;
+    private List interceptorNames;
+    private Session session;
+    //private PlatformTransactionManager  transactionManager;
+
+
+    public GrantReferalDaoImpl() {}
+
+    public String acceptReferralSP(Long aApplId, Long aNpeId) {
+
+       boolean mReferalPassed = false;
+       Session session = SessionFactoryUtils.getSession(getSessionFactory(), true);
+       GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(session);
+       try {
+         mGrantReferalDaoImplHelper.acceptReferralSP(aApplId, aNpeId);
+	     System.out.println ("*** message is  *****" + mGrantReferalDaoImplHelper.getReferalMessage());
+         mGrantReferalDaoImplHelper.rejectReferralSP(aApplId, aNpeId);
+	     System.out.println ("*** message is  *****" + mGrantReferalDaoImplHelper.getReferalMessage());
+
+       } catch (SQLException ex) {
+	        System.out.println("****** SQLException is ****"+ ex.toString() );
+       }
+	   return mGrantReferalDaoImplHelper.getReferalMessage();
+    }
+
+    public String acceptReferal(Long aApplId, Long aNpeId) {
+
+       boolean mReferalPassed = false;
+       //Session session = SessionFactoryUtils.getSession(getSessionFactory(), true);
+       GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(session);
+	   System.out.println ("*** acceptReferal session  *****" + session);
+
+       if ( mGrantReferalDaoImplHelper.verifyApplForReferal(aApplId)) {
+		   	System.out.println ("*** passed verifyApplForReferal test *****");
+   		    if (mGrantReferalDaoImplHelper.verifyApplForAcceptance(aApplId) ) {
+		   	    System.out.println ("*** passed verifyApplForAcceptance test *****");
+   			    if(mGrantReferalDaoImplHelper.verifyCancerActivity(aApplId, aNpeId) ) {
+				  System.out.println ("*** passed verifyCancerActivity test *****");
+				  mGrantReferalDaoImplHelper.insertReferal(aApplId, aNpeId);
+                  return "passed";
+			   }
+	       }
+	   }
+	   TransactionSynchronizationManager.unbindResource(session);
+
+	   return mGrantReferalDaoImplHelper.getReferalMessage();
+    }
+
+    public String rejectReferal(Long aApplId, Long aOrgId) {
+
+       boolean mReferalPassed = false;
+       Session session = SessionFactoryUtils.getSession(getSessionFactory(), true);
+       GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(session);
+
+       if ( mGrantReferalDaoImplHelper.verifyApplForReferal(aApplId)) {
+		   	System.out.println ("*** passed verifyApplForReferal test *****");
+   		    //if (mGrantReferalDaoImplHelper.verifyOrganization(aApplId) ) {
+		   	//    System.out.println ("*** passed verifyApplForAcceptance test *****");
+				  mGrantReferalDaoImplHelper.rejectReferal(aApplId, aOrgId);
+                  return "passed";
+			//}
+	    }
+
+	   return mGrantReferalDaoImplHelper.getReferalMessage();
+    }
+
+public void setThisSession(Session aSession) {
+	session = aSession;
+}
+public Session getThisSession() {
+	return session;
+}
+
+private List getInterceptorNames() {
+	return interceptorNames;
+}
+
+private void setInterceptorNames(List aInterceptorNames) {
+	interceptorNames = aInterceptorNames;
+}
+
+//public void setTransactionManager(PlatformTransactionManager transactionManager) {
+//    this.transactionManager = transactionManager;
+//}
+
+
+}

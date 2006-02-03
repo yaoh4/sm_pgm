@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPersonOrgRolesT" 
+    table="NCI_PERSON_ORG_ROLES_T"
+>
+
+    <id
+        name="id"
+        type="java.lang.Long"
+        column="ID"
+    >
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="ereCode"
+        type="java.lang.String"
+        column="ERE_CODE"
+        not-null="true"
+        length="8"
+    />
+    <property
+        name="startDate"
+        type="java.sql.Timestamp"
+        column="START_DATE"
+        not-null="true"
+        length="7"
+    />
+    <property
+        name="endDate"
+        type="java.sql.Timestamp"
+        column="END_DATE"
+        length="7"
+    />
+    <property
+        name="assignType"
+        type="java.lang.String"
+        column="ASSIGN_TYPE"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="epnId"
+        type="long"
+        column="EPN_ID"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="orgId"
+        type="long"
+        column="ORG_ID"
+        not-null="true"
+        length="10"
+    />
+    <property
+        name="roleUsageCode"
+        type="java.lang.String"
+        column="ROLE_USAGE_CODE"
+        length="2"
+    />
+    <property
+        name="createUserId"
+        type="java.lang.String"
+        column="CREATE_USER_ID"
+        not-null="true"
+        length="30"
+    />
+    <property
+        name="createDate"
+        type="java.sql.Timestamp"
+        column="CREATE_DATE"
+        not-null="true"
+        length="7"
+    />
+    <property
+        name="lastChangeUserId"
+        type="java.lang.String"
+        column="LAST_CHANGE_USER_ID"
+        length="30"
+    />
+    <property
+        name="lastChangeDate"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE_DATE"
+        length="7"
+    />
+    <property
+        name="updateStamp"
+        type="java.lang.Integer"
+        column="UPDATE_STAMP"
+        length="5"
+    />
+
+    <!-- associations -->
+    <!-- bi-directional one-to-many association to NciApplElementsT -->
+    <set
+        name="nciApplElementsTsByApplLevel2Id"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="APPL_LEVEL_2_ID" />
+        </key>
+        <one-to-many 
+            class="gov.nih.nci.iscs.oracle.pgm.hibernate.NciApplElementsT"
+        />
+    </set>
+    <!-- bi-directional one-to-many association to NciApplElementsT -->
+    <set
+        name="nciApplElementsTsByApplLevel1Id"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="APPL_LEVEL_1_ID" />
+        </key>
+        <one-to-many 
+            class="gov.nih.nci.iscs.oracle.pgm.hibernate.NciApplElementsT"
+        />
+    </set>
+    <!-- bi-directional one-to-many association to ApplProcessStatusesT -->
+    <set
+        name="applProcessStatusesTs"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="NPE_ID" />
+        </key>
+        <one-to-many 
+            class="gov.nih.nci.iscs.oracle.pgm.hibernate.ApplProcessStatusesT"
+        />
+    </set>
+    <!-- bi-directional one-to-many association to CancerActivityPdsT -->
+    <set
+        name="cancerActivityPdsTs"
+        lazy="true"
+        inverse="true"
+    >
+        <key>
+            <column name="NPE_ID" />
+        </key>
+        <one-to-many 
+            class="gov.nih.nci.iscs.oracle.pgm.hibernate.CancerActivityPdsT"
+        />
+    </set>
+
+</class>
+</hibernate-mapping>

@@ -1,0 +1,163 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<!DOCTYPE struts-config PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 1.1//EN" "http://jakarta.apache.org/struts/dtds/struts-config_1_1.dtd">
+<struts-config>
+  <form-beans>
+      <form-bean name="retrieveGrantsForPDAForm" type="gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForPDAForm" dynamic="false"/> 
+      <form-bean name="retrieveGrantsForReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForReferralForm" dynamic="false"/> 
+      <form-bean name="acceptReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.AcceptReferralForm" dynamic="false"/> 
+      <form-bean name="rejectReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.RejectReferralForm" dynamic="false"/> 
+      <form-bean name="releaseReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ReleaseReferralForm" dynamic="false"/> 
+      <form-bean name="rereferReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.RereferReferralForm" dynamic="false"/> 
+      <form-bean name="pdAssignmentForm" type="gov.nih.nci.iscs.oracle.pgm.forms.PdAssignmentForm" dynamic="false"/> 
+      <form-bean name="externalReferralSearchForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ExternalReferralForm" dynamic="false"/> 
+      <form-bean name="grantSearchErrorForm" type="gov.nih.nci.iscs.oracle.pgm.forms.GrantSearchErrorForm" dynamic="false"/> 
+  </form-beans>
+ 
+  <!-- Global forwards -->
+
+
+ <global-exceptions>
+  <exception
+    type="gov.nih.nci.iscs.oracle.pgm.exceptions.UserLoginException"
+    key ="errors.userLoginException"
+    path="/GrantSearchError.do"/>
+  <exception
+    type="gov.nih.nci.iscs.oracle.pgm.exceptions.GrantSearchException"
+    key ="errors.grantSearchException"
+    path="/GrantSearchError.do"/>
+  <exception
+    type="gov.nih.nci.iscs.oracle.pgm.exceptions.ReferralActionException"
+    key ="errors.grantSearchException"
+    path="/GrantSearchError.do"/>
+  <exception
+    type="gov.nih.nci.iscs.oracle.pgm.exceptions.ServiceImplException"
+    key ="errors.grantServiceException"
+    path="/ErrorPage.jsp"/>
+ </global-exceptions>
+ <global-forwards type="org.apache.struts.action.ActionForward">
+    <forward name="main" path="/index.jsp" redirect="false"/>
+    <forward name="error" path="/GrantSearchError.do" redirect="false"/>  
+    <forward name="generateReport" path="/GenerateReportAction.do" />
+  </global-forwards>
+
+  
+   <!--  Action Mapping Definitions  -->
+
+  <action-mappings>
+       <action  name="retrieveGrantsForPDAForm"
+            path="/SearchGrantsForPDA"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForPDAAction"
+            scope="request"
+            validate="false">
+            <forward name="assignPD" path="/PdAssignment.do" />
+            <forward name="success" path="/SearchGrantsForPDA.jsp" />
+            <forward name="continue" path="/SearchGrantsForPDA.jsp" />
+        </action>
+       <action  name="retrieveGrantsForReferralForm"
+            path="/SearchGrantsForReferral"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/SearchGrantsForReferral.jsp" />
+            <forward name="continue" path="/SearchGrantsForReferral.jsp" />
+            <forward name="accept" path="/AcceptReferral.do" />
+            <forward name="reject" path="/RejectReferral.do" />
+            <forward name="rerefer" path="/RereferReferral.do" />
+            <forward name="releaseDual" path="/ReleaseReferral.do" />
+            <forward name="generateReport" path="/crystalReport.do" />
+            <forward name="showPDs" path="/applCAHist.jsp" />
+            <forward name="failure" path="/GrantSearchError.do" />
+        </action>
+       <action  name="acceptReferralForm"
+            path="/AcceptReferral"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.AcceptReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/AcceptReferral.jsp" />
+            <forward name="continue" path="/AcceptReferral.jsp" />
+            <forward name="filterCA" path="/AcceptReferral.jsp" />
+            <forward name="sortList" path="/AcceptReferral.jsp" />
+            <forward name="complete" path="/AcceptReferralComplete.jsp" />
+            <forward name="cancel" path="/SearchGrantsForReferral.do" />
+            <forward name="return" path="/SearchGrantsForReferral.do" />
+            
+       </action>  
+       <action  name="rejectReferralForm"
+            path="/RejectReferral"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.RejectReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/RejectReferral.jsp" />
+            <forward name="continue" path="/RejectReferral.jsp" />
+            <forward name="applyToSelected" path="/RejectReferral.jsp" />
+            <forward name="sortList" path="/RejectReferral.jsp" />
+            <forward name="complete" path="/RejectReferralComplete.jsp" />
+            <forward name="cancel" path="/SearchGrantsForReferral.do" />
+            <forward name="return" path="/SearchGrantsForReferral.do" />
+       </action>   
+       <action  name="releaseReferralForm"
+            path="/ReleaseReferral"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.ReleaseReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/ReleaseReferral.jsp" />
+            <forward name="continue" path="/ReleaseReferral.jsp" />
+            <forward name="sortList" path="/ReleaseReferral.jsp" />
+            <forward name="complete" path="/ReleaseReferralComplete.jsp" />
+            <forward name="cancel" path="/SearchGrantsForReferral.do" />
+            <forward name="return" path="/SearchGrantsForReferral.do" />
+       </action>   
+       <action  name="rereferReferralForm"
+            path="/RereferReferral"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.RereferReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/RereferReferral.jsp" />
+            <forward name="continue" path="/RereferReferral.jsp" />
+            <forward name="sortList" path="/RereferReferral.jsp" />
+            <forward name="complete" path="/RereferReferralComplete.jsp" />
+            <forward name="cancel" path="/SearchGrantsForReferral.do" />
+            <forward name="return" path="/SearchGrantsForReferral.do" />
+            <forward name="showPDs" path="/RereferReferral.jsp" />
+       </action>   
+       <action  name="pdAssignmentForm"
+            path="/PdAssignment"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.AssignPDAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/AssignPd.jsp" />
+            <forward name="continue" path="/AssignPd.jsp" />
+            <forward name="complete" path="/AssignPdComplete.jsp" />
+            <forward name="cancel" path="/SearchGrantsForPDA.do" />
+            <forward name="return" path="/SearchGrantsForPDA.do" />
+            <forward name="executeAssignment" path="/AssignPd.jsp" />
+            <forward name="loadAssignments" path="/AssignPd.jsp" />
+       </action>   
+       <action  name="externalReferralSearchForm"
+            path="/externalReferralSearch"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.ExternalReferralAction"
+            scope="request"
+            validate="false">
+            <forward name="continue" path="/ExternalReferral.jsp" />
+            <forward name="extSearch" path="/SearchGrantsForReferral.do" />
+       </action>   
+       <action  path="/crystalReport"
+            type="gov.nih.nci.iscs.oracle.pgm.actions.CrystalReportAction"
+            scope="request"
+            validate="false">
+            <forward name="continue" path="/SearchGrantsForReferral.jsp" />
+       </action>   
+      <action name="grantSearchErrorForm" 
+            path="/GrantSearchError" 
+            type="gov.nih.nci.iscs.oracle.pgm.actions.GrantSearchErrorAction"
+            scope="request"
+            validate="false">
+            <forward name="success" path="/SentErrorEmail.jsp" />
+            <forward name="continue" path="/GrantSearchErrorPage.jsp" />
+      </action>
+
+    </action-mappings> 
+
+    <message-resources parameter="gov.nih.nci.iscs.oracle.pgm.actions.ApplicationResources" null="false"/>
+  <plug-in className="gov.nih.nci.iscs.plugins.PgmApplicationPlugin" />
+</struts-config>
