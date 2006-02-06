@@ -403,6 +403,7 @@ public_html/WEB-INF/lib/hibern8ide.jar -text
 public_html/WEB-INF/lib/hibernate-tools.jar -text
 public_html/WEB-INF/lib/hibernate2.jar -text
 public_html/WEB-INF/lib/hsqldb-1.7.1.jar -text
+public_html/WEB-INF/lib/j2ee.jar -text
 public_html/WEB-INF/lib/jakarta-oro.jar -text
 public_html/WEB-INF/lib/jdom.jar -text
 public_html/WEB-INF/lib/junit.jar -text
