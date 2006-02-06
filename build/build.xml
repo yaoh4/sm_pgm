@@ -254,7 +254,9 @@
          <arg value='233'/>
       </java>
    </target>
-
+   
+   <target name="buildmaster" depends="compile,build,deploy_to_jrun" description="Buildmaster deployment target"/>
+   <target name="preBuildmaster" depends="clean,make_deployment_dirs,copy_properties_files,stop_jrun" description="Deploy application"/>
    <target name="all" depends="clean,make_deployment_dirs,copy_properties_files,compile,build,stop_jrun,deploy_to_jrun,start_jrun" description="Deploy application"/>
 
 </project>
