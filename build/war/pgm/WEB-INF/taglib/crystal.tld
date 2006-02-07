@@ -1,0 +1,102 @@
+<?xml version = '1.0' encoding = 'windows-1252'?>
+<!DOCTYPE taglib PUBLIC "-//Sun Microsystems, Inc.//DTD JSP Tag Library 1.2//EN" "http://java.sun.com/dtd/web-jsptaglibrary_1_2.dtd">
+<taglib>
+   <tlib-version>1.1</tlib-version>
+   <jsp-version>1.2</jsp-version>
+   <short-name>crystaltags</short-name>
+   <uri></uri>
+   <description>Tags for invoking crystal reports</description>
+  <tag>
+  <name>ReportOptions</name>
+  <tagclass>gov.nih.nci.iscs.oracle.crystal.tag.CrystalOptionsTag</tagclass>
+  <bodycontent>EMPTY</bodycontent>
+  <info>A tag for creating the report options list.</info>
+	<attribute>
+		<name>reportOptionsList</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>  
+  <attribute>
+      <name>selectedValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>fieldName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>onChangeText</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>  
+
+  <tag>
+  <name>LoadFormatOptionsJS</name>
+  <tagclass>gov.nih.nci.iscs.oracle.crystal.tag.LoadFormatOptionsJSTag</tagclass>
+  <bodycontent>EMPTY</bodycontent>
+  <info>A tag for creating the report options list.</info>
+	<attribute>
+		<name>reportList</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>  
+  </tag>  
+
+  <tag>
+  <name>FormatOptions</name>
+  <tagclass>gov.nih.nci.iscs.oracle.crystal.tag.CrystalFormatOptionsTag</tagclass>
+  <bodycontent>EMPTY</bodycontent>
+  <info>A tag for creating the format options list.</info>
+  <attribute>
+      <name>selectedValue</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>fieldName</name>
+      <required>true</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>
+    <attribute>
+      <name>onChangeText</name>
+      <required>false</required>
+      <rtexprvalue>true</rtexprvalue>
+    </attribute>    
+  </tag>  
+
+  <tag>	
+	<name>CrystalReport</name>
+	<tagclass>gov.nih.nci.iscs.oracle.crystal.tag.CrystalReportTag</tagclass>
+	<bodycontent>EMPTY</bodycontent>
+	<info>A tag for generating crystal reports depending on user selection</info>
+	<attribute>
+		<name>runReport</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>reportType</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>reportId</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>	
+  <attribute>
+		<name>application</name>
+		<required>true</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+	<attribute>
+		<name>reportFormat</name>
+		<required>false</required>
+		<rtexprvalue>true</rtexprvalue>
+	</attribute>
+  </tag>  
+   
+</taglib>

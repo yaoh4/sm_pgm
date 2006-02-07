@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.CgRefCod" 
+    table="CG_REF_CODES"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="CG_REF_CODES"
+    </meta>
+
+    <composite-id>
+        <meta attribute="class-description" inherit="false">
+           @hibernate.id
+            generator-class="assigned"
+        </meta>
+        <key-property 
+            name="rvDomain" 
+            column="RV_DOMAIN" 
+            type="java.lang.String"
+            length="100"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RV_DOMAIN"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="rvLowValue" 
+            column="RV_LOW_VALUE" 
+            type="java.lang.String"
+            length="240"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RV_LOW_VALUE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="rvHighValue" 
+            column="RV_HIGH_VALUE" 
+            type="java.lang.String"
+            length="240"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RV_HIGH_VALUE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="rvAbbreviation" 
+            column="RV_ABBREVIATION" 
+            type="java.lang.String"
+            length="240"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RV_ABBREVIATION"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="rvMeaning" 
+            column="RV_MEANING" 
+            type="java.lang.String"
+            length="240"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RV_MEANING"
+            </meta> 
+        </key-property>
+    </composite-id>    
+
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

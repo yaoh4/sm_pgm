@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.ApplCancerActivityPocsT" 
+    table="APPL_CANCER_ACTIVITY_POCS_T"
+>
+
+    <composite-id>
+        <key-property 
+            name="startDate" 
+            column="START_DATE" 
+            type="java.util.Date"
+            length="7"
+        />
+        <!-- bi-directional many-to-one association to NciApplElementsT -->
+        <key-many-to-one
+        	name="nciApplElementsT"
+	        class="gov.nih.nci.iscs.oracle.pgm.hibernate.NciApplElementsT"
+	    >
+    	    <column name="APPL_ID" />
+	    </key-many-to-one>
+        <!-- bi-directional many-to-one association to CancerActivityPocsT -->
+        <key-many-to-one
+        	name="cancerActivityPocsT"
+	        class="gov.nih.nci.iscs.oracle.pgm.hibernate.CancerActivityPocsT"
+	    >
+    	    <column name="CAC_NPN_ID" />
+    	    <column name="CAC_CAY_CODE" />
+    	    <column name="CAC_START_DATE" />
+	    </key-many-to-one>
+    </composite-id>    
+
+    <property
+        name="endDate"
+        type="java.util.Date"
+        column="END_DATE"
+        length="7"
+    />
+    <property
+        name="createUserId"
+        type="java.lang.String"
+        column="CREATE_USER_ID"
+        length="10"
+    />
+    <property
+        name="createDate"
+        type="java.util.Date"
+        column="CREATE_DATE"
+        length="7"
+    />
+    <property
+        name="lastChangeUserId"
+        type="java.lang.String"
+        column="LAST_CHANGE_USER_ID"
+        length="10"
+    />
+    <property
+        name="lastChangeDate"
+        type="java.util.Date"
+        column="LAST_CHANGE_DATE"
+        length="7"
+    />
+    <property
+        name="updateStamp"
+        type="java.lang.Integer"
+        column="UPDATE_STAMP"
+        length="5"
+    />
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>
