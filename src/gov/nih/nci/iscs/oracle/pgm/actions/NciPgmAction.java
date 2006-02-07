@@ -70,11 +70,6 @@ public abstract class NciPgmAction extends Action {
         } else
         {
             String remoteUser = request.getRemoteUser();
-            //if coming from Workbench, check fo rthis value in the request object!!!
-            if(remoteUser==null){
-				System.out.println("*** in parent verifyUser and remoteUser is null ***");
-                 remoteUser = (String)request.getParameter("ldapID");
-			}
             if(remoteUser != null && !remoteUser.equals(""))
             {
                 NciUserImpl nui = new NciUserImpl();

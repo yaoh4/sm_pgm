@@ -123,29 +123,21 @@ public class ExternalReferralAction extends NciPgmAction{
  public boolean verifyUser(HttpServletRequest request, HttpServletResponse response)
         throws UserLoginException, Exception
     {
-		System.out.println("*** now in verifyUser of ExternalReferralAction ***");
         boolean returnValue = false;
         HttpSession session = request.getSession(true);
-		System.out.println("*** session is  *** " + session);
 
         NciUser nu = (NciUser)session.getAttribute("nciuser");
-		System.out.println("*** nu is  *** " + nu);
         if(nu != null && nu.isValid())
         {
-		    System.out.println("*** nu is not null *** " );
             returnValue = verifyUserForApp(request, response);
         } else
         {
-		    System.out.println("*** nu is  null *** " );
             String remoteUser = (String)request.getParameter("ldapID");
             if(remoteUser== null) {
-				System.out.println("*** ldapID is null **** ");
 				remoteUser = request.getRemoteUser();
 			}
-		    System.out.println("*** remoteUser is  *** " + remoteUser);
             if(remoteUser != null && !remoteUser.equals(""))
             {
-		        System.out.println("*** remoteUser is not null *** " );
                 NciUserImpl nui = new NciUserImpl();
                 StringBuffer ru = new StringBuffer(50);
                 if(remoteUser.indexOf("cn=") >= 0)
@@ -160,12 +152,10 @@ public class ExternalReferralAction extends NciPgmAction{
                 }
                 nui.setUserId(ru.toString());
                 if(setUserAttributes(nui, request)) {
-		            System.out.println("*** nciuser is  *** " + nui);
 					session.setAttribute("nciuser", nui);
                     returnValue = verifyUserForApp(request, response);
 				} else {
 				   logger.error("User Priviledges denied - 1!!! ");
-		           System.out.println("*** remoteUser is  null *** " );
 					return false;
 				}
             }
