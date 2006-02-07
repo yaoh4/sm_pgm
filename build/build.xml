@@ -53,7 +53,7 @@
         <pathelement path="${lib.dir}/app.jar"/>
         <pathelement path="${lib.dir}/junit.jar"/>
         <!--pathelement path="${lib.dir}/servlet.jar"/--> 
-        <pathelement path="${env.J2EE_HOME}/j2ee.jar"/>
+        <pathelement path="${lib.dir}/j2ee.jar"/>
 
         <fileset dir="${basedir}/lib">
             <include name="*.jar"/>
@@ -254,7 +254,9 @@
          <arg value='233'/>
       </java>
    </target>
-
+   
+   <target name="buildmaster" depends="compile,build,deploy_to_jrun" description="Buildmaster deployment target"/>
+   <target name="preBuildmaster" depends="clean,make_deployment_dirs,copy_properties_files,stop_jrun" description="Deploy application"/>
    <target name="all" depends="clean,make_deployment_dirs,copy_properties_files,compile,build,stop_jrun,deploy_to_jrun,start_jrun" description="Deploy application"/>
 
 </project>
