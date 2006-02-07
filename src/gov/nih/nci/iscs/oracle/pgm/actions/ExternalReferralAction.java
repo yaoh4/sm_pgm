@@ -138,6 +138,10 @@ public class ExternalReferralAction extends NciPgmAction{
         {
 		    System.out.println("*** nu is  null *** " );
             String remoteUser = (String)request.getParameter("ldapID");
+            if(remoteUser== null) {
+				System.out.println("*** ldapID is null **** ");
+				remoteUser = request.getRemoteUser();
+			}
 		    System.out.println("*** remoteUser is  *** " + remoteUser);
             if(remoteUser != null && !remoteUser.equals(""))
             {
