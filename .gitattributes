@@ -257,6 +257,7 @@ lib/hibern8ide.jar -text
 lib/hibernate-tools.jar -text
 lib/hibernate2.jar -text
 lib/hsqldb-1.7.1.jar -text
+lib/j2ee.jar -text
 lib/jakarta-oro.jar -text
 lib/jdom.jar -text
 lib/junit.jar -text
