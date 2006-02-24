@@ -82,7 +82,7 @@ public class RetrieveGrantsForReferalCommandDao extends RetrieveGrantsCommandDao
 
     /*
      * Build the Criteria object and build the sreach Criteria using the QueryObject
-     * - Create class instance for NciPdQueryVw
+     * - Create class instance for NciPdReferralVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
@@ -91,15 +91,19 @@ public class RetrieveGrantsForReferalCommandDao extends RetrieveGrantsCommandDao
 
     protected Criteria buildCriteria(Session aSession, UserFilterInfo oUserFilterInfo, GrantQueryObject oGrantQueryObject) throws CommandDaoException {
 		Criteria aCriteria = null;
-		try {
-		    aCriteria = super.buildCriteria(aSession);
+        Class mNciPdReferralVw = null;
+        try{
+            mNciPdReferralVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw");
+		    aCriteria = aSession.createCriteria(mNciPdReferralVw);
 		    //if (!(super.getQueryObject().isNull()) ) {
 			    aCriteria = buildGrantsQueryCriteria(aCriteria, oUserFilterInfo, oGrantQueryObject);
 		    //} else {
 			//    throw new CommandDaoException("No search criteria for Query");
 		    //}
-        } catch (Exception e) {
-			throw new CommandDaoException(e.toString());
+	    } catch (ClassNotFoundException e) {
+			throw new CommandDaoException("Unable to create NciPdReferralVw class " + e.toString());
+	    } catch (Exception e) {
+			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
 	    return aCriteria;
 
@@ -134,7 +138,7 @@ public class RetrieveGrantsForReferalCommandDao extends RetrieveGrantsCommandDao
         aCriteria = super.buildGrantsQueryCriteria(aCriteria, oUserFilterInfo, aGrantQueryObject);
 		// add getCurrentReferralActivityCode must be not be null
 		//aCriteria.add(Expression.eq("activeReferralFlag", mYesLiteral));
-		aCriteria.add(Expression.isNotNull("currentReferralActivityCode"));
+		//aCriteria.add(Expression.isNotNull("currentReferralActivityCode"));
 
 	    return aCriteria;
 

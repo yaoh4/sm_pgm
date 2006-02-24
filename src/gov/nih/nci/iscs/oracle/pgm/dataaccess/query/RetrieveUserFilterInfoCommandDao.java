@@ -80,7 +80,6 @@ public class RetrieveUserFilterInfoCommandDao extends ActionCommandDao implement
 
     /*
      * Build the query object and build the UserQueryObject
-     * - Create class instance for NciPdQueryVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
@@ -147,7 +146,7 @@ public class RetrieveUserFilterInfoCommandDao extends ActionCommandDao implement
 				  while (mTokens.hasMoreTokens()) {
 					 mTempList.add(mTokens.nextToken().replaceAll("'", ""));
 			     }
-                 oUserFilterInfo.setCancerActivityCodes((List) mTempList);
+                 oUserFilterInfo.setRuCodes((List) mTempList);
 			  }
 
 			  if (mCallableStatement.getString(9) != null) {

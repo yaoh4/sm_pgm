@@ -14,23 +14,25 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 
 
     /** identifier field */
-    private String PdOrg;
+    private String piName;
     private String PdId;
     private String fy;
     private String ncabDate;
     private String assignmentCA;
     private Date pdStartDate;
     private String pdTransferCode;
+    private String rfaPaNumber;
 
 
 
 
 
-    public String getPdOrg() {
-		return this.PdOrg;
+
+    public String getPiName() {
+		return this.piName;
 	}
-    public void setPdOrg(String PdOrg) {
-		this.PdOrg = PdOrg;
+    public void setPiName(String piName) {
+		this.piName = piName;
 	}
 
     public String getPdId() {
@@ -82,6 +84,12 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 		this.pdTransferCode = pdTransferCode;
 	}
 
+    public String getRfaPaNumber() {
+		return this.rfaPaNumber;
+	}
+    public void setRfaPaNumber(String rfaPaNumber) {
+		this.rfaPaNumber = rfaPaNumber;
+	}
 
    public java.util.Date parseAssignmentDate(String pdStartDate) {
 
@@ -99,13 +107,14 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     public String toString() {
         return new ToStringBuilder(this)
             .append("super ", super.toString())
-            .append("PdOrg ", getPdOrg())
+            .append("piName ", getPiName())
             .append("PdId ", getPdId())
             .append("Fy ", getFy())
             .append("NcabDate ", getNcabDate())
             .append("assignmentCA ", getAssignmentCA())
             .append("PdStartDate ", getPdStartDate())
             .append("PdTransferCode ", getPdTransferCode())
+            .append("rfaPaNumber ", getRfaPaNumber())
             .toString();
     }
 

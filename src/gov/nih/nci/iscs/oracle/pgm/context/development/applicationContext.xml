@@ -42,6 +42,8 @@
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/GwbLinksT.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCaAsgnmtHistoryVw.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CgRefCodes.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml</value>
 			</list>
 		</property>
 		

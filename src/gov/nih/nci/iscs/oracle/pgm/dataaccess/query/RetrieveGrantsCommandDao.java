@@ -63,21 +63,20 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
      * @retrun Criteria - a Criteria object
      */
 
-    protected Criteria buildCriteria(Session aSession) throws CommandDaoException {
+    /*protected Criteria buildCriteria(Session aSession) throws CommandDaoException {
 
         Class mNciPdQueryVw = null;
         Criteria mCriteria = null;
         try{
             mNciPdQueryVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw");
 		    mCriteria = aSession.createCriteria(mNciPdQueryVw);
-		    Criteria bCriteria = aSession.createCriteria(mNciPdQueryVw);
 	    } catch (ClassNotFoundException e) {
 			throw new CommandDaoException("Unable to create NciPdQueryVw class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
 		return mCriteria;
-    }
+    }*/
 
     /*
      * This method builds the search Criteria for the core Grants search criteria
@@ -104,9 +103,6 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		if  ( !(aGrantQueryObject.getCancerActivity() == null || aGrantQueryObject.getCancerActivity().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
 		   aCriteria.add(Expression.ilike("cayCode", aGrantQueryObject.getCancerActivity().toUpperCase().trim() + PERCENT_SYMBOL ));
 
-		// add the Rfa/Pa Number  search criterion
-		if ( !(aGrantQueryObject.getRfaPa() == null || aGrantQueryObject.getRfaPa().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
-		   aCriteria.add(Expression.ilike("rfaPaNumber", aGrantQueryObject.getRfaPa().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the applId  search criterion
 		if ( !(aGrantQueryObject.getApplId() == null || aGrantQueryObject.getApplId().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))

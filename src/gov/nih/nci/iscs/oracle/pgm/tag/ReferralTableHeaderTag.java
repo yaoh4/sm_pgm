@@ -81,9 +81,9 @@ public class ReferralTableHeaderTag extends TagSupport
 	  }
 
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PD_LAST_NAME_SORT)){
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_SORT)){
 		  buf.append("<th id=\"header04\" width=\"10%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.PD_LAST_NAME_SORT);
+		  buf.append(ApplicationConstants.PI_LAST_NAME_SORT);
 		  buf.append("\')\">PI");
 	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
               buf.append("<img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\">");
@@ -93,7 +93,7 @@ public class ReferralTableHeaderTag extends TagSupport
 		  buf.append("</a></th>");
 	  } else {
 		  buf.append("<th id=\"header04\" width=\"10%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.PD_LAST_NAME_SORT);
+		  buf.append(ApplicationConstants.PI_LAST_NAME_SORT);
 		  buf.append("\')\">PI</a></th>");
 	  }
 

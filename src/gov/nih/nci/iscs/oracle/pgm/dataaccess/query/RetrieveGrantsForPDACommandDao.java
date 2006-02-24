@@ -86,7 +86,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 
     /*
      * Build the Criteria object and build the sreach Criteria using the QueryObject
-     * - Create class instance for NciPdQueryVw
+     * - Create class instance for NciPdTransferVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
@@ -96,11 +96,15 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
     protected Criteria buildCriteria(Session aSession, UserFilterInfo oUserFilterInfo, GrantQueryObject oGrantQueryObject) throws CommandDaoException {
 
 		Criteria aCriteria = null;
-		try {
-		    aCriteria = super.buildCriteria(aSession);
+        Class mNciPdTransferVw = null;
+        try{
+            mNciPdTransferVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw");
+		    aCriteria = aSession.createCriteria(mNciPdTransferVw);
 		    aCriteria = this.buildGrantsQueryCriteria(aCriteria, oUserFilterInfo, oGrantQueryObject);
-        } catch (Exception e) {
-			throw new CommandDaoException(e.toString());
+	    } catch (ClassNotFoundException e) {
+			throw new CommandDaoException("Unable to create mNciPdTransferVw class " + e.toString());
+	    } catch (Exception e) {
+			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
 	    return aCriteria;
 
@@ -132,17 +136,21 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 		// add the ApplStatusCode search criterion
 
 
+		// add the Rfa/Pa Number  search criterion
+		if ( !(aGrantQueryObject.getRfaPa() == null || aGrantQueryObject.getRfaPa().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
+		   aCriteria.add(Expression.ilike("rfaPaNumber", aGrantQueryObject.getRfaPa().toUpperCase().trim() + PERCENT_SYMBOL ));
+
 		// add the Ipf search criterion
 		if(!(aGrantQueryObject.getIpf() == null || aGrantQueryObject.getIpf().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
 		   aCriteria.add(Expression.eq("ipf", new Long(aGrantQueryObject.getIpf()) ));
 
 	    // add the IrgCode  search criterion
 		if(!(aGrantQueryObject.getIrgCode() == null || aGrantQueryObject.getIrgCode().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
-		   aCriteria.add(Expression.like("irgCode", aGrantQueryObject.getIrgCode().toUpperCase().trim() + PERCENT_SYMBOL ));
+		   aCriteria.add(Expression.ilike("irgCode", aGrantQueryObject.getIrgCode().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the GroupCode search criterion
 		if(!(aGrantQueryObject.getGroupCode() == null || aGrantQueryObject.getGroupCode().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
-		   aCriteria.add(Expression.like("groupCode", aGrantQueryObject.getGroupCode().toUpperCase().trim() + PERCENT_SYMBOL ));
+		   aCriteria.add(Expression.ilike("groupCode", aGrantQueryObject.getGroupCode().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the IrgFlexCode search criterion
 		if(!(aGrantQueryObject.getPdOrg() == null || aGrantQueryObject.getPdOrg().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) )
@@ -153,7 +161,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 		   aCriteria.add(Expression.eq("pdNpnId", new Long(aGrantQueryObject.getPdId())  ));
 
 		if(!(aGrantQueryObject.getI2Status() == null || aGrantQueryObject.getI2Status().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) )
-		   aCriteria.add(Expression.like("applStatusCode", aGrantQueryObject.getI2Status().toUpperCase().trim() + PERCENT_SYMBOL ));
+		   aCriteria.add(Expression.ilike("applStatusCode", aGrantQueryObject.getI2Status().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the PriorityScoreNum from and to date search criterion
 		if(!(aGrantQueryObject.getPriorityScoreFrom() == null || aGrantQueryObject.getPriorityScoreFrom().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) ) {
@@ -174,18 +182,19 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 
         aCriteria = super.buildGrantsQueryCriteria(aCriteria, oUserFilterInfo, aGrantQueryObject);
 
-	    Disjunction councilDateCrit = Expression.disjunction();
+	    /*Disjunction councilDateCrit = Expression.disjunction();
 	    Disjunction intialTransferCrit = Expression.disjunction();
 	    Disjunction pdTransferCrit = Expression.disjunction();
 
-		councilDateCrit.add(Expression.like("councilMeetingDate", "%00"));
+		councilDateCrit.add(Expression.ilike("councilMeetingDate", "%00"));
 
-		councilDateCrit.add(Expression.like("pdTransferInitialCode", "%T"));
+		councilDateCrit.add(Expression.ilike("pdTransferInitialCode", "%T"));
 
 		councilDateCrit.add(Expression.and( Expression.eq("pdTransferInitialCode", "%I"),
 		                                    Expression.eq("currentFutureBoardFlag", "N")));
 
 		aCriteria.add(councilDateCrit);
+		*/
 
 	    // add programDirectorFlag criteria
 	    if (aGrantQueryObject.getGrantsFromCriteria().equalsIgnoreCase(ApplicationConstants.MY_PORTFOLIOS_VALUE) ) {
@@ -200,6 +209,8 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 		    }
 		    aCriteria.add(Expression.in("pdNpeId",valuesArray));
 		}
+
+
 	    return aCriteria;
 
     }

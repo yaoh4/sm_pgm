@@ -105,7 +105,7 @@ public class UserServiceImpl extends BaseServiceImpl
 	        if(!mappingName.equalsIgnoreCase(ApplicationConstants.REFERRAL_ACTION_MAPPING)){
 			    if( mUserFilterInfo.getPortfolioFlag() ) {
 	                String mTempValue = parseListItems(ApplicationConstants.MY_PORTFOLIOS,
-		                                           mUserFilterInfo.getProgramDirectorIds());
+		                                           mUserFilterInfo.getRuCodes());
 		            mLabelValueBean = new LabelValueBean( mTempValue, ApplicationConstants.MY_PORTFOLIOS_VALUE);
 		            mList.add(mLabelValueBean);
 				}

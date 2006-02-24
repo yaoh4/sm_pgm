@@ -9,7 +9,7 @@ import gov.nih.nci.iscs.oracle.pgm.factory.*;
 import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.GrantsForPDAQueryObject;
 
-import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw;
 
 import java.text.*;
 import java.util.*;

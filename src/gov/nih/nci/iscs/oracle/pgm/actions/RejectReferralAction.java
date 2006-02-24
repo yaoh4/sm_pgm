@@ -93,12 +93,12 @@ public class RejectReferralAction extends NciPgmAction {
 		   return mapping.findForward("continue");
 	   }else{
 		   if(mReferralActionObjects.size() <= 0 ) {
-  	          super.logErrors(messages, "validation", "errors.no.reject.action.selected");
+  	          //super.logErrors(messages, "validation", "errors.no.reject.action.selected");
+  	          super.logErrors(messages, "validation", "errors.no.rejection.grant.selected");
               this.saveMessages(request, messages);
 		      return mapping.findForward("continue");
 		   }
 	   }
-
 
 	   NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
 	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId() );

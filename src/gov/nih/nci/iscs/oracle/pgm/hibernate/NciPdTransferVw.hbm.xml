@@ -12,12 +12,12 @@
 -->
 
 <class 
-    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw" 
-    table="NCI_PD_QUERY_VW"
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw" 
+    table="NCI_PD_TRANSFER_VW"
 >
     <meta attribute="class-description" inherit="false">
        @hibernate.class
-        table="NCI_PD_QUERY_VW"
+        table="NCI_PD_TRANSFER_VW"
     </meta>
 
     <composite-id>
@@ -45,6 +45,17 @@
             <meta attribute="field-description">
                @hibernate.property
                 column="FULL_GRANT_NUM"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="rfaPaNumber" 
+            column="RFA_PA_NUMBER" 
+            type="java.lang.String"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RFA_PA_NUMBER"
             </meta> 
         </key-property>
         <key-property 
@@ -89,6 +100,61 @@
             <meta attribute="field-description">
                @hibernate.property
                 column="LAST_NAME"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="irgPercentileNum" 
+            column="IRG_PERCENTILE_NUM" 
+            type="java.math.BigDecimal"
+            length="5"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_PERCENTILE_NUM"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="priorityScoreNum" 
+            column="PRIORITY_SCORE_NUM" 
+            type="java.lang.Integer"
+            length="3"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PRIORITY_SCORE_NUM"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="irgCode" 
+            column="IRG_CODE" 
+            type="java.lang.String"
+            length="4"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_CODE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="irgFlexCode" 
+            column="IRG_FLEX_CODE" 
+            type="java.lang.String"
+            length="1"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_FLEX_CODE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="groupCode" 
+            column="GROUP_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="GROUP_CODE"
             </meta> 
         </key-property>
         <key-property 
@@ -180,28 +246,6 @@
             </meta> 
         </key-property>
         <key-property 
-            name="budgetStartDate" 
-            column="BUDGET_START_DATE" 
-            type="java.sql.Timestamp"
-            length="7"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="BUDGET_START_DATE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="budgetEndDate" 
-            column="BUDGET_END_DATE" 
-            type="java.sql.Timestamp"
-            length="7"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="BUDGET_END_DATE"
-            </meta> 
-        </key-property>
-        <key-property 
             name="fy" 
             column="FY" 
             type="java.lang.Integer"
@@ -290,146 +334,124 @@
             </meta> 
         </key-property>
         <key-property 
-            name="dualCayCode" 
-            column="DUAL_CAY_CODE" 
+            name="roleUsageCode" 
+            column="ROLE_USAGE_CODE" 
             type="java.lang.String"
-            length="8"
+            length="2"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_CAY_CODE"
+                column="ROLE_USAGE_CODE"
             </meta> 
         </key-property>
         <key-property 
-            name="pocNpnId" 
-            column="POC_NPN_ID" 
-            type="long"
-            length="10"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="POC_NPN_ID"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="pocLastName" 
-            column="POC_LAST_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="POC_LAST_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="pocFirstName" 
-            column="POC_FIRST_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="POC_FIRST_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="pocMiName" 
-            column="POC_MI_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="POC_MI_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="pocFullName" 
-            column="POC_FULL_NAME" 
-            type="java.lang.String"
-            length="93"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="POC_FULL_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="dualPocNpnId" 
-            column="DUAL_POC_NPN_ID" 
+            name="pdNpeId" 
+            column="PD_NPE_ID" 
             type="java.lang.Long"
             length="10"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_POC_NPN_ID"
+                column="PD_NPE_ID"
             </meta> 
         </key-property>
         <key-property 
-            name="dualPocLastName" 
-            column="DUAL_POC_LAST_NAME" 
+            name="pdNpnId" 
+            column="PD_NPN_ID" 
+            type="java.lang.Long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_NPN_ID"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdLastName" 
+            column="PD_LAST_NAME" 
             type="java.lang.String"
             length="30"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_POC_LAST_NAME"
+                column="PD_LAST_NAME"
             </meta> 
         </key-property>
         <key-property 
-            name="dualPocFirstName" 
-            column="DUAL_POC_FIRST_NAME" 
+            name="pdFirstName" 
+            column="PD_FIRST_NAME" 
             type="java.lang.String"
             length="30"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_POC_FIRST_NAME"
+                column="PD_FIRST_NAME"
             </meta> 
         </key-property>
         <key-property 
-            name="dualPocMiName" 
-            column="DUAL_POC_MI_NAME" 
+            name="pdMiName" 
+            column="PD_MI_NAME" 
             type="java.lang.String"
             length="30"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_POC_MI_NAME"
+                column="PD_MI_NAME"
             </meta> 
         </key-property>
         <key-property 
-            name="dualPocFullName" 
-            column="DUAL_POC_FULL_NAME" 
+            name="pdFullName" 
+            column="PD_FULL_NAME" 
             type="java.lang.String"
             length="93"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="DUAL_POC_FULL_NAME"
+                column="PD_FULL_NAME"
             </meta> 
         </key-property>
         <key-property 
-            name="araStatusCode" 
-            column="ARA_STATUS_CODE" 
+            name="pdStartDate" 
+            column="PD_START_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_START_DATE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdNonId" 
+            column="PD_NON_ID" 
+            type="java.lang.Long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_NON_ID"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdOrgName" 
+            column="PD_ORG_NAME" 
+            type="java.lang.String"
+            length="75"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_ORG_NAME"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdTransferInitialCode" 
+            column="PD_TRANSFER_INITIAL_CODE" 
             type="java.lang.String"
             length="1"
         >
             <meta attribute="field-description">
                @hibernate.property
-                column="ARA_STATUS_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="araMatchFlag" 
-            column="ARA_MATCH_FLAG" 
-            type="java.lang.String"
-            length="1"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="ARA_MATCH_FLAG"
+                column="PD_TRANSFER_INITIAL_CODE"
             </meta> 
         </key-property>
         <key-property 
@@ -441,28 +463,6 @@
             <meta attribute="field-description">
                @hibernate.property
                 column="CURRENT_FUTURE_BOARD_FLAG"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="currentReferralActivityCode" 
-            column="CURRENT_REFERRAL_ACTIVITY_CODE" 
-            type="java.lang.String"
-            length="4000"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="CURRENT_REFERRAL_ACTIVITY_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="currentReferralActivityDate" 
-            column="CURRENT_REFERRAL_ACTIVITY_DATE" 
-            type="java.sql.Timestamp"
-            length="7"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="CURRENT_REFERRAL_ACTIVITY_DATE"
             </meta> 
         </key-property>
         <key-property 

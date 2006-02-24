@@ -106,132 +106,132 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
      * Map the query results to the ReferralSearchResultObject
      * Add enties to a hashMap by applId
      * @retrun Map of search results keyed by ApplId
-     * @param aGrantList - aNciPdQueryList the search result
+     * @param aGrantList - aNciPdReferralList the search result
      */
-    private Map mapReferralSearchResults(List aNciPdQueryList, PaginationObject aPaginationObject) throws Exception{
+    private Map mapReferralSearchResults(List aNciPdReferralList, PaginationObject aPaginationObject) throws Exception{
 
 		TreeMap mQueryResults = new TreeMap();
-		Iterator mIterator = aNciPdQueryList.iterator();
+		Iterator mIterator = aNciPdReferralList.iterator();
 		String mKey = null;
 		int mIndex = 1;
 		int pageNumber = aPaginationObject.getPageNumber().intValue();
 		while (mIterator.hasNext() ) {
-			NciPdQueryVw mNciPdQuery = (NciPdQueryVw) mIterator.next();
+			NciPdReferralVw mNciPdReferral = (NciPdReferralVw) mIterator.next();
 		    ReferralSearchResultObject mReferralSearchResultObject = new ReferralSearchResultObject();
-			if(mNciPdQuery.getFullGrantNum() != null ) {
-				mReferralSearchResultObject.setGrantNumber(mNciPdQuery.getFullGrantNum() );
+			if(mNciPdReferral.getFullGrantNum() != null ) {
+				mReferralSearchResultObject.setGrantNumber(mNciPdReferral.getFullGrantNum() );
 			} else {
 				mReferralSearchResultObject.setGrantNumber(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getOrgName() != null ) {
-				mReferralSearchResultObject.setInstName(mNciPdQuery.getOrgName() );
+			if(mNciPdReferral.getOrgName() != null ) {
+				mReferralSearchResultObject.setInstName(mNciPdReferral.getOrgName() );
 			} else {
 				mReferralSearchResultObject.setInstName(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getLastName() != null ) {
-				mReferralSearchResultObject.setPiLastName(mNciPdQuery.getLastName() );
+			if(mNciPdReferral.getLastName() != null ) {
+				mReferralSearchResultObject.setPiLastName(mNciPdReferral.getLastName() );
 			} else {
 				mReferralSearchResultObject.setPiLastName(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getProjectTitle() != null ) {
-				mReferralSearchResultObject.setProjectTitle(mNciPdQuery.getProjectTitle() );
+			if(mNciPdReferral.getProjectTitle() != null ) {
+				mReferralSearchResultObject.setProjectTitle(mNciPdReferral.getProjectTitle() );
 			} else {
 				mReferralSearchResultObject.setProjectTitle(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getCayCode() != null ) {
-				mReferralSearchResultObject.setCancerActivity(mNciPdQuery.getCayCode() );
+			if(mNciPdReferral.getCayCode() != null ) {
+				mReferralSearchResultObject.setCancerActivity(mNciPdReferral.getCayCode() );
 			} else {
 				mReferralSearchResultObject.setCancerActivity(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getAraMatchFlag() != null ) {
-				mReferralSearchResultObject.setAraStatus(mNciPdQuery.getAraMatchFlag());
+			if(mNciPdReferral.getAraMatchFlag() != null ) {
+				mReferralSearchResultObject.setAraStatus(mNciPdReferral.getAraMatchFlag());
 			} else {
 				mReferralSearchResultObject.setAraStatus(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getDualCayCode() != null ) {
-				mReferralSearchResultObject.setDualCA(mNciPdQuery.getDualCayCode() );
+			if(mNciPdReferral.getDualCayCode() != null ) {
+				mReferralSearchResultObject.setDualCA(mNciPdReferral.getDualCayCode() );
 			} else {
 				mReferralSearchResultObject.setDualCA(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if((mNciPdQuery.getDualPocLastName() != null ) &&
-			   (mNciPdQuery.getDualPocFirstName() != null ) ) {
-				mReferralSearchResultObject.setDualPoc(mNciPdQuery.getDualPocLastName() + ", " + mNciPdQuery.getDualPocFirstName());
+			if((mNciPdReferral.getDualPocLastName() != null ) &&
+			   (mNciPdReferral.getDualPocFirstName() != null ) ) {
+				mReferralSearchResultObject.setDualPoc(mNciPdReferral.getDualPocLastName() + ", " + mNciPdReferral.getDualPocFirstName());
 			} else {
 				mReferralSearchResultObject.setDualPoc(ApplicationConstants.EMPTY_STRING );
 			}
 
 
-			if(mNciPdQuery.getPocFullName() != null )  {
-				mReferralSearchResultObject.setCurrentPoc(mNciPdQuery.getPocFullName());
+			if(mNciPdReferral.getPocFullName() != null )  {
+				mReferralSearchResultObject.setCurrentPoc(mNciPdReferral.getPocFullName());
 			} else {
 				mReferralSearchResultObject.setCurrentPoc(ApplicationConstants.EMPTY_STRING );
 			}
 
-			if(mNciPdQuery.getPdFullName() != null ) {
-				mReferralSearchResultObject.setPdFullName(mNciPdQuery.getPdFullName() );
-			} else {
-				mReferralSearchResultObject.setPdFullName(ApplicationConstants.EMPTY_STRING);
-			}
+			//if(mNciPdReferral.getLastName() != null ) {
+			//	mReferralSearchResultObject.setPdFullName(mNciPdReferral.getFirstName() + " " + mNciPdReferral.getLastName()  );
+			//} else {
+			mReferralSearchResultObject.setPdFullName(ApplicationConstants.EMPTY_STRING);
+			//}
 
-			if(mNciPdQuery.getCouncilMeetingDate() != null ) {
-				mReferralSearchResultObject.setNcabDate(mNciPdQuery.getCouncilMeetingDate().substring(4,6) + "/"  + mNciPdQuery.getCouncilMeetingDate().substring(0,4) );
+			if(mNciPdReferral.getCouncilMeetingDate() != null ) {
+				mReferralSearchResultObject.setNcabDate(mNciPdReferral.getCouncilMeetingDate().substring(4,6) + "/"  + mNciPdReferral.getCouncilMeetingDate().substring(0,4) );
 			} else {
 				mReferralSearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getCurrentReferralActivityDate() != null ) {
-				String temp = mNciPdQuery.getCurrentReferralActivityDate().toString();
+			if(mNciPdReferral.getCurrentReferralActivityDate() != null ) {
+				String temp = mNciPdReferral.getCurrentReferralActivityDate().toString();
 				mReferralSearchResultObject.setCurrentReferralActivityDate(temp.substring(5,7) + "/" + temp.substring(8,10) + "/" + temp.substring(0,4) );
 			} else {
 				mReferralSearchResultObject.setCurrentReferralActivityDate(ApplicationConstants.EMPTY_STRING);
 			}
 
 			mReferralSearchResultObject.setWithdrawn(false);
-			if(mNciPdQuery.getWithdrawnFlag() != null ) {
-				if(mNciPdQuery.getWithdrawnFlag().trim().equalsIgnoreCase("Y")) {
+			if(mNciPdReferral.getWithdrawnFlag() != null ) {
+				if(mNciPdReferral.getWithdrawnFlag().trim().equalsIgnoreCase("Y")) {
 				   mReferralSearchResultObject.setWithdrawn(true);
 			    }
 			}
 
 			mReferralSearchResultObject.setReReferred(false);
-			if(mNciPdQuery.getCurrentReferralActivityCode() != null ) {
-				if(mNciPdQuery.getCurrentReferralActivityCode().trim().equalsIgnoreCase("REREF")) {
+			if(mNciPdReferral.getCurrentReferralActivityCode() != null ) {
+				if(mNciPdReferral.getCurrentReferralActivityCode().trim().equalsIgnoreCase("REREF")) {
 				   mReferralSearchResultObject.setReReferred(true);
 			    }
 			}
 
 			String mEgrantsNumber = null;
-			if(mNciPdQuery.getAdminPhsOrgCode() == null ||
-			   mNciPdQuery.getSerialNum() == null ||
-			   mNciPdQuery.getSupportYear() == null) {
+			if(mNciPdReferral.getAdminPhsOrgCode() == null ||
+			   mNciPdReferral.getSerialNum() == null ||
+			   mNciPdReferral.getSupportYear() == null) {
    		       mEgrantsNumber = ApplicationConstants.EMPTY_STRING;
 			} else {
-				 String supportYear = mNciPdQuery.getSupportYear().toString();
+				 String supportYear = mNciPdReferral.getSupportYear().toString();
 				 int supportYearLen = supportYear.length();
 				 while (supportYearLen < 2) {
 					 supportYear = "0" + supportYear;
 					 supportYearLen = supportYear.length();
 				 }
 
-				 String serialNum = mNciPdQuery.getSerialNum().toString();
+				 String serialNum = mNciPdReferral.getSerialNum().toString();
 				 int  serialNumLen = serialNum.length();
 				 while (serialNumLen < 6) {
 					 serialNum = "0" + serialNum;
 					 serialNumLen = serialNum.length();
 				 }
-				 mEgrantsNumber = mNciPdQuery.getAdminPhsOrgCode() +  serialNum + "-" + supportYear;
+				 mEgrantsNumber = mNciPdReferral.getAdminPhsOrgCode() +  serialNum + "-" + supportYear;
 			}
 			mReferralSearchResultObject.setEGrantsNumber(mEgrantsNumber);
 
 
-		    mReferralSearchResultObject.setApplId(mNciPdQuery.getApplId() );
+		    mReferralSearchResultObject.setApplId(new Long(mNciPdReferral.getApplId()) );
 
 			mReferralSearchResultObject.setSelected(false);
 			mReferralSearchResultObject.setSortIndex(mIndex * pageNumber);

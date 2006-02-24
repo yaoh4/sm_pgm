@@ -560,7 +560,6 @@ src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/RejectReferalCommandDao.java -te
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/ReleaseReferalCommandDao.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/UpdateReportDataCommandDao.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/helper/GrantReferalDaoImplHelper.java -text
-src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/helper/GrantReferalDaoImplHelper_bkup.java1 -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/helper/LookupHelper.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/helper/PdAssignmentDaoImplHelper.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/query/GrantsForPDAQueryObject.java -text
@@ -684,6 +683,10 @@ src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciOrganizationsT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciOrganizationsT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdQueryVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdQueryVw.java -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.java -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/PdCaAsgnmtVw.hbm.xml -text

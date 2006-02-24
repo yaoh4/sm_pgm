@@ -12,12 +12,12 @@
 -->
 
 <class 
-    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw" 
-    table="NCI_PD_QUERY_VW"
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw" 
+    table="NCI_PD_REFERRAL_VW"
 >
     <meta attribute="class-description" inherit="false">
        @hibernate.class
-        table="NCI_PD_QUERY_VW"
+        table="NCI_PD_REFERRAL_VW"
     </meta>
 
     <composite-id>

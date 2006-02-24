@@ -52,6 +52,7 @@ public class SearchGrantsAction extends NciPgmAction  {
  private String timestamp = null;
 
  public static String USER_LOGIN_FAILURE = "UserLoginFailure";
+ public static String DEFAULT_SORT_COLUMN = "default";
  private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
 
 
@@ -124,10 +125,6 @@ public class SearchGrantsAction extends NciPgmAction  {
        if( mAction.equalsIgnoreCase(ApplicationConstants.REFRESH_ACTION ))
            return refresh(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.GENERATE_REPORT )) {
-           /*updateSelected (mapping, form,  request, response);
-		   SelectedGrants mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
-		   mSelectedGrants.sortSelectedGrants();
-		   return mapping.findForward(mAction);*/
            return generate(mapping, form, request, response);
 	   }
        if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_CANCEL ) ||
@@ -327,13 +324,18 @@ public class SearchGrantsAction extends NciPgmAction  {
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
 
-       updateSelected (mapping, form,  request, response);
-       RetrieveGrantsForm mRetrieveGrantsForm = (RetrieveGrantsForm) form;
+      RetrieveGrantsForm mRetrieveGrantsForm = (RetrieveGrantsForm) form;
+
+	  updateSelected (mapping, form,  request, response);
 
        boolean mSortOrder = false;
        String mAction = mRetrieveGrantsForm.getRequestAction();
        String mSortColumn = mRetrieveGrantsForm.getSortColumn();
        if(mRetrieveGrantsForm.getSortOrder().equalsIgnoreCase("asc")) {
+		   mSortOrder = true;
+	   }
+       if(mSortColumn==null || mSortColumn.trim().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
+		   mSortColumn = DEFAULT_SORT_COLUMN;
 		   mSortOrder = true;
 	   }
 	   SelectedGrants mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);

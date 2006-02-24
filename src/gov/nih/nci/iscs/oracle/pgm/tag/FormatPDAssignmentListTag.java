@@ -135,7 +135,7 @@ public class FormatPDAssignmentListTag extends TagSupport {
       buf.append("<td headers=\"header04\" width=\"27%\" class=" + className + ">" );
       buf.append("<SELECT NAME=\"pdId\" SIZE=\"1\" >");
 
-      boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdId());
+      boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdFullName());
       addPdSelect(buf, showAll, obj.getCancerActivity(), obj.getAssignmentCA() + obj.getPdId());
 	  buf.append("</td>");
       buf.append("<td headers=\"header05\" width=\"10%\" class=" + borderClassName + "><input type=\"textbox\" name = \"pdStartDate\" value=" + formattedDate + " >" + "&nbsp;");
@@ -199,20 +199,24 @@ public class FormatPDAssignmentListTag extends TagSupport {
      if(pdId == null)
         pdId = ApplicationConstants.EMPTY_STRING;
 
+     // Cancer Avtivity & Program Dir Id are both null;
      if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) &
 		pdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
 		return true;
 	 }
 
 
-     if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
-	 } else {
+     // Cancer activity is not null
+     if(!cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
+		 // and pdId is null
 		 if(pdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
 			 return false;
-		 } else {
+	 	 }else{
+			 // and pdId is not null
 			 return true;
 		 }
 	 }
+
 
 	 return true;
 

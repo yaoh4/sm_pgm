@@ -8,7 +8,7 @@ import org.springframework.context.ApplicationContext;
 
 
 import  gov.nih.nci.iscs.oracle.pgm.actions.NciPgmAction;
-import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForReferralForm;
+import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.ReportSelectorServiceImpl;
@@ -44,7 +44,7 @@ public class CrystalReportAction extends NciPgmAction    {
  private NciUser oNciUser;
  private ApplicationContext oApplicationContext;
  private String mAction = null;
- private RetrieveGrantsForReferralForm mRetrieveGrantsForReferralForm = null;
+ private RetrieveGrantsForm mRetrieveGrantsForm = null;
  private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
 
  public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -55,11 +55,24 @@ public class CrystalReportAction extends NciPgmAction    {
       oApplicationContext =  (ApplicationContext) oServletContext.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
       ActionMessages messages = new ActionMessages();
 
-      mRetrieveGrantsForReferralForm = (RetrieveGrantsForReferralForm) request.getAttribute("retrieveGrantsForReferralForm");
+      mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
+      if(mRetrieveGrantsForm == null) {
+         mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
+	  }
 
-      String mReportFormat = mRetrieveGrantsForReferralForm.getFormatSelected();
-      String mReportSelected = mRetrieveGrantsForReferralForm.getReportSelected();
+      String mReportFormat = mRetrieveGrantsForm.getFormatSelected();
+      String mReportSelected = mRetrieveGrantsForm.getReportSelected();
 
+      if(mReportSelected.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+         mReportSelected == null){
+	       logErrors(messages, "referralaction", "errors.crystal.report.select");
+	   	   this.saveMessages(request, messages);
+	  }
+      if(mReportFormat.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+         mReportSelected == null){
+	       logErrors(messages, "referralaction", "errors.crystal.format.select");
+	   	   this.saveMessages(request, messages);
+	  }
 
       SelectedGrants mSelectedGrants= (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
       if(mSelectedGrants.isEmpty()){
@@ -69,16 +82,6 @@ public class CrystalReportAction extends NciPgmAction    {
 	  }
       List mSortedList = (List) mSelectedGrants.getSortedSelectedGrants();
 
-      if(mReportSelected.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
-         mReportSelected == null){
-	       super.logErrors(messages, "referralaction", "errors.crystal.report.select");
-	   	   this.saveMessages(request, messages);
-	  }
-      if(mReportFormat.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
-         mReportSelected == null){
-	       super.logErrors(messages, "referralaction", "errors.crystal.format.select");
-	   	   this.saveMessages(request, messages);
-	  }
       if(!messages.isEmpty() ) {
 		   return mapping.findForward("continue");
 	  }

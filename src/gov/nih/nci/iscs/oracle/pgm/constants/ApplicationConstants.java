@@ -52,10 +52,11 @@ public class ApplicationConstants {
 	public static final String CA_SORT = "cancerActivity";
 	public static final String DUAL_CANCER_ACTIVITY_SORT = "dualCA";
 	public static final String DUAL_POC_SORT = "dualPoc";
-	public static final String PI_LAST_NAME_SORT = "piLastName";
+	public static final String PI_LAST_NAME_SORT = "lastName";
+	public static final String RFA_PA_NUMBER_SORT = "rfaPaNumber";
 	public static final String INST_NAME_SORT = "instName";
 	public static final String ORGANIZATION_SORT = "orgName";
-	public static final String PD_LAST_NAME_SORT = "lastName";
+	public static final String PD_LAST_NAME_SORT = "pdLastName";
 	public static final String PD_FULL_NAME_SORT = "pdFullName";
 	public static final String PROJECT_TITLE_SORT = "projectTitle";
 	public static final String FULL_GRANT_NUMBER_SORT = "default";

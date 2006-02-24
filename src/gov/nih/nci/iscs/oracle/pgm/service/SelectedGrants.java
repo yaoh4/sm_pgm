@@ -404,8 +404,8 @@ public class SelectedGrants implements Cloneable {
 			   if(mPDASearchResultObject.getCancerActivity().equalsIgnoreCase(mAssignmentCA) ||
 			      mPDASearchResultObject.getCancerActivity() == null ||
 			      mPDASearchResultObject.getCancerActivity().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			      mPDASearchResultObject.setPdId(mPdId);
-                  mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
+			        mPDASearchResultObject.setPdId(mPdId);
+                    mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
 			   } else {
 				  mPDASearchResultObject.setMarked(true);
 			      mErrorMsg = "errors.pdassignment.inavlid.ca.for.load";

@@ -24,7 +24,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("grantNumber", "getGrantNumber");
        columnMethodMap.put("default", "getGrantNumber");
        columnMethodMap.put("instName", "getInstName");
-       columnMethodMap.put("piLastName", "getPiLastName");
+       columnMethodMap.put("pdOrgName", "getInstName");
        columnMethodMap.put("pdFullName", "getPdFullName");
        columnMethodMap.put("projectTitle", "getProjectTitle");
        columnMethodMap.put("currentPoc", "getCurrentPoc");
@@ -32,13 +32,16 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("dualPoc", "getDualPoc");
        columnMethodMap.put("sortIndex", "getSortIndex");
        columnMethodMap.put("dualCA", "getDualCA");
-       columnMethodMap.put("lastName", "getPiLastName");
+       columnMethodMap.put("lastName", "getLastName");
        columnMethodMap.put("orgName", "getInstName");
        columnMethodMap.put("projectTitle", "getProjectTitle");
        columnMethodMap.put("araStatusCode", "getAraStatus");
        columnMethodMap.put("councilMeetingDate", "getNcabDate");
        columnMethodMap.put("dualCayCode", "getDualCA");
        columnMethodMap.put("cayCode", "getCancerActivity");
+       columnMethodMap.put("fy", "getFy");
+       columnMethodMap.put("lastName", "getPiLastName");
+       columnMethodMap.put("pdStartDate", "getPdStartDate");
        columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityDatey");
 
       }
@@ -82,9 +85,16 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
                rslt1 = temp1.toString();
                rslt2 = temp2.toString();
 		    }else{
-			   rslt1 = (String) o1_Method.invoke(o1, null);
-               rslt2 = (String) o2_Method.invoke(o2, null);
-		    }
+               if(o1_Method.getReturnType().getName().equalsIgnoreCase("java.lang.Integer")){
+                  Integer temp1 = (Integer) o1_Method.invoke(o1, null);
+                  Integer temp2 = (Integer) o2_Method.invoke(o2, null);
+                  rslt1 = temp1.toString();
+                  rslt2 = temp2.toString();
+		       }else{
+			      rslt1 = (String) o1_Method.invoke(o1, null);
+                  rslt2 = (String) o2_Method.invoke(o2, null);
+		       }
+		   }
 
             if(rslt1==null) {
 				rslt1 = ApplicationConstants.EMPTY_STRING;
@@ -92,8 +102,8 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
             if(rslt2==null) {
 				rslt2 = ApplicationConstants.EMPTY_STRING;
 			}
-               comp1 = (Object) rslt1.toUpperCase().trim();
-               comp2 = (Object) rslt2.toUpperCase().trim();
+            comp1 = (Object) rslt1.toUpperCase().trim();
+            comp2 = (Object) rslt2.toUpperCase().trim();
         } catch (NoSuchMethodException e) {
         } catch (IllegalAccessException e) {
         } catch (InvocationTargetException e) {}
