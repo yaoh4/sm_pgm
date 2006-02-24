@@ -33,12 +33,12 @@
             <table  cellspacing="0">
                    <tr>
                       <td class="DefaultText" nowrap><b>Report:</b></td>
-                      <td class="DefaultText"><ncijsp:reportSelector  applicationName='Pgm Management' moduleName='Referral Query' action='reports' controlName='reportSelected'/> </td>
+                      <td class="DefaultText"><ncijsp:reportSelector  applicationName='Pgm Management' action='reports' controlName='reportSelected'/> </td>
                    </tr>
                    <tr>
                       
                       <td class="DefaultText" nowrap><b>Format:</b></td>
-                      <td class="DefaultText" ><ncijsp:reportSelector  applicationName='Pgm Management' moduleName='Referral Query' action='formats' controlName='formatSelected'/> </td>
+                      <td class="DefaultText" ><ncijsp:reportSelector  applicationName='Pgm Management' action='formats' controlName='formatSelected'/> </td>
                    </tr>
                    <input type="hidden"  value="<%=(String) session.getAttribute("formats")%>" name="reportFormats" >
            </table>

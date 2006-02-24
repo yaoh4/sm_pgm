@@ -180,8 +180,8 @@ function refresh(oValue, index, rusId)
      
      if(index>0){
          selectIndex=document.forms[0].formatSelectedLo.options.length;
-         document.forms[0].formatSelectedLo.options[selectIndex]=new Option(" ", " ");
-         document.forms[0].formatSelected.options[selectIndex]=new Option(" ", " ");
+         document.forms[0].formatSelectedLo.options[selectIndex]=new Option("Choose a Format..... ", "");
+         document.forms[0].formatSelected.options[selectIndex]=new Option("Choose a Format..... ", "");
          var formats = document.forms[0].reportFormats.value;
          var reportFormatArray = formats.split("/");
          var reportFormatIndex = 0;

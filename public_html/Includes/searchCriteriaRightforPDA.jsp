@@ -5,7 +5,7 @@
                 Information</font></b><br>
                 <table border=0 cellpadding=0 cellspacing=0 width="350">
 		   <tr>
-		      <td nowrap width="80%"><b>Program Director Name:</b></td>
+		      <td nowrap width="80%"><b>Program Director:</b></td>
 		            
 		      <td nowrap width="20%" align="right"><b>Cancer Activity:</b></td>
 		   </tr>

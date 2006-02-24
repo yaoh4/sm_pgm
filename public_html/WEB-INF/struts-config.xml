@@ -52,6 +52,7 @@
             validate="false">
             <forward name="assignPD" path="/PdAssignment.do" />
             <forward name="success" path="/SearchGrantsForPDA.jsp" />
+            <forward name="generateReport" path="/crystalReport.do" />
             <forward name="continue" path="/SearchGrantsForPDA.jsp" />
         </action>
        <action  name="retrieveGrantsForReferralForm"

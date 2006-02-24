@@ -335,11 +335,13 @@ public_html/Includes/endSearchCriteria.jsp -text
 public_html/Includes/grantList.jsp -text
 public_html/Includes/grantListHeader.jsp -text
 public_html/Includes/grantListHeaderLo.jsp -text
+public_html/Includes/minusButton.jsp -text
 public_html/Includes/pagination.jsp -text
 public_html/Includes/pdAssignmentButton.jsp -text
 public_html/Includes/pdaActionButtons.jsp -text
 public_html/Includes/pdaGrantList.jsp -text
 public_html/Includes/pdaGrantList.jsp_bkup -text
+public_html/Includes/plusButton.jsp -text
 public_html/Includes/queryList.jsp -text
 public_html/Includes/referralActionButtons.jsp -text
 public_html/Includes/referralActivityButton.jsp -text
@@ -452,6 +454,8 @@ public_html/date-picker.js -text
 public_html/images/ButtonNOWHome.gif -text
 public_html/images/ButtonNotifications.gif -text
 public_html/images/ButtonWorkbench.gif -text
+public_html/images/CriteriaClosed.gif -text
+public_html/images/CriteriaOpen.gif -text
 public_html/images/HeadingBG.gif -text
 public_html/images/HeadingBG2.gif -text
 public_html/images/HeadingBullet.gif -text

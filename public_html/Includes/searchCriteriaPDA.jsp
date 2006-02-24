@@ -35,9 +35,8 @@
                       <td nowrap>
                            <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                              <tr>
-                               <td nowrap width="23%"><b>IRG</b></td>
-                               <td nowrap width="21%"><b>IRG Flex</b></td>
-                               <td nowrap width="56%"><b>I2 Status:</b></td>
+                               <td nowrap width="18%"</td>
+                               <td nowrap width="22%"></td>
                              </tr>
                            </table>
                        </td>
@@ -46,31 +45,41 @@
                          <td nowrap>
                            <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                              <tr>
-                               <td nowrap width="23%"><label for="irgCode"><b>Code:</label></b>
+                               <td nowrap width="23%"><label for="irgCode"><b>IRG Code:</label></b>
                                  <html:text property="irgCode" size="4"/>
                                </td>
-                               <td nowrap width="21%"><label for="irgFlexCode"><b>Code</b></label>
+                               <td nowrap width="30%"><label for="irgFlexCode"><b>IRG Flex Code</b></label>
                                  <html:text property="irgFlexCode" size="1"/>
                                </td>
-                               <td nowrap width="56%">
-                                  <html:select property="i2Status" name="retrieveGrantsForPDAForm">
-     			          <html:options collection="<%= LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0] %>" property="value"  labelProperty="label" />
-     			     </html:select>
+                               <td nowrap ><b>Grants With BARS:</b> 
+                                 <html:checkbox property="barFlag"/>
                                 </td>
                              </tr>
                             </table>
                            </td>
                         </tr>
-                 </table>
+                  <tr>
+                      <td nowrap>
+                           <table border=0 cellpadding=0 cellspacing=0 width="100%" >
+                             <tr>
+                               <td nowrap width="18%"</td>
+                               <td nowrap width="22%"></td>
+                             </tr>
+                           </table>
+                       </td>
+                   </tr>
+                   </table>
 
                  <table border=0 cellpadding=0 cellspacing=0 width="350">
                     <tr>
                          <td nowrap>
                            <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                              <tr>
-                               <td nowrap ><b>Grants With BARS:</b> 
+                               <td nowrap ><b>I2 Status:</b> 
                                
-                                 <html:checkbox property="barFlag"/>
+                                  <html:select property="i2Status" name="retrieveGrantsForPDAForm">
+     			          <html:options collection="<%= LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0] %>" property="value"  labelProperty="label" />
+     			     </html:select>
                                </td>
                              </tr>
                             </table>
@@ -78,8 +87,8 @@
                     </tr>
 
                  </table>
- 
 
+ 
 
 
 

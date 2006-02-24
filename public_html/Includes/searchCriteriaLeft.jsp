@@ -18,6 +18,7 @@
         <td width="20">&nbsp;</td>
         <td valign="top"> 
           <table  border="0" cellspacing="0" cellpadding="2">
+            
             <tr> 
               <% if(action.equalsIgnoreCase(ApplicationConstants.REFERRAL)) { %>
                  <td colspan="3" valign="top" bgcolor="#99CCFF"><b><font size="2" color="#FFFFFF">Grant 
@@ -68,7 +69,7 @@
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
-                          <html:text property="srlIndexed[1]"  size="6" maxlength="6"/>
+                          <html:text property="srlIndexed[1]"  size="7" maxlength="6"/>
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
@@ -93,7 +94,7 @@
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
-                          <html:text property="srlIndexed[2]"  size="6" maxlength="6"/>
+                          <html:text property="srlIndexed[2]"  size="7" maxlength="6"/>
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
@@ -118,7 +119,7 @@
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
-                          <html:text property="srlIndexed[3]"  size="6" maxlength="6"/>
+                          <html:text property="srlIndexed[3]"  size="7" maxlength="6"/>
                        </td>
                        <td nowrap width="5">&nbsp;</td>
                        <td nowrap>
@@ -130,6 +131,7 @@
                        </td>
                      </tr>
                     <% } %>
+                
                 <table border=0 cellpadding=0 cellspacing=1 >
                   <tr> 
                     <td nowrap><label for="pApplId"><b>Appl Id:</b></label> 
@@ -165,14 +167,14 @@
                 <table title="Institution" border=0 cellpadding="0" cellspacing="1">
 
 
-                <tr> 
+                 <tr> 
                   <td nowrap align="right"><b>Name:</b></td>
                   <td nowrap width="5"><img src="images/spacer.gif" alt="" width="5" height="10"></td>
                   <td nowrap> 
                     <html:text property="instName" size="30" maxlength="30"/>
                   </td>
-                </tr>
-                <tr> 
+                 </tr>
+                 <tr> 
                   <td nowrap align="right"><b>City:</b></td>
                   <td nowrap width="5">&nbsp;</td>
                   <td nowrap> 
@@ -180,15 +182,16 @@
                     <b>St:</b> 
                     <html:text property="instState" size="2" maxlength="2"/>
                   </td>
-                </tr>
+                 </tr>
 
-                <tr> 
+                 <tr> 
                   <td nowrap align="right"><b>IPF:</b></td>
                   <td nowrap width="5"><img src="images/spacer.gif" alt="" width="5" height="10"></td>
                   <td nowrap> 
                     <html:text property="ipf" size="10" maxlength="10"/>
                   </td>
-                </tr>
+                 </tr>
   
                 </table>
               </td>
+           </table> 

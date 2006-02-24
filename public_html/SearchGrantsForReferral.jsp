@@ -15,7 +15,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
-    <link rel="stylesheet" href="Stylesheets/main.css" type="text/css">
      <SCRIPT language="Javascript" src="pgm.js" type="text/javascript">
      </SCRIPT>
 
