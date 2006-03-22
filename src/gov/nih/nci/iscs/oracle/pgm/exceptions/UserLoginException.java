@@ -22,6 +22,7 @@ public class UserLoginException extends RuntimeException {
 
 	public UserLoginException(String message, Exception ex, HttpSession session) {
 		super(message);
+		System.out.println("*** in UserLoginException and className is *** " );
 		GrantSearchErrorForm mGrantSearchErrorForm = new GrantSearchErrorForm();
 		mGrantSearchErrorForm.setRequestAction("login");
 		/*String errorMessage =  new ToStringBuilder(this)
@@ -36,6 +37,7 @@ public class UserLoginException extends RuntimeException {
 
 	public UserLoginException(String message, HttpSession session) {
 		super(message);
+		System.out.println("*** in UserLoginException and className is *** " );
 		GrantSearchErrorForm mGrantSearchErrorForm = new GrantSearchErrorForm();
 		mGrantSearchErrorForm.setRequestAction("login");
         System.out.println("*** now in UserLoginException constructor **** ");
