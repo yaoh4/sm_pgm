@@ -3,18 +3,23 @@
               
               <td colspan="3" valign="top" bgcolor="#99CCFF"><b><font color="#FFFFFF" size="2">Program Director 
                 Information</font></b><br>
-                <table border=0 cellpadding=0 cellspacing=0 width="350">
+                <table border=0 cellpadding=0 cellspacing=0 width="400">
 		   <tr>
-		      <td nowrap width="80%"><b>Program Director Name:</b></td>
+		      <td nowrap width="70%"><b>Program Director:</b></td>
 		            
-		      <td nowrap width="20%" align="right"><b>Cancer Activity:</b></td>
+		      <td nowrap width="15%" align="right"><b>Cancer Activity:</b></td>
+                      <td width="20%" align="right">                     
+                      </td>
 		   </tr>
 		   <tr>
-		       <td nowrap width="80%">
+		       <td nowrap width="70%">
                            <ncijsp:formatProgramDirectorSelectTag /> 
 		        </td>
-	                <td width="20%" align="right">
+	                <td width="15%" align="left">
                            <ncijsp:formatCancerActivitySelectTag /> 
+                        </td>
+                        <td width="20%" align="right">
+                            <input class="button2a" type="button" value="Clear PD"  onclick="clearPDCriteria('continue');"/>
                         </td>
 	             </tr>
 		</table>

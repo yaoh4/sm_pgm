@@ -2,6 +2,8 @@
 <%@ page import="gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants" %>
 <%@ page import="gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject" %>
 <%@ page import="gov.nih.nci.iscs.oracle.pgm.service.PdAssignmentActionObject" %>
+<%@ page import= "gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo" %>
+
 <%@ page import="java.util.*" %>
 <!--Start List Table -->
 <A NAME="grants">&nbsp;</A>
@@ -48,6 +50,7 @@
               <%
                 Integer index = new Integer("0");
                 Set mPdAssignmentActionSet = mPdAssignmentActionObjects.entrySet();
+	        String grantsUrl = (String) session.getAttribute("grantsUrl");
                 Iterator mIterator = mPdAssignmentActionSet.iterator();
                 while (mIterator.hasNext()) {
                    Map.Entry mPdAssignmentActionMapEntry =  (Map.Entry) mIterator.next();
@@ -56,10 +59,11 @@
       	       %>
 
       	          <tr> 
-                        <td headers="header00" width="20%" class=listCell><%=actionObj.getGrantNumber() %>&nbsp;</td>
+                       <td headers="header00" width="20%" class=listCell>
+                          <a href="javascript:openYourGrantsWindow('<%=actionObj.getApplId() %>', '<%=grantsUrl %>' );"><%=actionObj.getGrantNumber() %>&nbsp;</a></td>
                         <td headers="header01" width="20%" class=listCell><%=actionObj.getProgramDirector() %>&nbsp;</td>
                         <td headers="header02" width="5%" class=listCell><%=actionObj.getCancerActivity() %>&nbsp;</td>
-                        <td headers="header03" width="10%" class=listCell><%=actionObj.getAssignmentDate() %>&nbsp;</td>
+                        <td headers="header03" width="10%" class=listCell><%=actionObj.getFormattedAssignmentDate() %>&nbsp;</td>
                         <td headers="header04" width="30%" class=listCell5>
 		          <ncijsp:formatResult result="<%=actionObj.getResults() %>" />&nbsp;
                          </td>

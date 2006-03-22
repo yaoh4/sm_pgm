@@ -20,7 +20,7 @@
               <td width="70%" align="right">
                 <ncijsp:formatPDAssignmentList action='<%= ApplicationConstants.FORMAT_SELECT %>'/> 
               </td>
-              <td align="left" width="30%"><input class="button2a" type="button" value="Apply To Selected Grants"  onclick="setCurrentReferralAction('<%= ApplicationConstants.LOAD_ASSIGNMENTS %>');"/></td>
+              <td align="left" width="30%"><input class="button2a" type="button" value="Apply To Selected Grants"  onclick="setAssignmentAction('<%= ApplicationConstants.LOAD_ASSIGNMENTS %>');"/></td>
 	    </tr>
 
 	    <tr><td colspan="2">&nbsp;</td></tr>

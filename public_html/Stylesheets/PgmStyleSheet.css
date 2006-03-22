@@ -85,8 +85,8 @@ Titles and other text formatting:
 	font-family: Verdana, Arial, Helvetica, sans-serif; 
 	font-size: 12pt; 
 	font-weight: bold; 
-	color: #3F7EFF
-      background-color: white
+	color: #3F7EFF;
+      background-color: white;
 }
 
 .TitleSecondary
@@ -94,7 +94,7 @@ Titles and other text formatting:
 	font-family: Verdana, Arial, Helvetica, sans-serif;
 	font-size: 10pt;
 	font-weight: bold;
-	color: #999999
+	color: #999999;
 }
 
 .BarFormat

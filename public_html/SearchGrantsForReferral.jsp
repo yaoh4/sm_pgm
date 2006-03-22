@@ -15,7 +15,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
-    <link rel="stylesheet" href="Stylesheets/main.css" type="text/css">
      <SCRIPT language="Javascript" src="pgm.js" type="text/javascript">
      </SCRIPT>
 
@@ -33,11 +32,13 @@
 <html:hidden property="sortActionSelected" />
 <html:hidden property="searchButtonInitiated" />
 <html:hidden property="timestamp" />
+<html:hidden property="sortAscendingIndicator" />
 
 <!--Start Header -->
 <!--Include the header -->
   <% String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">"; %>
   <% request.setAttribute(ApplicationConstants.SEARCH_ACTION, ApplicationConstants.REFERRAL); %>
+  <% request.getSession().setAttribute("applicationName", "Referral");%>
   <%@ include file="Includes/PgmHeader.jsp"%>
 <!--End Your Grants Header -->
 <!--Start Tabs/Load -->

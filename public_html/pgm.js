@@ -35,6 +35,14 @@ function setAction(oValue, oSort)
    document.forms[0].submit();
    
 }
+function clearPDCriteria(oAction) 
+{
+   document.forms[0].pdId.value = "";
+   document.forms[0].cancerActivity.value = "";
+   document.forms[0].pdOrg.value = "";
+   document.forms[0].requestAction.value = oAction;
+   document.forms[0].submit();
+}
 function sortReferralList(sortColumn, sortOrder) 
 {
    document.forms[0].sortColumn.value = sortColumn;
@@ -142,6 +150,23 @@ function setCurrentReferralAction(oValue)
    
 }
 
+function setCurrentReferralAction(oValue)
+{  
+
+   document.forms[0].requestAction.value = oValue;
+   document.forms[0].submit();
+   
+}
+
+function setAssignmentAction(oValue, oAction)
+{  
+
+     var count = document.forms[0].count.value;
+     document.forms[0].requestAction.value = oValue;
+     document.forms[0].submit();
+   
+}
+
 function refreshComments(comment, controltoUpdate)
 {  
   var control= eval ('document.forms[0].' + controltoUpdate.name);
@@ -180,8 +205,8 @@ function refresh(oValue, index, rusId)
      
      if(index>0){
          selectIndex=document.forms[0].formatSelectedLo.options.length;
-         document.forms[0].formatSelectedLo.options[selectIndex]=new Option(" ", " ");
-         document.forms[0].formatSelected.options[selectIndex]=new Option(" ", " ");
+         document.forms[0].formatSelectedLo.options[selectIndex]=new Option("Choose a Format..... ", "");
+         document.forms[0].formatSelected.options[selectIndex]=new Option("Choose a Format..... ", "");
          var formats = document.forms[0].reportFormats.value;
          var reportFormatArray = formats.split("/");
          var reportFormatIndex = 0;
@@ -292,19 +317,20 @@ function setPagination(oValue)
 }
 
 
-function sortGrantList(sortCriteria)
+function sortGrantList(sortCriteria, sortOrder)
 {
 
    document.forms[0].sortColumn.value=sortCriteria;
+   document.forms[0].sortAscendingIndicator.value = sortOrder;
    document.forms[0].requestAction.value = "search";
    document.forms[0].sortActionSelected.value = true;
-   document.forms[0].submit();
- 
+   document.forms[0].submit(); 
 }
-function openYourGrantsWindow(applId)
+
+function openYourGrantsWindow(applId, grantsUrl)
 { 
 
-  var url = "https://i2e-dev.nci.nih.gov/yourgrants/jsp/GrantDetails.jsp?applId=" + applId;
+  var url = grantsUrl + "/yourgrants/jsp/GrantDetails.jsp?applId=" + applId;
   var winName = "YourGrants";
   var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
  

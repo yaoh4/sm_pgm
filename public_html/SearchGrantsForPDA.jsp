@@ -13,7 +13,6 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
-    <link rel="stylesheet" href="Stylesheets/main.css" type="text/css">
 
     <SCRIPT language=JavaScript src="pgm.js" type="text/javascript">
     </SCRIPT>
@@ -31,28 +30,16 @@
 <html:hidden property="sortActionSelected" />
 <html:hidden property="searchButtonInitiated" />
 <html:hidden property="timestamp" />
+<html:hidden property="sortAscendingIndicator" />
 
 <!--Include the header -->
   <% String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">"; %>
   <% request.setAttribute(ApplicationConstants.SEARCH_ACTION, ApplicationConstants.PD_ASSIGNMENT); %>
+  <% request.getSession().setAttribute("applicationName", "PD");%>
   <%@ include file="Includes/PgmHeader.jsp"%>
 <!--End Your Grants Header -->
 
 <!--Start Tabs/Load -->
-<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
-   <tr>
-      <td width="20" align="right">&nbsp;</td>
-      <td>
-         <html:link action="/SearchGrantsForReferral"> Referral Activity </html:link>
-       </td>
-        <td height="5" nowrap><img src="images/spacer.gif" width="2" height="5"></td>
-       <td>
-         PD Assignment 
-      </td>
-      <td valign="top" width="20">&nbsp;</td>
-    </tr>
-</table>
-
 <br>
 
 <!--End Criteria -->

@@ -20,7 +20,11 @@
            <td> 
               <table summary="Grants Table" cellpadding="1" cellspacing="1" width="950" >
                 <tr> 
-                  <td width="10%"> &nbsp;</td>
+                  <td width="8%"> &nbsp;</td>
+                  <ncijsp:acceptReferralCA />
+                </tr> 
+                <tr> 
+                  <td width="8%"> &nbsp;</td>
                   <td align="left"><B>Assign To:</B></td>
                 </tr> 
                 <tr> 
@@ -29,13 +33,10 @@
                            <ncijsp:applyToAll />
                   
                 </tr> 
-                <tr> 
-                  <td width="8%"> &nbsp;</td>
-                  <ncijsp:acceptReferralCA />
-                </tr> 
               </table>           
             </td>
          </tr> 
+        
          <tr>
           <table border="0" cellspacing="0" cellpadding="0" width="800" >
             <tr><td width="7%" align="right">&nbsp;</td>

@@ -18,9 +18,11 @@
 
     <SCRIPT language=JavaScript src="pgm.js" type="text/javascript">
     </SCRIPT>
-    <SCRIPT language=JavaScript src="date-picker.js" type="text/javascript">
-    </SCRIPT>
     <SCRIPT language="JavaScript" src="date-picker.js">
+    </SCRIPT>
+    <SCRIPT language=JavaScript src="FieldChek.js">
+    </SCRIPT>
+    <SCRIPT language=JavaScript src="JavascriptFiles.js">
     </SCRIPT>
 </head>
 <body  " bgcolor="#FFFFFF" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">
@@ -33,6 +35,7 @@
 
 <html:form action="PdAssignment.do" method="POST" >
 <html:hidden property="requestAction" />
+<html:hidden property="selected" />
 <html:hidden property="index" />
 <html:hidden property="count" />
 <html:hidden property="sortColumn" />
@@ -58,12 +61,13 @@
 
    <tr>
      <td>
-     <table width="100%" border="0" cellspacing="0" cellpadding="0">
-       <!--Include the drop down to select additional Creiteria -->
-       <%@include file="Includes/assignPdTable.jsp"%>
-     </table>
-    </td>
+       <table width="100%" border="0" cellspacing="0" cellpadding="0">
+         <!--Include the drop down to select additional Creiteria -->
+         <%@include file="Includes/assignPdTable.jsp"%>
+       </table>
+     </td>
   </tr>
+  <tr><td > &nbsp; </td></tr>
 </table>
  
  </html:form>
@@ -73,6 +77,7 @@
  </body>
 <!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
 <iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
-</iframe>  
+<LAYER name="gToday:normal:agenda.js" src="npopeng.htm">     </LAYER>
+</iframe> 
  
 </html>

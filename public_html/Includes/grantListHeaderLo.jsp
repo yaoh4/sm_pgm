@@ -33,12 +33,12 @@
             <table  cellspacing="0">
                    <tr>
                       <td class="DefaultText" nowrap><b>Report:</b></td>
-                      <td class="DefaultText"><ncijsp:reportSelector  applicationName='Pgm Management' moduleName='Referral Query' action='reports' controlName='reportSelectedLo'/> </td>
+                      <td class="DefaultText"><ncijsp:reportSelector  applicationName='Pgm Management'  action='reports' controlName='reportSelectedLo'/> </td>
                    </tr>
                    <tr>
                       
                       <td class="DefaultText" nowrap><b>Format:</b></td>
-                      <td class="DefaultText" ><ncijsp:reportSelector  applicationName='Pgm Management' moduleName='Referral Query' action='formats' controlName='formatSelectedLo'/> </td>
+                      <td class="DefaultText" ><ncijsp:reportSelector  applicationName='Pgm Management' action='formats' controlName='formatSelectedLo'/> </td>
                    </tr>
            </table>
         </td>

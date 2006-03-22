@@ -31,13 +31,17 @@
     key ="errors.grantSearchException"
     path="/GrantSearchError.do"/>
   <exception
+    type="gov.nih.nci.iscs.oracle.pgm.exceptions.PDAssignmentException"
+    key ="errors.grantSearchException"
+    path="/GrantSearchError.do"/>
+  <exception
     type="gov.nih.nci.iscs.oracle.pgm.exceptions.ServiceImplException"
     key ="errors.grantServiceException"
-    path="/ErrorPage.jsp"/>
+    path="/GrantSearchError.jsp"/>
  </global-exceptions>
  <global-forwards type="org.apache.struts.action.ActionForward">
     <forward name="main" path="/index.jsp" redirect="false"/>
-    <forward name="error" path="/GrantSearchError.do" redirect="false"/>  
+    <forward name="error" path="/GrantSearchErrorPage.jsp" redirect="false"/>  
     <forward name="generateReport" path="/GenerateReportAction.do" />
   </global-forwards>
 
@@ -52,7 +56,9 @@
             validate="false">
             <forward name="assignPD" path="/PdAssignment.do" />
             <forward name="success" path="/SearchGrantsForPDA.jsp" />
+            <forward name="generateReport" path="/crystalReport.do" />
             <forward name="continue" path="/SearchGrantsForPDA.jsp" />
+            <forward name="error" path="/GrantSearchErrorPage.jsp" />
         </action>
        <action  name="retrieveGrantsForReferralForm"
             path="/SearchGrantsForReferral"
@@ -146,7 +152,8 @@
             type="gov.nih.nci.iscs.oracle.pgm.actions.CrystalReportAction"
             scope="request"
             validate="false">
-            <forward name="continue" path="/SearchGrantsForReferral.jsp" />
+            <forward name="continueForReferral" path="/SearchGrantsForReferral.jsp" />
+            <forward name="continueForPDA" path="/SearchGrantsForPDA.jsp" />
        </action>   
       <action name="grantSearchErrorForm" 
             path="/GrantSearchError" 
@@ -154,7 +161,9 @@
             scope="request"
             validate="false">
             <forward name="success" path="/SentErrorEmail.jsp" />
-            <forward name="continue" path="/GrantSearchErrorPage.jsp" />
+            <forward name="continue" path="/GrantSearchErrorPage.jsp" redirect="true"/>
+            <forward name="referralAction" path="/SearchGrantsForReferral.do" redirect="true" />
+            <forward name="assign" path="/SearchGrantsForPDA.do" redirect="true"/>
       </action>
       <action name="statusForm"
             path="/Status" 
