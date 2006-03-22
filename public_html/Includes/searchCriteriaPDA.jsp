@@ -78,7 +78,7 @@
                                <td nowrap ><b>I2 Status:</b> 
                                
                                   <html:select property="i2Status" name="retrieveGrantsForPDAForm">
-     			          <html:options collection="<%= LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0] %>" property="value"  labelProperty="label" />
+     			          <html:options collection="<%= LookUpTableConstants.APPL_STATUS_MV_LOOKUP[0] %>" property="value"  labelProperty="label" />
      			     </html:select>
                                </td>
                              </tr>

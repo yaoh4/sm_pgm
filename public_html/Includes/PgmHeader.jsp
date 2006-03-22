@@ -8,12 +8,19 @@
 <%
   ApplicationInfo pgmApplInfo =ApplicationInfo.getInstance(ApplicationConstants.APPLICATION_KEY);
   NciUser nciuser = (NciUser) session.getAttribute(NciUser.NCI_USER);
+  String applicationName = (String) session.getAttribute("applicationName");
 %>
 
 <table cellspacing="0" >
    <tr>
       <td width="35%">
-	 <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
+         <% if(applicationName.equalsIgnoreCase("Referral")){ %>
+             <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
+         <% } %>
+         <% if(applicationName.equalsIgnoreCase("PD")){ %>
+             <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
+         <% } %>
+         
       </td>
       <td width="65%">
          <table>

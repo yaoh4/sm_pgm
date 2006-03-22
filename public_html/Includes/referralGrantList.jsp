@@ -9,7 +9,7 @@
  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
     <tr>
       <td width="20" align="right"><img src="images/CriteriaOpen.gif" width="18" height="13"></td>
-      <td class="TitlePrimary"><a name="Grants">Grants</a></td>
+      <td class="TitlePrimary">Grants</td>
       <td valign="top" width="20">&nbsp;</td>
     </tr>
     <tr>

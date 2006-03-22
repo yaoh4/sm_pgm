@@ -30,10 +30,12 @@
 <html:hidden property="sortActionSelected" />
 <html:hidden property="searchButtonInitiated" />
 <html:hidden property="timestamp" />
+<html:hidden property="sortAscendingIndicator" />
 
 <!--Include the header -->
   <% String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">"; %>
   <% request.setAttribute(ApplicationConstants.SEARCH_ACTION, ApplicationConstants.PD_ASSIGNMENT); %>
+  <% request.getSession().setAttribute("applicationName", "PD");%>
   <%@ include file="Includes/PgmHeader.jsp"%>
 <!--End Your Grants Header -->
 

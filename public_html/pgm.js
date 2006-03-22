@@ -35,6 +35,14 @@ function setAction(oValue, oSort)
    document.forms[0].submit();
    
 }
+function clearPDCriteria(oAction) 
+{
+   document.forms[0].pdId.value = "";
+   document.forms[0].cancerActivity.value = "";
+   document.forms[0].pdOrg.value = "";
+   document.forms[0].requestAction.value = oAction;
+   document.forms[0].submit();
+}
 function sortReferralList(sortColumn, sortOrder) 
 {
    document.forms[0].sortColumn.value = sortColumn;
@@ -139,6 +147,23 @@ function setCurrentReferralAction(oValue)
 
    document.forms[0].requestAction.value = oValue;
    document.forms[0].submit();
+   
+}
+
+function setCurrentReferralAction(oValue)
+{  
+
+   document.forms[0].requestAction.value = oValue;
+   document.forms[0].submit();
+   
+}
+
+function setAssignmentAction(oValue, oAction)
+{  
+
+     var count = document.forms[0].count.value;
+     document.forms[0].requestAction.value = oValue;
+     document.forms[0].submit();
    
 }
 
@@ -292,15 +317,16 @@ function setPagination(oValue)
 }
 
 
-function sortGrantList(sortCriteria)
+function sortGrantList(sortCriteria, sortOrder)
 {
 
    document.forms[0].sortColumn.value=sortCriteria;
+   document.forms[0].sortAscendingIndicator.value = sortOrder;
    document.forms[0].requestAction.value = "search";
    document.forms[0].sortActionSelected.value = true;
-   document.forms[0].submit();
- 
+   document.forms[0].submit(); 
 }
+
 function openYourGrantsWindow(applId, grantsUrl)
 { 
 

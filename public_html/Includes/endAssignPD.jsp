@@ -16,7 +16,7 @@
       <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
         <tr> 
           <td width="80%" align="right">
-               <input class="button2a" type="button" value="Assign"  onclick="setCurrentReferralAction('executeAssignment');"/></td>
+               <input class="button2a" type="button" value="Assign"  onclick="setAssignmentAction('executeAssignment');"/></td>
 	  </td> 
           <td nowrap width="5">&nbsp;</td>
          <td align="left">

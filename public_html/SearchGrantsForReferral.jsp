@@ -32,11 +32,13 @@
 <html:hidden property="sortActionSelected" />
 <html:hidden property="searchButtonInitiated" />
 <html:hidden property="timestamp" />
+<html:hidden property="sortAscendingIndicator" />
 
 <!--Start Header -->
 <!--Include the header -->
   <% String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">"; %>
   <% request.setAttribute(ApplicationConstants.SEARCH_ACTION, ApplicationConstants.REFERRAL); %>
+  <% request.getSession().setAttribute("applicationName", "Referral");%>
   <%@ include file="Includes/PgmHeader.jsp"%>
 <!--End Your Grants Header -->
 <!--Start Tabs/Load -->
