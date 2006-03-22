@@ -1,0 +1,104 @@
+package gov.nih.nci.iscs.oracle.pgm.forms;
+
+
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionMapping;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+
+public class ReferalCriteriaEntryForm extends SuppDynamicActionForm {
+    public ReferalCriteriaEntryForm() {
+        super();
+    }
+
+    public ActionErrors validate(ActionMapping mapping,
+        HttpServletRequest request) {
+        ActionErrors aes = new ActionErrors();
+        HttpSession session = request.getSession();
+
+        checkEmptyString("line1Addr");
+        checkEmptyString("line2Addr");
+        checkEmptyString("line3Addr");
+        checkEmptyString("line4Addr");
+        checkEmptyString("line5Addr");
+        checkEmptyString("cityName");
+        checkEmptyString("stateCode");
+        checkEmptyString("zipCode");
+        checkEmptyString("phoneNum");
+        checkEmptyString("phoneExtensionNum");
+        checkEmptyString("faxNum");
+        checkEmptyString("alternatePhoneNum");
+        checkEmptyString("alternateExtensionNum");
+        checkEmptyString("addressTypeCode");
+
+        String requestedTab = (String) session.getAttribute(ActionConstants.REQUESTED_TAB);
+
+        String currentTab = (String) get("currentTab");
+        String dataEntryAction = (String) get("dataEntryAction");
+
+        if ((dataEntryAction != null) &&
+                dataEntryAction.equals(
+                    AddressActionConstants.CLEAR_DATA_ENTRY_ACTION)) {
+            return aes;
+        }
+
+        if (dataEntryAction.equals("ProjectAddressTab")) {
+            SupplementRequest esr = (SupplementRequest) session.getAttribute(PersonActionConstants.SUPPLEMENT_REQUEST_CONTEXT);
+
+            if (esr == null) {
+                aes.add(ActionErrors.GLOBAL_ERROR,
+                    new ActionError(
+                        "errors.addressaction.nosupprequestincontext"));
+            }
+        }
+
+        if ((dataEntryAction != null) &&
+                dataEntryAction.equals(
+                    AddressActionConstants.SAVE_DATA_ENTRY_ACTION)) {
+            if ((get("line1Addr") == null) || (get("line1Addr").equals(""))) {
+                aes.add(ActionErrors.GLOBAL_ERROR,
+                    new ActionError("errors.addressaction.noline1addr"));
+            }
+
+            if ((get("cityName") == null) || (get("cityName").equals(""))) {
+                aes.add(ActionErrors.GLOBAL_ERROR,
+                    new ActionError("errors.addressaction.nocityname"));
+            }
+
+            if ((get("stateCode") == null) || (get("stateCode").equals(""))) {
+                aes.add(ActionErrors.GLOBAL_ERROR,
+                    new ActionError("errors.addressaction.nostatecode"));
+            }
+
+            if ((get("zipCode") == null) || (get("zipCode").equals(""))) {
+                aes.add(ActionErrors.GLOBAL_ERROR,
+                    new ActionError("errors.addressaction.nozipcode"));
+            }
+        }
+
+        if (dataEntryAction.equals(ActionConstants.GENERATE_REPORT_ACTION))
+        {
+            String crystalReportId = (String)get(ActionConstants.CRYSTAL_REPORT_ID);
+            String crystalReportFormat = (String)get(ActionConstants.CRYSTAL_REPORT_FORMAT);
+            if ((crystalReportId == null)||(crystalReportId.startsWith("Choose a Report")))
+            {
+                ActionError ae = new ActionError("errors.reports.noreportselected");
+                aes.add(ActionErrors.GLOBAL_ERROR,ae);
+            }
+            if ((crystalReportFormat == null)||(crystalReportFormat.startsWith("Choose a Format")))
+            {
+                ActionError ae = new ActionError("errors.reports.noformatselected");
+                aes.add(ActionErrors.GLOBAL_ERROR,ae);
+            }
+        }
+
+        return aes;
+    }
+
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        super.reset(mapping, request);
+    }
+}
