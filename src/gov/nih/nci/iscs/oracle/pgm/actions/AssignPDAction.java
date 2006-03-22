@@ -24,6 +24,8 @@ import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;
 import gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
+import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 
@@ -60,8 +62,15 @@ public class AssignPDAction extends NciPgmAction {
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
+       if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
+		   throw new GrantSearchException("NciPgmAction", "execute", "Your session has expired. You have open a new browser window to continue!", request.getSession());
+	   }
+	try{
+
 	   performInitialization(form, request);
 
+       if( mAction.equalsIgnoreCase("assignPD" ))
+           return initializeSelection(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.EXECUTE_ASSIGN ))
            return executeAssignmentAction(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.LOAD_ASSIGNMENTS ))
@@ -74,7 +83,11 @@ public class AssignPDAction extends NciPgmAction {
        if( mAction.equalsIgnoreCase(ApplicationConstants.SORT_LIST_ACTION ))
            return sortList(mapping, form, request, response);
 
-       return mapping.findForward("continue");
+	  } catch (Exception ex) {
+		  throw new PDAssignmentException("AssignPDAction", "executeAction", ex.toString(), request.getSession(), ex);
+	  }
+
+      return mapping.findForward("continue");
 
    }
    public ActionForward executeAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -84,15 +97,26 @@ public class AssignPDAction extends NciPgmAction {
        messages = new ActionMessages();
        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
 	   // mark all seleceted grants
-       markSelectedGrants(mPdAssignmentForm);
+	   markSelectedGrants(mPdAssignmentForm);
   	   // process PdIds
-       processPdIds();
+	   processPdIds();
+       //processPdIds();
        mAssignmentActionObjects = new TreeMap();
-       mSelectedGrants.processForPdAssignmentAction(mAssignmentActionObjects);
+       Set errorMessages = mSelectedGrants.processForPdAssignmentAction(mAssignmentActionObjects, mPdAssignmentForm.getPdAssignmentStartDate());
+       if(errorMessages.size() > 0){
+		   Iterator iter = errorMessages.iterator();
+		  while(iter.hasNext()){
+		      String errorMsg = (String) iter.next();
+	          super.logErrors(messages, "validation", errorMsg);
+              this.saveMessages(request, messages);
+		  }
+		  return mapping.findForward("continue");
+	   }
 
 	   // make sure that at least one PD was selected
+
        if( mAssignmentActionObjects.size() == 0){
-	       super.logErrors(messages, "executeAssignmentAction", "errors.no.pd.selected");
+	       super.logErrors(messages, "validation", "errors.no.pd.assignment.selected");
            this.saveMessages(request, messages);
 		   return mapping.findForward("continue");
 	   }
@@ -112,6 +136,19 @@ public class AssignPDAction extends NciPgmAction {
 
    }
 
+   public ActionForward initializeSelection (ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                       HttpServletResponse response) throws ReferralActionException, Exception {
+
+	try{
+	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) request.getAttribute("pdAssignmentForm");
+       mPdAssignmentForm.initializeArray();
+	  } catch (Exception ex) {
+		  throw new ReferralActionException("executeAssignmentAction", "initializeSelection", ex.toString(), request.getSession(), ex);
+	  }
+       return mapping.findForward("continue");
+
+   }
+
    public ActionForward sortList (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
@@ -122,8 +159,9 @@ public class AssignPDAction extends NciPgmAction {
 
        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
        mSelectedGrants.resetMarked();
+  	   // process PdIds
        processPdIds();
-       return mapping.findForward("continue");
+	   return mapping.findForward("continue");
     }
 
    public ActionForward loadAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -133,8 +171,8 @@ public class AssignPDAction extends NciPgmAction {
        messages = new ActionMessages();
        String mErrorMsg = ApplicationConstants.EMPTY_STRING;
 	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) form;
-        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
-        markSelectedGrants(mPdAssignmentForm);
+       mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
+	    markSelectedGrants(mPdAssignmentForm);
         String pdIdForLoad = mPdAssignmentForm.getPdIdForLoad();
         if(pdIdForLoad != null) {
            try {
@@ -143,12 +181,13 @@ public class AssignPDAction extends NciPgmAction {
 	          mErrorMsg= mSelectedGrants.processLoadForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING);
 	       }
 	    }
-        if(!mErrorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+       if(!mErrorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
              super.logErrors(messages, "validation", mErrorMsg);
 	   	     this.saveMessages(request, messages);
 		}
-        processPdIds();
-   	    return mapping.findForward("continue");
+  	   // process PdIds
+       processPdIds();
+       return mapping.findForward("continue");
 
    }
 
@@ -170,7 +209,7 @@ public class AssignPDAction extends NciPgmAction {
     }
 
 
-   public void performInitialization (ActionForm form, HttpServletRequest request)  {
+   public void performInitialization (ActionForm form, HttpServletRequest request) {
 
 	   mPdAssignmentForm = (PdAssignmentForm) form;
 	   mAssignmentActionList = (ArrayList) request.getSession().getAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST);;
@@ -181,13 +220,11 @@ public class AssignPDAction extends NciPgmAction {
 	   }
 
    	   mAction = mPdAssignmentForm.getRequestAction();
-	   if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ))
-	      mPdAssignmentForm.setQueryResults( (List) mAssignmentActionList);
+	   mPdAssignmentForm.setQueryResults( (List) mAssignmentActionList);
   	   // set the Program Director LookUp
        oApplicationContext =  (ApplicationContext)  request.getSession().getServletContext().getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
        ArrayList mList = LookupHelper.addNewLookUp(LookUpTableConstants.PD_NAME_VW4_LOOKUP, oApplicationContext);
        request.setAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0], mList);
-
    }
 
 
@@ -199,40 +236,43 @@ public class AssignPDAction extends NciPgmAction {
               String[] mSelectedIndx =  mPdAssignmentForm.getSelectedIndx();
               for(int i=0; i<mSelectedIndx.length; i++) {
 	              String mKey = mSelectedIndx[i];
-
 	              if(mKey != null) {
-			    	 mSelectedGrants.processKeyForPDAssignmentAction(mKey, mPdAssignmentForm.getPdStartDate(),  true);
+			    	 //mSelectedGrants.processKeyForPDAssignmentAction(mKey, (String) mPdAssignmentForm.getPdAssignmentStartDateMapped(mKey),  true);
+			    	 mSelectedGrants.processKeyForPDAssignmentAction(mKey,  true);
 				  }
 			   }
 		    }
 	    }catch (Exception ex) {
-	        logger.error("An error occurred in executeAssignmentAction " + ex.toString());
+	        logger.error("An error occurred in markSelectedGrants " + ex.toString());
    	    }
 	}
 
    private void processPdIds() {
 
         try{
-           if(mPdAssignmentForm.getPdId() != null) {
-              String[] mPdIds =  mPdAssignmentForm.getPdId();
-              for(int index=0; index<mPdIds.length; index++) {
-	              String mPdId = mPdIds[index];
-	              try {
-					  if(mPdId == null ||  mPdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
-                         mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, index, false);
-					  }else {
-	                     mSelectedGrants.processPdForPDAssignmentAction(mPdId.substring(2), mPdId.substring(0,2), index, false);
-					  }
-				   } catch (Exception ex) {
-						 logger.error("**** an exception has been generated in processPdIds ***" + ex.toString());
-
-				   }
+		   Iterator iter = mPdAssignmentForm.getPrgIdsMap().entrySet().iterator();
+		   while(iter.hasNext()){
+			   Map.Entry entry = (Map.Entry)iter.next();
+			   String mKey = (String) entry.getKey();
+			   String mPdId = (String) entry.getValue();
+	           //String mPdAssignmentStartDate = (String) mPdAssignmentForm.getPdAssignmentStartDateMapped(mKey);
+	           try {
+				  if(mPdId == null ||  mPdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
+                     //mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, mKey, false, mPdAssignmentStartDate);
+                     mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, mKey, false);
+				  }else {
+	                 mSelectedGrants.processPdForPDAssignmentAction(mPdId.substring(2), mPdId.substring(0,2), mKey, false);
+				  }
+			   } catch (Exception ex) {
+				  logger.error("**** an exception has been generated in processPdIds ***" + ex.toString());
 			   }
 		    }
 	    }catch (Exception ex) {
-	        logger.error("An error occurred in executeAssignmentAction " + ex.toString());
+	        logger.error("An error occurred in processPdIds " + ex.toString());
    	    }
 
+
 	}
+
 
 }

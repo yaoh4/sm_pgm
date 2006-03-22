@@ -12,9 +12,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
 
 // application imports
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AccessCommandDao;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
@@ -31,9 +32,10 @@ import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.expression.Order;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.SessionFactory;
+import net.sf.hibernate.expression.*;
 
 
-public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao implements  RetrievePDCancerActivityInfoCommand {
+public class RetrieveActivePDInfoCommandDao extends AccessCommandDao implements  RetrieveActivePDInfoCommand {
    /**
      * Concrete class that encapsulates the methods for retrieveing User Data
      *  from the database
@@ -50,7 +52,8 @@ public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao imp
    /*
     * Class constructor
     */
-    public RetrievePDCancerActivityInfoCommandDao() {}
+    public RetrieveActivePDInfoCommandDao() {}
+
 
     /*
      * The main method that handles the execution of the command.
@@ -59,7 +62,7 @@ public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao imp
      * - execute the query and return the Query Page
      * @retrun aQueryPage - a QueryPage object that encapsulate the Pagination
      */
-    public QueryPage execute(String  oPersonId, String oUserId) {
+    public QueryPage execute(String  oCancerActivity, String oUserId) {
 
 	   QueryPage  mGrantsQueryPage = null;
 
@@ -67,7 +70,7 @@ public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao imp
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
        try {
 		   // build the query string from query object
-           Criteria mCriteria =  buildCriteria(mSession, oPersonId);
+           Criteria mCriteria =  buildCriteria(mSession, oCancerActivity);
            mGrantsQueryPage = new QueryPage(mCriteria, ApplicationConstants.ALL_PAGES, 1);
 
 	   } catch (CommandDaoException ex) {
@@ -75,7 +78,6 @@ public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao imp
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());
        }
-
        return mGrantsQueryPage;
     }
 
@@ -87,17 +89,34 @@ public class RetrievePDCancerActivityInfoCommandDao extends AccessCommandDao imp
      * throws a CommandDaoException
      * @retrun Criteria - a Criteria object
      */
-    private Criteria buildCriteria(Session aSession, String  oPersonId) throws CommandDaoException {
+    private Criteria buildCriteria(Session aSession, String  oCancerActivity) throws CommandDaoException {
 
-        Class mPdCaAsgnmtVw = null;
+        Class mPdOrgVw4 = null;
         Criteria mCriteria = null;
+
+        Date mToday = Calendar.getInstance().getTime();
         try{
-            mPdCaAsgnmtVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw");
-		    mCriteria = aSession.createCriteria(mPdCaAsgnmtVw);
-			mCriteria.add(Expression.eq("personId", new Long(oPersonId) ));
+            mPdOrgVw4 = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4");
+		    mCriteria = aSession.createCriteria(mPdOrgVw4);
+		    if(oCancerActivity != null) {
+				mCriteria.add(Expression.eq("cayCode", oCancerActivity.toUpperCase().trim()) );
+			}
+		    mCriteria.add(Expression.le("pdStartDate", mToday) );
+
+		    Disjunction pdEndDateCrit = Expression.disjunction();
+		    pdEndDateCrit.add(Expression.isNull("pdEndDate"));
+		    pdEndDateCrit.add(Expression.ge("pdEndDate", mToday));
+		    mCriteria.add(pdEndDateCrit);
+
+		    Disjunction cayEndDateCrit = Expression.disjunction();
+		    cayEndDateCrit.add(Expression.isNull("cayEndDate"));
+		    cayEndDateCrit.add(Expression.ge("cayEndDate", mToday));
+		    mCriteria.add(cayEndDateCrit);
+
+		    mCriteria.addOrder( Order.asc("pdName"));
 
 	    } catch (ClassNotFoundException e) {
-			throw new CommandDaoException("Unable to create PdCaAsgnmtVw class " + e.toString());
+			throw new CommandDaoException("Unable to create PdOrgVw4 class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }

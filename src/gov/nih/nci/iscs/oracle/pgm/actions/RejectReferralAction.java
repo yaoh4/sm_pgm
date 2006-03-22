@@ -21,6 +21,7 @@ import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralActionService;
 import gov.nih.nci.iscs.oracle.pgm.factory.GrantServiceFactory;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
@@ -56,6 +57,9 @@ public class RejectReferralAction extends NciPgmAction {
 
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws ReferralActionException, Exception {
+       if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
+		   throw new GrantSearchException("AcceptReferralAction", "executeAction", "Your session has expired. You have open a new browser window to continue!", request.getSession());
+	   }
 
 	try{
        performInitialization(form, request);
@@ -317,7 +321,6 @@ public class RejectReferralAction extends NciPgmAction {
 	  } catch (Exception ex) {
 		  throw new ReferralActionException("RejectReferralAction", "performInitialization", ex.toString(), request.getSession(), ex);
 	  }
-
    }
 
    public void performInitializeHashMap (ActionForm form, HttpServletRequest request)  {

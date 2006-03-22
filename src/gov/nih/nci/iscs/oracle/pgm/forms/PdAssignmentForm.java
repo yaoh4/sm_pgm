@@ -24,19 +24,27 @@ public class PdAssignmentForm extends ValidatorForm   {
     private  String[] selectedIndx;
     private  String[] pdId;
     private String pdIdForLoad;
-    private String pdStartDate;
+    private String[] pdStartDate;
+    //private Map pdAssignmentStartDate;
+    private String[] pdAssignmentStartDate;
     private int count;
     private boolean sortAscendingIndicator;
     private String sortColumn;
+    private String[] selected;
+    private Map PrgIdsMap;
 
     public PdAssignmentForm() {
   	    this.queryResults = (List) new ArrayList();
+        this.pdAssignmentStartDate = new String[this.queryResults.size()];
         this.pdId = new String[this.queryResults.size()];
         this.selectedIndx = new String[this.queryResults.size()];
+        this.selected = new String[this.queryResults.size()];
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
   	    this.pdIdForLoad = ApplicationConstants.EMPTY_STRING;
   	    this.sortColumn = "grantNumber";
   	    this.sortAscendingIndicator = true;
+		//this.pdAssignmentStartDate = new HashMap();
+  	    this.PrgIdsMap = new HashMap();
 
     }
 
@@ -44,15 +52,41 @@ public class PdAssignmentForm extends ValidatorForm   {
         super.reset(mapping, request);
     }
 
-   public void setQueryResults(List queryResults) {
-        this.pdId = new String[this.queryResults.size()];
-		this.count = queryResults.size();
-        this.selectedIndx = new String[this.queryResults.size()];
-        for(int index=0; index<this.queryResults.size(); index++) {
-			selectedIndx[index] = ApplicationConstants.EMPTY_STRING;
-			pdId[index] = ApplicationConstants.EMPTY_STRING;
-		}
+  public void initializeArray() {
 
+  	    this.selectedIndx = new String[queryResults.size()];
+  	    this.selected = new String[queryResults.size()];
+  	    this.pdId = new String[queryResults.size()];
+  	    this.pdAssignmentStartDate = new String[queryResults.size()];
+ 	    for (int indx=0; indx<selectedIndx.length; indx++) {
+			this.selectedIndx[indx] = new String("0");
+			this.pdId[indx] = new String("0");
+			this.selected[indx] = new String("0");
+		}
+		//this.pdAssignmentStartDate = new HashMap(queryResults.size());
+
+	}
+
+   public Object getPrgIdMapped(String key) {
+	   if(PrgIdsMap.get(key) == null)
+		   return ApplicationConstants.EMPTY_STRING;
+       return PrgIdsMap.get(key);
+
+    }
+
+    public void setPrgIdMapped(String key, Object value) {
+        PrgIdsMap.put(key, value);
+    }
+
+   public Map getPrgIdsMap() {
+        return PrgIdsMap;
+    }
+
+    public void setPrgIdsMap(Map PrgIdsMap) {
+        this.PrgIdsMap = (Map) PrgIdsMap;;
+    }
+   public void setQueryResults(List queryResults) {
+		this.count = queryResults.size();
 		this.queryResults = queryResults;
 	}
 
@@ -85,15 +119,39 @@ public class PdAssignmentForm extends ValidatorForm   {
 	  }
 	}
 
+    public void setSelected(String[] selected) {
 
-    public void setPdId(String[] pdId) {
+		this.selected = selected;
+	}
+
+	public String[] getSelected() {
+		return selected;
+	}
+
+    public void setSelectedIndexed(int index, String selected) {
+		this.selected[index] = selected;
+	}
+
+	public String getSelectedIndexed(int index) {
+	  try {
+		if( selected[index] == null) {
+			return ApplicationConstants.EMPTY_STRING;
+		} else {
+		    return selected[index];
+		}
+	  } catch (Exception ex) {
+		return ApplicationConstants.EMPTY_STRING;
+	  }
+	}
+
+    public void setPdIdIndx(String[] pdId) {
+
 		this.pdId = pdId;
 	}
 
 	public String[] getPdId() {
 		return pdId;
 	}
-
 
     public void setPdIdIndexed(int index, String pdId) {
 		this.pdId[index] = pdId;
@@ -132,13 +190,86 @@ public class PdAssignmentForm extends ValidatorForm   {
 	    }
 	}
 
-    public String getPdStartDate() {
+    public String[] getPdStartDate() {
 		return this.pdStartDate;
 	}
-    public void setPdStartDate(String pdStartDate) {
+    public void setPdStartDate(String[] pdStartDate) {
 		this.pdStartDate = pdStartDate;
 
 	}
+
+    public void setPdStartDateIndexed(int index, String pdStartDate) {
+		this.pdStartDate[index] = pdStartDate;
+	}
+
+	public String getPdStartDateIndexed(int index) {
+	  try {
+		if( pdStartDate[index] == null) {
+			return ApplicationConstants.EMPTY_STRING;
+		} else {
+		    return pdStartDate[index];
+		}
+	  } catch (Exception ex) {
+		return ApplicationConstants.EMPTY_STRING;
+	  }
+	}
+
+    public void setPdAssignmentStartDate(String[] pdAssignmentStartDate) {
+
+		this.pdAssignmentStartDate = pdAssignmentStartDate;
+	}
+
+	public String[] getPdAssignmentStartDate() {
+		return pdAssignmentStartDate;
+	}
+
+    public void setPdAssignmentStartIndexed(int index, String pdAssignmentStartDate) {
+		this.pdAssignmentStartDate[index] = pdAssignmentStartDate;
+	}
+
+	public String getPdAssignmentStartIndexed(int index) {
+	  try {
+		if( pdAssignmentStartDate[index] == null) {
+			return ApplicationConstants.EMPTY_STRING;
+		} else {
+		    return pdAssignmentStartDate[index];
+		}
+	  } catch (Exception ex) {
+		return ApplicationConstants.EMPTY_STRING;
+	  }
+	}
+
+   /*public Object getPdAssignmentStartDateMapped(String key) {
+	  try {
+	     if(pdAssignmentStartDate.get(key) == null) {
+		     return ApplicationConstants.EMPTY_STRING;
+	     }else{
+             return pdAssignmentStartDate.get(key);
+		 }
+
+	  } catch (Exception ex) {
+		 return ApplicationConstants.EMPTY_STRING;
+	  }
+	}
+
+  public String getPdAssignmentStartDateIndexed(int index) {
+	  ArrayList oValues = new ArrayList(pdAssignmentStartDate.values());
+	  return (String) oValues.get(index);
+  }
+
+
+    public void setPdAssignmentStartDateMapped(String key, Object value) {
+        pdAssignmentStartDate.put(key,  value);
+    }
+
+   public Map getPdAssignmentStartDate() {
+        return pdAssignmentStartDate;
+    }
+
+    public void setPdAssignmentStartDate(Map pdAssignmentStartDate) {
+        this.pdAssignmentStartDate = (Map) pdAssignmentStartDate;;
+    }
+    */
 
     public int getIndex() {
 		return index;
@@ -183,13 +314,16 @@ public class PdAssignmentForm extends ValidatorForm   {
            .append("queryResults ", getQueryResults())
            .append("PdId ", getPdId())
            .append("selectedIndx ", getSelectedIndx())
+           .append("selected ", getSelected())
            .append("requestAction ", getRequestAction())
            .append("pdIdForLoad ", getPdIdForLoad())
            .append("pdStartDate ", getPdStartDate())
+           .append("pdAssignmentStartDate ", getPdAssignmentStartDate())
            .append("index ", getIndex())
            .append("count ", getCount())
            .append("sortColumn ", getSortColumn())
            .append("sortAscendingIndicator ", getSortAscendingIndicator())
+           .append("PrgIdsMap ", getPrgIdsMap())
 
            .toString();
 	}

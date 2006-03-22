@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import java.util.*;
+import java.text.*;
 
 /** @author Hibernate CodeGenerator */
 public class PDASearchResultObject extends GrantSearchResultObject {
@@ -20,12 +21,24 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     private String ncabDate;
     private String assignmentCA;
     private Date pdStartDate;
+    private java.sql.Timestamp pdAssignmentStartDate;
     private String pdTransferCode;
     private String rfaPaNumber;
+    private String key;
+    public static java.sql.Timestamp mToday;
+    public static java.sql.Timestamp mYesterday;
 
+    static{
+		/*mToday = new java.sql.Timestamp(Calendar.getInstance().getTime());
+		Calendar calendar = new GregorianCalendar();
+		calendar.add(Calendar.DATE, -1);
+        mYesterday = new java.sql.Timestamp(calendar.getTime());*/
+		mToday = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
 
-
-
+		Calendar calendar = new GregorianCalendar();
+		calendar.add(Calendar.DATE, -1);
+        mYesterday = new java.sql.Timestamp(calendar.getTimeInMillis());
+	}
 
 
     public String getPiName() {
@@ -69,12 +82,33 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 		return pdStartDate;
 	}
     public void setPdStartDate(String pdStartDate) {
+
 		this.pdStartDate = parseAssignmentDate(pdStartDate);
 
 	}
     public void setPdStartDate(Date pdStartDate) {
 		this.pdStartDate = pdStartDate;
 
+	}
+
+
+    public java.sql.Timestamp getPdAssignmentStartDate() {
+		if(pdAssignmentStartDate == null ){
+			  pdAssignmentStartDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
+		}
+
+		return pdAssignmentStartDate;
+	}
+    public void setPdAssignmentStartDate(String pdAssignmentStartDate) {
+		java.sql.Timestamp parsedDate = parseAssignmentDate(pdAssignmentStartDate);
+	    if(!parsedDate.after(mToday)) {
+		   setPdAssignmentStartDate(mToday);
+	   }else{
+		   setPdAssignmentStartDate(parsedDate);
+	   }
+	}
+    public void setPdAssignmentStartDate(java.sql.Timestamp pdAssignmentStartDate) {
+		this.pdAssignmentStartDate = pdAssignmentStartDate;
 	}
 
     public String getPdTransferCode() {
@@ -91,18 +125,52 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 		this.rfaPaNumber = rfaPaNumber;
 	}
 
-   public java.util.Date parseAssignmentDate(String pdStartDate) {
+    public String getKey() {
+		return this.key;
+	}
+    public void setKey(String key) {
+		this.key = key;
+	}
 
+   public java.sql.Timestamp parseAssignmentDate(String pdStartDate) {
+
+	   java.sql.Timestamp mReturnValue = null;
 	   try{
-           //java.util.Date sqlToday = new Date();
-	       java.util.Date sqlAssignmentDate=new java.util.Date(formatter.parse(pdStartDate).getTime());
-	      return (java.util.Date) sqlAssignmentDate;
+	       SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+	       java.sql.Timestamp sqlAssignmentDate=new java.sql.Timestamp(formatter.parse(pdStartDate).getTime());
+	       mReturnValue =  (java.sql.Timestamp) sqlAssignmentDate;
+	       return mReturnValue;
 
 	  }catch(Exception ex) {
 		  System.out.println("****unable to parse date **** " + ex.toString());
-		  return null;
+		  return mReturnValue;
 	  }
+
+	  //return mReturnValue;
    }
+
+   public String validatePdAssignmentStartDate(String pdStartDate){
+
+	   String mReturnValue = ApplicationConstants.EMPTY_STRING;
+
+	   java.sql.Timestamp parsedDate = parseAssignmentDate(pdStartDate);
+	   if(parsedDate == null){
+		   return "errors.invalid.assignment.date.format";
+	   }
+
+	   if(!parsedDate.after(mYesterday)){
+		   return "errors.invalid.assignment.date";
+	   }
+
+	   if(!parsedDate.after(mToday)) {
+		   pdAssignmentStartDate = mToday;
+		   return mReturnValue;
+	   }else{
+		   pdAssignmentStartDate = parsedDate;
+	   }
+	   return mReturnValue;
+   }
+
 
     public String toString() {
         return new ToStringBuilder(this)
@@ -113,8 +181,10 @@ public class PDASearchResultObject extends GrantSearchResultObject {
             .append("NcabDate ", getNcabDate())
             .append("assignmentCA ", getAssignmentCA())
             .append("PdStartDate ", getPdStartDate())
+            .append("PdAssignmentStartDate ", getPdAssignmentStartDate())
             .append("PdTransferCode ", getPdTransferCode())
             .append("rfaPaNumber ", getRfaPaNumber())
+            .append("key ", getKey())
             .toString();
     }
 

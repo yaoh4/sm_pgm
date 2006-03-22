@@ -13,6 +13,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.ReportSelectorServiceImpl;
 import javax.servlet.http.HttpSession;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw;
 
@@ -46,10 +47,14 @@ public class CrystalReportAction extends NciPgmAction    {
  private String mAction = null;
  private RetrieveGrantsForm mRetrieveGrantsForm = null;
  private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
+ private String mContinueForward = "continueForReferral";
 
  public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
+       if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
+		   throw new GrantSearchException("CrystalReportAction", "execute", "Your session has expired. You have open a new browser window to continue!", request.getSession());
+	   }
       oSession = request.getSession();
 	  oServletContext = oSession.getServletContext();
       oApplicationContext =  (ApplicationContext) oServletContext.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
@@ -58,6 +63,7 @@ public class CrystalReportAction extends NciPgmAction    {
       mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
       if(mRetrieveGrantsForm == null) {
          mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
+         mContinueForward = "continueForPDA";
 	  }
 
       String mReportFormat = mRetrieveGrantsForm.getFormatSelected();
@@ -78,12 +84,12 @@ public class CrystalReportAction extends NciPgmAction    {
       if(mSelectedGrants.isEmpty()){
 	     super.logErrors(messages, "referralaction", "errors.generate.action.select");
 	   	 this.saveMessages(request, messages);
-		 return mapping.findForward("continue");
+		 return mapping.findForward(mContinueForward);
 	  }
       List mSortedList = (List) mSelectedGrants.getSortedSelectedGrants();
 
       if(!messages.isEmpty() ) {
-		   return mapping.findForward("continue");
+		   return mapping.findForward(mContinueForward);
 	  }
 
 
@@ -97,7 +103,7 @@ public class CrystalReportAction extends NciPgmAction    {
 
 
 
-      return mapping.findForward("continue");
+      return mapping.findForward(mContinueForward);
 
    }
 

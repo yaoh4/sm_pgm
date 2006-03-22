@@ -8,6 +8,7 @@ public class LookUpTableConstants {
 
 	public static final String[] CANCER_ACTIVITIES_T_LOOKUP = {"CANCER_ACTIVITIES_T_1", "select CODE, DESCRIPTION from CANCER_ACTIVITIES_T order by CODE asc"};
 	public static final String[] APPL_STATUS_GROUPS_MV_LOOKUP = {"APPL_STATUS_GROUPS_MV_1", "select appl_status_group_code, descrip from appl_status_groups_mv order by appl_status_group_code asc"};
+	public static final String[] APPL_STATUS_MV_LOOKUP = {"APPL_STATUSES_MV_1", "select appl_status_code, appl_status_descrip from appl_statuses_mv order by appl_status_code asc"};
 	public static final String[] BOARDS_T_LOOKUP = {"BOARDS_T_1", "SELECT  (meeting_year || meeting_month), (meeting_month || '/' || meeting_year) FROM boards_t ORDER BY meeting_year desc, meeting_month DESC"};
 	public static final String[] PD_NAME_VW3_LOOKUP = {"PD_ORG_VW3_1", "select  person_id, (pd_name || ' (' || Max(pd_code) || ')') from pd_ca_asgnmt_vw group by person_id, pd_name order by person_id"};
 	public static final String[] PD_ORG_VW3_LOOKUP = {"PD_ORG_VW3_2", "select  distinct org_id, org_desc from pd_org_vw3 order by org_id"};

@@ -159,6 +159,7 @@ public class SearchGrantsAction extends NciPgmAction  {
 
 	   ActionForward mActionForward = null;
        RetrieveGrantsForm mRetrieveGrantsForm = (RetrieveGrantsForm) form;
+
        if (mRetrieveGrantsForm.getSortActionSelected() ){
 		   SearchGrantsActionHelper.resetSession(request.getSession(), mRetrieveGrantsForm, mapping.getName(), false);
 	   }
@@ -412,16 +413,14 @@ public class SearchGrantsAction extends NciPgmAction  {
            if(mLastSortColumn == null) {
 		      mLastSortColumn = ApplicationConstants.EMPTY_STRING;
 	       }
-
-        mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
-        if(mRetrieveGrantsForm.getSortActionSelected()) {
-              if(mLastSortColumn.equalsIgnoreCase(mRetrieveGrantsForm.getSortColumn() )) {
-		         if(mRetrieveGrantsForm.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-		    	      mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_DESC);
-		         } else {
-  		             mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
-		         }
-	          }
+           boolean mSortAscendingIndicator = mRetrieveGrantsForm.getSortAscendingIndicator();
+           //mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
+           if(mRetrieveGrantsForm.getSortActionSelected()) {
+			   if(mSortAscendingIndicator) {
+				   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
+			   }else{
+				   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_DESC);
+			   }
 
 	          mRetrieveGrantsForm.setSortActionSelected(false);
     	   }
@@ -438,7 +437,6 @@ public class SearchGrantsAction extends NciPgmAction  {
 	       queryResults = (Map) mGrantSearchService.search(mGrantQueryObject, mPaginationObject, (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO) );
 
            if(selectAllIndicator) {
-	          logger.info("*** selectAllIndicator is true ***");
 		      return (Map) queryResults;
 	       }
 		   request.getSession().setAttribute("listGenerated", "Y");
@@ -457,7 +455,7 @@ public class SearchGrantsAction extends NciPgmAction  {
            request.getSession().setAttribute(ApplicationConstants.OLD_SEARCH_FORM, mRetrieveGrantsForm);
        } catch(Exception ex) {
 	        logger.error("Search action failed" + ex.toString());
-	        throw new GrantSearchException("SearchGrantsAction", "search", ex.toString(), request.getSession(), ex);
+	        throw new GrantSearchException(this.getClass().getName(), "search", ex.toString(), request.getSession(), ex);
        }
 
        return (Map) queryResults;
@@ -518,8 +516,8 @@ private void createLookUps(HttpServletRequest request, ActionMapping mapping) th
        mList = LookupHelper.addNewLookUp(LookUpTableConstants.CANCER_ACTIVITIES_T_LOOKUP, oApplicationContext);
 	   request.setAttribute(LookUpTableConstants.CANCER_ACTIVITIES_T_LOOKUP[0], mList);
 
-       mList = LookupHelper.addNewLookUp(LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP, oApplicationContext);
-	   request.setAttribute(LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0], mList);
+       mList = LookupHelper.addNewLookUp(LookUpTableConstants.APPL_STATUS_MV_LOOKUP, oApplicationContext);
+	   request.setAttribute(LookUpTableConstants.APPL_STATUS_MV_LOOKUP[0], mList);
 
 	   mList = LookupHelper.addNewLookUp(LookUpTableConstants.BOARDS_T_LOOKUP, oApplicationContext);
 	   request.setAttribute(LookUpTableConstants.BOARDS_T_LOOKUP[0], mList);

@@ -56,8 +56,12 @@ public class AcceptReferralAction extends NciPgmAction {
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
-	try{
 
+       if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
+		   throw new GrantSearchException("AcceptReferralAction", "executeAction", "Your session has expired. You have open a new browser window to continue!", request.getSession());
+	   }
+
+	try{
 	   performInitialization(form, request);
 
        if( mAction.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ))
@@ -286,7 +290,6 @@ public class AcceptReferralAction extends NciPgmAction {
 	  } catch (Exception ex) {
 		  throw new ReferralActionException("AcceptReferralAction", "performInitialization", ex.toString(), request.getSession(), ex);
 	  }
-
    }
 
    private String[] getKeyTokens(String mKey) {

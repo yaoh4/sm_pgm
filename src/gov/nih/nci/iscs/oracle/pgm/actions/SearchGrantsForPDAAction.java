@@ -76,7 +76,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 		   return processPDAssigmnentAction(mapping, form, request, response);
        }
      }catch (Exception ex) {
-		   throw new GrantSearchException("SearchGrantsForPDAAction", "executeAction", ex.toString());
+		   throw new GrantSearchException("SearchGrantsForPDAAction", "executeAction", ex.toString(), request.getSession(), ex);
 	 }
 
      return mapping.findForward("continue");
@@ -107,7 +107,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	      request.getSession().setAttribute("previousForm", mRetrieveGrantsForPDAForm);
 	  } catch (Exception ex) {
 		  logger.error ("An exception has occurred processing PD Assignment Action " + ex.toString() );
-		  throw new GrantSearchException("SearchGrantsForPDAAction", "processPDAssigmnentAction", ex.toString());
+		  throw new GrantSearchException("SearchGrantsForPDAAction", "processPDAssigmnentAction", ex.toString(), request.getSession(), ex);
 	  }
 
       return mapping.findForward(mAction);
@@ -121,7 +121,6 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	   RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) form;
 	   if(mActionForward != null)
 	      return mActionForward;
-
 	   ActionForm mFormToUse = form;
 
        if(mRetrieveGrantsForPDAForm.getSearchButtonInitiated()) {
@@ -148,7 +147,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 
 	   ActionForm mFormToUse = form;
 
-       mFormToUse = super.compareForms(form, request);
+       //mFormToUse = super.compareForms(form, request);
 
        super.search(mFormToUse, ApplicationConstants.PD_ASSIGNMENT, request);
        RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) mFormToUse;
@@ -289,7 +288,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	      }
 	   } catch (Exception ex) {
 		  logger.error ("An exception has occurred processing PD Assignment Action " + ex.toString() );
-		  throw new GrantSearchException("SearchGrantsForPDAAction", "validateForm", ex.toString());
+		  throw new GrantSearchException("SearchGrantsForPDAAction", "validateForm", ex.toString(), request.getSession(), ex);
 	   }
 
 	   return results;

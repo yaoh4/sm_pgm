@@ -52,7 +52,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
      try{
-
+       //throw new Exception("This is a test");
        ActionForward mActionForward = super.executeAction(mapping, form, request, response);
 	   if(mActionForward != null)
 	      return mActionForward;

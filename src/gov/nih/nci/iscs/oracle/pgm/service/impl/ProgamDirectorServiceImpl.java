@@ -11,13 +11,14 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorsI
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDOrgInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDInfoForAssignmentCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
 import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw;
-
+import gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.struts.util.LabelValueBean;
@@ -134,18 +135,31 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
     public List getCancerActivityForPD(String key) {
 		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
+		  String mLastCayCode = ApplicationConstants.EMPTY_STRING;
 		  try{
              RetrievePDCancerActivityInfoCommand oRetrievePDCancerActivityInfoCommand = (RetrievePDCancerActivityInfoCommand) getBean("retrievePDCancerActivityInfoCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDCancerActivityInfoCommand.execute(key, super.getUserId());
               // get the list from the page
              mList =  (ArrayList) aPDQueryPage.getList();
-
-             Iterator mIterator = mList.iterator();
-             while(mIterator.hasNext() ) {
+             if(mList.size() > 1){
+				 HashMap mTempMap = new HashMap(mList.size());
+				 Iterator mIterator = mList.iterator();
+				 while(mIterator.hasNext() ) {
+				    PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
+				    mTempMap.put(mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw);
+				 }
+				 mList = new ArrayList(mTempMap.values());
+			 }
+		    Iterator mIterator = mList.iterator();
+            while(mIterator.hasNext() ) {
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
-				  LabelValueBean mLabelValueBean;
-				  mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw.getCayCode());
- 			      mLabelValueBeanList.add(mLabelValueBean);
+				  if(mPdCaAsgnmtVw.getCayCode().equalsIgnoreCase(mLastCayCode)){
+				  }else{
+				    LabelValueBean mLabelValueBean;
+				    mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw.getCayCode());
+ 			        mLabelValueBeanList.add(mLabelValueBean);
+				  }
+ 			      mLastCayCode = mPdCaAsgnmtVw.getCayCode();
 			  }
 
 
@@ -176,6 +190,39 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("ProgamDirectorServiceImpl", "getCancerActivityForPD", "Unable to obtain Program Director from the database!!! " + ex.toString());
+	      }
+	       return mLabelValueBeanList;
+    }
+
+    public List getAllActiveProgramDirectors(String cancerActivity, boolean formatPds) {
+		  ArrayList mList  = new ArrayList();
+		  ArrayList mLabelValueBeanList = new ArrayList();
+		  try{
+             RetrieveActivePDInfoCommand oRetrieveActivePDInfoCommand = (RetrieveActivePDInfoCommand) getBean("retrieveActivePDInfoCommandDao");
+             QueryPage  aPDQueryPage = oRetrieveActivePDInfoCommand.execute(cancerActivity, super.getUserId());
+              // get the list from the page
+             mList =  (ArrayList) aPDQueryPage.getList();
+
+             Iterator mIterator = mList.iterator();
+             String mPreviousPd = ApplicationConstants.EMPTY_STRING;
+             while(mIterator.hasNext() ) {
+				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
+				  LabelValueBean mLabelValueBean = null;
+				  if(cancerActivity == null || formatPds) {
+					  mLabelValueBean = new LabelValueBean(mPdOrgVw4.getPdName() + "/" + mPdOrgVw4.getOrgDesc() + "/" + mPdOrgVw4.getCayCode(), mPdOrgVw4.getCayCode() + mPdOrgVw4.getNpeId().toString() );
+			          mLabelValueBeanList.add(mLabelValueBean);
+				  }else {
+					  if(!mPdOrgVw4.getPdName().equalsIgnoreCase(mPreviousPd)) {
+				  	     mLabelValueBean = new LabelValueBean(mPdOrgVw4.getPdName(), mPdOrgVw4.getPersonId().toString());
+				         mPreviousPd = mPdOrgVw4.getPdName();
+			             mLabelValueBeanList.add(mLabelValueBean);
+					  }
+				  }
+			  }
+
+
+		  } catch (Exception ex) {
+			 throw new ServiceImplException("ProgamDirectorServiceImpl", "getAllActiveProgramDirectors", "Unable to obtain active Program Director from the database!!! " + ex.toString());
 	      }
 	       return mLabelValueBeanList;
     }

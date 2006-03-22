@@ -41,6 +41,7 @@ public class SelectedGrants implements Cloneable {
     ArrayList oSortSelectedGrants;
     private boolean oSameCAForAll;
     private String oSelectedCA;
+    private String[] keys;
     private static Logger logger = LogManager.getLogger(SelectedGrants.class);
 
 
@@ -78,6 +79,13 @@ public class SelectedGrants implements Cloneable {
 
 	public String getSelectedCA() {
 		return oSelectedCA;
+	}
+
+	public void initKeys() {
+		this.keys = new String[oSelectedGrants.size()];
+	}
+	public void setKey(int index, String key) {
+		this.keys[index] = key;
 	}
 
     /**
@@ -212,34 +220,48 @@ public class SelectedGrants implements Cloneable {
     * Performs steps required before starting PD assignment; returns an error
     *  message indicating error to be displayed
     */
-    public void processForPdAssignmentAction(TreeMap mAssignmentActionObjects) {
+    public Set processForPdAssignmentAction(TreeMap mAssignmentActionObjects, String[] pdAssignmentStartDates) {
 
-        String mErrorMsg = new String(ApplicationConstants.EMPTY_STRING);
-        try {
+     HashSet mErrorMessages = new HashSet();
+     this.resetMarked();
+     try {
         Iterator iterator = oSelectedGrants.entrySet().iterator();
         int index = 0;
+        int dateIndex = 0;
         while (iterator.hasNext()) {
            Map.Entry entry = (Map.Entry) iterator.next();
+           String mKey = (String) entry.getKey();
            PDASearchResultObject obj = (PDASearchResultObject) entry.getValue();
-
            //if(obj.getSelected()){
-		   if(!obj.getPdId().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-			   PdAssignmentActionObject actionObj = new PdAssignmentActionObject();
-			   actionObj.setApplId(obj.getApplId());
-			   actionObj.setPdId(obj.getPdId());
-			   actionObj.setCancerActivity(obj.getCancerActivity());
-			   actionObj.setAssignmentCA(obj.getAssignmentCA());
-			   actionObj.setAssignmentDate(obj.getPdStartDate());
-			   actionObj.setPdTransferCode(obj.getPdTransferCode());
-			   actionObj.setIndex(index);
-			   mAssignmentActionObjects.put(new Integer(index), actionObj);
-			   index++;
+		   if(obj.getPdId() == null ||
+		      obj.getPdId().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ) ){
+		      // do nothing
+		   }else{
+			   //validate Assignment Start Data
+			   String errorMsg = obj.validatePdAssignmentStartDate((String) pdAssignmentStartDates[dateIndex]);
+			   if(!errorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+				   obj.setMarked(true);
+				   mErrorMessages.add(errorMsg);
+			   }else{
+				   PdAssignmentActionObject actionObj = new PdAssignmentActionObject();
+			       actionObj.setApplId(obj.getApplId());
+			       actionObj.setPdId(obj.getPdId());
+			       actionObj.setCancerActivity(obj.getCancerActivity());
+			       actionObj.setAssignmentCA(obj.getAssignmentCA());
+			       actionObj.setAssignmentDate(obj.getPdAssignmentStartDate());
+			       actionObj.setPdTransferCode(obj.getPdTransferCode());
+			       actionObj.setIndex(index);
+			       mAssignmentActionObjects.put(new Integer(index), actionObj);
+			       index++;
+			   }
 		   }
+		   dateIndex++;
 	    }
       } catch (Exception ex) {
 		logger.error("**** an exception has been generated in processForPdAssignmentAction ***" + ex.toString());
 
 	  }
+	    return (Set) mErrorMessages;
 
       }
 
@@ -351,11 +373,14 @@ public class SelectedGrants implements Cloneable {
     * Performs steps required before starting referral; returns an error
     *  message indicating error to be displayed
     */
-    public void processKeyForPDAssignmentAction(String mKey, String pdStartDate, boolean mSelected) {
+    //public void processKeyForPDAssignmentAction(String mKey, String pdAssignmentStartDate, boolean mSelected) {
+    public void processKeyForPDAssignmentAction(String mKey, boolean mSelected) {
+
 
 		PDASearchResultObject mPDASearchResultObject = (PDASearchResultObject) oSelectedGrants.get(mKey);
         mPDASearchResultObject.setSelected(mSelected);
-        mPDASearchResultObject.setPdStartDate(pdStartDate);
+
+        //mPDASearchResultObject.setPdAssignmentStartDate(pdAssignmentStartDate);
     }
 
 
@@ -363,27 +388,27 @@ public class SelectedGrants implements Cloneable {
     * Performs steps required before starting referral; returns an error
     *  message indicating error to be displayed
     */
-    public void processPdForPDAssignmentAction(String mPdId, String mAssignmentCA, int index, boolean mSelected) {
+    public void processPdForPDAssignmentAction(String mPdId, String mAssignmentCA, String mKey, boolean mSelected) {
 
 		try{
-		Object[] mPDASearchResultObjects = (Object[]) oSelectedGrants.values().toArray();
-        if(index <= mPDASearchResultObjects.length) {
-           PDASearchResultObject mPDASearchResultObject= (PDASearchResultObject) mPDASearchResultObjects[index];
+           PDASearchResultObject mPDASearchResultObject= (PDASearchResultObject) oSelectedGrants.get(mKey);;
            if(!mSelected) {
 		      if(!mPDASearchResultObject.getSelected() ) {
                  mPDASearchResultObject.setPdId(mPdId);
                  mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
+                 //mPDASearchResultObject.setPdAssignmentStartDate(mPdAssignmentStartDate);
 		      }
 	      }else {
 		     mPDASearchResultObject.setPdId(mPdId);
              mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
+             //mPDASearchResultObject.setPdAssignmentStartDate(mPdAssignmentStartDate);
 	      }
-	    }else {
-		}
+	    //}else {
+		//}
       } catch (Exception ex) {
 		logger.error("**** an exception has been generated in processPdForPDAssignmentAction ***" + ex.toString());
-
 	  }
+
 
     }
 
@@ -401,17 +426,16 @@ public class SelectedGrants implements Cloneable {
            String mKey = (String) entry.getKey();
            PDASearchResultObject mPDASearchResultObject = (PDASearchResultObject) entry.getValue();
 		   if(mPDASearchResultObject.getSelected() ){
-			   if(mPDASearchResultObject.getCancerActivity().equalsIgnoreCase(mAssignmentCA) ||
-			      mPDASearchResultObject.getCancerActivity() == null ||
-			      mPDASearchResultObject.getCancerActivity().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			        mPDASearchResultObject.setPdId(mPdId);
-                    mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
-			   } else {
-				  mPDASearchResultObject.setMarked(true);
-			      mErrorMsg = "errors.pdassignment.inavlid.ca.for.load";
-			   }
+			  mPDASearchResultObject.setPdId(mPdId);
+              mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
+		   //} else {
+			   //  mPDASearchResultObject.setMarked(true);
+			   //   mErrorMsg = "errors.pdassignment.inavlid.ca.for.load";
+			   //}
 		   }
+
 	    }
+
 	    return mErrorMsg;
     }
 
@@ -457,6 +481,5 @@ public class SelectedGrants implements Cloneable {
           return (PDASearchResultObject) oSelectedGrants.get(key);
 	   }
 	}
-
 
 }

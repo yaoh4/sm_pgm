@@ -44,6 +44,7 @@
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CgRefCodes.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PdOrgVw4.hbm.xml</value>
 			</list>
 		</property>
 		
@@ -199,6 +200,17 @@
              <ref bean="retrievePDInfoForAssignmentCommandDao"/>
            </property>
        </bean>
+
+       <bean id="retrieveActivePDInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveActivePDInfoCommandDao"/>
+           </property>
+       </bean>
+
        
        <bean id="retrievePDCancerActivityInfoCommand" 
            class="org.springframework.aop.framework.ProxyFactoryBean">
@@ -379,6 +391,11 @@
 
 
 	<bean id="retrievePDCancerActivityInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrievePDCancerActivityInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+
+	<bean id="retrieveActivePDInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveActivePDInfoCommandDao"
 	        parent="accessCommandDao" >
 	</bean>
 

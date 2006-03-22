@@ -131,8 +131,12 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 				mPDASearchResultObject.setFy(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdTransfer.getCouncilMeetingDate() != null) {
-				mPDASearchResultObject.setNcabDate(mNciPdTransfer.getCouncilMeetingDate().substring(4,6) + "/" + mNciPdTransfer.getCouncilMeetingDate().substring(0,4) );
+			if(mNciPdTransfer.getCouncilMeetingDate() != null ){
+			   try{
+				  mPDASearchResultObject.setNcabDate(mNciPdTransfer.getCouncilMeetingDate().substring(4,6) + "/" + mNciPdTransfer.getCouncilMeetingDate().substring(0,4) );
+			   }catch(StringIndexOutOfBoundsException ex){
+				   mPDASearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
+			   }
 			}else {
 				mPDASearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
 			}
@@ -157,6 +161,7 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 		    mPDASearchResultObject.setApplId(new Long(mNciPdTransfer.getApplId() ));
 			mPDASearchResultObject.setSelected(false);
 			mKey = mPDASearchResultObject.getApplId() + mPDASearchResultObject.getCancerActivity();
+			mPDASearchResultObject.setKey(mKey);
 			mQueryResults.put(new Integer(mIndex), mPDASearchResultObject);
             mIndex++;
 	    }

@@ -36,6 +36,7 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
        static {
        columnMethodMap = new HashMap();
        columnMethodMap.put("grantNumber", "getFullGrantNum");
+       columnMethodMap.put("fullGrantNum", "getFullGrantNum");
        columnMethodMap.put("default", "getFullGrantNum");
        columnMethodMap.put("cayCode", "getCayCode");
        columnMethodMap.put("dualCayCode", "getDualCayCode");

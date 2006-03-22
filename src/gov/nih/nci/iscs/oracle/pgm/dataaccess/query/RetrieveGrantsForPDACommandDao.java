@@ -126,6 +126,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 
 		if(!(aGrantQueryObject.getIrgFlexCode() == null|| aGrantQueryObject.getIrgFlexCode().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
 		   aCriteria.add(Expression.like("irgFlexCode", aGrantQueryObject.getIrgFlexCode().toUpperCase().trim() + PERCENT_SYMBOL ));
+
 		// add the PdOrgName search criterion
 
 		// add the BarFlag search criterion
@@ -168,7 +169,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 			if(aGrantQueryObject.getPriorityScoreTo() == null) {
 				aGrantQueryObject.setPriorityScoreTo(aGrantQueryObject.getPriorityScoreFrom());
 		    }
-		   aCriteria.add(Expression.between("priorityScoreNum", aGrantQueryObject.getPriorityScoreFrom(), aGrantQueryObject.getPriorityScoreTo() ));
+		   aCriteria.add(Expression.between("priorityScoreNum", aGrantQueryObject.getPriorityScoreFromInt(), aGrantQueryObject.getPriorityScoreToInt() ));
 		}
 
 		// add the IrgPercentileNum from and to search criterion
@@ -176,7 +177,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 			if(aGrantQueryObject.getPercentileTo() == null ){
 				aGrantQueryObject.setPercentileTo(aGrantQueryObject.getPercentileFrom());
 		    }
-		   aCriteria.add(Expression.between("irgPercentileNum", aGrantQueryObject.getPercentileFrom(), aGrantQueryObject.getPercentileTo()));
+		   aCriteria.add(Expression.between("irgPercentileNum", aGrantQueryObject.getPercentileFromBD(), aGrantQueryObject.getPercentileToBD()));
 	    }
 
 

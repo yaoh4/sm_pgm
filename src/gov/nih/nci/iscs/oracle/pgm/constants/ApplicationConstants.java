@@ -61,7 +61,7 @@ public class ApplicationConstants {
 	public static final String PROJECT_TITLE_SORT = "projectTitle";
 	public static final String FULL_GRANT_NUMBER_SORT = "default";
 	public static final String CURRENT_POC_SORT = "currentPoc";
-	public static final String GRANT_NUMBER_SORT = "grantNumber";
+	public static final String GRANT_NUMBER_SORT = "fullGrantNum";
 	public static final String PHS_ORG_CODE_SORT = "adminPhsOrgCode";
 	public static final String ACTIVITY_CODE_SORT = "activityCode";
 	public static final String SERIAL_NUM_SORT = "serialNum";

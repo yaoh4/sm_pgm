@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.util.*;
+import java.text.DateFormat;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
@@ -20,13 +21,13 @@ public class PdAssignmentActionObject {
     private Long   applId;
     private String pdId;
     private String cancerActivity;
-    private Date assignmentDate;
+    private java.sql.Timestamp assignmentDate;
     private String assignmentCA;
     private String results;
     private String programDirector;
     private String grantNumber;
     private String pdTransferCode;
-    protected SimpleDateFormat formatter = new SimpleDateFormat("mm/dd/yyyy");
+    protected SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
 
 
     public void PdAssignmentActionObject() {
@@ -74,13 +75,18 @@ public class PdAssignmentActionObject {
 			return ApplicationConstants.EMPTY_STRING;
 		return this.cancerActivity;
 	}
+   public String getFormattedAssignmentDate() {
 
-   public Date getAssignmentDate() {
+		String mFormattedDate = formatter.format(assignmentDate);
+		return mFormattedDate;
+   }
+
+   public java.sql.Timestamp getAssignmentDate() {
 		if (assignmentDate == null)
-		    return new Date();
+		    return null;
 		return this.assignmentDate;
    }
-   public void setAssignmentDate(Date assignmentDate) {
+   public void setAssignmentDate(java.sql.Timestamp assignmentDate) {
 		this.assignmentDate = assignmentDate;
    }
 
@@ -123,12 +129,12 @@ public class PdAssignmentActionObject {
 		this.pdTransferCode = pdTransferCode;
 	}
 
-   public java.sql.Date parseAssignmentDate() {
+   public java.sql.Timestamp parseAssignmentDate() {
 
 	   try{
            Date sqlToday = new Date();
-	      //sqlToday=new java.sql.Date(formatter.parse(assignmentDate).getTime());
-	      return (java.sql.Date) sqlToday;
+	      //sqlToday=new java.sql.Timestamp(formatter.parse(assignmentDate).getTime());
+	      return (java.sql.Timestamp) sqlToday;
 
 	  }catch(Exception ex) {
 		  System.out.println("****unable to parse date **** " + ex.toString());

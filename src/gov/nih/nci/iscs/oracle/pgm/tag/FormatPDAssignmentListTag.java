@@ -17,6 +17,8 @@ import gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject;
 import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.ProgamDirectorServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;
+import gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo;
+import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 import java.util.*;
 import java.text.*;
 
@@ -43,6 +45,7 @@ public class FormatPDAssignmentListTag extends TagSupport {
   public static String className = "";
   public static String borderClassName = "";
   public static String buttonClassName = "";
+  private String grantsUrl="";
 
   public void setKey(String key) {
 
@@ -63,10 +66,16 @@ public class FormatPDAssignmentListTag extends TagSupport {
   }
 
   public int doStartTag() {
+    HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
     try {
-      HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
       JspWriter out = pageContext.getOut();
       ServletContext sc = pageContext.getServletContext();
+	  grantsUrl = (String) request.getSession().getAttribute("grantsUrl");
+	  if(grantsUrl == null) {
+        ApplicationInfo ai = (ApplicationInfo) sc.getAttribute("applicationInfo");
+	    grantsUrl = ai.getApplicationKey("GRANTS_DETAILS_URL");
+	    request.getSession().setAttribute("grantsUrl", grantsUrl);
+	  }
       today = new java.util.Date();
       SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
       formattedDate = formatter.format(today);
@@ -90,20 +99,24 @@ public class FormatPDAssignmentListTag extends TagSupport {
 	  }
 
       out.print( buf.toString());
-     } catch(Exception e) {
-      e.printStackTrace();
+     } catch(Exception ex) {
+      ex.printStackTrace();
      }
    return SKIP_BODY;
   }
 
   private void formatTable(StringBuffer buf, String pdIdForLoad) {
 
+      int index = 0;
+      mSelectedGrants.initKeys();
       Iterator iterator = mAssignmentActionList.iterator();
       while  (iterator.hasNext()) {
            PDASearchResultObject sortedObj = (PDASearchResultObject) iterator.next();
            mKey = sortedObj.getApplId().toString() + sortedObj.getCancerActivity();
            PDASearchResultObject obj = (PDASearchResultObject) mSelectedGrants.get(mKey);
-	       formatPDAs(obj, buf);
+	       formatPDAs(obj, buf, index);
+	       mSelectedGrants.setKey(index, mKey);
+	       index++;
 	   }
 
   }
@@ -118,28 +131,37 @@ public class FormatPDAssignmentListTag extends TagSupport {
   }
 
 
-  private void 	formatPDAs(PDASearchResultObject obj, StringBuffer buf  ){
+  private void 	formatPDAs(PDASearchResultObject obj, StringBuffer buf, int index ){
 
 	  buf.append("<tr>");
       setClassForStyles(obj.getMarked());
       if(obj.getSelected()) {
-		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
+		 buf.append("<td headers=\"header00\" width=\"3%\" class=" + className + "><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
       } else {
-		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
+		 buf.append("<td headers=\"header00\" width=\"3%\" class=" + className + "><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
-      buf.append("<td headers=\"header01\" width=\"15%\" class=" + className + ">" + obj.getGrantNumber()+ "&nbsp;</td>");
+
+      buf.append("<td headers=\"header01\" width=\"15%\" class=" + className + ">");
+      buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a></td>");
+
       buf.append("<td headers=\"header02\" width=\"25%\" class=" + className + ">" + obj.getPdFullName() + "&nbsp;</td>");
       buf.append("<td headers=\"header03\" width=\"10%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;");
       buf.append("</td>");
 
       buf.append("<td headers=\"header04\" width=\"27%\" class=" + className + ">" );
-      buf.append("<SELECT NAME=\"pdId\" SIZE=\"1\" >");
+      String pdIdControlName = "PrgIdMapped(" + mKey  + ")";;
+	  buf.append("<SELECT NAME=\""+ pdIdControlName + "\" SIZE=\"1\" >");
+
 
       boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdFullName());
       addPdSelect(buf, showAll, obj.getCancerActivity(), obj.getAssignmentCA() + obj.getPdId());
 	  buf.append("</td>");
-      buf.append("<td headers=\"header05\" width=\"10%\" class=" + borderClassName + "><input type=\"textbox\" name = \"pdStartDate\" value=" + formattedDate + " >" + "&nbsp;");
-      buf.append("<a href=\"javascript:void(0)\" onclick=\"gfPop.fPopCalendar(document.pdAssignmentForm.pdStartDate.value);return false;\">");
+      formattedDate = (String) formatPdStartDate(obj.getPdAssignmentStartDate(), (String) mForm.getPdAssignmentStartIndexed(index));
+      String controlName = "pdAssignmentStartDate[" + index  + "]";
+
+      buf.append("<td headers=\"header05\" width=\"10%\" class=" + borderClassName + "><input type=\"textbox\" name = \"pdAssignmentStartDate\"  value=" + formattedDate + " >" + "&nbsp;");
+      buf.append("<a href=\"javascript:void(0)\" onclick=\"gfPop.fPopCalendar(document.pdAssignmentForm.pdAssignmentStartDate[" + index + "]);return false;\">");
+
       buf.append("<img src=\"images/IconCalendar.gif\" width=\"16\" height=\"15\" border=\"0\" alt=\"Date Picker\" />");
 	  buf.append("</a></tr>");
 	  buf.append("\n");
@@ -151,9 +173,9 @@ public class FormatPDAssignmentListTag extends TagSupport {
     ProgamDirectorServiceImpl mProgamDirectorServiceImpl =  new ProgamDirectorServiceImpl(mApplicationContext);
     List mList = null;
     if(cancerActivity == null || cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
-	   mList  = mProgamDirectorServiceImpl.getAllProgramDirectors(cancerActivity, false);
+	   mList  = mProgamDirectorServiceImpl.getAllActiveProgramDirectors(cancerActivity, false);
     } else {
-	   mList  = mProgamDirectorServiceImpl.getAllProgramDirectors(cancerActivity, true);
+	   mList  = mProgamDirectorServiceImpl.getAllActiveProgramDirectors(cancerActivity, true);
     }
     return mList;
   }
@@ -171,8 +193,6 @@ public class FormatPDAssignmentListTag extends TagSupport {
 		 List mList = getPdAssignmentList(cancerActivity);
 		 mIterator = mList.iterator();
 	 }
-
-
 
 	 while(mIterator.hasNext() ){
 	    LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
@@ -222,6 +242,27 @@ public class FormatPDAssignmentListTag extends TagSupport {
 
   }
 
+  private String formatPdStartDate(Date pdStartDate, String formDate) {
+
+      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
+      today = new java.util.Date();
+      String formattedDate = "";
+
+      //if(pdStartDate == null ){
+	  if(formDate.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) || formDate == null) {
+         pdStartDate = today;
+         return formatter.format(pdStartDate);
+	   }else{
+	     return formDate;
+	   }
+	  /*}else{
+		  return formatter.format(pdStartDate);
+	  }*/
+
+
+	  //return formattedDate;
+
+  }
   private void setClassForStyles(boolean marked) {
 	  if(marked){
 		  className = "listCellError";

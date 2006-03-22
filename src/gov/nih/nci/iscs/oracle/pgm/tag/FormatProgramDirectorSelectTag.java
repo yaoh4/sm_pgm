@@ -132,6 +132,7 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
  	// get the lookup infomation
      ProgamDirectorServiceImpl mProgamDirectorServiceImpl =  new ProgamDirectorServiceImpl(mApplicationContext);
  	 List mList  = mProgamDirectorServiceImpl.getAllProgramDirectors(cancerActivity, false);
+
      return mList;
    }
 
