@@ -27,18 +27,22 @@ public class GrantSearchErrorAction extends Action {
 
   GrantSearchErrorForm mGrantSearchErrorForm  = null;
   String mAction = null;
+  String mReturnAction = null;
 
   public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
 
        mGrantSearchErrorForm = (GrantSearchErrorForm) form;
+       mReturnAction = mGrantSearchErrorForm.getReturnAction();
        mAction = mGrantSearchErrorForm.getRequestAction();
        if( mAction.equalsIgnoreCase("email")){
 		   mGrantSearchErrorForm.setRequestAction("email");
            return sendEmail(mapping, form, request, response);
 	   }
-
+       if( mAction.equalsIgnoreCase("return")){
+           return mapReturnAction(mapping, form, request, response);
+	   }
        return mapping.findForward("continue");
 
    }
@@ -71,7 +75,17 @@ public class GrantSearchErrorAction extends Action {
           mailHandler.setTo(appInfo.getApplicationKey("ERROR_EMAIL"));
           //mailHandler.setTo("michelle.engermann@oracle.com");
 
-          mailHandler.setSubject(appInfo.getApplicationKey("SUBJECT_LINE_TEXT") + " Error Message - " + CommonUtil.getDateString(new Date(), "dd-MMM-yyyy hh:mm aaa"));
+          String mSubject = ApplicationConstants.EMPTY_STRING;
+          mReturnAction = (String) request.getSession().getAttribute("returnAction");
+
+          if(mReturnAction.equalsIgnoreCase("SearchGrantsForPDA")){
+			 mSubject =  appInfo.getApplicationKey("PD_TRANSFER_SUBJECT_LINE_TEXT");
+		  }else{
+			  if(mReturnAction.equalsIgnoreCase("SearchGrantsForReferral")){
+				  mSubject =  appInfo.getApplicationKey("REFERRAL_SUBJECT_LINE_TEXT");
+			  }
+		  }
+          mailHandler.setSubject(mSubject + " Error Message - " + CommonUtil.getDateString(new Date(), "dd-MMM-yyyy hh:mm aaa"));
           StringBuffer error_mesg = new StringBuffer();
           error_mesg.append("\n\nError Message: ");
           error_mesg.append(errorMessage.replaceAll("<BR>", "\n"));
@@ -97,6 +111,24 @@ public class GrantSearchErrorAction extends Action {
           mailHandler.sendMessage();
           return mapping.findForward("success");
     }
+
+  public ActionForward mapReturnAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
+
+
+         ActionForward mForward = null;
+
+         if(mReturnAction.equalsIgnoreCase("SearchGrantsForPDA")){
+			 mForward =  mapping.findForward("assign");
+		 }
+         if(mReturnAction.equalsIgnoreCase("SearchGrantsForReferral")){
+			 mForward = mapping.findForward("referralAction");
+		 }
+		 request.getSession().setAttribute("returnAction", mReturnAction);
+
+         return mForward;
+
+  }
 
 
 }

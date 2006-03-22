@@ -5,6 +5,6 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 
 public interface RetrieveGrantInfoCommand  {
 
-    public QueryPage execute(Long  oApplId, String oCancerActivity, String oUserId);
+    public QueryPage execute(Long  oApplId, String oCancerActivity, String oUserId, String oAction);
 
 }

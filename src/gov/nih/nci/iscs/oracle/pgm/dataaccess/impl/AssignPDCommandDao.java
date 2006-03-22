@@ -51,7 +51,7 @@ public class AssignPDCommandDao extends ActionCommandDao implements  AssignPDCom
      * @return String  - pass/fail
      */
      public Object execute(Long oApplId, Long oNpeId, String oCancerActivity,
-                           Date oAssignmentDate, String oPdTransferCode, String oUserId) {
+                           java.sql.Timestamp oAssignmentDate, String oPdTransferCode, String oUserId) {
 
        boolean mAssignmentPassed = false;
 

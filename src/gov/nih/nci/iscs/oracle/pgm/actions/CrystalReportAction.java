@@ -8,11 +8,12 @@ import org.springframework.context.ApplicationContext;
 
 
 import  gov.nih.nci.iscs.oracle.pgm.actions.NciPgmAction;
-import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForReferralForm;
+import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.ReportSelectorServiceImpl;
 import javax.servlet.http.HttpSession;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw;
 
@@ -44,43 +45,51 @@ public class CrystalReportAction extends NciPgmAction    {
  private NciUser oNciUser;
  private ApplicationContext oApplicationContext;
  private String mAction = null;
- private RetrieveGrantsForReferralForm mRetrieveGrantsForReferralForm = null;
+ private RetrieveGrantsForm mRetrieveGrantsForm = null;
  private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
+ private String mContinueForward = "continueForReferral";
 
  public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
+       if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
+		   throw new GrantSearchException("CrystalReportAction", "execute", "Your session has expired. You have open a new browser window to continue!", request.getSession());
+	   }
       oSession = request.getSession();
 	  oServletContext = oSession.getServletContext();
       oApplicationContext =  (ApplicationContext) oServletContext.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
       ActionMessages messages = new ActionMessages();
 
-      mRetrieveGrantsForReferralForm = (RetrieveGrantsForReferralForm) request.getAttribute("retrieveGrantsForReferralForm");
+      mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
+      if(mRetrieveGrantsForm == null) {
+         mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
+         mContinueForward = "continueForPDA";
+	  }
 
-      String mReportFormat = mRetrieveGrantsForReferralForm.getFormatSelected();
-      String mReportSelected = mRetrieveGrantsForReferralForm.getReportSelected();
+      String mReportFormat = mRetrieveGrantsForm.getFormatSelected();
+      String mReportSelected = mRetrieveGrantsForm.getReportSelected();
 
+      if(mReportSelected.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+         mReportSelected == null){
+	       logErrors(messages, "referralaction", "errors.crystal.report.select");
+	   	   this.saveMessages(request, messages);
+	  }
+      if(mReportFormat.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+         mReportSelected == null){
+	       logErrors(messages, "referralaction", "errors.crystal.format.select");
+	   	   this.saveMessages(request, messages);
+	  }
 
       SelectedGrants mSelectedGrants= (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
       if(mSelectedGrants.isEmpty()){
 	     super.logErrors(messages, "referralaction", "errors.generate.action.select");
 	   	 this.saveMessages(request, messages);
-		 return mapping.findForward("continue");
+		 return mapping.findForward(mContinueForward);
 	  }
       List mSortedList = (List) mSelectedGrants.getSortedSelectedGrants();
 
-      if(mReportSelected.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
-         mReportSelected == null){
-	       super.logErrors(messages, "referralaction", "errors.crystal.report.select");
-	   	   this.saveMessages(request, messages);
-	  }
-      if(mReportFormat.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
-         mReportSelected == null){
-	       super.logErrors(messages, "referralaction", "errors.crystal.format.select");
-	   	   this.saveMessages(request, messages);
-	  }
       if(!messages.isEmpty() ) {
-		   return mapping.findForward("continue");
+		   return mapping.findForward(mContinueForward);
 	  }
 
 
@@ -94,7 +103,7 @@ public class CrystalReportAction extends NciPgmAction    {
 
 
 
-      return mapping.findForward("continue");
+      return mapping.findForward(mContinueForward);
 
    }
 

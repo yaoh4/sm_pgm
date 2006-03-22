@@ -20,11 +20,15 @@ public class GrantSearchErrorForm extends ValidatorForm   {
 
     private String userMessage;
     private String requestAction;
+    private String returnAction;
+    private String lastReturnAction;
 
 
     public GrantSearchErrorForm() {
   	    this.userMessage = ApplicationConstants.EMPTY_STRING;
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
+  	    this.returnAction = ApplicationConstants.EMPTY_STRING;
+  	    this.lastReturnAction = ApplicationConstants.EMPTY_STRING;
     }
 
     public void reset(ActionMapping mapping, HttpServletRequest request) {
@@ -51,12 +55,28 @@ public class GrantSearchErrorForm extends ValidatorForm   {
 		return requestAction;
 	}
 
+   public void setReturnAction(String returnAction) {
+		this.returnAction = returnAction;
+	}
 
+	public String getReturnAction() {
+		return returnAction;
+	}
+
+   public void setLastReturnAction(String lastReturnAction) {
+		this.lastReturnAction = lastReturnAction;
+	}
+
+	public String getLastReturnAction() {
+		return lastReturnAction;
+	}
 
     public String toString() {
        return new ToStringBuilder(this)
            .append("userMessage ", getUserMessage())
            .append("requestAction ", getRequestAction())
+           .append("returnAction ", getReturnAction())
+           .append("lastReturnAction ", getLastReturnAction())
            .toString();
 	}
 

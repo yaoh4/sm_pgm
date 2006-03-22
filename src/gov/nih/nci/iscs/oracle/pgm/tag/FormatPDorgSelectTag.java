@@ -59,7 +59,6 @@ public class FormatPDorgSelectTag extends TagSupport {
 
       if(!cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ) &
          !personId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ) )  {
-	       System.out.println("**** about to process getPDOrgForCAList for boolean ***" + disableSelect);
 	       List mList = getPDOrgForCAList(cancerActivity, personId );
 	       if(mList.size() > 0) {
 		     formatSelectForCA(this.cancerActivity, this.personId, buf, mList);
@@ -70,7 +69,6 @@ public class FormatPDorgSelectTag extends TagSupport {
       if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
          personId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)  ||
          disableSelect) {
-	       System.out.println("**** about to process formatEmptySelect for boolean ***" + disableSelect);
 	        List mList = (List)  request.getAttribute(LookUpTableConstants.PD_ORG_VW3_LOOKUP[0]);
 		    formatEmptySelect(buf, mList);
 	  }

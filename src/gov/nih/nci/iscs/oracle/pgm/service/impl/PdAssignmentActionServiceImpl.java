@@ -12,7 +12,7 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AssignPDCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
@@ -34,6 +34,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
     private Map pdAssignmentActionGrants;
     private PdAssignmentActionObject pdAssignmentActionObject;
     private AssignPDCommand assignPDCommand;
+    private String oAction;
 
 
 
@@ -117,25 +118,26 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
      private boolean performRequery(boolean actionPassed) {
 
 		 boolean mResults = false;
+         NciPdTransferVw mNciPdTransferVw = null;
+         oAction =  ApplicationConstants.PD_ASSIGNMENT;
 		 String cancerActivity = new String(ApplicationConstants.EMPTY_STRING);
-	     NciPdQueryVw mNciPdQueryVw = null;
          if(actionPassed) {
 			cancerActivity = pdAssignmentActionObject.getAssignmentCA();
 		 } else {
 			cancerActivity = pdAssignmentActionObject.getCancerActivity();
 		 }
 
-		 mNciPdQueryVw = requeryGrant(pdAssignmentActionObject.getApplId(), cancerActivity);
-         if(mNciPdQueryVw != null) {
+		 mNciPdTransferVw = requeryGrant(pdAssignmentActionObject.getApplId(), cancerActivity);
+         if(mNciPdTransferVw != null) {
 			pdAssignmentActionObject.setCancerActivity(ApplicationConstants.EMPTY_STRING);
-			if(mNciPdQueryVw.getCayCode() != null )
-			    pdAssignmentActionObject.setCancerActivity(mNciPdQueryVw.getCayCode());
+			if(mNciPdTransferVw.getCayCode() != null )
+			    pdAssignmentActionObject.setCancerActivity(mNciPdTransferVw.getCayCode());
 			pdAssignmentActionObject.setProgramDirector(ApplicationConstants.EMPTY_STRING);
-			if(mNciPdQueryVw.getPdFullName() != null )
-			    pdAssignmentActionObject.setProgramDirector(mNciPdQueryVw.getPdFullName());
+			if(mNciPdTransferVw.getPdFullName() != null )
+			    pdAssignmentActionObject.setProgramDirector(mNciPdTransferVw.getPdFullName());
 			pdAssignmentActionObject.setGrantNumber(ApplicationConstants.EMPTY_STRING);
-			if(mNciPdQueryVw.getFullGrantNum() != null )
-			   pdAssignmentActionObject.setGrantNumber(mNciPdQueryVw.getFullGrantNum());
+			if(mNciPdTransferVw.getFullGrantNum() != null )
+			   pdAssignmentActionObject.setGrantNumber(mNciPdTransferVw.getFullGrantNum());
 		    mResults = true;
 		 }
 
@@ -146,22 +148,22 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
      * Get the POC for the Cancer Activity
      * @return String  - POC
      */
-     public NciPdQueryVw requeryGrant(Long aApplId, String cancerActivity) {
-         NciPdQueryVw mNciPdQueryVw;
+     public NciPdTransferVw requeryGrant(Long aApplId, String cancerActivity) {
+         NciPdTransferVw mNciPdTransferVw;
  		 String mPoc = new String(ApplicationConstants.EMPTY_STRING);
  		 if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
 			 cancerActivity = null;
 		 }
 	     try{
 	         RetrieveGrantInfoCommand mRetrieveGrantInfoCommand = (RetrieveGrantInfoCommand) getBean("retrieveGrantInfoCommandDao");
-		     QueryPage mQueryPage = mRetrieveGrantInfoCommand.execute(aApplId, cancerActivity, super.getUserId());
+		     QueryPage mQueryPage = mRetrieveGrantInfoCommand.execute(aApplId, cancerActivity, super.getUserId(), oAction);
 		     List mList = mQueryPage.getPageList();
-		     mNciPdQueryVw = (NciPdQueryVw) mList.get(0);
+		     mNciPdTransferVw = (NciPdTransferVw) mList.get(0);
          } catch (Exception ex) {
 			 throw new ServiceImplException("PdAssignmentActionServiceImpl", "requeryGrant", "An exception occurred in the reQuery process!!! " + ex.toString());
  	     }
 
- 	     return  mNciPdQueryVw;
+ 	     return  mNciPdTransferVw;
 
 	 }
 

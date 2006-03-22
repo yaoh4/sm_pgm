@@ -34,34 +34,37 @@ public class PDATableIteratorTag extends TagSupport
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header01\" width=\"17%\" class=listCell>");
-		  buf.append(queryResultObject.getPdFullName());
+		  buf.append(queryResultObject.getGrantNumber());
 		  buf.append("</td>");
 
-
 		  buf.append("<td headers=\"header02\" width=\"30%\" class=listCell>");
-		  buf.append(queryResultObject.getPdOrg());
+		  buf.append(queryResultObject.getPiName());
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header03\" width=\"10%\" class=listCell>");
 		  buf.append(queryResultObject.getFy());
 		  buf.append("</td>");
 
-		  buf.append("<td headers=\"header04\" width=\"17%\" class=listCell>");
-		  buf.append(queryResultObject.getGrantNumber());
-		  buf.append("</td>");
-
-		  buf.append("<td headers=\"header05\" width=\"3%\" class=listCell>");
-		  buf.append(queryResultObject.getCancerActivity());
-		  buf.append("</td>");
-
-		  buf.append("<td headers=\"header06\" width=\"10%\" class=listCell>");
+		  buf.append("<td headers=\"header04\" width=\"10%\" class=listCell>");
 		  buf.append(queryResultObject.getNcabDate());
 		  buf.append("</td>");
 
-		  buf.append("<td headers=\"header07\" width=\"10%\" class=listCell5>");
+		  buf.append("<td headers=\"header05\" width=\"6%\" class=listCell>");
+		  buf.append(queryResultObject.getRfaPaNumber());
+		  buf.append("</td>");
+
+		  buf.append("<td headers=\"header06\" width=\"3%\" class=listCell>");
+		  buf.append(queryResultObject.getCancerActivity());
+		  buf.append("</td>");
+
+		  buf.append("<td headers=\"header07\" width=\"17%\" class=listCell>");
+		  buf.append(queryResultObject.getPdFullName());
+		  buf.append("</td>");
+
+
+		  buf.append("<td headers=\"header08\" width=\"10%\" class=listCell5>");
 		  if(queryResultObject.getPdStartDate() != null) {
 			  String temp = queryResultObject.getPdStartDate().toString();
-			  System.out.println("*** now in tag and temp is ***** " + temp);
 		     buf.append(temp.substring(0, 10));
 		  }else {
 		     buf.append(ApplicationConstants.EMPTY_STRING);

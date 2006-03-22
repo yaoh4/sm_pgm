@@ -60,16 +60,24 @@ public class RetrieveGrantInfoCommandDao extends AccessCommandDao implements  Re
      * - execute the query and return the Query Page
      * @retrun aQueryPage - a QueryPage object that encapsulate the Pagination
      */
-    public QueryPage execute(Long  oApplId, String oCancerActivity, String oUserId) {
+    public QueryPage execute(Long  oApplId, String oCancerActivity, String oUserId, String oAction) {
 
 	   QueryPage  mGrantsQueryPage = null;
+	   Criteria mCriteria = null;
 
        // get the session from the sessionFactory
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
        try {
 		   // build the query string from query object
-           Criteria mCriteria =  buildCriteria(mSession, oApplId,  oCancerActivity);
-           mGrantsQueryPage = new QueryPage(mCriteria, ApplicationConstants.ALL_PAGES, 1);
+         if(oAction.equalsIgnoreCase(ApplicationConstants.REFERRAL) ){
+			mCriteria =  buildReferralCriteria(mSession, oApplId,  oCancerActivity);
+		 }else{
+			if(oAction.equalsIgnoreCase(ApplicationConstants.PD_ASSIGNMENT)) {
+			   mCriteria =  buildTransferCriteria(mSession, oApplId,  oCancerActivity);
+			}
+		 }
+
+            mGrantsQueryPage = new QueryPage(mCriteria, ApplicationConstants.ALL_PAGES, 1);
 
 	   } catch (CommandDaoException ex) {
 		   throw new CommandDaoException(" Query Execution Failed  " + ex.toString() );
@@ -82,28 +90,56 @@ public class RetrieveGrantInfoCommandDao extends AccessCommandDao implements  Re
 
     /*
      * Build the query object and build the UserQueryObject
-     * - Create class instance for NciPdQueryVw
+     * - Create class instance for NciPdReferralVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
      * @retrun Criteria - a Criteria object
      */
-    private Criteria buildCriteria(Session aSession, Long  oApplId, String oCancerActivity) throws CommandDaoException {
+    private Criteria buildReferralCriteria(Session aSession, Long  oApplId, String oCancerActivity) throws CommandDaoException {
 
-        Class mNciPdQueryVw = null;
+        Class mNciPdReferralVw = null;
         Criteria mCriteria = null;
         try{
-            mNciPdQueryVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw");
-		    mCriteria = aSession.createCriteria(mNciPdQueryVw);
+            mNciPdReferralVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw");
+		    mCriteria = aSession.createCriteria(mNciPdReferralVw);
 		    mCriteria.add(Expression.eq("applId",  oApplId ));
 		    if(oCancerActivity != null)
 		        mCriteria.add(Expression.eq("cayCode",  oCancerActivity ));
 	    } catch (ClassNotFoundException e) {
-			throw new CommandDaoException("Unable to create NciPdQueryVw class " + e.toString());
+			throw new CommandDaoException("Unable to create NciPdReferralVw class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
 		return mCriteria;
 	}
+
+    /*
+     * Build the query object and build the UserQueryObject
+     * - Create class instance for NciPdTransferVw
+     * - Create the Criteria object
+     * - build the GrantsQueryCriteria from the parfent Class
+     * throws a CommandDaoException
+     * @retrun Criteria - a Criteria object
+     */
+    private Criteria buildTransferCriteria(Session aSession, Long  oApplId, String oCancerActivity) throws CommandDaoException {
+
+        Class mNciPdTransferVw = null;
+        Criteria mCriteria = null;
+        try{
+            mNciPdTransferVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw");
+		    mCriteria = aSession.createCriteria(mNciPdTransferVw);
+		    mCriteria.add(Expression.eq("applId",  oApplId ));
+		    if(oCancerActivity != null)
+		        mCriteria.add(Expression.eq("cayCode",  oCancerActivity ));
+	    } catch (ClassNotFoundException e) {
+			throw new CommandDaoException("Unable to create NciPdTransferVw class " + e.toString());
+	    } catch (Exception e) {
+			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
+	    }
+		return mCriteria;
+	}
+
+
 
 }

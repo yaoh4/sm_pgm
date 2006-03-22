@@ -94,7 +94,7 @@ public class RetrieveGrantsForReferralForm extends RetrieveGrantsForm implements
           return validationMessages;
 	   }
 
-       return super.validate();
+       return super.validate(validationMessages);
 
    }
 

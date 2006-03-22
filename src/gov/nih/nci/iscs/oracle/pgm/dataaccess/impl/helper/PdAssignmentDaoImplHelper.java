@@ -49,7 +49,7 @@ public class PdAssignmentDaoImplHelper  {
        connection         = aConnection;
 	}
 
-    public boolean assignPD(Long aApplId, Long aNpeId, String aCancerActivity, String aPdTransferCode, java.util.Date aAssignmentDate) throws CommandDaoException, SQLException  {
+    public boolean assignPD(Long aApplId, Long aNpeId, String aCancerActivity, String aPdTransferCode, java.sql.Timestamp aAssignmentDate) throws CommandDaoException, SQLException  {
     /*
      * Call the assignment stored procedure
      *
@@ -60,13 +60,14 @@ public class PdAssignmentDaoImplHelper  {
        boolean mReturnVal = true;
        CallableStatement mCallableStatement = null;
        String mQueryString = "{call PD_PORTFOLIO_MGT_PKG.ASSIGN_CA_PD(?,?,?,?,?,?,?)}";
-       java.sql.Date mDate = new java.sql.Date(aAssignmentDate.getTime());
+
+       java.sql.Timestamp mDate = (java.sql.Timestamp) aAssignmentDate;
        try {
 		      mCallableStatement = connection.prepareCall(mQueryString);
               mCallableStatement.setLong(1, aApplId.longValue());
               mCallableStatement.setLong(2, aNpeId.longValue());
               mCallableStatement.setString(3, aCancerActivity);
-              mCallableStatement.setDate(4, mDate);
+              mCallableStatement.setTimestamp(4, aAssignmentDate);
               mCallableStatement.setString(5, aPdTransferCode);
               mCallableStatement.registerOutParameter(6, Types.VARCHAR);
               mCallableStatement.registerOutParameter(7, Types.VARCHAR);

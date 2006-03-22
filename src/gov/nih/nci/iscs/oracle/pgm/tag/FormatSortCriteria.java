@@ -30,7 +30,7 @@ public class FormatSortCriteria extends TagSupport {
 
   public static String CANCER_ACTIVITY = "Cancer Activity, ";
   public static String ORGANIZATION = "Institution, ";
-  public static String PD_LAST_NAME = "PI, ";
+  public static String PD_LAST_NAME = "PD, ";
   public static String FULL_GRANT_NUMBER = "IC Code, Activity Code, Serial Number, Support Year, Suffix";
   public static String PROJECT_TITLE = "Project Title, ";
   public static String PD_ORGANIZATION = "Program Director Organization, ";
@@ -40,7 +40,9 @@ public class FormatSortCriteria extends TagSupport {
   public static String ARA_MATCH = "ARA Status Code, ";
   public static String DUAL_CA = "Dual Cancer Activity Code, ";
   public static String CURR_REFERRAL_DATE_SORT = "Referred Date, ";
-
+  public static String PI_LAST_NAME_SORT = "PI, ";
+  public static String FISCAL_YEAR_SORT = "FY, ";
+  public static String RFA_PA_NUMBER_SORT = "RFA/PA, ";
 
   public String getFormName() {
 	  return this.formName;
@@ -102,6 +104,15 @@ public class FormatSortCriteria extends TagSupport {
 	  }
       if (mSortColumn.equalsIgnoreCase(ApplicationConstants.CURR_REFERRAL_DATE_SORT)) {
 		  mResults = CURR_REFERRAL_DATE_SORT + FULL_GRANT_NUMBER;
+	  }
+      if (mSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_SORT)) {
+		  mResults = PI_LAST_NAME_SORT + FULL_GRANT_NUMBER;
+	  }
+      if (mSortColumn.equalsIgnoreCase(ApplicationConstants.FISCAL_YEAR_SORT)) {
+		  mResults = FISCAL_YEAR_SORT + FULL_GRANT_NUMBER;
+	  }
+      if (mSortColumn.equalsIgnoreCase(ApplicationConstants.RFA_PA_NUMBER_SORT)) {
+		  mResults = RFA_PA_NUMBER_SORT + FULL_GRANT_NUMBER;
 	  }
 	  // did we match?
 	  if(mResults == null) {

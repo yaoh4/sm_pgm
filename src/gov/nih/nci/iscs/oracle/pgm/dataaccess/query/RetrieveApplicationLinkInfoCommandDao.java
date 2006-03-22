@@ -58,7 +58,7 @@ public class RetrieveApplicationLinkInfoCommandDao extends AccessCommandDao impl
 
     /*
      * Build the query object and build the UserQueryObject
-     * - Create class instance for NciPdQueryVw
+     * - Create class instance for GwbLinksT
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException

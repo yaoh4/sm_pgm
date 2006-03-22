@@ -14,6 +14,7 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.forms.PaginationObject;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForPDACommand;
 import gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject;
+import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
@@ -28,6 +29,21 @@ import org.apache.log4j.Logger;
 public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSearchService  {
 
     static Logger logger = LogManager.getLogger(PDAssignmentServiceImpl.class);
+    public static HashMap columnMethodMap;
+       // Here's a static initializer that fills in the hashtable
+       static {
+       columnMethodMap = new HashMap();
+       columnMethodMap.put("grantNumber", "getFullGrantNum");
+       columnMethodMap.put("default", "getFullGrantNum");
+       columnMethodMap.put("cayCode", "getCayCode");
+       columnMethodMap.put("pdFullName", "getPdFullName");
+       columnMethodMap.put("lastName", "getLastName");
+       columnMethodMap.put("fy", "getFy");
+       columnMethodMap.put("projectTitle", "getProjectTitle");
+       columnMethodMap.put("pdStartDate", "getPdStartDate");
+       columnMethodMap.put("councilMeetingDate", "getCouncilMeetingDate");
+       columnMethodMap.put("rfaPaNumber", "getRfaPaNumber");
+      }
 
 
 
@@ -49,6 +65,18 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 
              mapPaginationObject(mQueryPage, aPaginationObject);
 
+             String sortColumn = aGrantQueryObject.getSortColumn();
+             String methodName = (String) columnMethodMap.get(sortColumn);
+             if(sortColumn == null || methodName == null ) {
+				 sortColumn = "default";
+				 methodName = "getFullGrantNum";
+			 }
+             boolean sortAscendingIndicator = false;
+             if(aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)){
+				 sortAscendingIndicator = true;
+			 }
+	         Collections.sort((List) mQueryPage.getPageList(), new ReferralListComparator(null, sortAscendingIndicator, methodName));
+
              mQueryResults = mapPDASearchResults((List) mQueryPage.getPageList());
          } catch (Exception ex) {
 			 throw new ServiceImplException("PDAssignmentServiceImpl", "search", "An exception occurred in grants retrieval process!!! " + ex.toString());
@@ -59,23 +87,24 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 
 
 
-    private Map mapPDASearchResults(List aNciPdQueryList) {
+    private Map mapPDASearchResults(List aNciPdTransferList) {
 
-		HashMap mQueryResults = new HashMap();
-		Iterator mIterator = aNciPdQueryList.iterator();
+		TreeMap mQueryResults = new TreeMap();
+		Iterator mIterator = aNciPdTransferList.iterator();
+
 	    int mIndex = 1;
 	    String mKey = null;
 		while (mIterator.hasNext() ) {
-			NciPdQueryVw mNciPdQuery = (NciPdQueryVw) mIterator.next();
+			NciPdTransferVw mNciPdTransfer = (NciPdTransferVw) mIterator.next();
 		    PDASearchResultObject mPDASearchResultObject = new PDASearchResultObject();
-			if(mNciPdQuery.getFullGrantNum() != null) {
-				mPDASearchResultObject.setGrantNumber(mNciPdQuery.getFullGrantNum() );
+			if(mNciPdTransfer.getFullGrantNum() != null) {
+				mPDASearchResultObject.setGrantNumber(mNciPdTransfer.getFullGrantNum() );
 			}else {
 				mPDASearchResultObject.setGrantNumber(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getCayCode() != null) {
-				mPDASearchResultObject.setCancerActivity(mNciPdQuery.getCayCode() );
+			if(mNciPdTransfer.getCayCode() != null) {
+				mPDASearchResultObject.setCancerActivity(mNciPdTransfer.getCayCode() );
 			}else {
 				mPDASearchResultObject.setCancerActivity(ApplicationConstants.EMPTY_STRING );
 			}
@@ -83,45 +112,56 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 
 			mPDASearchResultObject.setSelected(false);
 
-			if(mNciPdQuery.getPdFullName() != null) {
-				mPDASearchResultObject.setPdFullName(mNciPdQuery.getPdFullName() );
+			if(mNciPdTransfer.getPdFullName() != null) {
+				mPDASearchResultObject.setPdFullName(mNciPdTransfer.getPdFullName() );
 			}else {
 				mPDASearchResultObject.setPdFullName(ApplicationConstants.EMPTY_STRING);
 			}
 
 
-			if(mNciPdQuery.getPdOrgName() != null) {
-				mPDASearchResultObject.setPdOrg(mNciPdQuery.getPdOrgName() );
+			if(mNciPdTransfer.getLastName() != null) {
+				mPDASearchResultObject.setPiName(mNciPdTransfer.getLastName() + " " + mNciPdTransfer.getFirstName());
 			}else {
-				mPDASearchResultObject.setPdOrg(ApplicationConstants.EMPTY_STRING);
+				mPDASearchResultObject.setPiName(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getFy() != null) {
-				mPDASearchResultObject.setFy(mNciPdQuery.getFy().toString() );
+			if(mNciPdTransfer.getFy() != null) {
+				mPDASearchResultObject.setFy(mNciPdTransfer.getFy().toString() );
 			}else {
 				mPDASearchResultObject.setFy(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getCouncilMeetingDate() != null) {
-				mPDASearchResultObject.setNcabDate(mNciPdQuery.getCouncilMeetingDate().substring(4,6) + "/" + mNciPdQuery.getCouncilMeetingDate().substring(0,4) );
+			if(mNciPdTransfer.getCouncilMeetingDate() != null ){
+			   try{
+				  mPDASearchResultObject.setNcabDate(mNciPdTransfer.getCouncilMeetingDate().substring(4,6) + "/" + mNciPdTransfer.getCouncilMeetingDate().substring(0,4) );
+			   }catch(StringIndexOutOfBoundsException ex){
+				   mPDASearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
+			   }
 			}else {
 				mPDASearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
 			}
 
-
-			if(mNciPdQuery.getPdStartDate() != null) {
-				mPDASearchResultObject.setPdStartDate(mNciPdQuery.getPdStartDate());
+			if(mNciPdTransfer.getRfaPaNumber() != null) {
+				mPDASearchResultObject.setRfaPaNumber(mNciPdTransfer.getRfaPaNumber() );
+			}else {
+				mPDASearchResultObject.setRfaPaNumber(ApplicationConstants.EMPTY_STRING);
 			}
 
-			if(mNciPdQuery.getPdTransferInitialCode() != null) {
-				mPDASearchResultObject.setPdTransferCode(mNciPdQuery.getPdTransferInitialCode() );
+
+			if(mNciPdTransfer.getPdStartDate() != null) {
+				mPDASearchResultObject.setPdStartDate(mNciPdTransfer.getPdStartDate());
+			}
+
+			if(mNciPdTransfer.getPdTransferInitialCode() != null) {
+				mPDASearchResultObject.setPdTransferCode(mNciPdTransfer.getPdTransferInitialCode() );
 			}else {
 				mPDASearchResultObject.setPdTransferCode(ApplicationConstants.EMPTY_STRING);
 			}
 
-		    mPDASearchResultObject.setApplId(mNciPdQuery.getApplId() );
+		    mPDASearchResultObject.setApplId(new Long(mNciPdTransfer.getApplId() ));
 			mPDASearchResultObject.setSelected(false);
 			mKey = mPDASearchResultObject.getApplId() + mPDASearchResultObject.getCancerActivity();
+			mPDASearchResultObject.setKey(mKey);
 			mQueryResults.put(new Integer(mIndex), mPDASearchResultObject);
             mIndex++;
 	    }

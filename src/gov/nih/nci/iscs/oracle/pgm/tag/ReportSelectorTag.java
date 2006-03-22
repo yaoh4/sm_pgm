@@ -29,6 +29,8 @@ public class ReportSelectorTag extends TagSupport
   public static String BOTTOM_LITERAL = "bottom";
   public static String REPORT_SELECTED = "reportSelected";
   public static String FORMAT_SELECTED = "formatSelected";
+  public static String REFERRAL_ACTION = "Referral Query";
+  public static String PD_ASSIGNMENT = "PD Assignment Query";
   public String formName = "retrieveGrantsForReferralForm";
 
 
@@ -52,9 +54,11 @@ public class ReportSelectorTag extends TagSupport
     HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
     HttpSession mSession = request.getSession();
     mForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
+    moduleName = REFERRAL_ACTION;
     if(mForm == null) {
        mForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
        formName = "retrieveGrantsForPDAForm";
+       moduleName = PD_ASSIGNMENT;
     }
     // get the list of reports
     mReportsList = getReportsList();

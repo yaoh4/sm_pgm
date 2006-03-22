@@ -9,10 +9,10 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 /** 
  *        @hibernate.class
- *         table="NCI_PD_QUERY_VW"
+ *         table="NCI_PD_REFERRAL_VW"
  *     
 */
-public class NciPdQueryVw implements Serializable {
+public class NciPdReferralVw implements Serializable {
 
     /** identifier field */
     private long applId;
@@ -138,7 +138,7 @@ public class NciPdQueryVw implements Serializable {
     private String withdrawnFlag;
 
     /** full constructor */
-    public NciPdQueryVw(long applId, String fullGrantNum, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
+    public NciPdReferralVw(long applId, String fullGrantNum, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
         this.councilMeetingDate = councilMeetingDate;
@@ -183,7 +183,7 @@ public class NciPdQueryVw implements Serializable {
     }
 
     /** default constructor */
-    public NciPdQueryVw() {
+    public NciPdReferralVw() {
     }
 
     /** 
@@ -767,8 +767,8 @@ public class NciPdQueryVw implements Serializable {
 
     public boolean equals(Object other) {
         if ( (this == other ) ) return true;
-        if ( !(other instanceof NciPdQueryVw) ) return false;
-        NciPdQueryVw castOther = (NciPdQueryVw) other;
+        if ( !(other instanceof NciPdReferralVw) ) return false;
+        NciPdReferralVw castOther = (NciPdReferralVw) other;
         return new EqualsBuilder()
             .append(this.getApplId(), castOther.getApplId())
             .append(this.getFullGrantNum(), castOther.getFullGrantNum())

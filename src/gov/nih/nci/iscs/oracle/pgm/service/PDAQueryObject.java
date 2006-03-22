@@ -1,5 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.service;
 
+import java.math.BigDecimal;
+
   public interface PDAQueryObject extends GrantQueryObject {
 
 
@@ -35,17 +37,21 @@ package gov.nih.nci.iscs.oracle.pgm.service;
     public void setI2Status(String i2Status);
 
     public String getPercentileFrom();
+    public BigDecimal getPercentileFromBD();
 
     public void setPercentileFrom(String percentileFrom);
     public String getPercentileTo() ;
+    public BigDecimal getPercentileToBD() ;
 
     public void setPercentileTo(String percentileTo) ;
 
 
     public String getPriorityScoreFrom();
+    public Integer getPriorityScoreFromInt();
 
     public void setPriorityScoreFrom(String priorityScoreFrom);
     public String getPriorityScoreTo();
+    public Integer getPriorityScoreToInt();
 
     public void setPriorityScoreTo(String priorityScoreTo);
 

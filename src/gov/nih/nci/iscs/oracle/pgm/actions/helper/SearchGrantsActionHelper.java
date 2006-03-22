@@ -56,6 +56,16 @@ public static boolean validateIntegerFields(String fieldValue)  {
    }
 
 }
+public static boolean validateDoubleFields(String fieldValue)  {
+
+   try {
+	     Double.parseDouble(fieldValue );
+	     return true;
+   } catch(NumberFormatException ex) {
+	     return false;
+   }
+
+}
 
 public static boolean validateLongFields(String fieldValue)  {
 
@@ -77,6 +87,29 @@ public static boolean validateFiscalYearRange(String fiscalYearFrom, String fisc
     return true;
 
  }
+
+public static boolean validateIntegerRange(String integerFrom, String integerTo)  {
+
+	long mIntegerFrom = Integer.parseInt(integerFrom);
+	long mIntegerTo = Integer.parseInt(integerTo);
+	if(mIntegerFrom > mIntegerTo )
+		  return false;
+
+    return true;
+
+ }
+
+public static boolean validateDoubleRange(String doubleFrom, String doubleTo)  {
+
+	double mDoubleFrom = Double.parseDouble(doubleFrom);
+	double mDoubleTo = Double.parseDouble(doubleTo);
+	if(mDoubleFrom > mDoubleTo )
+		  return false;
+
+    return true;
+
+ }
+
 public static String getDefaultPageSize()  {
 
 

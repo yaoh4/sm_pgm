@@ -71,6 +71,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
     private String reportSelectedLo;
     private String formatSelectedLo;
     private String timestamp;
+    private boolean sortAscendingIndicator;
 
     public RetrieveGrantsForm() {
         super();
@@ -80,6 +81,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
         Integer pageSize = new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE);
         this.selectedPageSize = new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE).toString();
   	    this.listGenerated = "N";
+  	    this.sortAscendingIndicator = true;
   	    this.queryResults = (List) new ArrayList();
   	    this.sortActionSelected = false;
 		Timestamp ts = new Timestamp(new Date().getTime());
@@ -537,6 +539,13 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
       return icdIndexed;
     }
 
+    public void setSortAscendingIndicator(boolean sortAscendingIndicator) {
+		this.sortAscendingIndicator = sortAscendingIndicator;
+	}
+
+	public boolean getSortAscendingIndicator() {
+		return sortAscendingIndicator;
+	}
 
 
     public void reset(){
@@ -678,6 +687,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
            .append("formatSelected ", getFormatSelected())
            .append("reportSelectedLo ", getReportSelectedLo())
            .append("formatSelectedLo ", getFormatSelectedLo())
+           .append("sortAscendingIndicator ", getSortAscendingIndicator())
            .append("timestamp ", getTimestamp())
            .toString();
 
@@ -761,10 +771,10 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
         return true;
       */
 	}
-public List validate() {
+public List validate(List validationMessages) {
 
 
-	   ArrayList validationMessages = new ArrayList();
+	   //ArrayList validationMessages = new ArrayList();
 	   boolean validateFyRange = true;
 	   boolean valiadateNcabRange = true;
 

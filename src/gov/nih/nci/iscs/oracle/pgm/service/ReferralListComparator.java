@@ -22,9 +22,10 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap = new HashMap();
        columnMethodMap.put("cancerActivity", "getCancerActivity");
        columnMethodMap.put("grantNumber", "getGrantNumber");
+       columnMethodMap.put("fullGrantNum", "getGrantNumber");
        columnMethodMap.put("default", "getGrantNumber");
        columnMethodMap.put("instName", "getInstName");
-       columnMethodMap.put("piLastName", "getPiLastName");
+       columnMethodMap.put("pdOrgName", "getInstName");
        columnMethodMap.put("pdFullName", "getPdFullName");
        columnMethodMap.put("projectTitle", "getProjectTitle");
        columnMethodMap.put("currentPoc", "getCurrentPoc");
@@ -32,13 +33,16 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("dualPoc", "getDualPoc");
        columnMethodMap.put("sortIndex", "getSortIndex");
        columnMethodMap.put("dualCA", "getDualCA");
-       columnMethodMap.put("lastName", "getPiLastName");
+       columnMethodMap.put("lastName", "getLastName");
        columnMethodMap.put("orgName", "getInstName");
        columnMethodMap.put("projectTitle", "getProjectTitle");
        columnMethodMap.put("araStatusCode", "getAraStatus");
        columnMethodMap.put("councilMeetingDate", "getNcabDate");
        columnMethodMap.put("dualCayCode", "getDualCA");
        columnMethodMap.put("cayCode", "getCancerActivity");
+       columnMethodMap.put("fy", "getFy");
+       columnMethodMap.put("lastName", "getPiLastName");
+       columnMethodMap.put("pdStartDate", "getPdStartDate");
        columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityDatey");
 
       }
@@ -77,14 +81,23 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
             Method o2_Method = o2.getClass().getMethod(methodName, null);
 
             if(o1_Method.getReturnType().getName().equalsIgnoreCase("java.util.Date")){
-               Date temp1 = (Date) o1_Method.invoke(o1, null);
-               Date temp2 = (Date) o2_Method.invoke(o2, null);
-               rslt1 = temp1.toString();
-               rslt2 = temp2.toString();
+
+              Date temp1 = (Date) o1_Method.invoke(o1, null);
+              Date temp2 = (Date) o2_Method.invoke(o2, null);
+              rslt1 = convertToString(temp1);
+              rslt2 = convertToString(temp1);
 		    }else{
-			   rslt1 = (String) o1_Method.invoke(o1, null);
-               rslt2 = (String) o2_Method.invoke(o2, null);
+              if(o1_Method.getReturnType().getName().equalsIgnoreCase("java.lang.Integer")){
+                  Integer temp1 = (Integer) o1_Method.invoke(o1, null);
+                  Integer temp2 = (Integer) o2_Method.invoke(o2, null);
+                  rslt1 = convertToString(temp1);
+                  rslt2 = convertToString(temp1);
+		      }else{
+			      rslt1 = (String) o1_Method.invoke(o1, null);
+                  rslt2 = (String) o2_Method.invoke(o2, null);
+		      }
 		    }
+
 
             if(rslt1==null) {
 				rslt1 = ApplicationConstants.EMPTY_STRING;
@@ -92,8 +105,8 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
             if(rslt2==null) {
 				rslt2 = ApplicationConstants.EMPTY_STRING;
 			}
-               comp1 = (Object) rslt1.toUpperCase().trim();
-               comp2 = (Object) rslt2.toUpperCase().trim();
+            comp1 = (Object) rslt1.toUpperCase().trim();
+            comp2 = (Object) rslt2.toUpperCase().trim();
         } catch (NoSuchMethodException e) {
         } catch (IllegalAccessException e) {
         } catch (InvocationTargetException e) {}
@@ -110,6 +123,18 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        	public boolean equals(Object obj) {
              return this.equals(obj);
         }
+
+  private String convertToString(Object temp){
+	  String returnVal;
+	  try{
+		  returnVal = temp.toString();
+	  }catch(NullPointerException ex) {
+		  returnVal = ApplicationConstants.EMPTY_STRING;
+	  }
+
+	  return returnVal;
+  }
+
   public void showMethods(Object o) {
       Class c = o.getClass();
       Method[] theMethods = c.getMethods();

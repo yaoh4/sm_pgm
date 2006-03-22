@@ -14,6 +14,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.PDAQueryObject;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
+
+import java.math.BigDecimal;
 
 public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQueryObject {
 
@@ -50,7 +53,16 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
         pdOrg = ApplicationConstants.EMPTY_STRING;
         percentileFrom = ApplicationConstants.EMPTY_STRING;
         percentileTo = ApplicationConstants.EMPTY_STRING;
-
+        priorityScoreFrom = ApplicationConstants.EMPTY_STRING;
+        priorityScoreFrom = ApplicationConstants.EMPTY_STRING;
+        irgCode = ApplicationConstants.EMPTY_STRING;
+        irgFlexCode = ApplicationConstants.EMPTY_STRING;
+        barFlag = false;
+        unAssignedGrantsCriteria = false;
+        inactiveGrantsCriteria = false;
+        includeHistoricalGrants = false;
+        i2Status = ApplicationConstants.EMPTY_STRING;
+        groupCode = ApplicationConstants.EMPTY_STRING;
         super.reset(mapping, request);
     }
 
@@ -72,7 +84,7 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
       return irgFlexCode;
     }
 
-    public void setIrgFlexCode(String irgCode) {
+    public void setIrgFlexCode(String irgFlexCode) {
 	  if (irgFlexCode==null)
 		  irgFlexCode = ApplicationConstants.EMPTY_STRING;
       this.irgFlexCode = irgFlexCode;
@@ -127,6 +139,11 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 		    return ApplicationConstants.EMPTY_STRING;
         return percentileFrom;
     }
+    public BigDecimal getPercentileFromBD() {
+		if (percentileFrom==null)
+		    return new BigDecimal("0");
+        return new BigDecimal(percentileFrom);
+    }
 
     public void setPercentileFrom(String percentileFrom) {
     	 if (percentileFrom==null)
@@ -138,6 +155,11 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
     	if (percentileTo==null)
     	   return ApplicationConstants.EMPTY_STRING;
          return percentileTo;
+    }
+    public BigDecimal getPercentileToBD() {
+    	if (percentileTo==null)
+		    return new BigDecimal("0");
+         return new BigDecimal(percentileTo);
     }
 
     public void setPercentileTo(String percentileTo) {
@@ -152,6 +174,11 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
     	   return ApplicationConstants.EMPTY_STRING;
         return priorityScoreFrom;
    }
+   public Integer getPriorityScoreFromInt() {
+    	if (priorityScoreFrom==null)
+		    return new Integer("0");
+        return new Integer(priorityScoreFrom);
+   }
 
    public void setPriorityScoreFrom(String priorityScoreFrom) {
        if (priorityScoreFrom==null)
@@ -163,6 +190,11 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
    	  if (priorityScoreTo==null)
   		  return ApplicationConstants.EMPTY_STRING;
       return priorityScoreTo;
+   }
+   public Integer getPriorityScoreToInt() {
+   	  if (priorityScoreTo==null)
+		    return new Integer("0");
+      return new Integer(priorityScoreTo);
    }
 
    public void setPriorityScoreTo(String priorityScoreTo) {
@@ -211,6 +243,9 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
    public String toString() {
        return new ToStringBuilder(this)
            .append (super.toString() )
+           .append("irgFlexCode ", getIrgFlexCode())
+           .append("groupCode ", getGroupCode())
+           .append("irgCode ", getIrgCode())
            .append("i2Status ", getI2Status())
            .append("pdOrg ", getPdOrg())
            .append("pdId ", getPdId())
@@ -225,7 +260,6 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 
 
     public void copyForms (RetrieveGrantsForPDAForm destForm) {
-		System.out.println("**** now in forms coptForm before **** " + destForm);
 		super.copyForms(destForm);
 		destForm.irgCode  = this.irgCode;
 		destForm.irgFlexCode  = this.irgFlexCode;
@@ -241,7 +275,6 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 		destForm.percentileTo  = this.percentileTo;
 		destForm.priorityScoreFrom  = this.priorityScoreFrom;
         destForm.priorityScoreTo  = this.priorityScoreTo;
-		System.out.println("**** now in forms coptForm after **** " + destForm);
 
 	}
 
@@ -291,6 +324,8 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 
 
   	   ArrayList validationMessages = new ArrayList();
+	   boolean validatePercentileRange = true;
+	   boolean validatePriorityRange = true;
 
   	   /*if(this.isNull() ){
   		  validationMessages.add("errors.search.criteria.null");
@@ -302,7 +337,62 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
    		     validationMessages.add("errors.pd.equired.criteria.null");
 			 return validationMessages;
 	   }
-       return super.validate();
+
+       if( this.percentileFrom.length() > 0) {
+           if(!SearchGrantsActionHelper.validateDoubleFields(this.percentileFrom) ) {
+			  validationMessages.add("errors.search.percentileFrom.format");
+			   validatePercentileRange = false;
+		   }
+          if( this.percentileTo.length() <= 0) {
+			  setPercentileTo(percentileFrom);
+		  }
+	   }
+
+       if( this.percentileTo.length() > 0) {
+           if(!SearchGrantsActionHelper.validateDoubleFields(this.percentileTo) ) {
+			  validationMessages.add("errors.search.percentileTo.format");
+			   validatePercentileRange = false;
+		   }
+           if( this.percentileFrom.length() <= 0) {
+			  setPercentileFrom("0");
+		  }
+	    }
+       if(validatePercentileRange) {
+          if( this.percentileTo.length() > 0  & this.percentileFrom.length() > 0) {
+              if(!SearchGrantsActionHelper.validateDoubleRange(this.percentileFrom, this.percentileTo) ){
+			     validationMessages.add("errors.search.percentile.range");
+		      }
+	      }
+	   }
+
+       if( this.priorityScoreFrom.length() > 0) {
+           if(!SearchGrantsActionHelper.validateIntegerFields(this.priorityScoreFrom) ) {
+			  validationMessages.add("errors.search.priorityScoreFrom.format");
+			   validatePriorityRange = false;
+		   }
+          if( this.priorityScoreTo.length() <= 0) {
+			  setPercentileTo(priorityScoreFrom);
+		  }
+	   }
+
+       if( this.priorityScoreTo.length() > 0) {
+           if(!SearchGrantsActionHelper.validateIntegerFields(this.priorityScoreTo) ) {
+			  validationMessages.add("errors.search.priorityScoreTo.format");
+			   validatePriorityRange = false;
+		   }
+          if( this.priorityScoreFrom.length() <= 0) {
+			  setPercentileFrom("0");
+		  }
+	   }
+       if(validatePriorityRange) {
+          if( this.priorityScoreTo.length() > 0  & this.priorityScoreFrom.length() > 0) {
+              if(!SearchGrantsActionHelper.validateIntegerRange(this.priorityScoreFrom, this.priorityScoreTo) ){
+			     validationMessages.add("errors.search.priority.range");
+		      }
+	      }
+	   }
+
+       return super.validate(validationMessages);
 
      }
 

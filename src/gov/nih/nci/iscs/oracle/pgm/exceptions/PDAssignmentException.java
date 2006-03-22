@@ -15,37 +15,39 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author Michelle Engermann
  */
-public class ReferralActionException extends RuntimeException {
+public class PDAssignmentException extends RuntimeException {
 
     protected final Log logger = LogFactory.getLog(getClass());
-	public ReferralActionException() {}
+	public PDAssignmentException() {}
 
-	public ReferralActionException(String className, String methodName, String message, HttpSession session) {
+	public PDAssignmentException(String className, String methodName, String message, HttpSession session) {
 		super(message);
 		String errorMessage = formatMessage(className, methodName, message);
 
+	    session.setAttribute("returnTag", "PD Assignment Query");
+	    session.setAttribute("returnAction", "SearchGrantsForPDA");
 	    session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
-	    session.setAttribute("returnTag", "Referral Activity Query");
-	    session.setAttribute("returnAction", "SearchGrantsForReferral");
-
 		logger.error(errorMessage);
 	}
-	public ReferralActionException(String className, String methodName, String message,
+	public PDAssignmentException(String className, String methodName, String message,
 	        HttpSession session, Exception ex) {
 		super(message);
 		String errorMessage = formatMessage(className, methodName, message);
 
         session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
         session.setAttribute(ApplicationConstants.ERROR_EXCEPTION, ex);
-	    session.setAttribute("returnTag", "Referral Activity Query");
-	    session.setAttribute("returnAction", "SearchGrantsForReferral");
+	    session.setAttribute("returnTag", "PD Assignment Query");
+	    session.setAttribute("returnAction", "SearchGrantsForPDA");
 
 		logger.error(errorMessage);
 	}
 
-	public ReferralActionException(String className, String methodName, String message) {
+	public PDAssignmentException(String className, String methodName, String message) {
 		super(message);
 		String errorMessage = formatMessage(className, methodName, message);
+
+	    //request.setAttribute("returnTag", "Return To PD Assignment");
+	    //request.setAttribute("returnAction", "SearchGrantsForPDA");
 
         //session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
 		logger.error(errorMessage);
@@ -54,22 +56,7 @@ public class ReferralActionException extends RuntimeException {
 
      private String formatMessage(String className, String methodName, String message){
 
-        String headerMsg = "";
-        if(className.equalsIgnoreCase("AcceptReferralAction") ){
-			headerMsg = " An exception has occurred during Accept Referral process ";
-		}
-
-        if(className.equalsIgnoreCase("RejectReferralAction") ){
-			headerMsg = " An exception has occurred during Reject Referral process ";
-		}
-
-        if(className.equalsIgnoreCase("RereferReferralAction") ){
-			headerMsg = " An exception has occurred during Rerefer Referral process ";
-		}
-
-        if(className.equalsIgnoreCase("ReleaseReferralAction") ){
-			headerMsg = " An exception has occurred during Release Referral process ";
-		}
+        String headerMsg = " An exception has occurred during PD Assignment process ";
 	    String errorMessage =  new StringBuffer("")
 		            .append(headerMsg)
 		            .append("Implementation Class: ")

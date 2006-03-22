@@ -15,7 +15,8 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ReReferReferalCommand;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdTransferVw;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
@@ -40,6 +41,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
     private AcceptReferalCommand acceptReferalCommand;
     private RejectReferalCommand rejectReferalCommand;
     private ReleaseReferalCommand releaseReferalCommand;
+    private String oAction;
 
 
 
@@ -204,31 +206,46 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
      */
      private boolean performRequery(String action) {
 
+         NciPdReferralVw mNciPdReferralVw = null;
+         NciPdTransferVw mNciPdTransferVw = null;
+         oAction =  ApplicationConstants.REFERRAL;
 		 boolean mResults = false;
 		 String cancerActivity = new String(ApplicationConstants.EMPTY_STRING);
 	     NciPdQueryVw mNciPdQueryVw = null;
-         if(action.equalsIgnoreCase("accept"))
+         if(action.equalsIgnoreCase("accept")) {
 			cancerActivity = referralActionObject.getCancerActivity();
+			oAction =  ApplicationConstants.PD_ASSIGNMENT;
+		 }
 
 		 if(action.equalsIgnoreCase("release") )
 			cancerActivity = referralActionObject.getDualCA();
 
          if(action.equalsIgnoreCase("rerefer") ) {
 			cancerActivity = referralActionObject.getRereferCA();
-			System.out.println("*** cancerActivity is ***" + cancerActivity);
-			System.out.println("*** referralActionObject.getApplId() is ***" + referralActionObject.getApplId());
-			System.out.println("*** referralActionObject is ***" + referralActionObject);
-		}
+		 }
 
 
-		 mNciPdQueryVw = requeryGrant(referralActionObject.getApplId(), cancerActivity);
-         if(mNciPdQueryVw != null) {
-			referralActionObject.setCancerActivity(mNciPdQueryVw.getCayCode());
-			if(mNciPdQueryVw.getPdFullName() != null)
-			   referralActionObject.setProgramDirector(mNciPdQueryVw.getPdFullName());
-			if(mNciPdQueryVw.getPocFullName() != null)
-			   referralActionObject.setRereferPOC(mNciPdQueryVw.getPocFullName());
-			mResults = true;
+		 List mList = requeryGrant(referralActionObject.getApplId(), cancerActivity);
+         if(oAction.equalsIgnoreCase(ApplicationConstants.REFERRAL) ){
+			 mNciPdReferralVw = (NciPdReferralVw) mList.get(0);
+             if(mNciPdReferralVw != null)
+			    referralActionObject.setCancerActivity(mNciPdReferralVw.getCayCode());
+			 //if(mNciPdReferralVw.getLastName() != null)
+			 //   referralActionObject.setProgramDirector(mNciPdReferralVw.getFirstName() + " " + mNciPdQueryVw.getLastName());
+			 if(mNciPdReferralVw.getPocFullName() != null)
+			    referralActionObject.setRereferPOC(mNciPdReferralVw.getPocFullName());
+			 mResults = true;
+		 }else{
+             if(oAction.equalsIgnoreCase(ApplicationConstants.PD_ASSIGNMENT) ){
+			    mNciPdTransferVw = (NciPdTransferVw) mList.get(0);
+                if(mNciPdTransferVw != null)
+			       referralActionObject.setCancerActivity(mNciPdTransferVw.getCayCode());
+			    if(mNciPdTransferVw.getPdFullName() != null)
+			       referralActionObject.setProgramDirector(mNciPdTransferVw.getPdFullName() );
+			    //if(mNciPdTransferVw.getPocFullName() != null)
+			    //   referralActionObject.setRereferPOC(mNciPdTransferVw.getPocFullName());
+			    mResults = true;
+			}
 		 }
 
 		 return mResults;
@@ -238,19 +255,18 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
      * Get the POC for the Cancer Activity
      * @return String  - POC
      */
-     public NciPdQueryVw requeryGrant(Long aApplId, String cancerActivity) {
-         NciPdQueryVw mNciPdQueryVw;
+     public List requeryGrant(Long aApplId, String cancerActivity) {
+         List mList = null;
  		 String mPoc = new String(ApplicationConstants.EMPTY_STRING);
 	     try{
 	         RetrieveGrantInfoCommand mRetrieveGrantInfoCommand = (RetrieveGrantInfoCommand) getBean("retrieveGrantInfoCommandDao");
-		     QueryPage mQueryPage = mRetrieveGrantInfoCommand.execute(aApplId, cancerActivity, super.getUserId());
-		     List mList = mQueryPage.getPageList();
-		     mNciPdQueryVw = (NciPdQueryVw) mList.get(0);
+		     QueryPage mQueryPage = mRetrieveGrantInfoCommand.execute(aApplId, cancerActivity, super.getUserId(), oAction);
+		     mList = mQueryPage.getPageList();
          } catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "requeryGrant", "An exception occurred in the reQuery process!!! " + ex.toString());
  	     }
 
- 	     return  mNciPdQueryVw;
+ 	     return  mList;
 
 	 }
 

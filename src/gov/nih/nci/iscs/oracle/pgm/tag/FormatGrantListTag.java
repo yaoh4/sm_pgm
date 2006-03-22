@@ -145,25 +145,28 @@ public class FormatGrantListTag extends TagSupport {
       } else {
 		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
-
-         buf.append("<td headers=\"header01\" width=\"14%\" class=" + className + ">" + obj.getPdFullName()+ "&nbsp;</td>");
-         buf.append("<td headers=\"header02\" width=\"20%\" class=" + className + ">" + obj.getPdOrg() + "&nbsp;</td>");
-         buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + obj.getFy() + "&nbsp;</td>");
-	     buf.append("<td headers=\"header04\" width=\"16%\" class=" + className + ">");
-	     buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\');\">" + obj.getGrantNumber() + "&nbsp;</a> </td>");
+	     buf.append("<td headers=\"header01\" width=\"16%\" class=" + className + ">");
+         buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	     if(obj.getWithdrawn() ){
 		    buf.append("<br> Withdrawn in IMPAC II</td>");
 		 }
 		 buf.append("</td>");
 
-         buf.append("<td headers=\"header05\" width=\"6%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;</td>");
-         buf.append("<td headers=\"header06\" width=\"10%\" class=" + className + ">" + obj.getNcabDate() + "&nbsp;</td>");
+         buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">" + obj.getPiName()+ "&nbsp;</td>");
+         buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + obj.getFy() + "&nbsp;</td>");
+         buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getNcabDate() + "&nbsp;</td>");
+
+         buf.append("<td headers=\"header05\" width=\"10%\" class=" + className + ">" + obj.getRfaPaNumber() + "&nbsp;</td>");
+         buf.append("<td headers=\"header06\" width=\"6%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;</td>");
+
+         buf.append("<td headers=\"header07\" width=\"14%\" class=" + className + ">" + obj.getPdFullName()+ "&nbsp;</td>");
+
          if(obj.getPdStartDate() != null) {
 			 String temp = obj.getPdStartDate().toString();
 			 temp = temp.substring(5,7) + "/" + temp.substring(8,10) + "/" + temp.substring(0,4);
-			 buf.append("<td headers=\"header07\" width=\"15%\" class=" + borderClassName + ">" + temp + "&nbsp;</td>");
+			 buf.append("<td headers=\"header08\" width=\"15%\" class=" + borderClassName + ">" + temp + "&nbsp;</td>");
 		 }else {
-			 buf.append("<td headers=\"header07\" width=\"15%\" class=" + borderClassName + ">" + ApplicationConstants.EMPTY_STRING + "&nbsp;</td>");
+			 buf.append("<td headers=\"header08\" width=\"15%\" class=" + borderClassName + ">" + ApplicationConstants.EMPTY_STRING + "&nbsp;</td>");
 		 }
 
 

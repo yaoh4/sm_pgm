@@ -1,7 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.tag;
 //Jdk Imports
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
-import gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForReferralForm;
+import gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 
 
 import javax.servlet.http.*;
@@ -12,133 +12,92 @@ import javax.servlet.jsp.tagext.*;
 
 public class PDATableHeaderTag extends TagSupport
 {
+  private boolean lastSortOrderAsc;
+  private String lastSortColumn;
 
   public int doStartTag() {
     try {
-      int minPage = 0;
-      int maxPage = 0;
+
       StringBuffer buf = new StringBuffer();
       JspWriter out = pageContext.getOut();
       ServletContext sc = pageContext.getServletContext();
       HttpSession session = pageContext.getSession();
-      String lastSortOrder = (String) session.getAttribute(ApplicationConstants.LAST_SORT_ORDER);
-      String lastSortColumn = (String) session.getAttribute(ApplicationConstants.LAST_SORT_COLUMN);
+      HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
+      RetrieveGrantsForm mForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
+
+
+      lastSortColumn = (String) session.getAttribute(ApplicationConstants.LAST_SORT_COLUMN);
+      lastSortOrderAsc = mForm.getSortAscendingIndicator();
+      String returnText = "";
 
       if (lastSortColumn == null) {
-		  lastSortColumn = ApplicationConstants.PD_LAST_NAME_SORT;
-		  lastSortOrder = ApplicationConstants.SORT_ASC;
+		  lastSortColumn = ApplicationConstants.FULL_GRANT_NUMBER_SORT;
+		  lastSortOrderAsc = true;
 	  }
 
 	  buf.append("<th id=\"header00\" width=\"3%\" align=middle class=listCellHead>Sel</th>" );
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PD_LAST_NAME_SORT)){
-		  buf.append("<th id=\"header01\" width=\"14%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.PD_LAST_NAME_SORT );
-		  buf.append("\')\">Program Director</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.FULL_GRANT_NUMBER_SORT) ||
+         lastSortColumn.equalsIgnoreCase(ApplicationConstants.GRANT_NUMBER_SORT) ){
+		  returnText = formatColumnText(true, "Grant Number", "16%", "listCellHead", ApplicationConstants.GRANT_NUMBER_SORT, "header01");
 	  } else {
-		  buf.append("<th id=\"header01\" width=\"14%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.PD_LAST_NAME_SORT);
-		  buf.append("\')\">PD Name</a></th>");
+		  returnText = formatColumnText(false, "Grant Number", "16%", "listCellHead", ApplicationConstants.GRANT_NUMBER_SORT, "header01");
 	  }
+      buf.append(returnText);
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PD_ORGANIZATION_SORT)){
-		  buf.append("<th id=\"header02\" width=\"20%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.PD_ORGANIZATION_SORT);
-		  buf.append("\')\">PD Org</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_SORT)){
+		  returnText = formatColumnText(true, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header02");
 	  } else {
-		  buf.append("<th id=\"header02\" width=\"20%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.PD_ORGANIZATION_SORT);
-		  buf.append("\')\">PD Org</a></th>");
+		  returnText = formatColumnText(false, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header02");
 	  }
+      buf.append(returnText);
+
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.FISCAL_YEAR_SORT)){
-		  buf.append("<th id=\"header03\" width=\"6%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.FISCAL_YEAR_SORT);
-		  buf.append("\')\">FY</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+		  returnText = formatColumnText(true, "FY", "6%", "listCellHead", ApplicationConstants.FISCAL_YEAR_SORT, "header03");
 	  } else {
-		  buf.append("<th id=\"header03\" width=\"6%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.FISCAL_YEAR_SORT);
-		  buf.append("\')\">fy</a></th>");
+		  returnText = formatColumnText(false, "FY", "6%", "listCellHead", ApplicationConstants.FISCAL_YEAR_SORT, "header03");
 	  }
+      buf.append(returnText);
+
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.NCAB_SORT)){
+		  returnText = formatColumnText(true, "NCAB", "10%", "listCellHead", ApplicationConstants.NCAB_SORT, "header04");
+	  } else {
+		  returnText = formatColumnText(false, "NCAB", "10%", "listCellHead", ApplicationConstants.NCAB_SORT, "header04");
+	  }
+      buf.append(returnText);
 
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.FULL_GRANT_NUMBER_SORT)){
-		  buf.append("<th id=\"header04\" width=\"16%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.FULL_GRANT_NUMBER_SORT);
-		  buf.append("\')\">Grant Number</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.RFA_PA_NUMBER_SORT)){
+		  returnText = formatColumnText(true, "RFA/PA", "6%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header05");
 	  } else {
-		  buf.append("<th id=\"header04\" width=\"16%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.FULL_GRANT_NUMBER_SORT);
-		  buf.append("\')\">Grant Number</a></th>");
+		  returnText = formatColumnText(false, "RFA/PA", "6%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header05");
 	  }
+      buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.CANCER_ACTIVITY_SORT)){
-		  buf.append("<th id=\"header05\" width=\"6%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.CANCER_ACTIVITY_SORT);
-		  buf.append("\')\">CA</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+		  returnText = formatColumnText(true, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header06");
 	  } else {
-		  buf.append("<th id=\"header05\" width=\"6%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.CANCER_ACTIVITY_SORT);
-		  buf.append("\')\">CA</a></th>");
+		  returnText = formatColumnText(false, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header06");
 	  }
+      buf.append(returnText);
 
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.NCAB_SORT)){
-		  buf.append("<th id=\"header06\" width=\"10%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.NCAB_SORT);
-		  buf.append("\')\">NCAB</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PD_FULL_NAME_SORT)){
+		  returnText = formatColumnText(true, "PD", "14%", "listCellHead", ApplicationConstants.PD_FULL_NAME_SORT, "header07");
 	  } else {
-		  buf.append("<th id=\"header06\" width=\"10%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.NCAB_SORT);
-		  buf.append("\')\">NCAB</a></th>");
+		  returnText = formatColumnText(false, "PD", "14%", "listCellHead", ApplicationConstants.PD_FULL_NAME_SORT, "header07");
 	  }
+      buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PD_START_DATE_SORT)){
-		  buf.append("<th id=\"header07\" width=\"15%\" align=middle class=listCellHead><a href=\"javascript:sortGrantList(\'" );
-		  buf.append(ApplicationConstants.PD_START_DATE_SORT);
-		  buf.append("\')\">PD Start Date</a>");
-	      if (lastSortOrder.equalsIgnoreCase(ApplicationConstants.SORT_ASC) ){
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> </th>");
-		  }else{
-              buf.append("&nbsp; &nbsp <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\"> </th>");
-		  }
+		  returnText = formatColumnText(true, "PD Start Date", "15%", "listCellHead", ApplicationConstants.PD_START_DATE_SORT, "header08");
 	  } else {
-		  buf.append("<th id=\"header07\" width=\"15%\" align=middle class=listCellHead><a anchor=\"#Grants\" href=\"javascript:sortGrantList(\'");
-		  buf.append(ApplicationConstants.PD_START_DATE_SORT);
-		  buf.append("\')\">PD Start Date</a></th>");
+		  returnText = formatColumnText(false, "PD Start Date", "15%", "listCellHead", ApplicationConstants.PD_START_DATE_SORT, "header08");
 	  }
+      buf.append(returnText);
 
 
       out.print( buf.toString());
@@ -148,6 +107,44 @@ public class PDATableHeaderTag extends TagSupport
       e.printStackTrace();
   }
   return SKIP_BODY;
+}
+
+private String formatSortImages(String sortColumn) {
+	String mReturn = ApplicationConstants.EMPTY_STRING;
+
+	boolean mFalse = false;
+	boolean mTrue = true;
+	String mFalseString = ", \'" + mFalse + "\')\">" + sortColumn;
+	String mTrueString = ", \'" + mTrue + "\')\">" + sortColumn;
+	String mUpArrowText = "&nbsp; <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\">";
+	String mDownArrowText = "&nbsp; <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">";
+
+	if(lastSortOrderAsc){
+		mReturn = mFalseString + mUpArrowText;
+	}else{
+		mReturn = mTrueString + mDownArrowText;
+	}
+	return mReturn;
+
+}
+
+private String formatColumnText(boolean lastSort, String sortColumn, String mWidth, String mClass, String ColumnText, String mHeader){
+
+	String mReturn = ApplicationConstants.EMPTY_STRING;
+	boolean mTrue = true;
+
+    String mText_1 = "<th id=\"" + mHeader + "\" width=\"" + mWidth + "\" align=middle class=" + mClass + "><a href=\"javascript:sortGrantList(\'";
+	String mText_2 = ColumnText + "\'";
+	String mText_3 = ", \'" + mTrue + "\')\">" + sortColumn;
+
+	if(lastSort){
+		mReturn = mText_1 + mText_2;
+		mReturn = mReturn + " " + formatSortImages(sortColumn);
+	}else{
+		mReturn = mText_1 + mText_2 + mText_3;
+	}
+
+	return mReturn;
 }
 
 

@@ -15,6 +15,7 @@ import gov.nih.nci.iscs.oracle.pgm.service.PDAQueryObject;
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import java.math.BigDecimal;
 
 public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObject{
 
@@ -75,6 +76,11 @@ public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObje
 		  return ApplicationConstants.EMPTY_STRING;
       return percentileFrom;
     }
+    public BigDecimal getPercentileFromBD() {
+		if (percentileFrom==null)
+		    return new BigDecimal("0");
+        return new BigDecimal(percentileFrom);
+    }
 
     public void setPercentileFrom(String percentileFrom) {
       this.percentileFrom = percentileFrom;
@@ -84,6 +90,11 @@ public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObje
 	  if (percentileTo==null)
 		  return ApplicationConstants.EMPTY_STRING;
       return percentileTo;
+    }
+    public BigDecimal getPercentileToBD() {
+    	if (percentileTo==null)
+		    return new BigDecimal("0");
+         return new BigDecimal(percentileTo);
     }
 
     public void setPercentileTo(String percentileTo) {
@@ -96,6 +107,11 @@ public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObje
 		  return ApplicationConstants.EMPTY_STRING;
       return priorityScoreFrom;
     }
+    public Integer getPriorityScoreFromInt() {
+	  if (priorityScoreFrom==null)
+		    return new Integer("0");
+      return new Integer(priorityScoreFrom);
+    }
 
     public void setPriorityScoreFrom(String priorityScoreFrom) {
       this.priorityScoreFrom = priorityScoreFrom;
@@ -105,6 +121,11 @@ public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObje
 	  if (priorityScoreTo==null)
 		  return ApplicationConstants.EMPTY_STRING;
       return priorityScoreTo;
+    }
+    public Integer getPriorityScoreToInt() {
+	  if (priorityScoreTo==null)
+		    return new Integer("0");
+      return new Integer(priorityScoreTo);
     }
 
     public void setPriorityScoreTo(String priorityScoreTo) {
