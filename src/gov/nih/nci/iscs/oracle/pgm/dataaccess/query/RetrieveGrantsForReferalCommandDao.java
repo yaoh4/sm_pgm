@@ -91,17 +91,17 @@ public class RetrieveGrantsForReferalCommandDao extends RetrieveGrantsCommandDao
 
     protected Criteria buildCriteria(Session aSession, UserFilterInfo oUserFilterInfo, GrantQueryObject oGrantQueryObject) throws CommandDaoException {
 		Criteria aCriteria = null;
-        Class mNciPdReferralVw = null;
+        Class mNciPdQueryVw = null;
         try{
-            mNciPdReferralVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw");
-		    aCriteria = aSession.createCriteria(mNciPdReferralVw);
+            mNciPdQueryVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw");
+		    aCriteria = aSession.createCriteria(mNciPdQueryVw);
 		    //if (!(super.getQueryObject().isNull()) ) {
 			    aCriteria = buildGrantsQueryCriteria(aCriteria, oUserFilterInfo, oGrantQueryObject);
 		    //} else {
 			//    throw new CommandDaoException("No search criteria for Query");
 		    //}
 	    } catch (ClassNotFoundException e) {
-			throw new CommandDaoException("Unable to create NciPdReferralVw class " + e.toString());
+			throw new CommandDaoException("Unable to create NciPdQueryVw class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
