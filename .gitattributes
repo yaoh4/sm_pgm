@@ -550,6 +550,7 @@ src/gov/nih/nci/iscs/oracle/pgm/constants/LookUpTableConstants.java -text
 src/gov/nih/nci/iscs/oracle/pgm/context/ApplicationContextFactory.java -text
 src/gov/nih/nci/iscs/oracle/pgm/context/development/applicationContext.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/context/test/applicationContext.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/context/training/applicationContext.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/AcceptReferalCommandDao.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/AccessCommandDao.java -text
 src/gov/nih/nci/iscs/oracle/pgm/dataaccess/impl/ActionCommandDao.java -text

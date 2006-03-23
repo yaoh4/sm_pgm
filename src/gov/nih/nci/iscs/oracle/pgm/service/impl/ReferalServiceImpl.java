@@ -117,7 +117,7 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 		int mIndex = 1;
 		int pageNumber = aPaginationObject.getPageNumber().intValue();
 		while (mIterator.hasNext() ) {
-			NciPdReferralVw mNciPdReferral = (NciPdReferralVw) mIterator.next();
+			NciPdQueryVw mNciPdReferral = (NciPdQueryVw) mIterator.next();
 		    ReferralSearchResultObject mReferralSearchResultObject = new ReferralSearchResultObject();
 			if(mNciPdReferral.getFullGrantNum() != null ) {
 				mReferralSearchResultObject.setGrantNumber(mNciPdReferral.getFullGrantNum() );
