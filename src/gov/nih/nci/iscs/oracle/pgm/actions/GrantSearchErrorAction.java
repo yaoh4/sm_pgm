@@ -33,7 +33,6 @@ public class GrantSearchErrorAction extends Action {
                                        HttpServletResponse response) throws Exception {
 
 
-       System.out.println("*** now in GrantSearchErrorAction ***");
        mGrantSearchErrorForm = (GrantSearchErrorForm) form;
        mReturnAction = mGrantSearchErrorForm.getReturnAction();
        mAction = mGrantSearchErrorForm.getRequestAction();
