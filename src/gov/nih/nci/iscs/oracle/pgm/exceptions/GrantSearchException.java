@@ -23,7 +23,6 @@ public class GrantSearchException extends RuntimeException {
 
 	public GrantSearchException(String className, String methodName, String message, HttpSession session) {
 		super(message);
-		System.out.println("*** in GrantSearchException and className is *** " + className);
 		formatTags(className, session);
 		String errorMessage = formatMessage(className, methodName, message);
 
@@ -33,7 +32,6 @@ public class GrantSearchException extends RuntimeException {
 	public GrantSearchException(String className, String methodName, String message,
 	        HttpSession session, Exception ex) {
 		super(message);
-		System.out.println("*** in GrantSearchException and className is *** " + className);
 		String errorMessage = formatMessage(className, methodName, message);
 
 		formatTags(className, session);
@@ -44,7 +42,6 @@ public class GrantSearchException extends RuntimeException {
 	}
 	public GrantSearchException(String className, String methodName, String message) {
 		super(message);
-		System.out.println("*** in GrantSearchException and className is *** " + className);
 		String errorMessage = formatMessage(className, methodName, message);
 
         //session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
