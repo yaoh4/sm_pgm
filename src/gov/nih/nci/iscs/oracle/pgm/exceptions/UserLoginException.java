@@ -20,33 +20,59 @@ public class UserLoginException extends RuntimeException {
     protected final Log logger = LogFactory.getLog(getClass());
 	public UserLoginException() {}
 
-	public UserLoginException(String message, Exception ex, HttpSession session) {
+	public UserLoginException(String className, String methodName, String message, HttpSession session) {
 		super(message);
-		System.out.println("*** in UserLoginException and className is *** " );
-		GrantSearchErrorForm mGrantSearchErrorForm = new GrantSearchErrorForm();
-		mGrantSearchErrorForm.setRequestAction("login");
-		/*String errorMessage =  new ToStringBuilder(this)
-		            .append("Implementation Class: ", className )
-		            .append("Implemenation Method: ", methodName )
-		            .append("Message: ", message )
-            .toString(); */
-        session.setAttribute(ApplicationConstants.ERROR_MESSAGE, message);
-        session.setAttribute(ApplicationConstants.ERROR_EXCEPTION, ex);
-		logger.error(" An exception has occurred during authetication/authorization process \n" + message);
+		formatTags(className, session);
+		String errorMessage = formatMessage(className, methodName, message);
+
+	    session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
+		logger.error(" An exception has occurred during authetication/authorization process \n" + errorMessage);
 	}
 
-	public UserLoginException(String message, HttpSession session) {
-		super(message);
-		System.out.println("*** in UserLoginException and className is *** " );
-		GrantSearchErrorForm mGrantSearchErrorForm = new GrantSearchErrorForm();
-		mGrantSearchErrorForm.setRequestAction("login");
-        System.out.println("*** now in UserLoginException constructor **** ");
-		/*String errorMessage =  new ToStringBuilder(this)
-		            .append("Implementation Class: ", className )
-		            .append("Implemenation Method: ", methodName )
-		            .append("Message: ", message )
-            .toString(); */
-        session.setAttribute(ApplicationConstants.ERROR_MESSAGE, message);
-		logger.error(" An exception has occurred during authetication/authorization process \n" + message);
-	}
+
+     private String formatMessage(String className, String methodName, String message){
+
+
+	    String errorMessage =  new StringBuffer("")
+		            .append(" An exception has occurred during authetication/authorization process")
+		            .append("Implementation Class: ")
+		            .append(className)
+		            .append("<BR>")
+		            .append("Implemenation Method: ")
+		            .append(methodName)
+		            .append("<BR>")
+	                .append("Message: ")
+		            .append(message)
+            .toString();
+
+            return errorMessage;
+
+	 }
+
+     private void formatTags(String className, HttpSession session){
+
+
+	    if(className.equalsIgnoreCase("SearchGrantsForReferralAction") ||
+	       className.equalsIgnoreCase("ExternalReferralAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.ExternalReferralAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForReferralAction")){
+	       session.setAttribute("returnTag", "Referral Activity Query");
+	       session.setAttribute("returnAction", "SearchGrantsForReferral");
+	       session.setAttribute("applicationName", "Referral");
+	       return;
+	    }
+	    if(className.equalsIgnoreCase("SearchGrantsForPDAAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForPDAAction")){
+	       session.setAttribute("returnTag", "PD Assignment Query");
+	       session.setAttribute("returnAction", "SearchGrantsForPDA");
+	       session.setAttribute("applicationName", "PD");
+	       return;
+	    }
+	    session.setAttribute("returnTag", "PD Assignment Query");
+	    session.setAttribute("returnAction", "SearchGrantsForPDA");
+	    session.setAttribute("applicationName", "PD");
+
+
+	 }
+
 }
