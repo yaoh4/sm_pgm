@@ -50,7 +50,7 @@ public abstract class NciPgmAction extends Action {
         ActionForward returnForward = null;
         if(!verifyUser(request, response))
         {
-           throw new UserLoginException("Error verifying the user permissions and roles required for this application. ", request.getSession());
+           throw new UserLoginException(this.getClass().getName(), "execute", "Error verifying the user permissions and roles required for this application. ", request.getSession());
         }
 
         returnForward = executeAction(mapping, form, request, response);
@@ -128,7 +128,7 @@ public abstract class NciPgmAction extends Action {
                 }
             } catch (Exception ex) {
                 logger.error(ex);
-                throw new UserLoginException("Error verifying the user permissions and roles required for this application. ", ex, request.getSession());
+                throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(), request.getSession());
             }
 
             try {
@@ -140,7 +140,7 @@ public abstract class NciPgmAction extends Action {
                 }
             } catch (Exception ex) {
                 logger.error(ex);
-    		    throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
+    		    throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(), request.getSession());
         }
 
             try {
@@ -167,7 +167,7 @@ public abstract class NciPgmAction extends Action {
                  }
             } catch(Exception ex) {
                 logger.error(ex);
-				       throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
+				       throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(),  request.getSession());
             }
 
             try {
@@ -189,13 +189,13 @@ public abstract class NciPgmAction extends Action {
             {
                Set roleSet = getUserDbRoles(request, (String)user.getAttribute("nciOracleId"));
                if(roleSet.size() == 0){
-				   throw new UserLoginException("Error verifying the user permissions and roles required for this application.", request.getSession());
+				   throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application.", request.getSession());
 			   }
                user.setAttribute("dbRoles", roleSet);
             }
             catch (Exception ex)
             {
-			   throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
+			   throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application." + ex.getMessage(), request.getSession());
             }
         }
 
