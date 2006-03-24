@@ -521,7 +521,6 @@ requirements/html/referral_accept.html -text
 requirements/html/referral_accept_confirmation.html -text
 requirements/html/referral_pd_assignment_style.css -text
 requirements/html/referral_query.html -text
-src/gov/nih/nci/iscs/oracle/pgm/ReferalCriteriaEntryForm.java1 -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/AcceptReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ApplicationResources.properties -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/AssignPDAction.java -text
