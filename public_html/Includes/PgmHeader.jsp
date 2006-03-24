@@ -9,33 +9,40 @@
   ApplicationInfo pgmApplInfo =ApplicationInfo.getInstance(ApplicationConstants.APPLICATION_KEY);
   NciUser nciuser = (NciUser) session.getAttribute(NciUser.NCI_USER);
   String applicationName = (String) session.getAttribute("applicationName");
+  String subject= "";
 %>
 
-<table cellspacing="0" >
+ <table width="100%" border="0" cellspacing="0" cellpadding="0" >
    <tr>
       <td width="35%">
          <% if(applicationName.equalsIgnoreCase("Referral")){ %>
              <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
-         <% } %>
+         <% subject = "mailto:nci-now-l@list.nih.gov?subject=Referral Activity";
+         } %>
          <% if(applicationName.equalsIgnoreCase("PD")){ %>
              <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
-         <% } %>
+         <% subject = "mailto:nci-now-l@list.nih.gov?subject=Program Director Transfer";
+         } %>
          
       </td>
       <td width="65%">
          <table>
             <tr>
-                 <% if (nciuser != null) { %>
-                   <td nowrap>User: <b><%=nciuser.getFullName()%></b></td>
-                   <td nowrap >&nbsp;</td>
-                   <td nowrap>Env: <b><%=pgmApplInfo.getApplicationKey("ENVIRONMENT_INSTANCE")%></b></td>
-                   <td nowrap >&nbsp;</td>
-                   <td nowrap >Version: <b><%=pgmApplInfo.getApplicationKey("VERSION")%></b></td>
-                   <td nowrap >&nbsp;</td>
-                   <td> <a href="mailto:nci-now-l@list.nih.gov?subject=Referral Activity">Send Comments</a></td>
-                   <td nowrap >&nbsp;</td>
-                   <td><a href="#" onClick=window.open('/pgm/pgmhelp.pdf')>Help</A></td>
-                <% } %> 
+                 
+                   <% if(nciuser != null ) { %>
+                      <td nowrap width=10%>User: <b><%=nciuser.getFullName()%></b></td>
+                   <% } else {%>  
+                      <td nowrap width=10%>&nbsp;</td>
+                   <%}%>
+                   <td nowrap width=1%>&nbsp;</td>
+                   <td nowrap width=10%>Env: <b><%=pgmApplInfo.getApplicationKey("ENVIRONMENT_INSTANCE")%></b></td>
+                   <td nowrap width=1%>&nbsp;</td>
+                   <td nowrap width=10%>Version: <b><%=pgmApplInfo.getApplicationKey("VERSION")%></b></td>
+                   <td nowrap width=1%>&nbsp;</td>
+                   <td width=10%> <a href="<%= subject %>">Send Comments</a></td>
+                   <td nowrap width=1%>&nbsp;</td>
+                   <td width=10%><a href="#" onClick=window.open('/pgm/pgmhelp.pdf')>Help</A></td>
+               
             </tr>
          </table>
       </td>
