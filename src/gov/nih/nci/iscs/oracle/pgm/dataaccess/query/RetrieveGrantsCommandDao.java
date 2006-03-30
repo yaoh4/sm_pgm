@@ -47,6 +47,8 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
    /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
     public static final String PERCENT_SYMBOL = "%";
+    public static final String DEFAULT_GRANT_NUM = "____________-__%";
+
 
    /*
     * Class constructor
@@ -91,13 +93,25 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 
 
         ArrayList mGrantNumberList = new ArrayList();
+
         for (int index=0; index<4; index++){
              String mGrantNumber = formatGrantNumber(aGrantQueryObject.getTp()[index], aGrantQueryObject.getMech()[index], aGrantQueryObject.getIcd()[index],
-                               aGrantQueryObject.getSrl()[index], aGrantQueryObject.getYear()[index], aGrantQueryObject.getSuffix()[index] );
-	         if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL)){
+                               aGrantQueryObject.getSrl()[index], aGrantQueryObject.getYear()[index], aGrantQueryObject.getSuffix()[index]);
+	         if(!mGrantNumber.equalsIgnoreCase(DEFAULT_GRANT_NUM)){
 				 mGrantNumberList.add(mGrantNumber);
 			 }
 	    }
+
+        if(mGrantNumberList.size() > 0){
+			Disjunction grantNumberCrit = Expression.disjunction();
+	        Iterator mIterator = mGrantNumberList.iterator();
+	        while(mIterator.hasNext()) {
+		    	 String mtemp = (String) mIterator.next();
+		    	 grantNumberCrit.add(Expression.ilike("fullGrantNum", mtemp));
+		    }
+		    aCriteria.add(grantNumberCrit);
+	    }
+
 
 		// add the Cancer Activity search criterion
 		if  ( !(aGrantQueryObject.getCancerActivity() == null || aGrantQueryObject.getCancerActivity().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
@@ -181,15 +195,6 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		}
 
 
-        if(mGrantNumberList.size() > 0){
-			Disjunction grantNumberCrit = Expression.disjunction();
-	        Iterator mIterator = mGrantNumberList.iterator();
-	        while(mIterator.hasNext()) {
-		    	 String mtemp = (String) mIterator.next();
-		    	 grantNumberCrit.add(Expression.ilike("fullGrantNum", mtemp));
-		    }
-		    aCriteria.add(grantNumberCrit);
-	    }
 
 		// add the sort order search criterion
 		if (aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)) {
@@ -234,60 +239,52 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 
     }
 
+
+
     private String  formatGrantNumber(String tp, String mech, String icd, String srl, String year, String suffix) {
 
 		String mGrantNumber = "";
 
 
 		if (tp == null || tp.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
+			mGrantNumber = mGrantNumber + "_";
 		} else{
-			mGrantNumber = mGrantNumber + tp.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + tp.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
 
 		if (mech == null || mech.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-				mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
-			}
+			mGrantNumber = mGrantNumber + "___";
 		} else{
-			mGrantNumber = mGrantNumber + mech.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + mech.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
 
 		if (icd == null || icd.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-				mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
-			}
+			mGrantNumber = mGrantNumber + "__";
 		} else{
-			mGrantNumber = mGrantNumber + icd.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + icd.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
 
 		if (srl == null || srl.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-				mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
-			}
+			mGrantNumber = mGrantNumber + "______";
 		} else{
-			mGrantNumber = mGrantNumber + srl.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + srl.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
 
-	    if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-		   mGrantNumber = mGrantNumber + "-";
-	    }
+		mGrantNumber = mGrantNumber + "-";
 
 		if (year == null || year.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-				mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
-			}
+			mGrantNumber = mGrantNumber + "__";
 		} else{
-			mGrantNumber = mGrantNumber + year.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + year.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
 
 		if (suffix == null || suffix.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
-			if(!mGrantNumber.equalsIgnoreCase(PERCENT_SYMBOL) ){
-				mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
-			}
+			mGrantNumber = mGrantNumber + PERCENT_SYMBOL;
 		} else{
-			mGrantNumber = mGrantNumber + suffix.toUpperCase().trim();
+			mGrantNumber = mGrantNumber + suffix.toUpperCase().trim() + PERCENT_SYMBOL;
 		}
+
+
         return mGrantNumber;
 	}
 
