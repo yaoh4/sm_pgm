@@ -194,7 +194,9 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		// add the sort order search criterion
 		if (aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)) {
 			if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("default") ||
-			   aGrantQueryObject.getSortColumn().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase("fullGrantNum") ||
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase("grantNumber")){
 				aCriteria.addOrder( Order.asc(ApplicationConstants.PHS_ORG_CODE_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.ACTIVITY_CODE_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.SERIAL_NUM_SORT));
@@ -210,7 +212,9 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 			}
 		} else {
 			if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("default") ||
-			   aGrantQueryObject.getSortColumn().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase("fullGrantNum") ||
+			   aGrantQueryObject.getSortColumn().equalsIgnoreCase("grantNumber")){
 				aCriteria.addOrder( Order.desc(ApplicationConstants.PHS_ORG_CODE_SORT));
 				aCriteria.addOrder( Order.desc(ApplicationConstants.ACTIVITY_CODE_SORT));
 				aCriteria.addOrder( Order.desc(ApplicationConstants.SERIAL_NUM_SORT));
