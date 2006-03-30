@@ -88,10 +88,17 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 				 methodName = "getFullGrantNum";
 			 }
              boolean sortAscendingIndicator = false;
+
              if(aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)){
 				 sortAscendingIndicator = true;
 			 }
-	         Collections.sort((List) mQueryPage.getPageList(), new ReferralListComparator(null, sortAscendingIndicator, methodName));
+			 if(sortColumn.equalsIgnoreCase("default") ||
+			    sortColumn.equalsIgnoreCase("fullGrantNum") ||
+			    sortColumn.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ||
+			    sortColumn.equalsIgnoreCase("grantNumber")){
+			 }else{
+	            Collections.sort((List) mQueryPage.getPageList(), new ReferralListComparator(null, sortAscendingIndicator, methodName));
+			 }
 
              mQueryResults = mapReferralSearchResults((List) mQueryPage.getPageList(), aPaginationObject);
          } catch (Exception ex) {
