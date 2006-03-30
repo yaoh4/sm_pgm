@@ -237,10 +237,14 @@ public class NciPdTransferVw implements Serializable {
     }
 
     public void setCouncilMeetingDate(String councilMeetingDate) {
+	 try{
        if(councilMeetingDate.substring(4,6).equalsIgnoreCase("00")){
 			councilMeetingDate = ApplicationConstants.EMPTY_STRING;
 		}
         this.councilMeetingDate = councilMeetingDate;
+	 }catch(Exception ex) {
+		 councilMeetingDate = ApplicationConstants.EMPTY_STRING;
+	 }
     }
 
     /**
