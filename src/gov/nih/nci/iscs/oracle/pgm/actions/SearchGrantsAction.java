@@ -414,7 +414,7 @@ public class SearchGrantsAction extends NciPgmAction  {
 		      mLastSortColumn = ApplicationConstants.EMPTY_STRING;
 	       }
            boolean mSortAscendingIndicator = mRetrieveGrantsForm.getSortAscendingIndicator();
-           //mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
+           mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
            if(mRetrieveGrantsForm.getSortActionSelected()) {
 			   if(mSortAscendingIndicator) {
 				   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
