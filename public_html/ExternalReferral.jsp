@@ -11,26 +11,36 @@
   String nextCouncil = (String)request.getAttribute(ApplicationConstants.NEXT_COUNCIL);
   String referralActivityUrl = (String)request.getAttribute(ApplicationConstants.REFERRAL_ACTIVITY_URL);
   String externalReferralUrl = referralActivityUrl.substring(0, referralActivityUrl.indexOf("/pgm/")+5)+"externalReferralSearch.do";
-
 %>
 <SCRIPT>
-  function popUpReferralActivity(pUrl, pTarget, pParams)
-  {
-     var myWindow = "this."+pTarget;
-     if (typeof eval(myWindow) == 'undefined') {
-        document.ApplicationLinkForm.action = pUrl;
-        document.ApplicationLinkForm.target = pTarget;
-        myWindow = window.open('',pTarget, pParams);
-        document.ApplicationLinkForm.submit();
-        myWindow.focus();
-     }
-     else {
-        document.ApplicationLinkForm.action = pUrl;
-        document.ApplicationLinkForm.target = pTarget;
-        document.ApplicationLinkForm.submit();     
-        myWindow.focus();
-     }
-   }
+
+  function popUpReferralActivity(theURL, myname, theParameters) {
+     var myname = 'ReferralActivityJAVA';
+     var myWindow = "this." + myname;
+	if(typeof eval(myWindow) == 'undefined'){
+		myWindow = window.open(theURL,myname,theParameters);
+                myWindow.focus();
+	}
+	else{
+	     if (typeof eval(myWindow) == 'window') {	
+		if(eval(myWindow + ".closed")) {
+			myWindow = window.open(theUrl,myname,theParameters);
+                        myWindow.focus();
+	        }
+	        else {
+	            myWindow = window.open(theURL,myname,theParameters);
+                    myWindow.focus();
+                }
+	     }
+	     else {  
+		myWindow = window.open(theURL,myname,theParameters);
+                myWindow.focus();	     
+	     }
+	}
+     
+
+}
+  
    function popUpQueryReferralActivity(cancerActivity, councilDate)
    {
      document.externalReferralSearchForm.cancerActivity.value=cancerActivity;
@@ -39,6 +49,8 @@
      document.externalReferralSearchForm.action='<%=externalReferralUrl%>';
      document.externalReferralSearchForm.submit();
    }
+   
+   
 </SCRIPT>
 <!-- Start Referral Activity Module Header -->
 <table class="ModuleHeader" align="center" border="0" cellpadding="0" cellspacing="0" width="820">
@@ -237,10 +249,12 @@
   </tr>
 </table>
  </div>
-<html:form action="externalReferralSearch.do" method="POST" target="_ReferralActivity">
+<html:form action="externalReferralSearch.do" method="POST" target="ReferralActivityJAVA">
+
 <html:hidden property="requestAction" value="<%=ApplicationConstants.EXT_SEARCH_ACTION%>" />
 <html:hidden property="cancerActivity" />
 <html:hidden property="ncabFromDate" />
 <html:hidden property="ncabToDate" />
 <html:hidden property="grantsFromCriteria" value="<%=ApplicationConstants.ALL_GRANTS%>"/>
+</body>
 </html:form>

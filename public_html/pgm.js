@@ -306,8 +306,10 @@ function getAnchorName () {
     if(tag=="M"){
         location.hash="msgTop";
     }
- 
+   var currWindow = window.self;
+   currWindow.focus();
 }
+
 
 function setPagination(oValue)
 {

@@ -69,17 +69,19 @@
 
 <!--End Criteria -->
 <a name="msgTop"></a>
-<logic:messagesPresent name="message" property="validation" message="true">
+<DIV ID="searchMessages" class="ErrorTextBoldItalics"
+  <logic:messagesPresent name="message" property="validation" message="true">
    <html:messages message="true" id="message" property="validation" header="validation.header" footer="validation.footer">
         <li><b><bean:write name="message"/></b></li>
   </html:messages>
-</logic:messagesPresent>
+  </logic:messagesPresent>
 
-<logic:messagesPresent name="message" property="search" message="true">
+  <logic:messagesPresent name="message" property="search" message="true">
    <html:messages message="true" id="message" property="search" header="search.header" footer="search.footer">
         <li><b><bean:write name="message"/></b></li>
   </html:messages>
-</logic:messagesPresent>
+  </logic:messagesPresent>
+</div>
 <a name="listTop"></a>
 <%@include file="Includes/referralGrantList.jsp"%>
 

@@ -22,11 +22,13 @@
         <%@include file="selectionButtons.jsp"%>
 
         <DIV ID="TheTip" class="button4a" STYLE="position:absolute; visibility:hidden;" ></DIV> 
-        <logic:messagesPresent name="message" property="referralaction" message="true">
+        <DIV ID="listMessages" class="ErrorTextBoldItalics"
+          <logic:messagesPresent name="message" property="referralaction" message="true">
            <html:messages message="true" id="message" property="referralaction" header="referalaction.header" footer="referalaction.footer">
              <li><b><bean:write name="message"/></b></li>
            </html:messages>
-        </logic:messagesPresent>
+          </logic:messagesPresent>
+        </div>
         <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
 
         <tr>

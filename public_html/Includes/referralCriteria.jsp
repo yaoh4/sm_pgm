@@ -9,7 +9,7 @@
 </table>
   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
     <tr> 
-      <td align="left">A NCAB date range is required to perform a 
+      <td align="left" class="DefaultTextBold">A NCAB date range is required to perform a 
       search.</td>
     </tr>
     <tr> 

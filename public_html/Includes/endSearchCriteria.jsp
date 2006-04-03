@@ -20,6 +20,10 @@
       <td valign="top" align="left" width="2%"><input class="button2a" type="button" value="Clear"  onclick="setAction('reset', 'default');"/> 
       <td valign="top" width="95%">&nbsp;</td>
     </tr>
+    <tr> 
+      <td  colspan="4">&nbsp;</td>
+      
+    </tr>
 
   </table>
     <!--End Criteria-->

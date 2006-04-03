@@ -36,6 +36,25 @@ table,td,input,select,textarea
 	font-weight: bold; 
 	COLOR: #000000
 }
+.DefaultTextBoldItalics
+{
+ 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	FONT-SIZE: 8pt;
+	font-weight: bold; 
+	font-style: italic;
+	COLOR: #000000
+}
+.ErrorTextBoldItalics
+{
+ 
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	FONT-SIZE: 8pt;
+	font-weight: bold; 
+	font-style: italic;
+	COLOR: #000000
+}
+
 
 
 
@@ -86,7 +105,7 @@ Titles and other text formatting:
 	font-size: 12pt; 
 	font-weight: bold; 
 	color: #3F7EFF;
-      background-color: white;
+        background-color: white;
 }
 
 .TitleSecondary
