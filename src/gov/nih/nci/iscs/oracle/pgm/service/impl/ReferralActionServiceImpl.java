@@ -206,12 +206,11 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
      */
      private boolean performRequery(String action) {
 
-         NciPdReferralVw mNciPdReferralVw = null;
+         NciPdQueryVw mNciPdQueryVw = null;
          NciPdTransferVw mNciPdTransferVw = null;
          oAction =  ApplicationConstants.REFERRAL;
 		 boolean mResults = false;
 		 String cancerActivity = new String(ApplicationConstants.EMPTY_STRING);
-	     NciPdQueryVw mNciPdQueryVw = null;
          if(action.equalsIgnoreCase("accept")) {
 			cancerActivity = referralActionObject.getCancerActivity();
 			oAction =  ApplicationConstants.PD_ASSIGNMENT;
@@ -227,13 +226,13 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 
 		 List mList = requeryGrant(referralActionObject.getApplId(), cancerActivity);
          if(oAction.equalsIgnoreCase(ApplicationConstants.REFERRAL) ){
-			 mNciPdReferralVw = (NciPdReferralVw) mList.get(0);
-             if(mNciPdReferralVw != null)
-			    referralActionObject.setCancerActivity(mNciPdReferralVw.getCayCode());
-			 //if(mNciPdReferralVw.getLastName() != null)
-			 //   referralActionObject.setProgramDirector(mNciPdReferralVw.getFirstName() + " " + mNciPdQueryVw.getLastName());
-			 if(mNciPdReferralVw.getPocFullName() != null)
-			    referralActionObject.setRereferPOC(mNciPdReferralVw.getPocFullName());
+			 mNciPdQueryVw = (NciPdQueryVw) mList.get(0);
+             if(mNciPdQueryVw != null)
+			    referralActionObject.setCancerActivity(mNciPdQueryVw.getCayCode());
+			 //if(mNciPdQueryVw.getLastName() != null)
+			 //   referralActionObject.setProgramDirector(mNciPdQueryVw.getFirstName() + " " + mNciPdQueryVw.getLastName());
+			 if(mNciPdQueryVw.getPocFullName() != null)
+			    referralActionObject.setRereferPOC(mNciPdQueryVw.getPocFullName());
 			 mResults = true;
 		 }else{
              if(oAction.equalsIgnoreCase(ApplicationConstants.PD_ASSIGNMENT) ){

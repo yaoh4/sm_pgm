@@ -90,7 +90,7 @@ public class RetrieveGrantInfoCommandDao extends AccessCommandDao implements  Re
 
     /*
      * Build the query object and build the UserQueryObject
-     * - Create class instance for NciPdReferralVw
+     * - Create class instance for NciPdQueryVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
@@ -98,16 +98,16 @@ public class RetrieveGrantInfoCommandDao extends AccessCommandDao implements  Re
      */
     private Criteria buildReferralCriteria(Session aSession, Long  oApplId, String oCancerActivity) throws CommandDaoException {
 
-        Class mNciPdReferralVw = null;
+        Class mNciPdQueryVw = null;
         Criteria mCriteria = null;
         try{
-            mNciPdReferralVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdReferralVw");
-		    mCriteria = aSession.createCriteria(mNciPdReferralVw);
+            mNciPdQueryVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw");
+		    mCriteria = aSession.createCriteria(mNciPdQueryVw);
 		    mCriteria.add(Expression.eq("applId",  oApplId ));
 		    if(oCancerActivity != null)
 		        mCriteria.add(Expression.eq("cayCode",  oCancerActivity ));
 	    } catch (ClassNotFoundException e) {
-			throw new CommandDaoException("Unable to create NciPdReferralVw class " + e.toString());
+			throw new CommandDaoException("Unable to create NciPdQueryVw class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }
