@@ -59,6 +59,7 @@ public class FormatGrantListTag extends TagSupport {
       ServletContext sc = session.getServletContext();
       ApplicationInfo ai = (ApplicationInfo) sc.getAttribute("applicationInfo");
 	  grantsUrl = ai.getApplicationKey("GRANTS_DETAILS_URL");
+	  session.setAttribute("GRANTS_DETAILS_URL", grantsUrl);
 	  StringBuffer buf = new StringBuffer();
       mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
       Map referralQueryResults = (Map) request.getSession().getAttribute(ApplicationConstants.QUERY_RESULTS);
