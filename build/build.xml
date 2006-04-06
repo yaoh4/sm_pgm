@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+
+<project name="pgm" default="all" basedir="..">
+
+ <!-- Defined Environment & property files -->
+     
+    <property environment="env"/>    
+    <property name="name" value="pgm"/>
+    <property file="${basedir}/build/build.properties"/>    
+    <property file="${basedir}/build/user.properties"/>    
+
+    <property name="app.name"   value="pgm"/>
+    <property name="src.dir" value="${basedir}/src/gov/nih/nci/iscs/oracle/pgm"/>
+    <property name="context.dir" value="${src.dir}/context"/>
+    <property name="mapping.dir" value="${src.dir}/hibernate"/>
+    <property name="lib.dir" value="${lib.dir}"/>
+
+
+    <property name="properties.dir" value="${deploy.dir}/properties"/>
+
+    <property name="app.war.dir"            value="${build.war.dir}/${app.name}"/>
+    <property name="app.war.inf"            value="${app.war.dir}/WEB-INF"/>
+    <property name="app.war.includes"       value="${app.war.dir}/includes"/>
+    <property name="app.war.images"         value="${app.war.dir}/images"/>
+
+    <property name="app.distribution.dir"   value="${distribution.dir}/${app.name}"/>
+    <property name="app.name.war"           value="${app.name}.war"/>
+
+    <property name="pgm.jrun.deploy.dir"    value="${jrun.servers.dir}/${server.name}"/>
+
+    <patternset id="java.libs" includes="**/*.jar,**/*.zip" />
+    <path id="master-classpath">
+        <pathelement location="D:/Oracle_nci/ora/jdbc/lib/classes12.jar"/>
+        <pathelement path="${lib.dir}/userlogin.jar"/>
+        <pathelement path="${lib.dir}/dirctxdispenser.jar"/>
+        <pathelement path="${lib.dir}/dataretriever.jar"/>
+        <pathelement path="${lib.dir}/clecommons.jar"/>
+        <pathelement path="${lib.dir}/commons-jxpath.jar"/>
+        <pathelement path="${lib.dir}/commons-validator.jar"/>
+        <pathelement path="${lib.dir}/commons-collection.jar"/>
+        <pathelement path="${lib.dir}/commons-digester.jar"/>
+        <pathelement path="${lib.dir}/commons-validator.jar"/>
+        <pathelement path="${lib.dir}/commons-lang.jar"/>
+        <pathelement path="${lib.dir}/commons-fileupload.jar"/>
+        <pathelement path="${lib.dir}/commons-digester.jar"/>
+        <pathelement path="${lib.dir}/commons-logging.jar"/>
+        <pathelement path="${lib.dir}/log4j-1.2.8.jar"/>
+        <pathelement path="${lib.dir}/log4j-props.jar"/>
+        <pathelement path="${lib.dir}/struts.jar"/>
+        <pathelement path="${lib.dir}/userlogin.jar"/>
+        <pathelement path="${lib.dir}/commons-beanutils.jar"/>
+        <pathelement path="${lib.dir}/classes12.jar"/>
+        <pathelement path="${lib.dir}/app.jar"/>
+        <pathelement path="${lib.dir}/junit.jar"/>
+        <!--pathelement path="${lib.dir}/servlet.jar"/--> 
+        <pathelement path="${lib.dir}/j2ee.jar"/>
+
+        <fileset dir="${basedir}/lib">
+            <include name="*.jar"/>
+        </fileset>
+      
+    </path>
+
+    <target name="usage">
+        <echo message=""/>
+        <echo message="${name} build file"/>
+        <echo message="-----------------------------------"/>
+        <echo message=""/>
+        <echo message="Available targets are:"/>
+        <echo message=""/>
+        <echo message="build     --> compile all jars"/>
+        <echo message="package     --> create the jar file"/>
+        <echo message="insertCA   --> Insert Cancer Activity"/>
+        <echo message=""/>
+    </target>
+    <!-- Create deployment dirs make_deployment_dirs -->
+    <target name="make_deployment_dirs" description="create deployment dirs" depends="clean" >
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${conf.dir}/integration/${app.name}"/>
+        <mkdir dir="${distribution.dir}"/>
+        <mkdir dir="${app.distribution.dir}"/>
+    </target>
+    <!-- remove deployment dirs before deoplyment -->
+    <target name="clean" description="remove deployment dirs before deployemt">
+        <delete includeEmptyDirs="true" failonerror="false">
+            <fileset dir="${classes.dir}">
+                <include name="**/*.class"/>
+                <include name="${name}.jar"/>
+            </fileset>
+            <fileset dir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/lib">
+                <include name="**/*.class"/>
+                <include name="${name}.jar"/>
+            </fileset>
+            <fileset dir="${conf.dir}/integration/${app.name}">
+                <include name="**/*.properties"/>
+            </fileset>   
+        </delete>
+   </target>
+   <!-- compile project source -->
+   <target name="compile" depends="make_deployment_dirs" 
+        description="compiles the java source files" >
+        <mkdir dir="${classes.dir}"/>
+        <mkdir dir="${conf.dir}/integration/${app.name}"/>
+        <javac
+             srcdir="${src.dir}"
+             destdir="${classes.dir}"
+             classpathref="master-classpath"
+             nowarn="off"
+             fork="yes" >
+        </javac>
+        <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/actions">
+	     <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/actions">
+	        <include name="**/*.properties"/>
+	     </fileset>
+	
+        </copy>
+        <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/context">
+	     <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/context">
+	        <include name="**/*.xml"/>
+	     </fileset>
+	
+        </copy>
+   </target>
+   <!--  copy various proerties files to required directories -->
+   <target name="copy_properties_files" depends="make_deployment_dirs"
+                description="copies properties files to deployment folders" >
+     <!-- copy log4j.properties to classes folder -->
+     <copy file="${properties.dir}/pgm.properties" todir="${conf.dir}/integration/${app.name}"/>
+
+   </target>    
+
+   <target name="build" depends="clean,make_deployment_dirs" description="Compile main source tree java files">
+       <copy todir="${app.war.dir}">
+           <fileset dir="${public_html.dir}">
+               <include name="**/*.*"/>
+           </fileset>
+       </copy>
+       <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/hibernate">
+	    <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/hibernate">
+		  <include name="**/*.hbm.xml"/>
+	    </fileset>
+	</copy>
+        <!-- create war file -->
+	<war warfile="${app.distribution.dir}/${app.name.war}" webxml="${app.war.inf}/web.xml" duplicate="preserve">
+	        <fileset dir="${public_html.dir}"/>
+		<classes dir="${classes.dir}"/>
+		<lib dir="${lib.dir}"/>                
+		<!-- webinf dir="${app.war.inf}">
+		   	<exclude name="web.xml"/>
+		   	<exclude name="**/ApplicationResources.properties"/>               
+		</webinf >
+	        <lib dir="${lib.dir}"/-->
+	 </war>
+         <jar destfile="${lib.dir}/app.jar" basedir="${classes.dir}"/>        
+    </target>
+    
+    <!--  stop the JRUN server -->
+    <target name="stop_jrun" description="stop the JRUN server">
+       <exec executable="${jrun.bin.dir}/jrun.exe" os="${os.name}">
+              <arg line="-stop ${server.name}"/>
+       </exec>
+    </target>
+    
+    <!--  start the JRUN server -->
+    <target name="start_jrun" description="start the JRUN server">
+       <exec executable="${jrun.bin.dir}/jrun.exe" os="${os.name}">
+              <arg line="-start ${server.name}"/>
+       </exec>
+    </target>
+    <!--  deploy the war file to the JRUN server -->
+    <target name="deploy_to_jrun" description="deploy the war file to the JRUN server">
+       <copy file="${app.distribution.dir}/${app.name.war}" tofile="${pgm.jrun.deploy.dir}/pgm.war"/>
+    </target>
+ 
+   <!-- =================================================================== -->
+   <!-- Accept a Referal                                                    -->
+   <!-- =================================================================== -->
+   <target name="acceptReferal" description="accept a referal">
+      <java 
+         classname="gov.nih.nci.iscs.oracle.pgm.test.AcceptReferalTest" 
+         fork="yes" 
+         failonerror="true">
+         <classpath refid="master-classpath"/>
+         <classpath path="${classes.dir}"/>
+     
+         <arg value="6293672"/>
+         <arg value="2111"/>
+
+
+      </java>
+   </target>
+   <!-- =================================================================== -->
+   <!-- Reject a Referal                                                    -->
+   <!-- =================================================================== -->
+   <target name="rejectReferal" description="reject a referal">
+      <java 
+         classname="gov.nih.nci.iscs.oracle.pgm.test.RejectReferalTest" 
+         fork="yes" 
+         failonerror="true">
+         <classpath refid="master-classpath"/>
+         <classpath path="${classes.dir}"/>
+     
+         <arg value="6293672"/>
+         <arg value="2076"/>
+      </java>
+   </target>
+    <!-- =================================================================== -->
+   <!-- Retrieve Grants for Referal                                          -->
+   <!-- =================================================================== -->
+   <target name="retrieveGrantsForReferalTest" description="retrieve grants for referal">
+      <java 
+         classname="gov.nih.nci.iscs.oracle.pgm.test.RetrieveGrantsForReferalTest" 
+         fork="yes" 
+         failonerror="true">
+         <classpath refid="master-classpath"/>
+         <classpath path="${classes.dir}"/>
+     
+         <arg value="1T32"/>
+         <arg value="1"/>
+         <arg value="1979"/>
+      </java>
+   </target> 
+
+    <!-- =================================================================== -->
+   <!-- Retrieve Grants for PDA                                          -->
+   <!-- =================================================================== -->
+   <target name="retrieveGrantsForPDATest" description="retrieve grants for PDA">
+      <java 
+         classname="gov.nih.nci.iscs.oracle.pgm.test.RetrieveGrantsForPDATest" 
+         fork="yes" 
+         failonerror="true">
+         <classpath refid="master-classpath"/>
+         <classpath path="${classes.dir}"/>
+     
+         <arg value="1T32"/>
+         <arg value="2"/>
+         <arg value="F"/>
+      </java>
+   </target> 
+ 
+   <!-- =================================================================== -->
+   <!-- Inserts a cancer activity Program Director                          -->
+   <!-- =================================================================== -->
+   <target name="insertPD" description="insert a cancer activity PD">
+      <java 
+         classname="com.warfrog.hibernatetutorial.hibernate.InsertProgramDirector" 
+         fork="yes" 
+         failonerror="true">
+         <classpath refid="master-classpath"/>
+         <classpath path="${classes.dir}"/>
+         <arg value="111"/>
+         <arg value="mengerma"/>
+         <arg value="mengerma"/>
+         <arg value='233'/>
+      </java>
+   </target>
+   
+   <target name="buildmaster" depends="compile,build,deploy_to_jrun" description="Buildmaster deployment target"/>
+   <target name="preBuildmaster" depends="clean,make_deployment_dirs,copy_properties_files,stop_jrun" description="Deploy application"/>
+   <target name="all" depends="clean,make_deployment_dirs,copy_properties_files,compile,build,stop_jrun,deploy_to_jrun,start_jrun" description="Deploy application"/>
+
+</project>

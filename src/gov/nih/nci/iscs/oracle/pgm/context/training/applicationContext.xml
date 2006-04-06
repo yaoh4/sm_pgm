@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+	<!-- 
+		Datasource that works in any application server
+		You could easily use J2EE data source instead if this were
+		running inside of a J2EE container.
+	 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+		<property name="driverClassName"><value>oracle.jdbc.driver.OracleDriver</value></property>
+		<property name="url"><value>jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = app1-db2.nci.nih.gov)(PORT = 1526))) (CONNECT_DATA = (SERVICE_NAME = a1d2atr.nci.nih.gov) ) )</value></property>
+		<property name="username"><value>nci_app_user</value></property>
+		<property name="password"><value>orac1e</value></property>
+	</bean>
+	<!-- Hibernate SessionFactory -->
+	<bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
+		<property name="dataSource"><ref local="dataSource"/></property>
+		
+		<!-- Must references all OR mapping files. -->
+		<property name="mappingResources">
+			<list>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCancerActivityPocsT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCancerActivitiesT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplicationPdsT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplProcessStatusesT.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CancerActivitiesT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CancerActivityPdsT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CancerActivityPocsT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CancerActivityPeopleT.hbm.xml</value>
+     		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciApplElementsT.hbm.xml</value>
+		        <!--value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciOrganizationsT.hbm.xml</value> -->
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdQueryVw.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.hbm.xml</value>
+		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ProcessStatusesT.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PvGrantPiT.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/DbaRolePrivs.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PdCaAsgnmtVw.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ReportsVw.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ReportParametersVw.hbm.xml</value>
+       		        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ReferralActivityVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/GwbLinksT.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCaAsgnmtHistoryVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/CgRefCodes.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PdOrgVw4.hbm.xml</value>
+			</list>
+		</property>
+		
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
+				<prop key="hibernate.c3p0.max_size">1</prop>
+				<prop key="hibernate.c3p0.min_size"></prop>
+				<prop key="hibernate.c3p0.timeout">5000</prop>
+				<prop key="hibernate.c3p0.max_statements">100</prop>
+				<prop key="hibernate.c3p0.idle_test_period">300</prop>
+                                <prop key="hibernate.c3p0.acquire_increment">2</prop>
+				<prop key="hibernate.show_sql">true</prop>								
+			</props>
+		</property>
+	</bean>
+        <bean id="debug" class="org.springframework.aop.interceptor.DebugInterceptor"/>
+
+        <bean id="hibernateInterceptor" class="org.springframework.orm.hibernate.HibernateInterceptor">
+          <property name="sessionFactory">
+              <ref bean="sessionFactory"/>
+          </property>
+      </bean>
+
+	<!-- Pass the session factory to our GrantReferalDAOImpl -->
+
+
+       <bean id="actionCommand" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true"> 
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ActionCommand</value>
+	   </property>
+           <property name="target">
+             <ref local="actionCommandDao"/>
+           </property>
+           <property name="interceptorNames">
+              <list>
+                 <value>hibernateInterceptor</value>
+              </list>
+           </property>
+       </bean>
+
+        <bean id="actionCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.ActionCommandDao" abstract="true">
+	     <property name="sessionFactory">
+                <ref local="sessionFactory"/>
+             </property>
+        </bean>
+
+
+       <bean id="accessCommand" class="org.springframework.aop.framework.ProxyFactoryBean"  > 
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AccessCommand</value>
+	   </property>
+           <property name="target">
+             <ref local="accessCommandDao"/>
+           </property>
+           <property name="interceptorNames">
+              <list>
+                 <value>hibernateInterceptor</value>
+              </list>
+           </property>
+       </bean>
+
+        <bean id="accessCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AccessCommandDao" >
+	     <property name="sessionFactory">
+                <ref local="sessionFactory"/>
+             </property>
+        </bean>
+
+
+       <bean id="retrieveGrantsCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean" >
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveGrantsCommandDao"/>
+           </property>
+       </bean>
+       <bean id="retrieveGrantsForReferalCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForReferalCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveGrantsForReferalCommandDao"/>
+           </property>
+       </bean>
+       <bean id="retrieveGrantsForPDACommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForPDACommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveGrantsForPDACommandDao"/>
+           </property>
+       </bean>
+       <bean id="retrieveUserInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveUserInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveUserFilterInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserFilterInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveUserFilterInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveLookUpCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveLookUpCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveLookUpCommandDao"/>
+           </property>
+       </bean>
+       
+       <bean id="retrieveProgamDirectorInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveProgamDirectorInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveProgamDirectorsInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorsInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveProgamDirectorsInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrievePDInfoForAssignmentCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDInfoForAssignmentCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrievePDInfoForAssignmentCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveActivePDInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveActivePDInfoCommandDao"/>
+           </property>
+       </bean>
+
+       
+       <bean id="retrievePDCancerActivityInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrievePDCancerActivityInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrievePDOrgInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDOrgInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrievePDOrgInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveCAHistoryCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCAHistoryCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveCAHistoryCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveCAInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCAInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveCAInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveAppLinksCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveAppLinksCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveAppLinksCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="wbReferralActivitiesInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbReferralActivitiesInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="wbReferralActivitiesInfoCommandDao"/>
+           </property>
+       </bean>
+
+
+       <bean id="retrieveRejCommentsCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveRejCommentsCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveRejCommentsCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveApplicationLinkInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveApplicationLinkInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveApplicationLinkInfoCommandDao"/>
+           </property>
+       </bean>
+       
+        <bean id="wbRetrieveBoardsCommand" 
+            class="org.springframework.aop.framework.ProxyFactoryBean">
+            <property name="proxyInterfaces">
+ 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbRetrieveBoardsCommand</value>
+ 	     </property>
+            <property name="target">
+              <ref bean="wbRetrieveBoardsCommandDao"/>
+            </property>
+        </bean>
+        
+       <bean id="retrieveReportsInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveReportsInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveReportsInfoCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveCrystalParamsCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCrystalParamsCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveCrystalParamsCommandDao"/>
+           </property>
+       </bean>
+
+       <bean id="retrieveGrantInfoCommand" 
+           class="org.springframework.aop.framework.ProxyFactoryBean">
+           <property name="proxyInterfaces">
+	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantInfoCommand</value>
+	     </property>
+           <property name="target">
+             <ref bean="retrieveGrantInfoCommandDao"/>
+           </property>
+       </bean>
+
+
+	<bean id="updateReportDataCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.UpdateReportDataCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+	<bean id="acceptReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AcceptReferalCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+	<bean id="rejectReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.RejectReferalCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+	<bean id="releaseReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.ReleaseReferalCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+	<bean id="reReferReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.ReReferReferalCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+        
+	<bean id="assignPDCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AssignPDCommandDao"
+	        parent="actionCommandDao">
+	</bean>
+
+	<bean id="retrieveGrantsForReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveGrantsForReferalCommandDao"
+	        parent="retrieveGrantsCommandDao" >
+	</bean>
+
+	<bean id="retrieveGrantsForPDACommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveGrantsForPDACommandDao"
+	        parent="retrieveGrantsCommandDao" >
+	</bean>
+
+	<bean id="retrieveGrantsCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveGrantsCommandDao"
+	         parent="accessCommandDao" >
+	</bean>
+	<bean id="retrieveUserInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveUserInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveUserFilterInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveUserFilterInfoCommandDao"
+	        parent="actionCommandDao" >
+	</bean>
+
+	<bean id="retrieveLookUpCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveLookUpCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveProgamDirectorInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveProgamDirectorInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveProgamDirectorsInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveProgamDirectorsInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrievePDInfoForAssignmentCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrievePDInfoForAssignmentCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+
+	<bean id="retrievePDCancerActivityInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrievePDCancerActivityInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+
+	<bean id="retrieveActivePDInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveActivePDInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrievePDOrgInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrievePDOrgInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveCAHistoryCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveCAHistoryCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveCAInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveCAInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveAppLinksCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveAppLinksCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+
+	<bean id="wbReferralActivitiesInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.WbReferralActivitiesInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+	<bean id="retrieveApplicationLinkInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveApplicationLinkInfoCommandDao"
+	        parent="accessCommandDao" >
+	</bean>
+
+ 	<bean id="wbRetrieveBoardsCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.WbRetrieveBoardsCommandDao"
+  	        parent="accessCommandDao" singleton="false">
+ 	</bean>
+
+ 	<bean id="retrieveRejCommentsCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveRejCommentsCommandDao"
+  	        parent="accessCommandDao" singleton="false">
+ 	</bean>
+
+	<bean id="retrieveReportsInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveReportsInfoCommandDao"
+	        parent="accessCommandDao">
+	</bean>
+
+	<bean id="retrieveCrystalParamsCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveCrystalParamsCommandDao"
+	        parent="accessCommandDao">
+	</bean>
+
+	<bean id="retrieveGrantInfoCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveGrantInfoCommandDao"
+	        parent="accessCommandDao">
+	</bean>
+
+       <bean id="updateReportDataCommand" 
+           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+           <property name="transactionManager">
+                <ref bean="myTransactionManager"/>
+           </property>
+           <property name="target">
+             <ref bean="updateReportDataCommandDao"/>
+           </property>
+           <property name="transactionAttributes">
+             <props>
+                 <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+             </props>
+         </property>
+         <property name="postInterceptors"><ref bean="debug"/></property>
+        </bean>
+
+      <bean id="acceptReferalCommand" 
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          <property name="transactionManager">
+               <ref bean="myTransactionManager"/>
+          </property>
+          <property name="target">
+            <ref bean="acceptReferalCommandDao"/>
+          </property>
+          <property name="transactionAttributes">
+            <props>
+                <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+        <property name="postInterceptors"><ref bean="debug"/></property>
+       </bean>
+       
+      <bean id="rejectReferalCommand" 
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          <property name="transactionManager">
+               <ref bean="myTransactionManager"/>
+          </property>
+          <property name="target">
+            <ref bean="rejectReferalCommandDao"/>
+          </property>
+          <property name="transactionAttributes">
+            <props>
+                <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+        <property name="postInterceptors"><ref bean="debug"/></property>
+       </bean>
+
+      <bean id="releaseReferalCommand" 
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          <property name="transactionManager">
+               <ref bean="myTransactionManager"/>
+          </property>
+          <property name="target">
+            <ref bean="releaseReferalCommandDao"/>
+          </property>
+          <property name="transactionAttributes">
+            <props>
+                <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+        <property name="postInterceptors"><ref bean="debug"/></property>
+       </bean>
+
+    <bean id="reReferReferalCommand" 
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          <property name="transactionManager">
+               <ref bean="myTransactionManager"/>
+          </property>
+          <property name="target">
+            <ref bean="reReferReferalCommandDao"/>
+          </property>
+          <property name="transactionAttributes">
+            <props>
+                <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+        <property name="postInterceptors"><ref bean="debug"/></property>
+       </bean>
+
+       <bean id="myTransactionManager" class="org.springframework.orm.hibernate.HibernateTransactionManager">
+          <property name="sessionFactory">
+              <ref bean="sessionFactory"/>
+          </property>
+       </bean>
+
+      <bean id="assignPDCommand" 
+          class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
+          <property name="transactionManager">
+               <ref bean="myTransactionManager"/>
+          </property>
+          <property name="target">
+            <ref bean="assignPDCommandDao"/>
+          </property>
+          <property name="transactionAttributes">
+            <props>
+                <prop key="execute">PROPAGATION_REQUIRES_NEW</prop>
+            </props>
+        </property>
+        <property name="postInterceptors"><ref bean="debug"/></property>
+       </bean>
+
+       <!--bean id="myTransactionInterceptor" class="org.springframework.transaction.interceptor.TransactionInterceptor">
+        <property name="transactionManager">
+            <ref bean="myTransactionManager"/>
+        </property>
+        <property name="transactionAttributeSource">
+            <value>
+                gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RejectReferalCommand.execute*=PROPAGATION_MANDATORY
+            </value>
+        </property>
+      </bean-->
+  
+    
+</beans>
