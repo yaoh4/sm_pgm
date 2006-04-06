@@ -93,11 +93,13 @@ public class SelectedGrants implements Cloneable {
      */
     public SelectedGrants() {
         oSelectedGrants = new TreeMap();
+        oSortSelectedGrants = new ArrayList();
     }
 
     public SelectedGrants(String aMappingName) {
         oSelectedGrants = new TreeMap();
         oMappingName = aMappingName;
+        oSortSelectedGrants = new ArrayList();
     }
 
    /**

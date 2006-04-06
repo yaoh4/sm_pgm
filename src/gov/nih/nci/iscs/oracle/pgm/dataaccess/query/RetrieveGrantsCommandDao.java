@@ -244,7 +244,11 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
     private String  formatGrantNumber(String tp, String mech, String icd, String srl, String year, String suffix) {
 
 		String mGrantNumber = "";
-
+		if(srl != null) {
+			if(srl.length()>0){
+				srl = padSerialNumber(srl);
+			}
+		}
 
 		if (tp == null || tp.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ){
 			mGrantNumber = mGrantNumber + "_";
@@ -287,5 +291,22 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 
         return mGrantNumber;
 	}
+
+	private String padSerialNumber (String srl){
+
+		int maxLength = 6;
+		int srlLength = srl.length();
+		String temp = "";
+		if(srlLength<maxLength){
+			int upperLimit = maxLength - srlLength;
+			for(int i=0; i<upperLimit; i++){
+				temp = temp += "0";
+			}
+		}
+
+		srl = temp + srl;
+		return srl;
+	}
+
 
 }

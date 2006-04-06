@@ -53,9 +53,15 @@ public class ExternalReferralAction extends NciPgmAction{
       try{
 	    mExternalReferralForm = (ExternalReferralForm) form;
 	    mAction = mExternalReferralForm.getRequestAction();
+        NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
+        String oracleId = (String)request.getParameter("oracleID");
+        if(oracleId == null){
+			mExternalReferralForm.setRequestAction(ApplicationConstants.EXT_SEARCH_ACTION);
+			request.getSession().setAttribute(ApplicationConstants.EXT_SEARCH_ACTION, ApplicationConstants.EXT_SEARCH_ACTION);
+			return mapping.findForward("extSearch");
+		}
         oApplicationContext =  (ApplicationContext)  request.getSession().getServletContext().getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
         if( mAction.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ) ) {
-           String oracleId = (String)request.getParameter("oracleID");
            Map referralActivities = getWbReferralActivities(oracleId);
            List boards = getBoards();
             request.setAttribute(ApplicationConstants.CURRENT_COUNCIL, boards.get(1));

@@ -128,7 +128,7 @@ public abstract class NciPgmAction extends Action {
                 }
             } catch (Exception ex) {
                 logger.error(ex);
-                throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(), request.getSession());
+                throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP User attribute mail. " + ex.getMessage(), request.getSession());
             }
 
             try {
@@ -140,7 +140,7 @@ public abstract class NciPgmAction extends Action {
                 }
             } catch (Exception ex) {
                 logger.error(ex);
-    		    throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(), request.getSession());
+    		    throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP attribute for nciOracleId. " + ex.getMessage(), request.getSession());
         }
 
             try {
@@ -167,7 +167,7 @@ public abstract class NciPgmAction extends Action {
                  }
             } catch(Exception ex) {
                 logger.error(ex);
-				       throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application. " + ex.getMessage(),  request.getSession());
+				throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP attribute for lastName.. " + ex.getMessage(),  request.getSession());
             }
 
             try {
@@ -183,7 +183,7 @@ public abstract class NciPgmAction extends Action {
                 if (lastName == null) lastName = "";
                 user.setAttribute("fullName",givenName+" "+lastName);
                 logger.error(ex);
-				        //throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
+				//throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
             }
             try
             {

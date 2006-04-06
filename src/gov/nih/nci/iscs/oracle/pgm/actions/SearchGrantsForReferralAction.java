@@ -48,6 +48,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
   private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
 
   private String timestamp = null;
+  private boolean backButtonActive = false;
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
@@ -72,7 +73,18 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 		   return processReferralAction(mapping, form, request, response);
        }
 
+       String mLastAction = (String) request.getSession().getAttribute("lastAction");
+       if(mLastAction != null) {
+          if( mLastAction.equalsIgnoreCase(ApplicationConstants.ACCEPT_REFERRAL ) ||
+             mLastAction.equalsIgnoreCase(ApplicationConstants.REJECT_REFERRAL ) ||
+             mLastAction.equalsIgnoreCase(ApplicationConstants.REREFER_REFERRAL) ||
+             mLastAction.equalsIgnoreCase(ApplicationConstants.RELEASE_DUAL_REFERRAL ) ) {
+             mRetrieveGrantsForReferralForm.setRequestAction(mLastAction);
+		     return cancelled (mapping, form,  request, response);
+          }
+	   }
        if( mAction.equalsIgnoreCase(ApplicationConstants.EXT_SEARCH_ACTION) ){
+		   mRetrieveGrantsForReferralForm.setSearchButtonInitiated(true);
 		   return search(mapping, form, request, response);
 	   }
      }catch (Exception ex) {
@@ -111,7 +123,8 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 
 	      request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS  , mSelectedGrants);
           request.getSession().setAttribute(ApplicationConstants.REFERRAL_ACTION_LIST , newQueryResults);
-	      request.getSession().setAttribute("previousForm", mRetrieveGrantsForReferralForm);
+		  request.getSession().setAttribute("previousForm", mRetrieveGrantsForReferralForm);
+          request.getSession().setAttribute("lastAction", mAction);
 	  }  catch (Exception ex) {
 		  throw new GrantSearchException("SearchGrantsForReferralAction", "processReferralAction", ex.toString(), request.getSession(), ex);
 	  }
@@ -131,6 +144,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 	     ActionForm mFormToUse = form;
 
          RetrieveGrantsForReferralForm mRetrieveGrantsForReferralForm = (RetrieveGrantsForReferralForm) mFormToUse;
+
          if(mRetrieveGrantsForReferralForm.getSearchButtonInitiated()) {
 		    mRetrieveGrantsForReferralForm.setSortColumn(ApplicationConstants.FULL_GRANT_NUMBER_SORT);
             if(!validateForm(mapping, mFormToUse,  request)) {
@@ -141,8 +155,8 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 		    SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), mapping.getName());
 	        mRetrieveGrantsForReferralForm.setSearchButtonInitiated(false);
 	     }
+		 super.search(mFormToUse, ApplicationConstants.REFERRAL, request);
 
-        super.search(mFormToUse, ApplicationConstants.REFERRAL, request);
         //mRetrieveGrantsForReferralForm = (RetrieveGrantsForReferralForm)  mFormToUse;
         //mRetrieveGrantsForReferralForm.copyForms((RetrieveGrantsForReferralForm) form);
 	  } catch (Exception ex) {
@@ -239,6 +253,10 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
               super.search(mRetrieveGrantsForReferralForm, ApplicationConstants.REFERRAL, request);
           }
           request.setAttribute("retrieveGrantsForReferralForm", (ActionForm) mRetrieveGrantsForReferralForm);
+	      request.getSession().setAttribute("lastAction", ApplicationConstants.EMPTY_STRING);
+          request.getSession().setAttribute(ApplicationConstants.REFERRAL_ACTION_HASH, new TreeMap());
+	      request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
+          request.getSession().setAttribute(ApplicationConstants.REFERRAL_ACTION_LIST, new ArrayList());
 	  } catch (Exception ex) {
 		  throw new GrantSearchException("SearchGrantsForReferralAction", "cancelled", ex.toString(), request.getSession(), ex);
 	  }
