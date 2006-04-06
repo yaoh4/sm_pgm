@@ -15,7 +15,7 @@
 <SCRIPT>
 
   function popUpReferralActivity(theURL, myname, theParameters) {
-     var myname = 'ReferralActivityJAVA';
+     var myname = 'ReferralActivity';
      var myWindow = "this." + myname;
 	if(typeof eval(myWindow) == 'undefined'){
 		myWindow = window.open(theURL,myname,theParameters);
@@ -249,7 +249,7 @@
   </tr>
 </table>
  </div>
-<html:form action="externalReferralSearch.do" method="POST" target="ReferralActivityJAVA">
+<html:form action="externalReferralSearch.do" method="POST" target="ReferralActivity">
 
 <html:hidden property="requestAction" value="<%=ApplicationConstants.EXT_SEARCH_ACTION%>" />
 <html:hidden property="cancerActivity" />
