@@ -37,10 +37,11 @@
               </tr>
                 <%Iterator mIterator = referralQueryResults.iterator();
                  int index = 0;
+                 String grantsUrl = (String) session.getAttribute("GRANTS_DETAILS_URL");
       	         while (mIterator.hasNext() ) { 
       	         ReferralSearchResultObject obj = (ReferralSearchResultObject) mIterator.next(); %>
       	          <tr> 
-                        <td headers="header00" width="17%" class=listCell><a href="javascript:openYourGrantsWindow('<%=obj.getApplId() %>');"><%=obj.getGrantNumber() %>&nbsp;</a></td>
+                        <td headers="header00" width="17%" class=listCell><a href="javascript:openYourGrantsWindow('<%=obj.getApplId() %>', '<%=grantsUrl %>');"><%=obj.getGrantNumber() %>&nbsp;</a></td>
                         <td headers="header01" width="21%" class=listCell><%=obj.getInstName() %>&nbsp;</td>
                         <td headers="header02" width="21%" class=listCell><%=obj.getPiLastName() %>&nbsp;</td>
                         <td headers="header03" width="10%" class=listCell><%=obj.getCancerActivity() %>&nbsp;</td>

@@ -85,6 +85,7 @@
               </tr>
                 <%Iterator mIterator = referralQueryResults.iterator();
                  int index = 0;
+                 String grantsUrl = (String) session.getAttribute("GRANTS_DETAILS_URL");
                  String className = "listCell";
                  String borderClassName = "listCell5";
                  
@@ -97,11 +98,11 @@
       	             className = "listCell";
       	             borderClassName = "listCellError";
       	         }
-      	         
+  	         
       	         %>
       	          <tr> 
                         <ncijsp:RejectReferral indx='<%= index %>' action='selection' cancerActivity= '<%= obj.getCancerActivity().toUpperCase()%>' applId= '<%= obj.getApplId() %>' selected= '<%= obj.getSelected() %>'/> 
-                        <td headers="header01" width="17%" class='<%= className %>' ><a href="javascript:openYourGrantsWindow('<%=obj.getApplId() %>');"><%=obj.getGrantNumber() %>&nbsp;</a></td>
+                        <td headers="header01" width="17%" class='<%= className %>' ><a href="javascript:openYourGrantsWindow('<%=obj.getApplId() %>', '<%=grantsUrl %>');"><%=obj.getGrantNumber() %>&nbsp;</a></td>
                         <td headers="header02" width="6%" class='<%= className %>'><%=obj.getCancerActivity() %>&nbsp;</td>
                         <td headers="header03" width="23%" class='<%= className %>'><%=obj.getPiLastName() %>&nbsp;</td>
                         <td headers="header04" width="24%" class='<%= className %>'><%=obj.getInstName() %>&nbsp;</td>
