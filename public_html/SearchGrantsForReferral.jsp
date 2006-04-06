@@ -1,3 +1,8 @@
+<% response.setHeader("Cache-Control","no-cache"); //HTTP 1.1
+   response.setHeader("Pragma","no-cache"); //HTTP 1.0 
+   response.setDateHeader ("Expires", 0); //prevents caching 
+   response.setHeader("Cache-Control","no-store"); //HTTP 1.1 
+%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
   <%@ page contentType="text/html;charset=windows-1252"%>
   <%@ taglib  uri="/WEB-INF/taglib/NCITaglib.tld"  prefix="ncijsp" %>
@@ -13,6 +18,9 @@
 <head>
     <title>Referral Activity</title>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+      <meta http-equiv="Expires" CONTENT="0">
+      <meta http-equiv="Cache-Control" CONTENT="no-cache">
+      <meta http-equiv="Pragma" CONTENT="no-cache">
 
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
      <SCRIPT language="Javascript" src="pgm.js" type="text/javascript">

@@ -10,7 +10,7 @@
   String currentCouncil = (String)request.getAttribute(ApplicationConstants.CURRENT_COUNCIL);
   String nextCouncil = (String)request.getAttribute(ApplicationConstants.NEXT_COUNCIL);
   String referralActivityUrl = (String)request.getAttribute(ApplicationConstants.REFERRAL_ACTIVITY_URL);
-  String externalReferralUrl = referralActivityUrl.substring(0, referralActivityUrl.indexOf("/pgm/")+5)+"externalReferralSearch.do";
+  String externalReferralUrl = referralActivityUrl;
 %>
 <SCRIPT>
 

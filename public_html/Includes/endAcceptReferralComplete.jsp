@@ -16,7 +16,7 @@
       <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
         <tr> 
           <td width="85%" align="right">
-               <input class="button2a" type="button" value="Return to Referral Activity"  onclick="setCurrentReferralAction('return');"/>
+               <input class="button2a" type="button" value="Referral Activity Query"  onclick="setCurrentReferralAction('return');"/>
           </td> 
           <td width="15" align"left"> &nbsp; </td>
           
