@@ -38,7 +38,7 @@
                   <td headers="header01" width="3%" class=listCellHead>CA</td>
                   <td headers="header02" width="17%" class=listCellHead>PI Name</td>
                   <td headers="header03" width="20%" class=listCellHead>Institution</td>
-                  <td headers="header04" width="20%" class=listCellHead>PD Name/Org</td>
+                  <td headers="header04" width="20%" class=listCellHead>PD Name</td>
                   <td headers="header05" width="20%" class=listCellHead>Acceptance Results</td>
               </tr>
               <%
