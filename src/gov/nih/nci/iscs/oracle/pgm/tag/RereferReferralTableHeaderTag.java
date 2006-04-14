@@ -110,10 +110,10 @@ public class RereferReferralTableHeaderTag extends TagSupport
 		  buf.append(ApplicationConstants.CURRENT_POC_SORT );
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
-			  buf.append(", \'" + mFalse + "\')\">Institution");
+			  buf.append(", \'" + mFalse + "\')\">Current POC");
               buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"  alt=\"asc\"> ");
 		  }else{
-			  buf.append(", \'" + mTrue + "\')\">Institution");
+			  buf.append(", \'" + mTrue + "\')\">Current POC");
              buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"  alt=\"asc\">");
 		  }
 		  buf.append("</a></th>");
