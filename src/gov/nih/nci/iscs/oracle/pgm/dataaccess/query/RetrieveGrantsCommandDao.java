@@ -112,6 +112,9 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		    aCriteria.add(grantNumberCrit);
 	    }
 
+		// add the Rfa/Pa Number  search criterion
+		if ( !(aGrantQueryObject.getRfaPa() == null || aGrantQueryObject.getRfaPa().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
+		   aCriteria.add(Expression.ilike("rfaPaNumber", aGrantQueryObject.getRfaPa().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the Cancer Activity search criterion
 		if  ( !(aGrantQueryObject.getCancerActivity() == null || aGrantQueryObject.getCancerActivity().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))

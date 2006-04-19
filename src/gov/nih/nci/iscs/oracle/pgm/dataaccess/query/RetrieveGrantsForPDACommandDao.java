@@ -137,9 +137,6 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 		// add the ApplStatusCode search criterion
 
 
-		// add the Rfa/Pa Number  search criterion
-		if ( !(aGrantQueryObject.getRfaPa() == null || aGrantQueryObject.getRfaPa().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
-		   aCriteria.add(Expression.ilike("rfaPaNumber", aGrantQueryObject.getRfaPa().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the Ipf search criterion
 		if(!(aGrantQueryObject.getIpf() == null || aGrantQueryObject.getIpf().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
