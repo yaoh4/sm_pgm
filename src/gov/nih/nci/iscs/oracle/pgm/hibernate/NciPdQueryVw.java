@@ -21,6 +21,9 @@ public class NciPdQueryVw implements Serializable {
     private String fullGrantNum;
 
     /** identifier field */
+    private String rfaPaNumber;
+
+    /** identifier field */
     private String councilMeetingDate;
 
     /** identifier field */
@@ -138,9 +141,10 @@ public class NciPdQueryVw implements Serializable {
     private String withdrawnFlag;
 
     /** full constructor */
-    public NciPdQueryVw(long applId, String fullGrantNum, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
+    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
+        this.rfaPaNumber = rfaPaNumber;
         this.councilMeetingDate = councilMeetingDate;
         this.firstName = firstName;
         this.miName = miName;
@@ -210,6 +214,19 @@ public class NciPdQueryVw implements Serializable {
 
     public void setFullGrantNum(String fullGrantNum) {
         this.fullGrantNum = fullGrantNum;
+    }
+
+    /** 
+     *                @hibernate.property
+     *                 column="RFA_PA_NUMBER"
+     *             
+     */
+    public String getRfaPaNumber() {
+        return this.rfaPaNumber;
+    }
+
+    public void setRfaPaNumber(String rfaPaNumber) {
+        this.rfaPaNumber = rfaPaNumber;
     }
 
     /** 
@@ -723,6 +740,7 @@ public class NciPdQueryVw implements Serializable {
         return new ToStringBuilder(this)
             .append("applId", getApplId())
             .append("fullGrantNum", getFullGrantNum())
+            .append("rfaPaNumber", getRfaPaNumber())
             .append("councilMeetingDate", getCouncilMeetingDate())
             .append("firstName", getFirstName())
             .append("miName", getMiName())
@@ -772,6 +790,7 @@ public class NciPdQueryVw implements Serializable {
         return new EqualsBuilder()
             .append(this.getApplId(), castOther.getApplId())
             .append(this.getFullGrantNum(), castOther.getFullGrantNum())
+            .append(this.getRfaPaNumber(), castOther.getRfaPaNumber())
             .append(this.getCouncilMeetingDate(), castOther.getCouncilMeetingDate())
             .append(this.getFirstName(), castOther.getFirstName())
             .append(this.getMiName(), castOther.getMiName())
@@ -818,6 +837,7 @@ public class NciPdQueryVw implements Serializable {
         return new HashCodeBuilder()
             .append(getApplId())
             .append(getFullGrantNum())
+            .append(getRfaPaNumber())
             .append(getCouncilMeetingDate())
             .append(getFirstName())
             .append(getMiName())

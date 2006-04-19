@@ -48,6 +48,17 @@
             </meta> 
         </key-property>
         <key-property 
+            name="rfaPaNumber" 
+            column="RFA_PA_NUMBER" 
+            type="java.lang.String"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RFA_PA_NUMBER"
+            </meta> 
+        </key-property>
+        <key-property 
             name="councilMeetingDate" 
             column="COUNCIL_MEETING_DATE" 
             type="java.lang.String"
