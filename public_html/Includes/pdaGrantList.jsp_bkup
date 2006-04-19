@@ -1,0 +1,65 @@
+<!--Start List Table -->
+<A NAME="grants">Grant List </A>
+<% java.util.ArrayList myQueryResults = (java.util.ArrayList) request.getAttribute("queryResults");
+ System.out.println("***** myQueryResults is *****" + myQueryResults);
+ if(myQueryResults != null ) {
+    if(myQueryResults.size() > 0 ) { %>
+<jsp:useBean id="queryResults" scope="request" class="java.util.ArrayList"/>
+<bean:write name="queryResults"/>
+<logic:notEmpty name="queryResults" scope="request">
+  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+    <tr><td width="20" align="right">&nbsp;</td>
+    </tr>
+    <tr><td width="20" align="right">&nbsp;</td>
+    </tr>
+    <tr><td width="20" align="right">&nbsp;</td>
+    </tr>
+    <tr>
+      <td width="20">&nbsp;</td>
+      <td valign="top" colspan="5">
+       <script language="JavaScript" type="text/javascript">
+          // define table with border attribute for Netscape 4.7x browsers 
+          if (ns4 == 1) {
+            document.write('<table summary="Grants Table" border="1" cellpadding="1" cellspacing="1" width="100%">'); 
+          } else {
+            // otherwise no border is required
+            document.write('<table summary="Grants Table" cellpadding="1" cellspacing="1" width="100%">'); 
+          } 
+       </script>
+
+       <noscript>
+         <table summary="Grants Table" cellpadding="1" cellspacing="1" width="100%">
+       </noscript>	  
+
+          <tr> 
+	    <ncijsp:pdaHeader />
+	  </tr>
+          <logic:iterate id="PDASearchResultObject" name="queryResults">
+	 
+	           <tr valign="top"> 
+	              <td headers="header00" width="3%" class=listCell><html:checkbox name="PDASearchResultObject"  property="selected"/></td>
+	              <td headers="header01" width="17%" class=listCell><html:checkbox name="PDASearchResultObject"  property="pdName"/></td>
+	              <td headers="header02" width="30%" class=listCell><bean:write name="PDASearchResultObject" property="pdOrg"/></td>
+	              <td headers="header03" width="10%" class=listCell><bean:write name="PDASearchResultObject" property="fy"/></td>
+	              <td headers="header04" width="17%" class=listCell><bean:write name="PDASearchResultObject" property="grantNumber"/></td>
+	              <td headers="header05" width="3%" class=listCell><bean:write name="PDASearchResultObject" property="cancerActivity"/></td>
+	              <td headers="header06" width="10%" class=listCell><bean:write name="PDASearchResultObject" property="ncabDate"/></td>
+	              <td headers="header07" width="10%" class=listCell5><bean:write name="PDASearchResultObject" property="pdStartDate"/></td>
+	 
+	            </tr>
+          </logic:iterate>
+	      
+         </table>
+      </td>
+      <td width="20">&nbsp;</td>
+    </tr>
+    <tr> 
+      <td width="20" height="20">&nbsp;</td>
+      <td nowrap align="right" colspan="5" height="20">&nbsp;</td>
+      <td width="20" height="20">&nbsp;</td>
+    </tr>
+  </table>
+</logic:notEmpty>
+<% } } %>
+<!--End List Table -->
+

@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.GrantQueriesT" 
+    table="GRANT_QUERIES_T"
+>
+
+    <composite-id>
+        <key-property 
+            name="id" 
+            column="ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="queryName" 
+            column="QUERY_NAME" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="queryDesc" 
+            column="QUERY_DESC" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="queryType" 
+            column="QUERY_TYPE" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="createUserId" 
+            column="CREATE_USER_ID" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="createDate" 
+            column="CREATE_DATE" 
+            type="java.util.Date"
+            length="7"
+        />
+        <key-property 
+            name="lastChangeDate" 
+            column="LAST_CHANGE_DATE" 
+            type="java.util.Date"
+            length="7"
+        />
+        <key-property 
+            name="lastChangeUserId" 
+            column="LAST_CHANGE_USER_ID" 
+            type="java.lang.String"
+            length="30"
+        />
+    </composite-id>    
+
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>
