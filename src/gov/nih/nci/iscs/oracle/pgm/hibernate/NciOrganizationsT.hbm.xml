@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciOrganizationsT" 
+    table="NCI_ORGANIZATIONS_T"
+>
+
+    <composite-id>
+        <key-property 
+            name="id" 
+            column="ID" 
+            type="long"
+            length="10"
+        />
+        <key-property 
+            name="abbreviation" 
+            column="ABBREVIATION" 
+            type="java.lang.String"
+            length="10"
+        />
+        <key-property 
+            name="description" 
+            column="DESCRIPTION" 
+            type="java.lang.String"
+            length="75"
+        />
+        <key-property 
+            name="nihAdminCode" 
+            column="NIH_ADMIN_CODE" 
+            type="java.lang.String"
+            length="10"
+        />
+        <key-property 
+            name="noeOrgType" 
+            column="NOE_ORG_TYPE" 
+            type="java.lang.String"
+            length="10"
+        />
+        <key-property 
+            name="parentOrgId" 
+            column="PARENT_ORG_ID" 
+            type="java.lang.Long"
+            length="10"
+        />
+        <key-property 
+            name="commonEmailAddr" 
+            column="COMMON_EMAIL_ADDR" 
+            type="java.lang.String"
+            length="50"
+        />
+        <key-property 
+            name="createUserId" 
+            column="CREATE_USER_ID" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="createDate" 
+            column="CREATE_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        />
+        <key-property 
+            name="lastChangeUserId" 
+            column="LAST_CHANGE_USER_ID" 
+            type="java.lang.String"
+            length="30"
+        />
+        <key-property 
+            name="lastChangeDate" 
+            column="LAST_CHANGE_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        />
+        <key-property 
+            name="updateStamp" 
+            column="UPDATE_STAMP" 
+            type="java.lang.Integer"
+            length="5"
+        />
+        <key-property 
+            name="verifiedFlag" 
+            column="VERIFIED_FLAG" 
+            type="java.lang.String"
+            length="1"
+        />
+        <key-property 
+            name="verifiedDate" 
+            column="VERIFIED_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        />
+        <key-property 
+            name="ardEntry" 
+            column="ARD_ENTRY" 
+            type="java.lang.Object"
+            length="4000"
+        />
+        <key-property 
+            name="inactiveDate" 
+            column="INACTIVE_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        />
+    </composite-id>    
+
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>
