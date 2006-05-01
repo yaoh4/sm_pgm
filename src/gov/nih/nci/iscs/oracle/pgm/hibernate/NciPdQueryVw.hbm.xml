@@ -314,7 +314,7 @@
         <key-property 
             name="pocNpnId" 
             column="POC_NPN_ID" 
-            type="long"
+            type="java.lang.Long"
             length="10"
         >
             <meta attribute="field-description">
