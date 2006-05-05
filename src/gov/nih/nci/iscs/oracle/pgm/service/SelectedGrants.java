@@ -405,7 +405,8 @@ public class SelectedGrants implements Cloneable {
 
 		try{
            PDASearchResultObject mPDASearchResultObject= (PDASearchResultObject) oSelectedGrants.get(mKey);;
-           if(!mSelected) {
+           //if(!mSelected) {
+		   if(mPDASearchResultObject.getSelected()){
 		      if(pdIdForLoad==null || pdIdForLoad.trim().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
                  mPDASearchResultObject.setPdId(mPdId);
                  mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
