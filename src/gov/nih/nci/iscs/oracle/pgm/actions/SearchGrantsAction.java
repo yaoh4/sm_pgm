@@ -438,12 +438,10 @@ public class SearchGrantsAction extends NciPgmAction  {
                mPaginationObject.setPageNumber(new Integer(ApplicationConstants.ALL_PAGES));
 	       } else {
 	           mPaginationObject =  (PaginationObject) request.getSession().getAttribute(ApplicationConstants.PAGINATION_OBJECT);
-	           System.out.println("*** mPaginationObject  is *** " + mPaginationObject);
 	           if (mPaginationObject == null) {
 	               mPaginationObject = new PaginationObject();
 		       }
 	       }
-	       System.out.println("*** just before searching and mPaginationObject is *** " + mPaginationObject);
 	       GrantSearchService mGrantSearchService = GrantServiceFactory.getGrantSearchService(action, oApplicationContext);
 	       queryResults = (Map) mGrantSearchService.search(mGrantQueryObject, mPaginationObject, (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO) );
 
@@ -459,6 +457,7 @@ public class SearchGrantsAction extends NciPgmAction  {
 	       }
 
 	       mRetrieveGrantsForm.setListGenerated((String) request.getSession().getAttribute("listGenerated"));
+	       mRetrieveGrantsForm.setSelectedPageSize(mPaginationObject.getPageSize().toString());
            request.getSession().setAttribute("queryResults", queryResults);
            request.getSession().setAttribute(ApplicationConstants.PAGINATION_OBJECT, mPaginationObject );
            request.getSession().setAttribute(ApplicationConstants.LAST_SORT_COLUMN, mRetrieveGrantsForm.getSortColumn() );

@@ -181,7 +181,7 @@ public static void resetSortParameters(HttpSession session, RetrieveGrantsForm n
 public static void resetSession(HttpSession session, RetrieveGrantsForm newForm, String mappingAction, boolean resetSort) {
 
    session.setAttribute(ApplicationConstants.OLD_SEARCH_FORM, newForm );
-   resetSessionForSearch(session, newForm mappingAction);
+   resetSessionForSearch(session, newForm, mappingAction);
    if(resetSort){
 	   resetSortParameters(session, newForm);
    }

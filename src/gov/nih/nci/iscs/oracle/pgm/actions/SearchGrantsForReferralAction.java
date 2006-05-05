@@ -151,7 +151,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 	           mRetrieveGrantsForReferralForm.setListGenerated("M");
 		       return  mapping.findForward("continue");
 	        }
-		    SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), (RetrieveGrantsForm) mRetrieveGrantsForPDAForm, mapping.getName());
+		    SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), (RetrieveGrantsForm) mRetrieveGrantsForReferralForm, mapping.getName());
 	        mRetrieveGrantsForReferralForm.setSearchButtonInitiated(false);
 	     }
 		 super.search(mFormToUse, ApplicationConstants.REFERRAL, request);
