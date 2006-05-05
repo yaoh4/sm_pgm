@@ -127,7 +127,7 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 
 
 			if(mNciPdTransfer.getLastName() != null) {
-				mPDASearchResultObject.setPiName(mNciPdTransfer.getLastName() + " " + mNciPdTransfer.getFirstName());
+				mPDASearchResultObject.setPiName(mNciPdTransfer.getLastName() + ", " + mNciPdTransfer.getFirstName());
 			}else {
 				mPDASearchResultObject.setPiName(ApplicationConstants.EMPTY_STRING);
 			}

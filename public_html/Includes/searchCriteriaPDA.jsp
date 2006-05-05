@@ -55,6 +55,34 @@
                    </table>
 
 
+                <table border=0 cellpadding=0 cellspacing=0 width="350">
+                  <tr> 
+                    <td nowrap> 
+                      <table border=0 cellpadding=0 cellspacing=0 width="100%" >
+                        <tr width="73%"> 
+                          <td nowrap ><b>Fiscal Year (YYYY)</b></td>
+                        </tr>
+                       </table>
+                    </td>
+                   </tr>
+                   <tr> 
+                    <td nowrap> 
+                      <table border=0 cellpadding=0 cellspacing=0 width="100%" >
+                        <tr> 
+                          <td nowrap width="73%"><label for="fyFrom"><b><bean:message key="labels.search.field.fyFrom" /></b>
+                          
+                             <html:text property="fyFrom" size="10" maxlength="10" onblur="copyFY()"/> </label>
+                          
+                            &nbsp;<label for="fyTo"><b><bean:message key="labels.search.field.fyTo" /></b> 
+                          
+                             <html:text property="fyTo" size="10" maxlength="10" onblur="copyFY()"/> </label>
+                          </td>          
+                        </tr>
+                       </table>
+                    </td>
+                   </tr>
+                </table>
+
  
 
 

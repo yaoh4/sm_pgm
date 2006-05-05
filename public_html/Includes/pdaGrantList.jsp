@@ -22,11 +22,13 @@
         <%@include file="selectionButtons.jsp"%>
 
         </table>
-        <logic:messagesPresent name="message" property="referralaction" message="true">
-           <html:messages message="true" id="message" property="referralaction" header="referalaction.header" footer="referalaction.footer">
+        <DIV ID="listMessages" class="ErrorTextBoldItalics"
+        <logic:messagesPresent name="message" property="pdAssignmentaction" message="true">
+           <html:messages message="true" id="message" property="pdAssignmentaction" header="pdAssignmentaction.header" footer="pdAssignmentaction.footer">
              <li><b><bean:write name="message"/></b></li>
            </html:messages>
         </logic:messagesPresent>
+        </div>
         <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
 
         <tr>

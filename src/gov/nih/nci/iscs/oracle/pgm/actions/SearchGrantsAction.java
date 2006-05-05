@@ -127,9 +127,10 @@ public class SearchGrantsAction extends NciPgmAction  {
        if( mAction.equalsIgnoreCase(ApplicationConstants.GENERATE_REPORT )) {
            return generate(mapping, form, request, response);
 	   }
-       if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_CANCEL ) ||
-           mAction.equalsIgnoreCase(ApplicationConstants.ACTION_RETURN ))
+       if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_CANCEL ))
            return cancelled(mapping, form, request, response);
+       if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_RETURN ) )
+           return returned(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_COLLAPSE_CRITERIA ) ||
            mAction.equalsIgnoreCase(ApplicationConstants.ACTION_EXPAND_CRITERIA  ))
            return mapping.findForward("continue");
@@ -383,7 +384,14 @@ public class SearchGrantsAction extends NciPgmAction  {
        return mActionForward;
 
    }
+   public ActionForward returned (ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                       HttpServletResponse response) throws GrantSearchException, Exception {
 
+	   ActionForward mActionForward = null;
+       request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()) );
+       return mActionForward;
+
+   }
   public   Map search (ActionForm form, String action, HttpServletRequest request, boolean selectIndicator) {
 	  try{
 		  request.setAttribute("SelectAllIndicator", new Boolean(selectIndicator));
@@ -424,15 +432,18 @@ public class SearchGrantsAction extends NciPgmAction  {
 
 	          mRetrieveGrantsForm.setSortActionSelected(false);
     	   }
-  	       PaginationObject mPaginationObject = new PaginationObject();
+  	       PaginationObject mPaginationObject;
            if(selectAllIndicator) {
-		       mPaginationObject.setPageNumber(new Integer(ApplicationConstants.ALL_PAGES));
+               mPaginationObject = new PaginationObject();
+               mPaginationObject.setPageNumber(new Integer(ApplicationConstants.ALL_PAGES));
 	       } else {
 	           mPaginationObject =  (PaginationObject) request.getSession().getAttribute(ApplicationConstants.PAGINATION_OBJECT);
+	           System.out.println("*** mPaginationObject  is *** " + mPaginationObject);
 	           if (mPaginationObject == null) {
 	               mPaginationObject = new PaginationObject();
 		       }
 	       }
+	       System.out.println("*** just before searching and mPaginationObject is *** " + mPaginationObject);
 	       GrantSearchService mGrantSearchService = GrantServiceFactory.getGrantSearchService(action, oApplicationContext);
 	       queryResults = (Map) mGrantSearchService.search(mGrantQueryObject, mPaginationObject, (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO) );
 
@@ -453,6 +464,7 @@ public class SearchGrantsAction extends NciPgmAction  {
            request.getSession().setAttribute(ApplicationConstants.LAST_SORT_COLUMN, mRetrieveGrantsForm.getSortColumn() );
            request.getSession().setAttribute(ApplicationConstants.LAST_SORT_ORDER, mRetrieveGrantsForm.getSortOrder() );
            request.getSession().setAttribute(ApplicationConstants.OLD_SEARCH_FORM, mRetrieveGrantsForm);
+           request.getSession().setAttribute("LAST_PAGE_SIZE", mPaginationObject.getPageSize().toString());
        } catch(Exception ex) {
 	        logger.error("Search action failed" + ex.toString());
 	        throw new GrantSearchException(this.getClass().getName(), "search", ex.toString(), request.getSession(), ex);
@@ -516,8 +528,8 @@ private void createLookUps(HttpServletRequest request, ActionMapping mapping) th
        mList = LookupHelper.addNewLookUp(LookUpTableConstants.CANCER_ACTIVITIES_T_LOOKUP, oApplicationContext);
 	   request.setAttribute(LookUpTableConstants.CANCER_ACTIVITIES_T_LOOKUP[0], mList);
 
-       mList = LookupHelper.addNewLookUp(LookUpTableConstants.APPL_STATUS_MV_LOOKUP, oApplicationContext);
-	   request.setAttribute(LookUpTableConstants.APPL_STATUS_MV_LOOKUP[0], mList);
+       mList = LookupHelper.addNewLookUp(LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP, oApplicationContext);
+	   request.setAttribute(LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0], mList);
 
 	   mList = LookupHelper.addNewLookUp(LookUpTableConstants.BOARDS_T_LOOKUP, oApplicationContext);
 	   request.setAttribute(LookUpTableConstants.BOARDS_T_LOOKUP[0], mList);

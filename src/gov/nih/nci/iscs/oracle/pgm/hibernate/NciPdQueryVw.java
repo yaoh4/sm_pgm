@@ -7,10 +7,10 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 
-/** 
+/**
  *        @hibernate.class
  *         table="NCI_PD_QUERY_VW"
- *     
+ *
 */
 public class NciPdQueryVw implements Serializable {
 
@@ -93,7 +93,7 @@ public class NciPdQueryVw implements Serializable {
     private String dualCayCode;
 
     /** identifier field */
-    private long pocNpnId;
+    private Long pocNpnId;
 
     /** identifier field */
     private String pocLastName;
@@ -141,7 +141,7 @@ public class NciPdQueryVw implements Serializable {
     private String withdrawnFlag;
 
     /** full constructor */
-    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
+    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, Long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
         this.rfaPaNumber = rfaPaNumber;
@@ -190,10 +190,10 @@ public class NciPdQueryVw implements Serializable {
     public NciPdQueryVw() {
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="APPL_ID"
-     *             
+     *
      */
     public long getApplId() {
         return this.applId;
@@ -203,10 +203,10 @@ public class NciPdQueryVw implements Serializable {
         this.applId = applId;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="FULL_GRANT_NUM"
-     *             
+     *
      */
     public String getFullGrantNum() {
         return this.fullGrantNum;
@@ -216,10 +216,10 @@ public class NciPdQueryVw implements Serializable {
         this.fullGrantNum = fullGrantNum;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="RFA_PA_NUMBER"
-     *             
+     *
      */
     public String getRfaPaNumber() {
         return this.rfaPaNumber;
@@ -229,10 +229,10 @@ public class NciPdQueryVw implements Serializable {
         this.rfaPaNumber = rfaPaNumber;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="COUNCIL_MEETING_DATE"
-     *             
+     *
      */
     public String getCouncilMeetingDate() {
         return this.councilMeetingDate;
@@ -242,10 +242,10 @@ public class NciPdQueryVw implements Serializable {
         this.councilMeetingDate = councilMeetingDate;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="FIRST_NAME"
-     *             
+     *
      */
     public String getFirstName() {
         return this.firstName;
@@ -255,10 +255,10 @@ public class NciPdQueryVw implements Serializable {
         this.firstName = firstName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="MI_NAME"
-     *             
+     *
      */
     public String getMiName() {
         return this.miName;
@@ -268,10 +268,10 @@ public class NciPdQueryVw implements Serializable {
         this.miName = miName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="LAST_NAME"
-     *             
+     *
      */
     public String getLastName() {
         return this.lastName;
@@ -281,10 +281,10 @@ public class NciPdQueryVw implements Serializable {
         this.lastName = lastName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="APPL_TYPE_CODE"
-     *             
+     *
      */
     public String getApplTypeCode() {
         return this.applTypeCode;
@@ -294,10 +294,10 @@ public class NciPdQueryVw implements Serializable {
         this.applTypeCode = applTypeCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="ADMIN_PHS_ORG_CODE"
-     *             
+     *
      */
     public String getAdminPhsOrgCode() {
         return this.adminPhsOrgCode;
@@ -307,10 +307,10 @@ public class NciPdQueryVw implements Serializable {
         this.adminPhsOrgCode = adminPhsOrgCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="ACTIVITY_CODE"
-     *             
+     *
      */
     public String getActivityCode() {
         return this.activityCode;
@@ -320,10 +320,10 @@ public class NciPdQueryVw implements Serializable {
         this.activityCode = activityCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="SERIAL_NUM"
-     *             
+     *
      */
     public Integer getSerialNum() {
         return this.serialNum;
@@ -333,10 +333,10 @@ public class NciPdQueryVw implements Serializable {
         this.serialNum = serialNum;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="SUPPORT_YEAR"
-     *             
+     *
      */
     public Integer getSupportYear() {
         return this.supportYear;
@@ -346,10 +346,10 @@ public class NciPdQueryVw implements Serializable {
         this.supportYear = supportYear;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="SUFFIX_CODE"
-     *             
+     *
      */
     public String getSuffixCode() {
         return this.suffixCode;
@@ -359,10 +359,10 @@ public class NciPdQueryVw implements Serializable {
         this.suffixCode = suffixCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="APPL_STATUS_CODE"
-     *             
+     *
      */
     public String getApplStatusCode() {
         return this.applStatusCode;
@@ -372,10 +372,10 @@ public class NciPdQueryVw implements Serializable {
         this.applStatusCode = applStatusCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="APPL_STATUS_GROUP_CODE"
-     *             
+     *
      */
     public String getApplStatusGroupCode() {
         return this.applStatusGroupCode;
@@ -385,10 +385,10 @@ public class NciPdQueryVw implements Serializable {
         this.applStatusGroupCode = applStatusGroupCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="BUDGET_START_DATE"
-     *             
+     *
      */
     public Date getBudgetStartDate() {
         return this.budgetStartDate;
@@ -398,10 +398,10 @@ public class NciPdQueryVw implements Serializable {
         this.budgetStartDate = budgetStartDate;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="BUDGET_END_DATE"
-     *             
+     *
      */
     public Date getBudgetEndDate() {
         return this.budgetEndDate;
@@ -411,10 +411,10 @@ public class NciPdQueryVw implements Serializable {
         this.budgetEndDate = budgetEndDate;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="FY"
-     *             
+     *
      */
     public Integer getFy() {
         return this.fy;
@@ -424,10 +424,10 @@ public class NciPdQueryVw implements Serializable {
         this.fy = fy;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="IPF"
-     *             
+     *
      */
     public Long getIpf() {
         return this.ipf;
@@ -437,10 +437,10 @@ public class NciPdQueryVw implements Serializable {
         this.ipf = ipf;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="ORG_NAME"
-     *             
+     *
      */
     public String getOrgName() {
         return this.orgName;
@@ -450,10 +450,10 @@ public class NciPdQueryVw implements Serializable {
         this.orgName = orgName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="INSTITUTION_CITY"
-     *             
+     *
      */
     public String getInstitutionCity() {
         return this.institutionCity;
@@ -463,10 +463,10 @@ public class NciPdQueryVw implements Serializable {
         this.institutionCity = institutionCity;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="INSTITUTION_STATE"
-     *             
+     *
      */
     public String getInstitutionState() {
         return this.institutionState;
@@ -476,10 +476,10 @@ public class NciPdQueryVw implements Serializable {
         this.institutionState = institutionState;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="PROJECT_TITLE"
-     *             
+     *
      */
     public String getProjectTitle() {
         return this.projectTitle;
@@ -489,10 +489,10 @@ public class NciPdQueryVw implements Serializable {
         this.projectTitle = projectTitle;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="LEGACY_SOURCE_FILE"
-     *             
+     *
      */
     public String getLegacySourceFile() {
         return this.legacySourceFile;
@@ -502,10 +502,10 @@ public class NciPdQueryVw implements Serializable {
         this.legacySourceFile = legacySourceFile;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="CAY_CODE"
-     *             
+     *
      */
     public String getCayCode() {
         return this.cayCode;
@@ -515,10 +515,10 @@ public class NciPdQueryVw implements Serializable {
         this.cayCode = cayCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_CAY_CODE"
-     *             
+     *
      */
     public String getDualCayCode() {
         return this.dualCayCode;
@@ -528,23 +528,24 @@ public class NciPdQueryVw implements Serializable {
         this.dualCayCode = dualCayCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="POC_NPN_ID"
-     *             
+     *
      */
-    public long getPocNpnId() {
-        return this.pocNpnId;
+    public Long getPocNpnId() {
+		return this.pocNpnId;
     }
 
-    public void setPocNpnId(long pocNpnId) {
+    public void setPocNpnId(Long pocNpnId) {
+
         this.pocNpnId = pocNpnId;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="POC_LAST_NAME"
-     *             
+     *
      */
     public String getPocLastName() {
         return this.pocLastName;
@@ -554,10 +555,10 @@ public class NciPdQueryVw implements Serializable {
         this.pocLastName = pocLastName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="POC_FIRST_NAME"
-     *             
+     *
      */
     public String getPocFirstName() {
         return this.pocFirstName;
@@ -567,10 +568,10 @@ public class NciPdQueryVw implements Serializable {
         this.pocFirstName = pocFirstName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="POC_MI_NAME"
-     *             
+     *
      */
     public String getPocMiName() {
         return this.pocMiName;
@@ -580,10 +581,10 @@ public class NciPdQueryVw implements Serializable {
         this.pocMiName = pocMiName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="POC_FULL_NAME"
-     *             
+     *
      */
     public String getPocFullName() {
         return this.pocFullName;
@@ -593,10 +594,10 @@ public class NciPdQueryVw implements Serializable {
         this.pocFullName = pocFullName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_POC_NPN_ID"
-     *             
+     *
      */
     public Long getDualPocNpnId() {
         return this.dualPocNpnId;
@@ -606,10 +607,10 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocNpnId = dualPocNpnId;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_POC_LAST_NAME"
-     *             
+     *
      */
     public String getDualPocLastName() {
         return this.dualPocLastName;
@@ -619,10 +620,10 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocLastName = dualPocLastName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_POC_FIRST_NAME"
-     *             
+     *
      */
     public String getDualPocFirstName() {
         return this.dualPocFirstName;
@@ -632,10 +633,10 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocFirstName = dualPocFirstName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_POC_MI_NAME"
-     *             
+     *
      */
     public String getDualPocMiName() {
         return this.dualPocMiName;
@@ -645,10 +646,10 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocMiName = dualPocMiName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="DUAL_POC_FULL_NAME"
-     *             
+     *
      */
     public String getDualPocFullName() {
         return this.dualPocFullName;
@@ -658,10 +659,10 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocFullName = dualPocFullName;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="ARA_STATUS_CODE"
-     *             
+     *
      */
     public String getAraStatusCode() {
         return this.araStatusCode;
@@ -671,10 +672,10 @@ public class NciPdQueryVw implements Serializable {
         this.araStatusCode = araStatusCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="ARA_MATCH_FLAG"
-     *             
+     *
      */
     public String getAraMatchFlag() {
         return this.araMatchFlag;
@@ -684,10 +685,10 @@ public class NciPdQueryVw implements Serializable {
         this.araMatchFlag = araMatchFlag;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="CURRENT_FUTURE_BOARD_FLAG"
-     *             
+     *
      */
     public String getCurrentFutureBoardFlag() {
         return this.currentFutureBoardFlag;
@@ -697,10 +698,10 @@ public class NciPdQueryVw implements Serializable {
         this.currentFutureBoardFlag = currentFutureBoardFlag;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="CURRENT_REFERRAL_ACTIVITY_CODE"
-     *             
+     *
      */
     public String getCurrentReferralActivityCode() {
         return this.currentReferralActivityCode;
@@ -710,10 +711,10 @@ public class NciPdQueryVw implements Serializable {
         this.currentReferralActivityCode = currentReferralActivityCode;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="CURRENT_REFERRAL_ACTIVITY_DATE"
-     *             
+     *
      */
     public Date getCurrentReferralActivityDate() {
         return this.currentReferralActivityDate;
@@ -723,10 +724,10 @@ public class NciPdQueryVw implements Serializable {
         this.currentReferralActivityDate = currentReferralActivityDate;
     }
 
-    /** 
+    /**
      *                @hibernate.property
      *                 column="WITHDRAWN_FLAG"
-     *             
+     *
      */
     public String getWithdrawnFlag() {
         return this.withdrawnFlag;

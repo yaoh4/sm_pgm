@@ -159,7 +159,7 @@ public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao imp
 		   aCriteria.add(Expression.eq("pdNpnId", new Long(aGrantQueryObject.getPdId())  ));
 
 		if(!(aGrantQueryObject.getI2Status() == null || aGrantQueryObject.getI2Status().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) )
-		   aCriteria.add(Expression.ilike("applStatusCode", aGrantQueryObject.getI2Status().toUpperCase().trim() + PERCENT_SYMBOL ));
+		   aCriteria.add(Expression.ilike("applStatusGroupCode", aGrantQueryObject.getI2Status().toUpperCase().trim() + PERCENT_SYMBOL ));
 
 		// add the PriorityScoreNum from and to date search criterion
 		if(!(aGrantQueryObject.getPriorityScoreFrom() == null || aGrantQueryObject.getPriorityScoreFrom().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) ) {

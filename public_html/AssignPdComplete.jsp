@@ -35,6 +35,9 @@
 
 <table border="0" cellspacing="0" cellpadding="0" width="800" >
   <tr>
+      <td colspan="2"> &nbsp; </td>
+  </tr>
+  <tr>
       <td width="20" align="right">
      <table width="100%" border="0" cellspacing="0" cellpadding="0">
        <!--Include the drop down to select additional Creiteria -->
@@ -42,7 +45,10 @@
       </td>
   </tr>
   <tr>
-      <td width="600" align="left"><b> Program Director Assignment Results </B></td>
+      <td width="20" align="right">&nbsp;</td>
+  </tr>
+  <tr>
+      <td width="600" align="left"><H3> Program Director Assignment Results </H3></td>
   </tr>
   <tr>
       <td width="20" align="right">&nbsp;</td>

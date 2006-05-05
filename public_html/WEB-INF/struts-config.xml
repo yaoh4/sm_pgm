@@ -55,6 +55,7 @@
             scope="request"
             validate="false">
             <forward name="assignPD" path="/PdAssignment.do" />
+            <forward name="assignPortfolio" path="/PdAssignment.do" />
             <forward name="success" path="/SearchGrantsForPDA.jsp" />
             <forward name="generateReport" path="/crystalReport.do" />
             <forward name="continue" path="/SearchGrantsForPDA.jsp" />
@@ -138,6 +139,7 @@
             <forward name="cancel" path="/SearchGrantsForPDA.do" />
             <forward name="return" path="/SearchGrantsForPDA.do" />
             <forward name="executeAssignment" path="/AssignPd.jsp" />
+            <forward name="executePortfolioAssignment" path="/AssignPd.jsp" />
             <forward name="loadAssignments" path="/AssignPd.jsp" />
        </action>   
        <action  name="externalReferralSearchForm"

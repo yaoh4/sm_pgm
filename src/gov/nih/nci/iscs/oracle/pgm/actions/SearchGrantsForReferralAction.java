@@ -53,7 +53,6 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
      try{
-       //throw new Exception("This is a test");
        ActionForward mActionForward = super.executeAction(mapping, form, request, response);
 	   if(mActionForward != null)
 	      return mActionForward;
@@ -152,7 +151,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 	           mRetrieveGrantsForReferralForm.setListGenerated("M");
 		       return  mapping.findForward("continue");
 	        }
-		    SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), mapping.getName());
+		    SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), (RetrieveGrantsForm) mRetrieveGrantsForPDAForm, mapping.getName());
 	        mRetrieveGrantsForReferralForm.setSearchButtonInitiated(false);
 	     }
 		 super.search(mFormToUse, ApplicationConstants.REFERRAL, request);

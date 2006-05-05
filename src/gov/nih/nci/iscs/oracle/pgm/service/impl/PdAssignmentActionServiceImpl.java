@@ -71,7 +71,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
 			 while (mIterator.hasNext() ){
 				 boolean mAssignmentResults = false;
 				 pdAssignmentActionObject = (PdAssignmentActionObject) mIterator.next();
-                 if(action.equalsIgnoreCase("assign")){
+			     if( action.equalsIgnoreCase("assign") ) {
                     mAssignmentResults = assign();
 			        mResults = performRequery(mAssignmentResults);
 				 }

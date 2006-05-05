@@ -25,8 +25,6 @@ public class PdAssignmentForm extends ValidatorForm   {
     private  String[] pdId;
     private String pdIdForLoad;
     private String[] pdStartDate;
-    //private Map pdAssignmentStartDate;
-    private String[] pdAssignmentStartDate;
     private int count;
     private boolean sortAscendingIndicator;
     private String sortColumn;
@@ -35,7 +33,6 @@ public class PdAssignmentForm extends ValidatorForm   {
 
     public PdAssignmentForm() {
   	    this.queryResults = (List) new ArrayList();
-        this.pdAssignmentStartDate = new String[this.queryResults.size()];
         this.pdId = new String[this.queryResults.size()];
         this.selectedIndx = new String[this.queryResults.size()];
         this.selected = new String[this.queryResults.size()];
@@ -43,7 +40,6 @@ public class PdAssignmentForm extends ValidatorForm   {
   	    this.pdIdForLoad = ApplicationConstants.EMPTY_STRING;
   	    this.sortColumn = "grantNumber";
   	    this.sortAscendingIndicator = true;
-		//this.pdAssignmentStartDate = new HashMap();
   	    this.PrgIdsMap = new HashMap();
 
     }
@@ -57,13 +53,11 @@ public class PdAssignmentForm extends ValidatorForm   {
   	    this.selectedIndx = new String[queryResults.size()];
   	    this.selected = new String[queryResults.size()];
   	    this.pdId = new String[queryResults.size()];
-  	    this.pdAssignmentStartDate = new String[queryResults.size()];
  	    for (int indx=0; indx<selectedIndx.length; indx++) {
 			this.selectedIndx[indx] = new String("0");
 			this.pdId[indx] = new String("0");
 			this.selected[indx] = new String("0");
 		}
-		//this.pdAssignmentStartDate = new HashMap(queryResults.size());
 
 	}
 
@@ -214,62 +208,6 @@ public class PdAssignmentForm extends ValidatorForm   {
 	  }
 	}
 
-    public void setPdAssignmentStartDate(String[] pdAssignmentStartDate) {
-
-		this.pdAssignmentStartDate = pdAssignmentStartDate;
-	}
-
-	public String[] getPdAssignmentStartDate() {
-		return pdAssignmentStartDate;
-	}
-
-    public void setPdAssignmentStartIndexed(int index, String pdAssignmentStartDate) {
-		this.pdAssignmentStartDate[index] = pdAssignmentStartDate;
-	}
-
-	public String getPdAssignmentStartIndexed(int index) {
-	  try {
-		if( pdAssignmentStartDate[index] == null) {
-			return ApplicationConstants.EMPTY_STRING;
-		} else {
-		    return pdAssignmentStartDate[index];
-		}
-	  } catch (Exception ex) {
-		return ApplicationConstants.EMPTY_STRING;
-	  }
-	}
-
-   /*public Object getPdAssignmentStartDateMapped(String key) {
-	  try {
-	     if(pdAssignmentStartDate.get(key) == null) {
-		     return ApplicationConstants.EMPTY_STRING;
-	     }else{
-             return pdAssignmentStartDate.get(key);
-		 }
-
-	  } catch (Exception ex) {
-		 return ApplicationConstants.EMPTY_STRING;
-	  }
-	}
-
-  public String getPdAssignmentStartDateIndexed(int index) {
-	  ArrayList oValues = new ArrayList(pdAssignmentStartDate.values());
-	  return (String) oValues.get(index);
-  }
-
-
-    public void setPdAssignmentStartDateMapped(String key, Object value) {
-        pdAssignmentStartDate.put(key,  value);
-    }
-
-   public Map getPdAssignmentStartDate() {
-        return pdAssignmentStartDate;
-    }
-
-    public void setPdAssignmentStartDate(Map pdAssignmentStartDate) {
-        this.pdAssignmentStartDate = (Map) pdAssignmentStartDate;;
-    }
-    */
 
     public int getIndex() {
 		return index;
@@ -318,7 +256,6 @@ public class PdAssignmentForm extends ValidatorForm   {
            .append("requestAction ", getRequestAction())
            .append("pdIdForLoad ", getPdIdForLoad())
            .append("pdStartDate ", getPdStartDate())
-           .append("pdAssignmentStartDate ", getPdAssignmentStartDate())
            .append("index ", getIndex())
            .append("count ", getCount())
            .append("sortColumn ", getSortColumn())

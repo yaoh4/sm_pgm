@@ -21,6 +21,9 @@ public class AssignPDTableHeaderTag extends TagSupport
       HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
       PdAssignmentForm mForm = (PdAssignmentForm) request.getAttribute("pdAssignmentForm");
       String lastSortColumn = mForm.getSortColumn();
+      String mAction = mForm.getRequestAction();
+      String mLastAction = (String) request.getSession().getAttribute("lastAction");
+
       boolean lastSortOrderAsc = mForm.getSortAscendingIndicator();
 
 
@@ -89,9 +92,10 @@ public class AssignPDTableHeaderTag extends TagSupport
 		  buf.append("</a></th>");
 	  }
 
-
-      buf.append("<th id= headers=\"header04\" width=\"27%\" align=middle class=listCellHead>Assign To</th>");
-      buf.append("<th id= headers=\"header05\" width=\"10%\" class=listCellHead>Start Date</th>");
+      if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD) ||
+         mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD)){
+         buf.append("<th id= headers=\"header04\" width=\"27%\" align=middle class=listCellHead>Assign To</th>");
+	  }
 
 
       out.print( buf.toString());

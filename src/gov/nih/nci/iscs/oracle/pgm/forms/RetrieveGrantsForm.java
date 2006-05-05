@@ -639,7 +639,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
 		 sortOrder = ApplicationConstants.EMPTY_STRING;
 		 pageAction = ApplicationConstants.EMPTY_STRING;
 		 gotoPageNumber = ApplicationConstants.EMPTY_STRING;
-		 selectedPageSize = ApplicationConstants.EMPTY_STRING;
+         selectedPageSize = new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE).toString();
 		 listGenerated = ApplicationConstants.EMPTY_STRING;
 		 reportSelected = ApplicationConstants.EMPTY_STRING;
 		 formatSelected = ApplicationConstants.EMPTY_STRING;
@@ -905,7 +905,16 @@ public List validate(List validationMessages) {
 	    return false;
 
 	}
+	protected boolean validSrlNumber() {
+  	    for (int indx=0; indx<ApplicationConstants.MAX_GRANT_NUM_INDEX; indx++) {
+			if(this.srl[indx].equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
+		    }else {
+				return true;
+			}
+		}
+	    return false;
 
+	}
 
 
 }

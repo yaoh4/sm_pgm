@@ -106,7 +106,9 @@ public class ApplicationConstants {
 	public static final String REFERRAL_ACTION_MAPPING = "retrieveGrantsForReferralForm";
 	public static final int    MAX_GRANT_NUM_INDEX = 4;
     public static final String ASSIGN_PD = "assignPD";
+    public static final String ASSIGN_PORTFOLIO = "assignPortfolio";
     public static final String EXECUTE_ASSIGN ="executeAssignment";
+    public static final String EXECUTE_PORTFOLIO_ASSIGNMENT ="executePortfolioAssignment";
     //public static final String APPLY_TO_SELECTED ="applyToSelected";
     public static final String FORMAT_SELECT ="formatSelect";
     public static final String FORMAT_TABLE ="formatTable";

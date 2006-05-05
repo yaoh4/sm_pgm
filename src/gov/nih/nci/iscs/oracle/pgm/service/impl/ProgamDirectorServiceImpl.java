@@ -94,75 +94,86 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
     public List getAllProgramDirectors(String cancerActivity, boolean formatPds) {
 		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
+		  String mViewName = "pdCaAsgnmtVw";
 		  try{
              RetrievePDInfoForAssignmentCommand oRetrievePDInfoForAssignmentCommand = (RetrievePDInfoForAssignmentCommand) getBean("retrievePDInfoForAssignmentCommandDao");
-             QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, super.getUserId());
+             QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, mViewName, super.getUserId());
               // get the list from the page
              mList =  (ArrayList) aPDQueryPage.getList();
 
              Iterator mIterator = mList.iterator();
-             String mPreviousPd = ApplicationConstants.EMPTY_STRING;
-             String pdName = ApplicationConstants.EMPTY_STRING;
-             String pdCode = ApplicationConstants.EMPTY_STRING;
-             String personId = ApplicationConstants.EMPTY_STRING;
-             HashSet pdCodes = new HashSet();
-             boolean firstRow = true;
              while(mIterator.hasNext() ) {
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
 				  LabelValueBean mLabelValueBean = null;
 				  if(cancerActivity == null || formatPds) {
 					  mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getPdName() + "/" + mPdCaAsgnmtVw.getOrgDesc() + "/" + mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw.getCayCode() + mPdCaAsgnmtVw.getNpeId().toString() );
 			          mLabelValueBeanList.add(mLabelValueBean);
-				  }else {
-					  if(firstRow){
-						  mPreviousPd = mPdCaAsgnmtVw.getPdName();
-						  pdName = mPdCaAsgnmtVw.getPdName();
-						  personId = mPdCaAsgnmtVw.getPersonId().toString();
-						  firstRow = false;
-					  }
-					  if(mPdCaAsgnmtVw.getPdName().equalsIgnoreCase(mPreviousPd)) {
-						  if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-							 pdCodes.add(mPdCaAsgnmtVw.getPdCode());
-						  }else{
-							  if(pdCode.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-						         pdCode = "(" + mPdCaAsgnmtVw.getPdCode();
-						      }else{
-						         pdCode = pdCode + ", " + mPdCaAsgnmtVw.getPdCode();
-							  }
-						 }
-					  }else{
-						  if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-                             pdCode = ApplicationConstants.EMPTY_STRING;
-                             Iterator iter = pdCodes.iterator();
-                             while(iter.hasNext()){
-							     if(pdCode.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-								    pdCode  = "(" + (String) iter.next();
-								 }else{
-									pdCode  = pdCode + ", " + (String) iter.next();
-								 }
-							 }
-				  	         mLabelValueBean = new LabelValueBean(pdName + pdCode + ")", personId);
-                             pdCodes = new HashSet();
-							 pdCodes.add(mPdCaAsgnmtVw.getPdCode());
-						  }else{
-				  	        mLabelValueBean = new LabelValueBean(pdName + pdCode + ")", personId);
-						    pdCode = "(" + mPdCaAsgnmtVw.getPdCode();
-						  }
-			             mLabelValueBeanList.add(mLabelValueBean);
-						 pdName = mPdCaAsgnmtVw.getPdName();
-						 personId = mPdCaAsgnmtVw.getPersonId().toString();
-				         mPreviousPd = mPdCaAsgnmtVw.getPdName();
-					  }
 				  }
-			  }
-
-
+		     }
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("ProgamDirectorServiceImpl", "getAllProgramDirectors", "Unable to obtain Program Director from the database!!! " + ex.toString());
 	      }
 	       return mLabelValueBeanList;
     }
 
+    public List getPDForTransfer(String cancerActivity) {
+		  ArrayList mLabelValueBeanList = new ArrayList();
+		  ArrayList mList  = new ArrayList();
+		  TreeMap mTempMap;
+		  String mViewName = "pdOrgVw4";
+		  try{
+             RetrievePDInfoForAssignmentCommand oRetrievePDInfoForAssignmentCommand = (RetrievePDInfoForAssignmentCommand) getBean("retrievePDInfoForAssignmentCommandDao");
+             QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, mViewName, super.getUserId());
+              // get the list from the page
+             mList =  (ArrayList) aPDQueryPage.getList();
+             mTempMap = new TreeMap();
+
+             String pdName = ApplicationConstants.EMPTY_STRING;
+             String pdCode = ApplicationConstants.EMPTY_STRING;
+             String personId = ApplicationConstants.EMPTY_STRING;
+             Iterator mIterator = mList.iterator();
+             while(mIterator.hasNext() ) {
+				  HashSet mTempSet = new HashSet();
+				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
+				  pdName =  mPdOrgVw4.getPdName();
+				  pdCode =  mPdOrgVw4.getPdCode();
+				  personId = mPdOrgVw4.getPersonId().toString();
+				  if(mTempMap.containsKey(pdName+"*"+personId)){
+					  mTempSet = (HashSet) mTempMap.get(pdName+"*"+personId);
+					  mTempSet.add(pdCode);
+				  }else{
+					  mTempSet.add(pdCode);
+				  }
+				  mTempMap.put(pdName+"*"+personId, mTempSet);
+			  }
+
+              LabelValueBean mLabelValueBean = null;
+              for (mIterator = mTempMap.entrySet().iterator(); mIterator.hasNext();) {
+                   Map.Entry entry = (Map.Entry) mIterator.next();
+                   String key = (String)entry.getKey();
+                   Set value = (Set)entry.getValue();
+                   int index = key.indexOf("*");
+                   pdName = key.substring(0, index);
+                   personId = key.substring(index+1, key.length());
+                   pdCode  = " (";
+                   boolean firstTime = true;
+                   for (Iterator mIter = value.iterator(); mIter.hasNext();) {
+					   if(firstTime){
+						   pdCode  = pdCode + (String) mIter.next();
+						   firstTime = false;
+					   }else{
+						   pdCode  = pdCode + ", " + (String) mIter.next();
+					   }
+
+				   }
+				   mLabelValueBean = new LabelValueBean(pdName + pdCode + ")", personId);
+                   mLabelValueBeanList.add(mLabelValueBean);
+              }
+		  } catch (Exception ex) {
+			 throw new ServiceImplException("ProgamDirectorServiceImpl", "getAllProgramDirectors", "Unable to obtain Program Director from the database!!! " + ex.toString());
+	      }
+	       return mLabelValueBeanList;
+    }
     /*public List getAllProgramDirectors(String cancerActivity, boolean mFormatPDs) {
 
 		  this.formatPds = true;
@@ -184,21 +195,21 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 				 HashMap mTempMap = new HashMap(mList.size());
 				 Iterator mIterator = mList.iterator();
 				 while(mIterator.hasNext() ) {
-				    PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
-				    mTempMap.put(mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw);
+				    PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
+				    mTempMap.put(mPdOrgVw4.getCayCode(), mPdOrgVw4);
 				 }
 				 mList = new ArrayList(mTempMap.values());
 			 }
 		    Iterator mIterator = mList.iterator();
             while(mIterator.hasNext() ) {
-				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
-				  if(mPdCaAsgnmtVw.getCayCode().equalsIgnoreCase(mLastCayCode)){
+				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
+				  if(mPdOrgVw4.getCayCode().equalsIgnoreCase(mLastCayCode)){
 				  }else{
 				    LabelValueBean mLabelValueBean;
-				    mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw.getCayCode());
+				    mLabelValueBean = new LabelValueBean(mPdOrgVw4.getCayCode(), mPdOrgVw4.getCayCode());
  			        mLabelValueBeanList.add(mLabelValueBean);
 				  }
- 			      mLastCayCode = mPdCaAsgnmtVw.getCayCode();
+ 			      mLastCayCode = mPdOrgVw4.getCayCode();
 			  }
 
 
@@ -220,9 +231,9 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
              Iterator mIterator = mList.iterator();
              while(mIterator.hasNext() ) {
-				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
+				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
 				  LabelValueBean mLabelValueBean;
-				  mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getOrgDesc(), mPdCaAsgnmtVw.getOrgId().toString());
+				  mLabelValueBean = new LabelValueBean(mPdOrgVw4.getOrgDesc(), new Long(mPdOrgVw4.getOrgId()).toString());
  			      mLabelValueBeanList.add(mLabelValueBean);
 			  }
 

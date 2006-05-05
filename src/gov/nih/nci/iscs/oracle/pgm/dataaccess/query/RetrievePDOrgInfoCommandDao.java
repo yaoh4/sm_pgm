@@ -89,15 +89,15 @@ public class RetrievePDOrgInfoCommandDao extends AccessCommandDao implements  Re
      */
     private Criteria buildCriteria(Session aSession, String  oPersonId, String  oCancerActivity) throws CommandDaoException {
 
-        Class mPdCaAsgnmtVw = null;
+        Class mPdOrgVw4 = null;
         Criteria mCriteria = null;
         try{
-            mPdCaAsgnmtVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw");
-		    mCriteria = aSession.createCriteria(mPdCaAsgnmtVw);
+            mPdOrgVw4 = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4");
+		    mCriteria = aSession.createCriteria(mPdOrgVw4);
 			mCriteria.add(Expression.eq("personId", new Long(oPersonId) ));
 			mCriteria.add(Expression.eq("cayCode", oCancerActivity.trim().toUpperCase() ));
 	    } catch (ClassNotFoundException e) {
-			throw new CommandDaoException("Unable to create PdCaAsgnmtVw class " + e.toString());
+			throw new CommandDaoException("Unable to create PdOrgVw4 class " + e.toString());
 	    } catch (Exception e) {
 			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
 	    }

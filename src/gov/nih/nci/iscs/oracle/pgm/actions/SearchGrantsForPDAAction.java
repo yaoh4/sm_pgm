@@ -46,6 +46,7 @@ import javax.servlet.http.HttpSession;
 public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 
   private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
+  private static int MAX_IND_ASSGNT_COUNT = 100;
 
 
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -53,36 +54,39 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 
      try{
        ActionForward mActionForward = super.executeAction(mapping, form, request, response);
+	   System.out.println("** mActionForward is **  " + mActionForward);
+	   if(mActionForward != null)
+	      return mActionForward;
 	   RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) form;
 	   String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
 
-	   if(mActionForward != null)
-	      return mActionForward;
-
-       String mLastAction = (String) request.getSession().getAttribute("lastAction");
-       if(mLastAction != null) {
-          if( mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ) {
-             mRetrieveGrantsForPDAForm.setRequestAction(mLastAction);
-		     return cancelled (mapping, form,  request, response);
-          }
-	   }
 
        if( mAction.equalsIgnoreCase(ApplicationConstants.CONTINUE_ACTION )) {
           mRetrieveGrantsForPDAForm.setQueryResults((List) new ArrayList());
           mRetrieveGrantsForPDAForm.setListGenerated("N");
           request.getSession().setAttribute("listGenerated", "N");
-          SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), mapping.getName());
+          SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), (RetrieveGrantsForm) mRetrieveGrantsForPDAForm, mapping.getName());
           return mapping.findForward("continue");
 	   }
 
        if(mRetrieveGrantsForPDAForm.getSelectedPageSize().trim().equals(ApplicationConstants.EMPTY_STRING)) {
 		  mRetrieveGrantsForPDAForm.setSelectedPageSize(new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE).toString());
 	   }
-       if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ) {
+       if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
+           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ){
 		   super.updateSelected (mapping, form,  request, response);
 
 		   return processPDAssigmnentAction(mapping, form, request, response);
        }
+
+       String mLastAction = (String) request.getSession().getAttribute("lastAction");
+       if(mLastAction != null) {
+          if( mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
+              mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ){
+              mRetrieveGrantsForPDAForm.setRequestAction(mLastAction);
+		     return returned (mapping, form,  request, response);
+          }
+	   }
      }catch (Exception ex) {
 		   throw new GrantSearchException("SearchGrantsForPDAAction", "executeAction", ex.toString(), request.getSession(), ex);
 	 }
@@ -104,7 +108,17 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	      SelectedGrants mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS  );
 
           if(mSelectedGrants.isEmpty()){
-	         super.logErrors(messages, "pdAssignmentaction", "errors.pdassign.action.select");
+             if (mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD )){
+				 super.logErrors(messages, "pdAssignmentaction", "errors.pdassign.action.select");
+			 }else{
+				 super.logErrors(messages, "pdAssignmentaction", "errors.portfolioassign.action.select");
+			 }
+	   	     this.saveMessages(request, messages);
+		     return mapping.findForward("continue");
+	      }
+          if (mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) &
+              mSelectedGrants.getSelectedGrants().entrySet().size() > MAX_IND_ASSGNT_COUNT){
+	         super.logErrors(messages, "pdAssignmentaction", "errors.indv.pdassign.max.count.error");
 	   	     this.saveMessages(request, messages);
 		     return mapping.findForward("continue");
 	      }
@@ -127,10 +141,12 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
 	   ActionForward mActionForward = super.search(mapping, form, request, response);
-	   RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) form;
 	   if(mActionForward != null)
 	      return mActionForward;
+
 	   ActionForm mFormToUse = form;
+
+       RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) mFormToUse;
 
        if(mRetrieveGrantsForPDAForm.getSearchButtonInitiated()) {
 		   mRetrieveGrantsForPDAForm.setSortColumn(ApplicationConstants.FULL_GRANT_NUMBER_SORT);
@@ -139,7 +155,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	           mRetrieveGrantsForPDAForm.setListGenerated("M");
 		       return  mapping.findForward("continue");
 	       }
-		   SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), mapping.getName());
+		   SearchGrantsActionHelper.resetSessionForSearch(request.getSession(), (RetrieveGrantsForm) mRetrieveGrantsForPDAForm, mapping.getName());
 	       mRetrieveGrantsForPDAForm.setSearchButtonInitiated(false);
 	   }
 
@@ -208,14 +224,35 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	   ActionForm mFormToUse = form;
 
        RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm  = (RetrieveGrantsForPDAForm) request.getSession().getAttribute("previousForm");
+	   //String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
+	   //request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
+       /*if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
+           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ) {
+          super.search(mRetrieveGrantsForPDAForm, ApplicationConstants.PD_ASSIGNMENT, request);
+       }*/
+       request.setAttribute("retrieveGrantsForPDAForm", (ActionForm) mRetrieveGrantsForPDAForm);
+       request.getSession().setAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST, new ArrayList());
+	   request.getSession().setAttribute("lastAction", ApplicationConstants.EMPTY_STRING);
+       return mapping.findForward("continue");
+
+   }
+
+   public ActionForward returned (ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                       HttpServletResponse response) throws GrantSearchException, Exception {
+
+ 	   ActionForward mActionForward = super.cancelled(mapping, form, request, response);
+
+	   ActionForm mFormToUse = form;
+       RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm  = (RetrieveGrantsForPDAForm) request.getSession().getAttribute("previousForm");
 	   String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
-       if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ) {
+	   request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
+       if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
+           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ) {
           super.search(mRetrieveGrantsForPDAForm, ApplicationConstants.PD_ASSIGNMENT, request);
        }
        request.setAttribute("retrieveGrantsForPDAForm", (ActionForm) mRetrieveGrantsForPDAForm);
-	   request.getSession().setAttribute("lastAction", ApplicationConstants.EMPTY_STRING);
-	   request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
        request.getSession().setAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST, new ArrayList());
+	   request.getSession().setAttribute("lastAction", ApplicationConstants.EMPTY_STRING);
        return mapping.findForward("continue");
 
    }

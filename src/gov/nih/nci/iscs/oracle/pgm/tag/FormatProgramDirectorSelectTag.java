@@ -46,7 +46,7 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
 
       if(!cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
 	     List mList = getPDListForCancerActivity(cancerActivity);
-	     if(mList.size() > 0) {
+         if(mList.size() > 0) {
 		    formatEmptySelect(buf, mList);
 		 } else {
 			disableSelect = true;
@@ -136,7 +136,7 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
 
  	// get the lookup infomation
      ProgamDirectorServiceImpl mProgamDirectorServiceImpl =  new ProgamDirectorServiceImpl(mApplicationContext);
- 	 List mList  = mProgamDirectorServiceImpl.getAllProgramDirectors(cancerActivity, false);
+ 	 List mList  = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity);
      return mList;
    }
 

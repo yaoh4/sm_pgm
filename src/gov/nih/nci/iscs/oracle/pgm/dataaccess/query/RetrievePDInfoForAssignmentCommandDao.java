@@ -60,15 +60,21 @@ public class RetrievePDInfoForAssignmentCommandDao extends AccessCommandDao impl
      * - execute the query and return the Query Page
      * @retrun aQueryPage - a QueryPage object that encapsulate the Pagination
      */
-    public QueryPage execute(String  oCancerActivity, String oUserId) {
+    public QueryPage execute(String  oCancerActivity, String oViewName, String oUserId) {
 
 	   QueryPage  mGrantsQueryPage = null;
+	   Criteria mCriteria = null;
 
        // get the session from the sessionFactory
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
        try {
 		   // build the query string from query object
-           Criteria mCriteria =  buildCriteria(mSession, oCancerActivity);
+		   if(oViewName.equalsIgnoreCase("pdOrgVw4")){
+			  mCriteria =  buildPdOrgVw4Criteria(mSession, oCancerActivity);
+		   }
+		   if(oViewName.equalsIgnoreCase("pdCaAsgnmtVw")){
+			  mCriteria =  buildPdCaAsgnmtVwCriteria(mSession, oCancerActivity);
+		   }
            mGrantsQueryPage = new QueryPage(mCriteria, ApplicationConstants.ALL_PAGES, 1);
 
 	   } catch (CommandDaoException ex) {
@@ -81,23 +87,46 @@ public class RetrievePDInfoForAssignmentCommandDao extends AccessCommandDao impl
 
     /*
      * Build the query object and build the UserQueryObject
+     * - Create class instance for PdOrgVw4
+     * - Create the Criteria object
+     * - build the GrantsQueryCriteria from the parfent Class
+     * throws a CommandDaoException
+     * @retrun Criteria - a Criteria object
+     */
+    private Criteria buildPdOrgVw4Criteria(Session aSession, String  oCancerActivity) throws CommandDaoException {
+
+        Class mPdOrgVw4 = null;
+        Criteria mCriteria = null;
+        try{
+            mPdOrgVw4 = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4");
+		    mCriteria = aSession.createCriteria(mPdOrgVw4);
+		    if(oCancerActivity != null &
+		       !oCancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
+				mCriteria.add(Expression.eq("cayCode", oCancerActivity.toUpperCase().trim()) );
+			}
+		    mCriteria.addOrder( Order.asc("pdName"));
+	    } catch (ClassNotFoundException e) {
+			throw new CommandDaoException("Unable to create mPdOrgVw4 class " + e.toString());
+	    } catch (Exception e) {
+			throw new CommandDaoException("Unable to create buildCriteria for Query " + e.toString());
+	    }
+		return mCriteria;
+	}
+    /*
+     * Build the query object and build the UserQueryObject
      * - Create class instance for PdCaAsgnmtVw
      * - Create the Criteria object
      * - build the GrantsQueryCriteria from the parfent Class
      * throws a CommandDaoException
      * @retrun Criteria - a Criteria object
      */
-    private Criteria buildCriteria(Session aSession, String  oCancerActivity) throws CommandDaoException {
+    private Criteria buildPdCaAsgnmtVwCriteria(Session aSession, String  oCancerActivity) throws CommandDaoException {
 
         Class mPdCaAsgnmtVw = null;
         Criteria mCriteria = null;
         try{
             mPdCaAsgnmtVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw");
 		    mCriteria = aSession.createCriteria(mPdCaAsgnmtVw);
-		    if(oCancerActivity != null &
-		       !oCancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
-				mCriteria.add(Expression.eq("cayCode", oCancerActivity.toUpperCase().trim()) );
-			}
 		    mCriteria.addOrder( Order.asc("pdName"));
 	    } catch (ClassNotFoundException e) {
 			throw new CommandDaoException("Unable to create PdCaAsgnmtVw class " + e.toString());
@@ -106,4 +135,5 @@ public class RetrievePDInfoForAssignmentCommandDao extends AccessCommandDao impl
 	    }
 		return mCriteria;
 	}
+
 }

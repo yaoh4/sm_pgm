@@ -8,6 +8,7 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.io.Serializable;
 import java.util.*;
+import java.text.DateFormat;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
@@ -222,10 +223,11 @@ public class SelectedGrants implements Cloneable {
     * Performs steps required before starting PD assignment; returns an error
     *  message indicating error to be displayed
     */
-    public Set processForPdAssignmentAction(TreeMap mAssignmentActionObjects, String[] pdAssignmentStartDates) {
+    public Set processForPdAssignmentAction(TreeMap mAssignmentActionObjects) {
 
      HashSet mErrorMessages = new HashSet();
      this.resetMarked();
+     System.out.println("*** in processForPdAssignmentAction and oSelectedGrants is ** " + oSelectedGrants);
      try {
         Iterator iterator = oSelectedGrants.entrySet().iterator();
         int index = 0;
@@ -239,24 +241,17 @@ public class SelectedGrants implements Cloneable {
 		      obj.getPdId().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING ) ){
 		      // do nothing
 		   }else{
-			   //validate Assignment Start Data
-			   String errorMsg = obj.validatePdAssignmentStartDate((String) pdAssignmentStartDates[dateIndex]);
-			   if(!errorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
-				   obj.setMarked(true);
-				   mErrorMessages.add(errorMsg);
-			   }else{
-				   PdAssignmentActionObject actionObj = new PdAssignmentActionObject();
-			       actionObj.setApplId(obj.getApplId());
-			       actionObj.setPdId(obj.getPdId());
-			       actionObj.setCancerActivity(obj.getCancerActivity());
-			       actionObj.setAssignmentCA(obj.getAssignmentCA());
-			       actionObj.setAssignmentDate(obj.getPdAssignmentStartDate());
-			       actionObj.setPdTransferCode(obj.getPdTransferCode());
-			       actionObj.setIndex(index);
-			       mAssignmentActionObjects.put(new Integer(index), actionObj);
-			       index++;
-			   }
-		   }
+			   PdAssignmentActionObject actionObj = new PdAssignmentActionObject();
+			   actionObj.setApplId(obj.getApplId());
+			   actionObj.setPdId(obj.getPdId());
+			   actionObj.setCancerActivity(obj.getCancerActivity());
+			   actionObj.setAssignmentCA(obj.getAssignmentCA());
+			   actionObj.setPdTransferCode(obj.getPdTransferCode());
+			   actionObj.setIndex(index);
+			   actionObj.setAssignmentDate(new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis()));
+			   mAssignmentActionObjects.put(new Integer(index), actionObj);
+			   index++;
+	       }
 		   dateIndex++;
 	    }
       } catch (Exception ex) {
@@ -384,29 +379,41 @@ public class SelectedGrants implements Cloneable {
 
         //mPDASearchResultObject.setPdAssignmentStartDate(pdAssignmentStartDate);
     }
+   /**
+    * Performs steps required before starting referral; returns an error
+    *  message indicating error to be displayed
+    */
+    //public void processKeyForPDAssignmentAction(String mKey, String pdAssignmentStartDate, boolean mSelected) {
+    public void processKeyForPortfolioAssignmentAction(String mPdId, String mAssignmentCA) {
+
+
+      for (Iterator iterator = oSelectedGrants.entrySet().iterator(); iterator.hasNext();) {
+         Map.Entry entry = (Map.Entry) iterator.next();
+         PDASearchResultObject mPDASearchResultObject = (PDASearchResultObject) entry.getValue();
+         mPDASearchResultObject.setSelected(true);
+		 mPDASearchResultObject.setPdId(mPdId);
+         mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
+      }
+    }
 
 
    /**
     * Performs steps required before starting referral; returns an error
     *  message indicating error to be displayed
     */
-    public void processPdForPDAssignmentAction(String mPdId, String mAssignmentCA, String mKey, boolean mSelected) {
+    public void processPdForPDAssignmentAction(String mPdId, String mAssignmentCA, String mKey, boolean mSelected, String pdIdForLoad) {
 
 		try{
            PDASearchResultObject mPDASearchResultObject= (PDASearchResultObject) oSelectedGrants.get(mKey);;
            if(!mSelected) {
-		      if(!mPDASearchResultObject.getSelected() ) {
+		      if(pdIdForLoad==null || pdIdForLoad.trim().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
                  mPDASearchResultObject.setPdId(mPdId);
                  mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
-                 //mPDASearchResultObject.setPdAssignmentStartDate(mPdAssignmentStartDate);
 		      }
 	      }else {
 		     mPDASearchResultObject.setPdId(mPdId);
              mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
-             //mPDASearchResultObject.setPdAssignmentStartDate(mPdAssignmentStartDate);
 	      }
-	    //}else {
-		//}
       } catch (Exception ex) {
 		logger.error("**** an exception has been generated in processPdForPDAssignmentAction ***" + ex.toString());
 	  }
@@ -430,10 +437,6 @@ public class SelectedGrants implements Cloneable {
 		   if(mPDASearchResultObject.getSelected() ){
 			  mPDASearchResultObject.setPdId(mPdId);
               mPDASearchResultObject.setAssignmentCA(mAssignmentCA);
-		   //} else {
-			   //  mPDASearchResultObject.setMarked(true);
-			   //   mErrorMsg = "errors.pdassignment.inavlid.ca.for.load";
-			   //}
 		   }
 
 	    }

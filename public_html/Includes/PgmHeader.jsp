@@ -20,8 +20,8 @@
          <% subject = "mailto:nci-now-l@list.nih.gov?subject=Referral Activity";
          } %>
          <% if(applicationName.equalsIgnoreCase("PD")){ %>
-             <img src="images/ReferralActivity.gif" alt="Referral Activity Logo" />
-         <% subject = "mailto:nci-now-l@list.nih.gov?subject=Program Director Transfer";
+             <img src="images/Logo_PDAssignment.gif" alt="PD Assignment (Non-Referral) Logo" />
+         <% subject = "mailto:nci-now-l@list.nih.gov?subject=PD Assignment";
          } %>
          
       </td>
@@ -30,7 +30,7 @@
             <tr>
                  
                    <% if(nciuser != null ) { %>
-                      <td nowrap width=10%>User: <b><%=nciuser.getFullName()%></b></td>
+                      <td nowrap width=10%>User: <b><%=nciuser.getAttribute("givenName") + " " +nciuser.getAttribute("lastName")%></b></td>
                    <% } else {%>  
                       <td nowrap width=10%>&nbsp;</td>
                    <%}%>
@@ -41,7 +41,14 @@
                    <td nowrap width=1%>&nbsp;</td>
                    <td width=10%> <a href="<%= subject %>">Send Comments</a></td>
                    <td nowrap width=1%>&nbsp;</td>
-                   <td width=10%><a href="#" onClick=window.open('/pgm/pgmhelp.pdf')>Help</A></td>
+                   <td width=10%>
+                   <% if(applicationName.equalsIgnoreCase("Referral")){ %>
+                       <a href="#" onClick=window.open('/pgm/pgmhelp.pdf')>Help</A>
+                   <% } %>
+                   <% if(applicationName.equalsIgnoreCase("PD")){ %>
+                       <a href="#" onClick=window.open('/pgm/PDAssignment.pdf')>Help</A>
+                   <% } %>
+                   </td>
                
             </tr>
          </table>

@@ -35,7 +35,7 @@ public class PdAssignmentActionObject {
 		this.pdId = ApplicationConstants.EMPTY_STRING;
 		this.results = ApplicationConstants.EMPTY_STRING;
 		this.cancerActivity = ApplicationConstants.EMPTY_STRING;
-		//this.assignmentDate = ApplicationConstants.EMPTY_STRING;
+		this.assignmentDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
 		this.assignmentCA = ApplicationConstants.EMPTY_STRING;
 		this.programDirector = ApplicationConstants.EMPTY_STRING;
 		this.grantNumber = ApplicationConstants.EMPTY_STRING;
@@ -75,11 +75,6 @@ public class PdAssignmentActionObject {
 			return ApplicationConstants.EMPTY_STRING;
 		return this.cancerActivity;
 	}
-   public String getFormattedAssignmentDate() {
-
-		String mFormattedDate = formatter.format(assignmentDate);
-		return mFormattedDate;
-   }
 
    public java.sql.Timestamp getAssignmentDate() {
 		if (assignmentDate == null)
@@ -87,7 +82,14 @@ public class PdAssignmentActionObject {
 		return this.assignmentDate;
    }
    public void setAssignmentDate(java.sql.Timestamp assignmentDate) {
+	   System.out.println("*** assignmentDate is *** " + assignmentDate);
 		this.assignmentDate = assignmentDate;
+   }
+   public String getFormattedAssignmentDate() {
+
+
+		String mFormattedDate = formatter.format(assignmentDate);
+		return mFormattedDate;
    }
 
    public String getAssignmentCA() {

@@ -333,8 +333,8 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
   	   }*/
 
        if(pdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) &
-          !validGrantNumber()) {
-   		     validationMessages.add("errors.pd.equired.criteria.null");
+          !validSrlNumber()) {
+   		     validationMessages.add("errors.pd.srl.required.criteria.null");
 			 return validationMessages;
 	   }
 
@@ -371,7 +371,7 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 			   validatePriorityRange = false;
 		   }
           if( this.priorityScoreTo.length() <= 0) {
-			  setPercentileTo(priorityScoreFrom);
+			  setPriorityScoreTo(priorityScoreFrom);
 		  }
 	   }
 

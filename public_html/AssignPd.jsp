@@ -8,10 +8,17 @@
   <%@ page import="org.apache.struts.action.Action" %> 
   <%@ page import="org.apache.struts.action.ActionErrors" %>
   <%@ page import="gov.nih.nci.iscs.oracle.pgm.forms.PdAssignmentForm" %>
+<jsp:useBean id="pdAssignmentForm" scope="request"
+                           class="gov.nih.nci.iscs.oracle.pgm.forms.PdAssignmentForm" />
 
 <html>
 <head>
-    <title>Program Director Transfer</title>
+    <logic:notEqual name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+       <title>Individual Assignment</title>
+    </logic:notEqual>
+    <logic:equal name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+       <title>Portfolio Assignment</title>
+    </logic:equal>
     <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
 
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
@@ -54,7 +61,13 @@
     </td>
   </tr>
   <tr>
-      <td width="600" align="left"><b> Program Director Transfer </B></td>
+    <logic:notEqual name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+       <td width="600" align="left"><H3>Individual Assignment</H3></td>
+    </logic:notEqual>
+    <logic:equal name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+       <td width="600" align="left"><H3>Portfolio Assignment</H3></td>
+    </logic:equal>
+
   </tr>
   <tr>
       <td width="20" align="right">&nbsp;</td>

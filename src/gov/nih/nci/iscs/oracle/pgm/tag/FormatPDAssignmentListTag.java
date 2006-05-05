@@ -40,13 +40,13 @@ public class FormatPDAssignmentListTag extends TagSupport {
   private List mPdAssignmentList;
   private ArrayList mAssignmentActionList;
   private PdAssignmentForm mForm;
-  private String formattedDate;
-  private Date today;
   public static String className = "";
   public static String borderClassName = "";
   public static String buttonClassName = "";
   private String grantsUrl="";
   private HashMap pdByCancerActivityMap = new HashMap();
+  private String mAction;
+  private String mLastAction;
 
   public void setKey(String key) {
 
@@ -77,9 +77,6 @@ public class FormatPDAssignmentListTag extends TagSupport {
 	    grantsUrl = ai.getApplicationKey("GRANTS_DETAILS_URL");
 	    request.getSession().setAttribute("grantsUrl", grantsUrl);
 	  }
-      today = new java.util.Date();
-      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-      formattedDate = formatter.format(today);
       mApplicationContext =  (ApplicationContext) sc.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
       mPdAssignmentList = (List) request.getSession().getAttribute("PdAssignmentList");
 	  String nullCancerActivity = null;
@@ -90,7 +87,9 @@ public class FormatPDAssignmentListTag extends TagSupport {
       mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
 	  mAssignmentActionList = (ArrayList) request.getSession().getAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST);;
 	  mForm = (PdAssignmentForm) request.getAttribute("pdAssignmentForm");
-	  StringBuffer buf = new StringBuffer();
+      mAction = mForm.getRequestAction();
+      mLastAction = (String) request.getSession().getAttribute("lastAction");
+      StringBuffer buf = new StringBuffer();
 
       String pdIdForLoad = mForm.getPdIdForLoad();
 	  if(action.equalsIgnoreCase(ApplicationConstants.FORMAT_TABLE)) {
@@ -115,6 +114,10 @@ public class FormatPDAssignmentListTag extends TagSupport {
            PDASearchResultObject sortedObj = (PDASearchResultObject) iterator.next();
            mKey = sortedObj.getApplId().toString() + sortedObj.getCancerActivity();
            PDASearchResultObject obj = (PDASearchResultObject) mSelectedGrants.get(mKey);
+           if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ||
+              mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO)){
+			   obj.setSelected(true);
+		   }
 	       formatPDAs(obj, buf, index);
 	       mSelectedGrants.setKey(index, mKey);
 	       index++;
@@ -136,8 +139,9 @@ public class FormatPDAssignmentListTag extends TagSupport {
 
 	  buf.append("<tr>");
       setClassForStyles(obj.getMarked());
-      if(obj.getSelected()) {
-		 buf.append("<td headers=\"header00\" width=\"3%\" class=" + className + "><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
+      if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ||
+         mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO)){
+		 buf.append("<td headers=\"header00\" width=\"3%\" class=" + className + "><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\" checked disabled></td>");
       } else {
 		 buf.append("<td headers=\"header00\" width=\"3%\" class=" + className + "><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
@@ -146,25 +150,26 @@ public class FormatPDAssignmentListTag extends TagSupport {
       buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a></td>");
 
       buf.append("<td headers=\"header02\" width=\"25%\" class=" + className + ">" + obj.getPdFullName() + "&nbsp;</td>");
-      buf.append("<td headers=\"header03\" width=\"10%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;");
+
+      if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD)||
+         mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD)){
+		  buf.append("<td headers=\"header03\" width=\"10%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;");
+	  }else{
+		  buf.append("<td headers=\"header03\" width=\"10%\" class=" + borderClassName + ">" + obj.getCancerActivity() + "&nbsp;");
+	  }
+
       buf.append("</td>");
 
-      buf.append("<td headers=\"header04\" width=\"27%\" class=" + className + ">" );
-      String pdIdControlName = "PrgIdMapped(" + mKey  + ")";;
-	  buf.append("<SELECT NAME=\""+ pdIdControlName + "\" SIZE=\"1\" >");
-
-
-      boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdFullName());
-      addPdSelect(buf, showAll, obj.getCancerActivity(), obj.getAssignmentCA() + obj.getPdId());
-	  buf.append("</td>");
-      formattedDate = (String) formatPdStartDate(obj.getPdAssignmentStartDate(), (String) mForm.getPdAssignmentStartIndexed(index));
-      String controlName = "pdAssignmentStartDate[" + index  + "]";
-
-      buf.append("<td headers=\"header05\" width=\"10%\" class=" + borderClassName + "><input type=\"textbox\" name = \"pdAssignmentStartDate\"  value=" + formattedDate + " >" + "&nbsp;");
-      buf.append("<a href=\"javascript:void(0)\" onclick=\"gfPop.fPopCalendar(document.pdAssignmentForm.pdAssignmentStartDate[" + index + "]);return false;\">");
-
-      buf.append("<img src=\"images/IconCalendar.gif\" width=\"16\" height=\"15\" border=\"0\" alt=\"Date Picker\" />");
-	  buf.append("</a></tr>");
+      if(mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD) ||
+         mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD)){
+    	  buf.append("<td headers=\"header04\" width=\"27%\" class=" + borderClassName + ">" );
+          String pdIdControlName = "PrgIdMapped(" + mKey  + ")";;
+	      buf.append("<SELECT NAME=\""+ pdIdControlName + "\" SIZE=\"1\" >");
+          boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdFullName());
+          addPdSelect(buf, showAll, obj.getCancerActivity(), obj.getAssignmentCA() + obj.getPdId());
+	      buf.append("</td>");
+	  }
+	  buf.append("</tr>");
 	  buf.append("\n");
   }
 
@@ -186,33 +191,35 @@ public class FormatPDAssignmentListTag extends TagSupport {
   }
 
   private void addPdSelect(StringBuffer buf, boolean showAll, String cancerActivity, String selectedPd) {
-	 buf.append("<option SELECTED value=");
-	 buf.append(ApplicationConstants.EMPTY_STRING);
-	 buf.append(">");
-	 buf.append(ApplicationConstants.EMPTY_STRING);
-     buf.append("</option>\n");
-     Iterator mIterator = null;
-     if(showAll){
-		 mIterator = mPdAssignmentList.iterator();
-	 } else {
-		 List mList = getPdAssignmentList(cancerActivity);
-		 mIterator = mList.iterator();
-	 }
 
-	 while(mIterator.hasNext() ){
-	    LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	    String mValue = (String) mLookUpValueBean.getValue();
-	    String mLabel = (String) mLookUpValueBean.getLabel();
-	    if(mValue.equalsIgnoreCase(selectedPd)) {
-	  	   buf.append("<option SELECTED value=");
-	    } else {
-	       buf.append("<option value=");
-	  	}
-	    buf.append(mValue);
-	  	buf.append(">");
-	    buf.append(mLabel);
-	    buf.append("</option>");
-     }
+
+		 buf.append("<option SELECTED value=");
+	     buf.append(ApplicationConstants.EMPTY_STRING);
+	     buf.append(">");
+	     buf.append(ApplicationConstants.EMPTY_STRING);
+         buf.append("</option>\n");
+         Iterator mIterator = null;
+         if(showAll){
+	    	 mIterator = mPdAssignmentList.iterator();
+	     } else {
+	    	 List mList = getPdAssignmentList(cancerActivity);
+	    	 mIterator = mList.iterator();
+	     }
+
+	    while(mIterator.hasNext() ){
+	       LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
+	       String mValue = (String) mLookUpValueBean.getValue();
+	       String mLabel = (String) mLookUpValueBean.getLabel();
+	       if(mValue.equalsIgnoreCase(selectedPd)) {
+	     	   buf.append("<option SELECTED value=");
+	       } else {
+	          buf.append("<option value=");
+	       }
+	       buf.append(mValue);
+	       buf.append(">");
+	       buf.append(mLabel);
+	       buf.append("</option>");
+        }
 
   }
 
@@ -247,27 +254,7 @@ public class FormatPDAssignmentListTag extends TagSupport {
 
   }
 
-  private String formatPdStartDate(Date pdStartDate, String formDate) {
 
-      SimpleDateFormat formatter = new SimpleDateFormat("MM/dd/yyyy");
-      today = new java.util.Date();
-      String formattedDate = "";
-
-      //if(pdStartDate == null ){
-	  if(formDate.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) || formDate == null) {
-         pdStartDate = today;
-         return formatter.format(pdStartDate);
-	   }else{
-	     return formDate;
-	   }
-	  /*}else{
-		  return formatter.format(pdStartDate);
-	  }*/
-
-
-	  //return formattedDate;
-
-  }
   private void setClassForStyles(boolean marked) {
 	  if(marked){
 		  className = "listCellError";

@@ -15,13 +15,21 @@
     <!--Start Search/Clear Buttons-->
       <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
         <tr> 
-          <td width="80%" align="right">
-               <input class="button2a" type="button" value="Assign"  onclick="setAssignmentAction('executeAssignment');"/></td>
-	  </td> 
-          <td nowrap width="5">&nbsp;</td>
-         <td align="left">
-               <input class="button2a" type="button" value="Cancel"  onclick="setCurrentReferralAction('cancel');"/></td>
-         </td>               
-        </tr>
+                <logic:notEqual name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+                   <td width="80%" align="right">
+                     <input class="button2a" type="button" value="Assign"  onclick="setAssignmentAction('executeAssignment');"/></td>
+	           </td> 
+                  <td nowrap width="5">&nbsp;</td>
+                  <td align="left">
+                     <input class="button2a" type="button" value="Cancel"  onclick="setCurrentReferralAction('cancel');"/></td>
+                  </td>               
+	        </logic:notEqual> 
+                <logic:equal name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
+                  <td align="right" width="75%">
+                     <input class="button2a" type="button" value="Cancel"  onclick="setCurrentReferralAction('cancel');"/></td>
+                  </td>               
+                  <td align="right" width="25%"> &nbsp; </td>
+	        </logic:equal> 
+       </tr>
   </table>
     <!--End Criteria-->

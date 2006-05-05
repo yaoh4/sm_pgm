@@ -57,6 +57,7 @@ public class AssignPDAction extends NciPgmAction {
   String mAction = null;
   ActionMessages messages;
   ApplicationContext oApplicationContext;
+  private boolean portfolioExecution = false;
   private static Logger logger = LogManager.getLogger(AssignPDAction.class);
 
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -69,10 +70,14 @@ public class AssignPDAction extends NciPgmAction {
 
 	   performInitialization(form, request);
 
-       if( mAction.equalsIgnoreCase("assignPD" ))
-           return initializeSelection(mapping, form, request, response);
+       if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
+           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ){
+            return initializeSelection(mapping, form, request, response);
+	   }
        if( mAction.equalsIgnoreCase(ApplicationConstants.EXECUTE_ASSIGN ))
            return executeAssignmentAction(mapping, form, request, response);
+       if( mAction.equalsIgnoreCase(ApplicationConstants.EXECUTE_PORTFOLIO_ASSIGNMENT ))
+           return executePortfolioAssignmentAction(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.LOAD_ASSIGNMENTS ))
            return loadAssignmentAction(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.ACTION_CANCEL ) ||
@@ -90,24 +95,34 @@ public class AssignPDAction extends NciPgmAction {
       return mapping.findForward("continue");
 
    }
+
+
    public ActionForward executeAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
+	   String assignmentType =  (String) request.getSession().getAttribute("assignmentType");
+       String mErrorMsg = ApplicationConstants.EMPTY_STRING;
 	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) form;
        messages = new ActionMessages();
        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
 	   // mark all seleceted grants
-	   markSelectedGrants(mPdAssignmentForm);
-  	   // process PdIds
-	   processPdIds();
-       //processPdIds();
+	   if(!portfolioExecution ) {
+		   mErrorMsg=markSelectedGrants(mPdAssignmentForm);
+		   if(!mErrorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+              super.logErrors(messages, "validation", mErrorMsg);
+              this.saveMessages(request, messages);
+              return mapping.findForward("continue");
+		   }
+  	       // process PdIds
+	       processPdIds();
+	   }
        mAssignmentActionObjects = new TreeMap();
-       Set errorMessages = mSelectedGrants.processForPdAssignmentAction(mAssignmentActionObjects, mPdAssignmentForm.getPdAssignmentStartDate());
+       Set errorMessages = mSelectedGrants.processForPdAssignmentAction(mAssignmentActionObjects);
        if(errorMessages.size() > 0){
 		   Iterator iter = errorMessages.iterator();
 		  while(iter.hasNext()){
-		      String errorMsg = (String) iter.next();
-	          super.logErrors(messages, "validation", errorMsg);
+		      mErrorMsg = (String) iter.next();
+	          super.logErrors(messages, "validation", mErrorMsg);
               this.saveMessages(request, messages);
 		  }
 		  return mapping.findForward("continue");
@@ -136,6 +151,24 @@ public class AssignPDAction extends NciPgmAction {
 
    }
 
+   public ActionForward executePortfolioAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
+                                       HttpServletResponse response) throws Exception {
+
+       messages = new ActionMessages();
+	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) request.getAttribute("pdAssignmentForm");
+       String pdIdForLoad = mPdAssignmentForm.getPdIdForLoad();
+       if(pdIdForLoad == null || pdIdForLoad.trim().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
+          super.logErrors(messages, "validation", "errors.no.asignment.pd.selected");
+	   	  this.saveMessages(request, messages);
+	   }else{
+		   mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
+	       mSelectedGrants.processKeyForPortfolioAssignmentAction(pdIdForLoad.substring(2), pdIdForLoad.substring(0,2));
+	       portfolioExecution = true;
+	   }
+	   return executeAssignmentAction(mapping, form, request, response);
+
+   }
+
    public ActionForward initializeSelection (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
@@ -160,25 +193,35 @@ public class AssignPDAction extends NciPgmAction {
        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
        mSelectedGrants.resetMarked();
   	   // process PdIds
-       processPdIds();
-	   return mapping.findForward("continue");
+	   if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ){
+          processPdIds();
+	   }
+       return mapping.findForward("continue");
     }
 
    public ActionForward loadAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
 	   // mark all seleceted grants
+	   String assignmentType =  (String) request.getSession().getAttribute("assignmentType");
        messages = new ActionMessages();
        String mErrorMsg = ApplicationConstants.EMPTY_STRING;
 	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) form;
        mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
-	    markSelectedGrants(mPdAssignmentForm);
-        String pdIdForLoad = mPdAssignmentForm.getPdIdForLoad();
+	   mErrorMsg = markSelectedGrants(mPdAssignmentForm);
+	   if(!mErrorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+          super.logErrors(messages, "validation", mErrorMsg);
+          this.saveMessages(request, messages);
+          return mapping.findForward("continue");
+	   }
+       String pdIdForLoad = mPdAssignmentForm.getPdIdForLoad();
         if(pdIdForLoad != null) {
            try {
 	          mErrorMsg = mSelectedGrants.processLoadForPDAssignmentAction(pdIdForLoad.substring(2), pdIdForLoad.substring(0,2));
 		   } catch(Exception ex) {
-	          mErrorMsg= mSelectedGrants.processLoadForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING);
+               super.logErrors(messages, "validation", "errors.no.asignment.pd.selected");
+	   	       this.saveMessages(request, messages);
+               //mErrorMsg= mSelectedGrants.processLoadForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING);
 	       }
 	    }
        if(!mErrorMsg.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
@@ -189,6 +232,7 @@ public class AssignPDAction extends NciPgmAction {
        processPdIds();
        return mapping.findForward("continue");
 
+
    }
 
    public ActionForward cancelAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -197,7 +241,7 @@ public class AssignPDAction extends NciPgmAction {
 	   request.getSession().setAttribute(ApplicationConstants.ASSIGNMENT_ACTION_HASH, new TreeMap());
 	   request.getSession().setAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST, new ArrayList());
        request.getSession().setAttribute("listGenerated", "Y");
-       return mapping.findForward(ApplicationConstants.ACTION_CANCEL);
+       return mapping.findForward(ApplicationConstants.ACTION_RETURN);
 
    }
 
@@ -213,6 +257,7 @@ public class AssignPDAction extends NciPgmAction {
 
 	   mPdAssignmentForm = (PdAssignmentForm) form;
 	   mAssignmentActionList = (ArrayList) request.getSession().getAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST);;
+	   portfolioExecution = false;
 	   // this should not happen
 	   if( mAssignmentActionList == null) {
            mAssignmentActionList  =  new ArrayList();
@@ -228,7 +273,8 @@ public class AssignPDAction extends NciPgmAction {
    }
 
 
-   private void markSelectedGrants(PdAssignmentForm mPdAssignmentForm) {
+
+   private String markSelectedGrants(PdAssignmentForm mPdAssignmentForm) {
 
        mSelectedGrants.resetSelected();
        try{
@@ -237,31 +283,34 @@ public class AssignPDAction extends NciPgmAction {
               for(int i=0; i<mSelectedIndx.length; i++) {
 	              String mKey = mSelectedIndx[i];
 	              if(mKey != null) {
-			    	 //mSelectedGrants.processKeyForPDAssignmentAction(mKey, (String) mPdAssignmentForm.getPdAssignmentStartDateMapped(mKey),  true);
 			    	 mSelectedGrants.processKeyForPDAssignmentAction(mKey,  true);
 				  }
 			   }
-		    }
+			   return ApplicationConstants.EMPTY_STRING;
+		    }else{
+				return "errors.no.pd.assignment.selected";
+			}
 	    }catch (Exception ex) {
 	        logger.error("An error occurred in markSelectedGrants " + ex.toString());
    	    }
+	    return ApplicationConstants.EMPTY_STRING;
+
 	}
 
    private void processPdIds() {
 
         try{
+           String pdIdForLoad = mPdAssignmentForm.getPdIdForLoad();
 		   Iterator iter = mPdAssignmentForm.getPrgIdsMap().entrySet().iterator();
 		   while(iter.hasNext()){
 			   Map.Entry entry = (Map.Entry)iter.next();
 			   String mKey = (String) entry.getKey();
 			   String mPdId = (String) entry.getValue();
-	           //String mPdAssignmentStartDate = (String) mPdAssignmentForm.getPdAssignmentStartDateMapped(mKey);
 	           try {
 				  if(mPdId == null ||  mPdId.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ) {
-                     //mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, mKey, false, mPdAssignmentStartDate);
-                     mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, mKey, false);
+                     mSelectedGrants.processPdForPDAssignmentAction(ApplicationConstants.EMPTY_STRING, ApplicationConstants.EMPTY_STRING, mKey, false, pdIdForLoad);
 				  }else {
-	                 mSelectedGrants.processPdForPDAssignmentAction(mPdId.substring(2), mPdId.substring(0,2), mKey, false);
+	                 mSelectedGrants.processPdForPDAssignmentAction(mPdId.substring(2), mPdId.substring(0,2), mKey, false, pdIdForLoad);
 				  }
 			   } catch (Exception ex) {
 				  logger.error("**** an exception has been generated in processPdIds ***" + ex.toString());

@@ -181,15 +181,21 @@ public static void resetSortParameters(HttpSession session, RetrieveGrantsForm n
 public static void resetSession(HttpSession session, RetrieveGrantsForm newForm, String mappingAction, boolean resetSort) {
 
    session.setAttribute(ApplicationConstants.OLD_SEARCH_FORM, newForm );
-   resetSessionForSearch(session, mappingAction);
+   resetSessionForSearch(session, newForm mappingAction);
    if(resetSort){
 	   resetSortParameters(session, newForm);
    }
  }
 
-public static void resetSessionForSearch(HttpSession session, String mappingAction) {
+public static void resetSessionForSearch(HttpSession session, RetrieveGrantsForm newForm, String mappingAction) {
 
    PaginationObject mPaginationObject = new PaginationObject();
+   String lastPageSize = (String) session.getAttribute("LAST_PAGE_SIZE");
+   if(lastPageSize==null || lastPageSize.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)){
+   }else{
+	   mPaginationObject.setPageSize(new Integer(lastPageSize));
+   }
+
    mPaginationObject.setPageNumber(new Integer(ApplicationConstants.FIRST_PAGE));
    session.setAttribute(ApplicationConstants.CURRENT_PAGE_SIZE, new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE));
 
