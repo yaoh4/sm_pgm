@@ -37,292 +37,6 @@
             </meta> 
         </key-property>
         <key-property 
-            name="fullGrantNum" 
-            column="FULL_GRANT_NUM" 
-            type="java.lang.String"
-            length="19"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="FULL_GRANT_NUM"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="rfaPaNumber" 
-            column="RFA_PA_NUMBER" 
-            type="java.lang.String"
-            length="10"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="RFA_PA_NUMBER"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="councilMeetingDate" 
-            column="COUNCIL_MEETING_DATE" 
-            type="java.lang.String"
-            length="6"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="COUNCIL_MEETING_DATE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="firstName" 
-            column="FIRST_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="FIRST_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="miName" 
-            column="MI_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="MI_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="lastName" 
-            column="LAST_NAME" 
-            type="java.lang.String"
-            length="30"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="LAST_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="irgPercentileNum" 
-            column="IRG_PERCENTILE_NUM" 
-            type="java.math.BigDecimal"
-            length="5"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="IRG_PERCENTILE_NUM"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="priorityScoreNum" 
-            column="PRIORITY_SCORE_NUM" 
-            type="java.lang.Integer"
-            length="3"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="PRIORITY_SCORE_NUM"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="irgCode" 
-            column="IRG_CODE" 
-            type="java.lang.String"
-            length="4"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="IRG_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="irgFlexCode" 
-            column="IRG_FLEX_CODE" 
-            type="java.lang.String"
-            length="1"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="IRG_FLEX_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="groupCode" 
-            column="GROUP_CODE" 
-            type="java.lang.String"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="GROUP_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="applTypeCode" 
-            column="APPL_TYPE_CODE" 
-            type="java.lang.String"
-            length="1"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="APPL_TYPE_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="adminPhsOrgCode" 
-            column="ADMIN_PHS_ORG_CODE" 
-            type="java.lang.String"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="ADMIN_PHS_ORG_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="activityCode" 
-            column="ACTIVITY_CODE" 
-            type="java.lang.String"
-            length="3"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="ACTIVITY_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="serialNum" 
-            column="SERIAL_NUM" 
-            type="java.lang.Integer"
-            length="6"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="SERIAL_NUM"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="supportYear" 
-            column="SUPPORT_YEAR" 
-            type="java.lang.Integer"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="SUPPORT_YEAR"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="suffixCode" 
-            column="SUFFIX_CODE" 
-            type="java.lang.String"
-            length="4"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="SUFFIX_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="applStatusCode" 
-            column="APPL_STATUS_CODE" 
-            type="java.lang.String"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="APPL_STATUS_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="applStatusGroupCode" 
-            column="APPL_STATUS_GROUP_CODE" 
-            type="java.lang.String"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="APPL_STATUS_GROUP_CODE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="fy" 
-            column="FY" 
-            type="java.lang.Integer"
-            length="4"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="FY"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="ipf" 
-            column="IPF" 
-            type="java.lang.Long"
-            length="10"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="IPF"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="orgName" 
-            column="ORG_NAME" 
-            type="java.lang.String"
-            length="40"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="ORG_NAME"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="institutionCity" 
-            column="INSTITUTION_CITY" 
-            type="java.lang.String"
-            length="35"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="INSTITUTION_CITY"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="institutionState" 
-            column="INSTITUTION_STATE" 
-            type="java.lang.String"
-            length="2"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="INSTITUTION_STATE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="projectTitle" 
-            column="PROJECT_TITLE" 
-            type="java.lang.String"
-            length="81"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="PROJECT_TITLE"
-            </meta> 
-        </key-property>
-        <key-property 
-            name="legacySourceFile" 
-            column="LEGACY_SOURCE_FILE" 
-            type="java.lang.String"
-            length="20"
-        >
-            <meta attribute="field-description">
-               @hibernate.property
-                column="LEGACY_SOURCE_FILE"
-            </meta> 
-        </key-property>
-        <key-property 
             name="cayCode" 
             column="CAY_CODE" 
             type="java.lang.String"
@@ -333,7 +47,296 @@
                 column="CAY_CODE"
             </meta> 
         </key-property>
-        <key-property 
+    </composite-id>
+        
+        <property 
+            name="fullGrantNum" 
+            column="FULL_GRANT_NUM" 
+            type="java.lang.String"
+            length="19"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="FULL_GRANT_NUM"
+            </meta> 
+        </property>
+        <property 
+            name="rfaPaNumber" 
+            column="RFA_PA_NUMBER" 
+            type="java.lang.String"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="RFA_PA_NUMBER"
+            </meta> 
+        </property>
+        <property 
+            name="councilMeetingDate" 
+            column="COUNCIL_MEETING_DATE" 
+            type="java.lang.String"
+            length="6"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="COUNCIL_MEETING_DATE"
+            </meta> 
+        </property>
+        <property 
+            name="firstName" 
+            column="FIRST_NAME" 
+            type="java.lang.String"
+            length="30"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="FIRST_NAME"
+            </meta> 
+        </property>
+        <property 
+            name="miName" 
+            column="MI_NAME" 
+            type="java.lang.String"
+            length="30"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="MI_NAME"
+            </meta> 
+        </property>
+        <property 
+            name="lastName" 
+            column="LAST_NAME" 
+            type="java.lang.String"
+            length="30"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="LAST_NAME"
+            </meta> 
+        </property>
+        <property 
+            name="irgPercentileNum" 
+            column="IRG_PERCENTILE_NUM" 
+            type="java.math.BigDecimal"
+            length="5"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_PERCENTILE_NUM"
+            </meta> 
+        </property>
+        <property 
+            name="priorityScoreNum" 
+            column="PRIORITY_SCORE_NUM" 
+            type="java.lang.Integer"
+            length="3"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PRIORITY_SCORE_NUM"
+            </meta> 
+        </property>
+        <property 
+            name="irgCode" 
+            column="IRG_CODE" 
+            type="java.lang.String"
+            length="4"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="irgFlexCode" 
+            column="IRG_FLEX_CODE" 
+            type="java.lang.String"
+            length="1"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IRG_FLEX_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="groupCode" 
+            column="GROUP_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="GROUP_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="applTypeCode" 
+            column="APPL_TYPE_CODE" 
+            type="java.lang.String"
+            length="1"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="APPL_TYPE_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="adminPhsOrgCode" 
+            column="ADMIN_PHS_ORG_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ADMIN_PHS_ORG_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="activityCode" 
+            column="ACTIVITY_CODE" 
+            type="java.lang.String"
+            length="3"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ACTIVITY_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="serialNum" 
+            column="SERIAL_NUM" 
+            type="java.lang.Integer"
+            length="6"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="SERIAL_NUM"
+            </meta> 
+        </property>
+        <property 
+            name="supportYear" 
+            column="SUPPORT_YEAR" 
+            type="java.lang.Integer"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="SUPPORT_YEAR"
+            </meta> 
+        </property>
+        <property 
+            name="suffixCode" 
+            column="SUFFIX_CODE" 
+            type="java.lang.String"
+            length="4"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="SUFFIX_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="applStatusCode" 
+            column="APPL_STATUS_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="APPL_STATUS_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="applStatusGroupCode" 
+            column="APPL_STATUS_GROUP_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="APPL_STATUS_GROUP_CODE"
+            </meta> 
+        </property>
+        <property 
+            name="fy" 
+            column="FY" 
+            type="java.lang.Integer"
+            length="4"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="FY"
+            </meta> 
+        </property>
+        <property 
+            name="ipf" 
+            column="IPF" 
+            type="java.lang.Long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="IPF"
+            </meta> 
+        </property>
+        <property 
+            name="orgName" 
+            column="ORG_NAME" 
+            type="java.lang.String"
+            length="40"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ORG_NAME"
+            </meta> 
+        </property>
+        <property 
+            name="institutionCity" 
+            column="INSTITUTION_CITY" 
+            type="java.lang.String"
+            length="35"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="INSTITUTION_CITY"
+            </meta> 
+        </property>
+        <property 
+            name="institutionState" 
+            column="INSTITUTION_STATE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="INSTITUTION_STATE"
+            </meta> 
+        </property>
+        <property 
+            name="projectTitle" 
+            column="PROJECT_TITLE" 
+            type="java.lang.String"
+            length="81"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PROJECT_TITLE"
+            </meta> 
+        </property>
+        <property 
+            name="legacySourceFile" 
+            column="LEGACY_SOURCE_FILE" 
+            type="java.lang.String"
+            length="20"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="LEGACY_SOURCE_FILE"
+            </meta> 
+        </property>
+
+        <property 
             name="roleUsageCode" 
             column="ROLE_USAGE_CODE" 
             type="java.lang.String"
@@ -343,8 +346,8 @@
                @hibernate.property
                 column="ROLE_USAGE_CODE"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdNpeId" 
             column="PD_NPE_ID" 
             type="java.lang.Long"
@@ -354,8 +357,8 @@
                @hibernate.property
                 column="PD_NPE_ID"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdNpnId" 
             column="PD_NPN_ID" 
             type="java.lang.Long"
@@ -365,8 +368,8 @@
                @hibernate.property
                 column="PD_NPN_ID"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdLastName" 
             column="PD_LAST_NAME" 
             type="java.lang.String"
@@ -376,8 +379,8 @@
                @hibernate.property
                 column="PD_LAST_NAME"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdFirstName" 
             column="PD_FIRST_NAME" 
             type="java.lang.String"
@@ -387,8 +390,8 @@
                @hibernate.property
                 column="PD_FIRST_NAME"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdMiName" 
             column="PD_MI_NAME" 
             type="java.lang.String"
@@ -398,8 +401,8 @@
                @hibernate.property
                 column="PD_MI_NAME"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdFullName" 
             column="PD_FULL_NAME" 
             type="java.lang.String"
@@ -409,8 +412,8 @@
                @hibernate.property
                 column="PD_FULL_NAME"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdStartDate" 
             column="PD_START_DATE" 
             type="java.sql.Timestamp"
@@ -420,8 +423,8 @@
                @hibernate.property
                 column="PD_START_DATE"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdNonId" 
             column="PD_NON_ID" 
             type="java.lang.Long"
@@ -431,8 +434,8 @@
                @hibernate.property
                 column="PD_NON_ID"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdOrgName" 
             column="PD_ORG_NAME" 
             type="java.lang.String"
@@ -442,8 +445,8 @@
                @hibernate.property
                 column="PD_ORG_NAME"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="pdTransferInitialCode" 
             column="PD_TRANSFER_INITIAL_CODE" 
             type="java.lang.String"
@@ -453,8 +456,8 @@
                @hibernate.property
                 column="PD_TRANSFER_INITIAL_CODE"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="currentFutureBoardFlag" 
             column="CURRENT_FUTURE_BOARD_FLAG" 
             type="java.lang.String"
@@ -464,8 +467,8 @@
                @hibernate.property
                 column="CURRENT_FUTURE_BOARD_FLAG"
             </meta> 
-        </key-property>
-        <key-property 
+        </property>
+        <property 
             name="withdrawnFlag" 
             column="WITHDRAWN_FLAG" 
             type="java.lang.String"
@@ -475,8 +478,7 @@
                @hibernate.property
                 column="WITHDRAWN_FLAG"
             </meta> 
-        </key-property>
-    </composite-id>    
+        </property>
 
 
     <!-- associations -->
