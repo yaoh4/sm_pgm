@@ -166,6 +166,7 @@ public_html/Includes/searchCriteriaRightforReferral.jsp -text
 public_html/Includes/selectionButtons.jsp -text
 public_html/JavascriptFiles.js -text
 public_html/NextRecordAction.do.jsp -text
+public_html/PDAssignment.pdf -text svneol=unset#unset
 public_html/PgmMgmtQuickGuide.pdf -text svneol=unset#unset
 public_html/RejectReferral.jsp -text
 public_html/RejectReferralComplete.jsp -text
@@ -271,6 +272,8 @@ public_html/images/IconHelp.gif -text
 public_html/images/LogoNCI.gif -text
 public_html/images/LogoYourGrantsLeft.gif -text
 public_html/images/LogoYourGrantsRight.gif -text
+public_html/images/Logo_PDAssignment.gif -text
+public_html/images/Logo_PDAssignment.jpg -text
 public_html/images/ReferralActivity.gif -text
 public_html/images/ReferralActivity.jpg -text
 public_html/images/TabAssignmentMatrixOff.gif -text
