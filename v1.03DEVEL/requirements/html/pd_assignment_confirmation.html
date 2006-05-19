@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>PD Assignment Confirmation</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="referral_pd_assignment_style.css" type="text/css" />
+</head>
+<body>
+
+<script langugage="JavaScript" type="text/JavaScript">
+	function changeStyle(id, newStyle) {
+		identity=document.getElementById(id);
+		identity.className=newStyle;
+		}		
+</script>
+
+<div id="header">
+	<table cellspacing="0">
+		<tr>
+			<td id="logo">
+				<a href="#"><img src="#" width="97" height="29" alt="PPM Logo" border="0" /></a>
+			</td>
+			<td id="pageName">
+				PD Assignment Confirmation
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="globalNav">
+	<table cellspacing="0">
+		<tr>
+			<td><a href="referral_query.html">Referral Activity</a></td>
+			<td id="lastItem"><a href="#">PD Assignment</a></td>
+		</tr>
+	</table>
+</div>
+
+<div class="subheader">
+	<a href="#" onClick="javascript:changeStyle('results', 'show'); javascript:changeStyle('resultsExpand', 'hide'); javascript:changeStyle('resultsCollapse', 'show');"><span class="hide" id="resultsExpand"><img src="images/plus.gif" alt="Expand" border="0" width="13" height="13" /></span></a> 
+	<a href="#" onClick="javascript:changeStyle('results', 'hide'); javascript:changeStyle('resultsCollapse', 'hide'); javascript:changeStyle('resultsExpand', 'show');"><span class="show" id="resultsCollapse"><img src="images/minus.gif" alt="Collapse" border="0" width="13" height="13" /></span></a> 
+	PD Assignment Confirmation
+</div>
+
+<div id="results">
+	<div class="controls">
+		<table cellspacing="0">
+			<tr>
+				<td class="label">
+					Results Shown:  
+				</td>
+				<td>
+					1 to 5 of 269
+				</td>
+			</tr>
+			<tr> 
+				<td class="label">
+					No. of Grants per Page:
+				</td>
+				<td>
+					5
+				</td>
+			</tr>
+			<tr>
+				<td class="label">
+					View Results Page:
+				</td>
+				<td>
+					<a href="#"><< first</a> | 
+					<a href="#">< prev</a> | 
+					<a href="#">next ></a> | 
+					<a href="#">last >></a>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">  
+					Current Sort:
+				</td>
+				<td>
+					Grant Number
+				</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="data">
+		<table cellspacing="0">
+			<tr>
+				<th><a href="#">Grant Number</a></th>
+				<th><a href="#">PI Name</a></th>
+				<th><a href="#">PD</a></th>
+				<th><a href="#">CA</a></th>
+				<th><a href="#">Start Date</a></th>
+				<th><a href="#">Assignment Results</a></th>
+			</tr>
+			<tr>
+				<td title="Grant Number">1234567890</td>
+				<td title="PI Name">Louise Langley</td>
+				<td title="PD">DeeDee Dixon</td>
+				<td title="CA">BC</td>
+				<td title="Start Date">01/21/2004</td>
+				<td title="Assignment Results">Success</td>
+			</tr>
+			<tr>
+				<td title="Grant Number">1234567891</td>
+				<td title="PI Name">Angie Anderson</td>
+				<td title="PD">Suzy Smith</td>
+				<td title="CA">DE</td>
+				<td title="Start Date">01/15/2004</td>
+				<td title="Assignment Results">Success</td>
+			</tr>
+			<tr>
+				<td title="Grant Number">1234567892</td>
+				<td title="PI Name">Carl Carlson</td>
+				<td title="PD">Bill Williamson</td>
+				<td title="CA">AB</td>
+				<td title="Start Date">01/22/2004</td>
+				<td title="Assignment Results">Success</td>
+			</tr>
+			<tr class="fail">
+				<td title="Grant Number">1234567893</td>
+				<td title="PI Name">Maggie Miller</td>
+				<td title="PD">Jenny Jenkins</td>
+				<td title="CA">EF</td>
+				<td title="Start Date">01/27/2004</td>
+				<td title="Assignment Results">Failure</td>
+			</tr>
+			<tr>
+				<td title="Grant Number">1234567894</td>
+				<td title="PI Name">Oliver O'Connell</td>
+				<td title="PD">Mark McIntyre</td>
+				<td title="CA">CD</td>
+				<td title="Start Date">01/23/2004</td>
+				<td title="Assignment Results">Success</td>
+			</tr>
+		</table>
+	</div>
+	
+	<div class="button">
+		<a href="#">Finish</a>
+	</div>
+</div>
+
+<div id="footer">
+	<img src="images/LogoNCI.gif" width="81" height="54" alt="" />
+</div>
+
+</body>
+</html>

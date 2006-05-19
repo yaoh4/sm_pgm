@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
+    
+<hibernate-mapping>
+<!-- 
+    Created by the Middlegen Hibernate plugin
+
+    http://boss.bekk.no/boss/middlegen/
+    http://hibernate.sourceforge.net/
+-->
+
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4" 
+    table="PD_ORG_VW4"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="PD_ORG_VW4"
+    </meta>
+
+    <composite-id>
+        <meta attribute="class-description" inherit="false">
+           @hibernate.id
+            generator-class="assigned"
+        </meta>
+        <key-property 
+            name="npeId" 
+            column="NPE_ID" 
+            type="long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="NPE_ID"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdCode" 
+            column="PD_CODE" 
+            type="java.lang.String"
+            length="2"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_CODE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdName" 
+            column="PD_NAME" 
+            type="java.lang.String"
+            length="93"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_NAME"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="personId" 
+            column="PERSON_ID" 
+            type="long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PERSON_ID"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="orgId" 
+            column="ORG_ID" 
+            type="long"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ORG_ID"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="orgDesc" 
+            column="ORG_DESC" 
+            type="java.lang.String"
+            length="75"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ORG_DESC"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="orgAbbrv" 
+            column="ORG_ABBRV" 
+            type="java.lang.String"
+            length="10"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="ORG_ABBRV"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdStartDate" 
+            column="PD_START_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_START_DATE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="pdEndDate" 
+            column="PD_END_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="PD_END_DATE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="cayCode" 
+            column="CAY_CODE" 
+            type="java.lang.String"
+            length="8"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="CAY_CODE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="cayStartDate" 
+            column="CAY_START_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="CAY_START_DATE"
+            </meta> 
+        </key-property>
+        <key-property 
+            name="cayEndDate" 
+            column="CAY_END_DATE" 
+            type="java.sql.Timestamp"
+            length="7"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="CAY_END_DATE"
+            </meta> 
+        </key-property>
+    </composite-id>    
+
+
+    <!-- associations -->
+
+</class>
+</hibernate-mapping>

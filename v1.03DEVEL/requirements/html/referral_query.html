@@ -1,0 +1,380 @@
+<?xml version="1.0" encoding="iso-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+	<title>Referral Activity Query</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
+	<link rel="stylesheet" href="referral_pd_assignment_style.css" type="text/css" />
+</head>
+<body>
+
+<script langugage="JavaScript" type="text/JavaScript">
+	function changeStyle(id, newStyle) {
+		identity=document.getElementById(id);
+		identity.className=newStyle;
+		}		
+</script>
+
+<div id="header">
+	<table cellspacing="0">
+		<tr>
+			<td id="logo">
+				<a href="#"><img src="#" width="97" height="29" alt="PPM Logo" border="0" /></a>
+			</td>
+			<td id="pageName">
+				Referral Activity Query
+			</td>
+		</tr>
+	</table>
+</div>
+
+<div id="globalNav">
+	<table cellspacing="0">
+		<tr>
+			<td><a href="#">Referral Activity</a></td>
+			<td id="lastItem"><a href="pd_assignment_query.html">PD Assignment</a></td>
+		</tr>
+	</table>
+</div>
+
+<div class="subheader">
+	<a href="#" onClick="javascript:changeStyle('criteria', 'show'); javascript:changeStyle('criteriaExpand', 'hide'); javascript:changeStyle('criteriaCollapse', 'show');"><span class="hide" id="criteriaExpand"><img src="images/plus.gif" alt="Expand" border="0" width="13" height="13" /></span></a> 
+	<a href="#" onClick="javascript:changeStyle('criteria', 'hide'); javascript:changeStyle('criteriaCollapse', 'hide'); javascript:changeStyle('criteriaExpand', 'show');"><span class="show" id="criteriaCollapse"><img src="images/minus.gif" alt="Collapse" border="0" width="13" height="13" /></span></a> 
+	Referral Activity Query
+</div>
+
+<div id="criteria">
+	<div id="query">
+		<table cellspacing="0">
+			<tr>
+				<td colspan="2">
+					<p>
+						<strong>Grants from:</strong>
+						<select>
+							<option>All Grants</option>
+							<option>My Cancer Activity</option>
+							<option>My Portfolio</option>
+						</select>
+					</p>
+				</td>
+			</tr>
+			<tr>
+				<td><!-- column 1 -->
+					<p>
+						<strong>Grant Number</strong>
+						<table cellspacing="0">
+							<tr>
+								<td>
+									<span class="label">Tp:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">Mech:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">ICD:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">Srl #:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">Yr:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">Sfx:</span><br />
+									<input type="text" maxlength="3" size="3" />
+								</td>
+								<td>
+									<span class="label">Appl ID:</span><br />
+									<input type="text" maxlength="5" size="5" />
+								</td>
+							</tr>
+							<tr>
+								<td colspan="6">
+									<span class="label">Project Title:</span><br />
+									<input type="text" maxlength="35" size="35" />
+								</td>
+							</tr>
+						</table>
+					</p>
+					<p>
+						<strong>Principal Investigator</strong>
+						<table cellspacing="0">
+							<tr>
+								<td>
+									<span class="label">Last Name:</span><br />
+									<input type="text" maxlength="35" size="35" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="label">First Name:</span><br />
+									<input type="text" maxlength="35" size="35" />
+								</td>
+							</tr>
+						</table>
+					</p>
+					<p>
+						<strong>Institution</strong>
+						<table cellspacing="0">
+							<tr>
+								<td colspan="3">
+									<span class="label">Name:</span><br />
+									<input type="text" maxlength="35" size="35" />
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="label">City:</span><br />
+									<input type="text" maxlength="25" size="25" />
+								</td>
+								<td>	
+									<span class="label">State:</span><br />
+									<input type="text" maxlength="2" size="2" />
+								</td>
+								<td>
+									<span class="label">IPF:</span><br /><input type="text" maxlength="5" size="5" />
+								</td>
+							</tr>
+						</table>
+					</p>
+				</td>
+				<td><!-- column 2 -->
+					<p>
+						<strong>Other Codes/Dates/Status</strong>
+						<table cellspacing="0">
+							<tr>
+								<td>
+									<span class="label">FY From:</span><br />
+									<select>
+										<option></option>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+									</select>
+								</td>
+								<td>
+									<span class="label">To:</span><br />
+									<select>
+										<option></option>
+										<option>2004</option>
+										<option>2003</option>
+										<option>2002</option>
+									</select>
+								</td>
+								<td>
+									<span class="label">NCAB From:</span><br />
+									<select>
+										<option></option>
+										<option>2002</option>
+										<option>2003</option>
+										<option>2004</option>
+									</select>
+								</td>
+								<td>
+									<span class="label">To:</span><br />
+									<select>
+										<option></option>
+										<option>2004</option>
+										<option>2003</option>
+										<option>2002</option>
+									</select>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<span class="label">RFA/PA:</span><br />
+									<input type="text" maxlength="10" size="10" />
+								</td>
+								<td colspan="3">
+									<span class="label">Cancer Activity:</span><br />
+									<select>
+										<option></option>
+										<option>AB</option>
+										<option>BC</option>
+										<option>CD</option>
+									</select>
+								</td>
+							</tr>
+						</table>
+					</p>
+				</td>
+			</tr>
+		</table>
+	</div>
+		
+	<div class="button">
+		<a href="#">Reset</a>
+		<a href="#">Search</a>	
+	</div>
+</div>
+
+<div class="subheader">
+	<a href="#" onClick="javascript:changeStyle('results', 'show'); javascript:changeStyle('resultsExpand', 'hide'); javascript:changeStyle('resultsCollapse', 'show');"><span class="hide" id="resultsExpand"><img src="images/plus.gif" alt="Expand" border="0" width="13" height="13" /></span></a> 
+	<a href="#" onClick="javascript:changeStyle('results', 'hide'); javascript:changeStyle('resultsCollapse', 'hide'); javascript:changeStyle('resultsExpand', 'show');"><span class="show" id="resultsCollapse"><img src="images/minus.gif" alt="Collapse" border="0" width="13" height="13" /></span></a> 
+	Referral Activity Query Results
+</div>
+
+<div id="results">
+	<div class="controls">
+		<table cellspacing="0">
+			<tr>
+				<td class="label">Reports:</td>
+				<td>
+					<select>
+						<option></option>
+						<option>All brillig were</option>
+						<option>the borogroves and</option>
+						<option>all the mome</option>
+						<option>wraths outgrabe</option>
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">Format:</td>
+				<td>
+					<select>
+						<option></option>
+						<option>All brillig were</option>
+						<option>the borogroves and</option>
+						<option>all the mome</option>
+						<option>wraths outgrabe</option>
+					</select>
+					<a href="#">Generate</a>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">
+					Results Shown:  
+				</td>
+				<td>
+					1 to 5 of 269
+				</td>
+			</tr>
+			<tr> 
+				<td class="label">
+					No. of Grants per Page:
+				</td>
+				<td>
+					5
+				</td>
+			</tr>
+			<tr>
+				<td class="label">
+					View Results Page:
+				</td>
+				<td>
+					<a href="#"><< first</a> | 
+					<a href="#">< prev</a> | 
+					<a href="#">next ></a> | 
+					<a href="#">last >></a>
+				</td>
+			</tr>
+			<tr>
+				<td class="label">  
+					Current Sort:
+				</td>
+				<td>
+					Grant Number
+				</td>
+			</tr>
+		</table>
+	</div>
+
+	<a href="#">Check All</a> | <a href="#">Clear All</a>
+	
+	<div class="data">
+		<table cellspacing="0">
+			<tr>
+				<th><input type="checkbox" /></th>
+				<th><a href="#">FY</a></th>
+				<th><a href="#">Grant Number</a></th>
+				<th><a href="#">CA</a></th>
+				<th><a href="#">NCAB</a></th>
+				<th><a href="#">Institution</a></th>
+				<th><a href="#">PI</a></th>
+				<th><a href="#">Title</a></th>
+				<th><a href="#">Dual CA</a></th>
+				<th><a href="#">ARA</a></th>
+			</tr>
+			<tr>
+				<td class="align2"><input type="checkbox" /></td>
+				<td title="FY">&nbsp;</td>
+				<td title="Grant Number">&nbsp;</td>
+				<td title="CA">&nbsp;</td>
+				<td title="NCAB">&nbsp;</td>
+				<td title="Institution">&nbsp;</td>
+				<td title="PI">&nbsp;</td>
+				<td title="Title">&nbsp;</td>
+				<td title="Dual CA">&nbsp;</td>
+				<td title="ARA">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="align2"><input type="checkbox" /></td>
+				<td title="FY">&nbsp;</td>
+				<td title="Grant Number">&nbsp;</td>
+				<td title="CA">&nbsp;</td>
+				<td title="NCAB">&nbsp;</td>
+				<td title="Institution">&nbsp;</td>
+				<td title="PI">&nbsp;</td>
+				<td title="Title">&nbsp;</td>
+				<td title="Dual CA">&nbsp;</td>
+				<td title="ARA">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="align2"><input type="checkbox" /></td>
+				<td title="FY">&nbsp;</td>
+				<td title="Grant Number">&nbsp;</td>
+				<td title="CA">&nbsp;</td>
+				<td title="NCAB">&nbsp;</td>
+				<td title="Institution">&nbsp;</td>
+				<td title="PI">&nbsp;</td>
+				<td title="Title">&nbsp;</td>
+				<td title="Dual CA">&nbsp;</td>
+				<td title="ARA">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="align2"><input type="checkbox" /></td>
+				<td title="FY">&nbsp;</td>
+				<td title="Grant Number">&nbsp;</td>
+				<td title="CA">&nbsp;</td>
+				<td title="NCAB">&nbsp;</td>
+				<td title="Institution">&nbsp;</td>
+				<td title="PI">&nbsp;</td>
+				<td title="Title">&nbsp;</td>
+				<td title="Dual CA">&nbsp;</td>
+				<td title="ARA">&nbsp;</td>
+			</tr>
+			<tr>
+				<td class="align2"><input type="checkbox" /></td>
+				<td title="FY">&nbsp;</td>
+				<td title="Grant Number">&nbsp;</td>
+				<td title="CA">&nbsp;</td>
+				<td title="NCAB">&nbsp;</td>
+				<td title="Institution">&nbsp;</td>
+				<td title="PI">&nbsp;</td>
+				<td title="Title">&nbsp;</td>
+				<td title="Dual CA">&nbsp;</td>
+				<td title="ARA">&nbsp;</td>
+			</tr>
+		</table>
+	</div>	
+	
+	<div class="button">
+		<a href="referral_accept.html">Accept</a>
+		<a href="#">Reject</a>
+		<a href="#">Re-refer</a>
+		<a href="#">Release Dual</a>	
+	</div>
+</div>
+
+<div id="footer">
+	<img src="images/LogoNCI.gif" width="81" height="54" alt="" />
+</div>
+
+</body>
+</html>
