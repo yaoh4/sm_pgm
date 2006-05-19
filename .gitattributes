@@ -1,10 +1,10 @@
 * text=auto !eol
-v1.03DEVEL/build/build.properties -text
-v1.03DEVEL/build/build.xml -text
-v1.03DEVEL/build/hibernate.cfg.xml -text
-v1.03DEVEL/build/hibernate.properties -text
-v1.03DEVEL/build/updatescript.txt -text
-v1.03DEVEL/build/user.properties -text
+build/build.properties -text
+build/build.xml -text
+build/hibernate.cfg.xml -text
+build/hibernate.properties -text
+build/updatescript.txt -text
+build/user.properties -text
 v1.03DEVEL/config/database/db2.xml -text
 v1.03DEVEL/config/database/firstsql.xml -text
 v1.03DEVEL/config/database/hsqldb.xml -text
