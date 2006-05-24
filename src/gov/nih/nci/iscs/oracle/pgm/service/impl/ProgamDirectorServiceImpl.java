@@ -22,6 +22,7 @@ import gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.struts.util.LabelValueBean;
+import org.apache.commons.lang.StringUtils;
 
 
 /**
@@ -106,7 +107,7 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
 				  LabelValueBean mLabelValueBean = null;
 				  if(cancerActivity == null || formatPds) {
-					  mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getPdName() + "/" + mPdCaAsgnmtVw.getOrgDesc() + "/" + mPdCaAsgnmtVw.getCayCode(), mPdCaAsgnmtVw.getCayCode() + mPdCaAsgnmtVw.getNpeId().toString() );
+				      mLabelValueBean = new LabelValueBean(mPdCaAsgnmtVw.getPdName()+ "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdCaAsgnmtVw.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdCaAsgnmtVw.getOrgDesc(), mPdCaAsgnmtVw.getCayCode() + mPdCaAsgnmtVw.getNpeId().toString() );
 			          mLabelValueBeanList.add(mLabelValueBean);
 				  }
 		     }
@@ -259,7 +260,7 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
 				  LabelValueBean mLabelValueBean = null;
 				  if(cancerActivity == null || formatPds) {
-					  mLabelValueBean = new LabelValueBean(mPdOrgVw4.getPdName() + "/" + mPdOrgVw4.getOrgDesc() + "/" + mPdOrgVw4.getCayCode(), mPdOrgVw4.getCayCode() + mPdOrgVw4.getNpeId().toString() );
+					  mLabelValueBean = new LabelValueBean(mPdOrgVw4.getPdName()+ "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdOrgVw4.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdOrgVw4.getOrgDesc(), mPdOrgVw4.getCayCode() + mPdOrgVw4.getNpeId().toString() );
 			          mLabelValueBeanList.add(mLabelValueBean);
 				  }else {
 					  if(!mPdOrgVw4.getPdName().equalsIgnoreCase(mPreviousPd)) {
