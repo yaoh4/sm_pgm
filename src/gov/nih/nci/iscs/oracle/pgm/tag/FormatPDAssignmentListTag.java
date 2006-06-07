@@ -130,7 +130,10 @@ public class FormatPDAssignmentListTag extends TagSupport {
 
 
       String nullCancerActivity = null;
-      buf.append("<SELECT NAME=\"pdIdForLoad\" SIZE=\"1\" >");
+      buf.append("<SELECT " +
+      "STYLE=\"font-family : monospace; \n" + 
+      "\"" +
+      "NAME=\"pdIdForLoad\" SIZE=\"1\" >");
       addPdSelect(buf, true, nullCancerActivity, pdIdForLoad);
   }
 
