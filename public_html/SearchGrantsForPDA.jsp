@@ -80,6 +80,7 @@
 	
 <!--End Your Grants Footer -->
 <!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
+<ncijsp:crystalReport/>
 </html:form>
 <%@ include file="Includes/StandardFooter.jsp"%>
 
