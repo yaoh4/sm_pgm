@@ -107,7 +107,7 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
 				  LabelValueBean mLabelValueBean = null;
 				  if(cancerActivity == null || formatPds) {
-				      mLabelValueBean = new LabelValueBean(StringUtils.rightPad(mPdCaAsgnmtVw.getPdName(), 40, " ") + mPdCaAsgnmtVw.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdCaAsgnmtVw.getOrgDesc(), mPdCaAsgnmtVw.getCayCode() + mPdCaAsgnmtVw.getNpeId().toString() );
+				      mLabelValueBean = new LabelValueBean(StringUtils.rightPad(mPdCaAsgnmtVw.getPdName(), 30, ";") + mPdCaAsgnmtVw.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdCaAsgnmtVw.getOrgDesc(), mPdCaAsgnmtVw.getCayCode() + mPdCaAsgnmtVw.getNpeId().toString() );
 			          mLabelValueBeanList.add(mLabelValueBean);
 				  }
 		     }
@@ -260,7 +260,7 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 				  PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
 				  LabelValueBean mLabelValueBean = null;
 				  if(cancerActivity == null || formatPds) {
-					  mLabelValueBean = new LabelValueBean(StringUtils.rightPad( mPdOrgVw4.getPdName(), 40, " ")+ mPdOrgVw4.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdOrgVw4.getOrgDesc(), mPdOrgVw4.getCayCode() + mPdOrgVw4.getNpeId().toString() );
+					  mLabelValueBean = new LabelValueBean(StringUtils.rightPad( mPdOrgVw4.getPdName(), 30, ";")+ mPdOrgVw4.getCayCode() + "&nbsp;&nbsp;&nbsp;&nbsp;" + mPdOrgVw4.getOrgDesc(), mPdOrgVw4.getCayCode() + mPdOrgVw4.getNpeId().toString() );
 			          mLabelValueBeanList.add(mLabelValueBean);
 				  }else {
 					  if(!mPdOrgVw4.getPdName().equalsIgnoreCase(mPreviousPd)) {
