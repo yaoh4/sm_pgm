@@ -23,6 +23,7 @@ import java.util.*;
 import java.text.*;
 
 
+
 import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import javax.servlet.ServletContext;
@@ -220,11 +221,29 @@ public class FormatPDAssignmentListTag extends TagSupport {
 	       }
 	       buf.append(mValue);
 	       buf.append(">");
-	       buf.append(mLabel);
+	       buf.append(replace(mLabel, ";", "&nbsp;"));
 	       buf.append("</option>");
         }
 
   }
+  
+    
+    static String replace(String str, String pattern, String replace) {
+            int s = 0;
+            int e = 0;
+            StringBuffer result = new StringBuffer();
+        
+            while ((e = str.indexOf(pattern, s)) >= 0) {
+                result.append(str.substring(s, e));
+                result.append(replace);
+                s = e+pattern.length();
+            }
+            result.append(str.substring(s));
+            return result.toString();
+        }
+
+
+
 
   private boolean processFilterLogic(String cancerActivity, String pdId) {
 
