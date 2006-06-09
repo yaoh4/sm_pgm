@@ -168,7 +168,7 @@ public class FormatPDAssignmentListTag extends TagSupport {
          mLastAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD)){
     	  buf.append("<td headers=\"header04\" width=\"27%\" class=" + borderClassName + ">" );
           String pdIdControlName = "PrgIdMapped(" + mKey  + ")";;
-	      buf.append("<SELECT NAME=\""+ pdIdControlName + "\" SIZE=\"1\" >");
+	      buf.append("<SELECT STYLE=\"font-family : monospace; \n NAME=\""+ pdIdControlName + "\" SIZE=\"1\" >");
           boolean showAll  = processFilterLogic(obj.getCancerActivity(), obj.getPdFullName());
           addPdSelect(buf, showAll, obj.getCancerActivity(), obj.getAssignmentCA() + obj.getPdId());
 	      buf.append("</td>");
