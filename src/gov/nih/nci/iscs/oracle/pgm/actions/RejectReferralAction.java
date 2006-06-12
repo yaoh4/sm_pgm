@@ -163,7 +163,12 @@ public class RejectReferralAction extends NciPgmAction {
       	            mApplId.equalsIgnoreCase(mReferralSearchResultObject.getApplId().toString())){
 						if(mPutGrant) {
                           ReferralActionObject mReferralActionObject = new ReferralActionObject();
+                          if (dbComments.equalsIgnoreCase("Other")){
                           mReferralActionObject.setComments(comments);
+                          }
+                          else {
+                              mReferralActionObject.setComments(dbComments);
+                          }
                           mReferralActionObject.setApplId(mReferralSearchResultObject.getApplId());
                           mReferralActionObject.setCancerActivity(mReferralSearchResultObject.getCancerActivity());
                           mReferralActionObjects.put(mCA+"*"+mApplId, mReferralActionObject);
