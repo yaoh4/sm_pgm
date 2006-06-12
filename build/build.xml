@@ -87,11 +87,7 @@
             <fileset dir="${classes.dir}">
                 <include name="**/*.class"/>
                 <include name="${name}.jar"/>
-            </fileset>
-            <fileset dir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/lib">
-                <include name="**/*.class"/>
-                <include name="${name}.jar"/>
-            </fileset>
+            </fileset>           
             <fileset dir="${conf.dir}/integration/${app.name}">
                 <include name="**/*.properties"/>
             </fileset>   
@@ -130,7 +126,7 @@
 
    </target>    
 
-   <target name="build" depends="clean,make_deployment_dirs" description="Compile main source tree java files">
+   <target name="build" depends="make_deployment_dirs, compile" description="Compile main source tree java files">
        <copy todir="${app.war.dir}">
            <fileset dir="${public_html.dir}">
                <include name="**/*.*"/>
@@ -152,7 +148,7 @@
 		</webinf >
 	        <lib dir="${lib.dir}"/-->
 	 </war>
-         <jar destfile="${lib.dir}/app.jar" basedir="${classes.dir}"/>        
+            
     </target>
     
     <!--  stop the JRUN server -->
