@@ -43,7 +43,8 @@ public class RejectionCommentsServiceImpl extends BaseServiceImpl
 		     Iterator mIterator = mList.iterator();
 		     while(mIterator.hasNext()){
 				 CgRefCodes mCgRefCodes = (CgRefCodes) mIterator.next();
-	             mRejectionComments.put(mCgRefCodes.getRvLowValue().replaceAll(" ", ""), mCgRefCodes.getRvLowValue());
+	           //  mRejectionComments.put(mCgRefCodes.getRvLowValue().replaceAll(" ", ""), mCgRefCodes.getRvLowValue());
+                     mRejectionComments.put(mCgRefCodes.getRvLowValue(), mCgRefCodes.getRvLowValue());
 			 }
 	         mRejectionComments.put("Other", "Other");
 		  } catch (Exception ex) {
