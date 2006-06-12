@@ -157,15 +157,15 @@ private StringBuffer appendComments(StringBuffer buf, String commentsControlName
 	 for (Iterator iterator = this.rejectionCommentsMap.entrySet().iterator(); iterator.hasNext();) {
 	          Map.Entry entry = (Map.Entry) iterator.next();
 	          String key = (String)entry.getKey();
-	          key = key.replaceAll(" ", "");
+	        //  key = key.replaceAll(" ", "");
 	          String value = (String)entry.getValue();
 	          if(rejectionSelection.equalsIgnoreCase(key.trim())) {
-				  buf.append("<OPTION SELECTED value=");
+				  buf.append("<OPTION SELECTED value='");
 			  }else{
-				  buf.append("<OPTION value=");
+				  buf.append("<OPTION value='");
 			  }
 			  buf.append( key);
-			  buf.append(">");
+			  buf.append("'>");
 			  buf.append(value);
 	          buf.append("</OPTION>\n");
 	  }
