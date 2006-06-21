@@ -125,6 +125,8 @@ public class ApplicationConstants {
     public static final String PDF_EXPORT_FORMAT = "&cmd=EXPORT&EXPORT_FMT=U2FPDF:0";
     public static final String EXCEL_EXPORT_FORMAT = "&cmd=EXPORT&EXPORT_FMT=U2FXLS:3";
     public static final String PAGE_SIZES = "pageSizes";
+    public static final String REFERRAL_REPORT = "referralReport";
+    public static final String PD_ASSIGNMENT_REPORT = "pdAssignmentReport";
 
     public static final Date  DEFAULT_DATE() {
 
