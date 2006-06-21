@@ -1,6 +1,8 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl;
 
 
+import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+
 import java.util.*;
 import java.text.SimpleDateFormat;
 import net.sf.hibernate.type.Type;
@@ -53,7 +55,8 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
      * Executes the accept referral.
      * @return String  - pass/fail
      */
-     public Object execute(String mSessionId, Long mReportId, Long mApplId, String mAction, String oUserId) {
+     public Object execute(String mSessionId, Long mReportId, Long mApplId, String mAction, String oUserId, 
+        String reportType) {
 
        boolean mUpdatePassed = false;
 
@@ -63,9 +66,9 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
 
        try {
 		     if(mAction.equalsIgnoreCase(DELETE_ACTION)) {
-  			     mUpdatePassed = deleteData(mSessionId, mReportId, mConnection);
+  			     mUpdatePassed = deleteData(mSessionId, mReportId, mConnection, reportType);
 			 }else {
-				 mUpdatePassed = insertData(mSessionId, mReportId, mApplId, mConnection);
+				 mUpdatePassed = insertData(mSessionId, mReportId, mApplId, mConnection, reportType);
 			 }
 	   } catch (CommandDaoException ex) {
 		   throw new CommandDaoException("Accept Referral Failed!!!" + ex.toString() );
@@ -87,7 +90,8 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
 	    interceptorNames = aInterceptorNames;
     }
 
-    public boolean insertData(String mSessionId, Long mReportId, Long mApplId, Connection mConnection ) throws CommandDaoException, SQLException  {
+    public boolean insertData(String mSessionId, Long mReportId, Long mApplId, Connection mConnection, 
+        String reportType) throws CommandDaoException, SQLException  {
     /*
      * Call the stored procedure to insert temp data for report
      *
@@ -98,7 +102,11 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
        boolean mReturnVal = true;
        CallableStatement mCallableStatement = null;
 	   String mColumnName = "APPL_ID";
-	   String mSourceTableName = "NCI_PD_QUERY_VW";
+        String mSourceTableName = null;
+       if (reportType.equalsIgnoreCase(ApplicationConstants.REFERRAL_REPORT))
+	    mSourceTableName = "NCI_PD_QUERY_VW";
+      else 
+          mSourceTableName = "NCI_PD_TRANSFER_VW";
 	   String mWhereClause = "APPL_ID = "+mApplId;
        String mQueryString = "{call REPORTS_UTL_PKG.STORE_TEMP_IDS(?,?,?,?,?)}";
        try {
@@ -127,7 +135,8 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
 
     }
 
-    public boolean deleteData(String mSessionId, Long mReportId,  Connection mConnection ) throws CommandDaoException, SQLException  {
+    public boolean deleteData(String mSessionId, Long mReportId, Connection mConnection, 
+        String reportType) throws CommandDaoException, SQLException  {
     /*
      * Call the stored procedure to insert temp data for report
      *
