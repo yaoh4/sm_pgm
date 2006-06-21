@@ -59,11 +59,13 @@ public class CrystalReportAction extends NciPgmAction    {
 	  oServletContext = oSession.getServletContext();
       oApplicationContext =  (ApplicationContext) oServletContext.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
       ActionMessages messages = new ActionMessages();
-
+    String reportType = null;
       mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
+      reportType = ApplicationConstants.REFERRAL_REPORT;
       if(mRetrieveGrantsForm == null) {
          mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
          mContinueForward = "continueForPDA";
+         reportType = ApplicationConstants.PD_ASSIGNMENT_REPORT;
 	  }
 
       String mReportFormat = mRetrieveGrantsForm.getFormatSelected();
@@ -95,8 +97,8 @@ public class CrystalReportAction extends NciPgmAction    {
 
       ReportSelectorServiceImpl mReportSelectorServiceImpl =  new ReportSelectorServiceImpl(oApplicationContext);
       ReportsVw mReportsVw = mReportSelectorServiceImpl.getReportDetails(new Long(mReportSelected), new Long(mReportFormat));
-      mReportSelectorServiceImpl.deleteDataForReport(oSession.getId(), mReportsVw.getCrystalId());
-      mReportSelectorServiceImpl.insertDataForReport(mSortedList, oSession.getId(), mReportsVw.getCrystalId());
+      mReportSelectorServiceImpl.deleteDataForReport(oSession.getId(), reportType, mReportsVw.getCrystalId());
+      mReportSelectorServiceImpl.insertDataForReport(mSortedList, reportType, oSession.getId(), mReportsVw.getCrystalId());
       oSession.setAttribute("reportDetails", mReportsVw);
       oSession.setAttribute("reportAction",  "run");
 
