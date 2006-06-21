@@ -81,7 +81,7 @@ public class ReportSelectorServiceImpl extends BaseServiceImpl
     }
 
 
-    public void insertDataForReport(List mSortedSelectedGrants, String mSessionId, Long mReportId) {
+    public void insertDataForReport(List mSortedSelectedGrants, String reportType,String mSessionId, Long mReportId) {
 		   String actionResult = new String();
 		   try{
 	            UpdateReportDataCommand oUpdateReportDataCommand = (UpdateReportDataCommand) getBean("updateReportDataCommandDao");
@@ -89,7 +89,7 @@ public class ReportSelectorServiceImpl extends BaseServiceImpl
                 while  (mIterator.hasNext()) {
                    GrantSearchResultObject mGrantSearchResultObject = (GrantSearchResultObject) mIterator.next();
 				   Long mApplId = mGrantSearchResultObject.getApplId();
-   			       actionResult = (String) oUpdateReportDataCommand.execute(mSessionId, mReportId, mApplId, "insert", super.getUserId() );
+   			       actionResult = (String) oUpdateReportDataCommand.execute(mSessionId, mReportId, mApplId, "insert", super.getUserId(), reportType);
 				}
 			} catch (Exception ex) {
 				 throw new ServiceImplException("ReportSelectorServiceImpl", "insertDataForReport", "Unable to insert grant data in report table!!! " + ex.toString());
@@ -97,12 +97,12 @@ public class ReportSelectorServiceImpl extends BaseServiceImpl
     }
 
 
-    public void deleteDataForReport(String mSessionId, Long mReportId) {
+    public void deleteDataForReport(String mSessionId, String reportType, Long mReportId) {
 		   String actionResult = new String();
 		   Long mApplId = new Long ("0");
 		   try{
 	            UpdateReportDataCommand oUpdateReportDataCommand = (UpdateReportDataCommand) getBean("updateReportDataCommandDao");
-   			    actionResult = (String) oUpdateReportDataCommand.execute(mSessionId, mReportId, mApplId, "delete", super.getUserId() );
+   			    actionResult = (String) oUpdateReportDataCommand.execute(mSessionId, mReportId, mApplId, "delete", super.getUserId(), reportType);
 
 			} catch (Exception ex) {
 				 throw new ServiceImplException("ReportSelectorServiceImpl", "insertDataForReport", "Unable to insert grant data in report table!!! " + ex.toString());
