@@ -31,9 +31,7 @@
 	    <tr><td colspan="2">&nbsp;</td></tr>
          </table>
 
-          <table border="0" cellspacing="1" cellpadding="1" width="800" >
-            <tr><td width="7%" align="right">&nbsp;</td>
-            </tr>         
+          <table border="0" cellspacing="1" cellpadding="1" width="800" >       
             <tr>
                 <logic:equal name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO %>">
                   <td colspan="2" align="left" class="ErrorTextBoldItalics"> All <bean:write name="pdAssignmentForm" property="count" /> grants will be assigned to the New Program Director </td></tr>
@@ -42,10 +40,20 @@
                   <td width="3%">&nbsp;</td>
                   <%@include file="actionSelectionButtons.jsp"%>
                   <td width="62%">&nbsp;</td>
+                </tr>
+                   <tr>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                   <td>&nbsp;</td>
+                   <td align="right">
+                     <input class="button2a" type="button" value="Assign"  onclick="setAssignmentAction('executeAssignment');"/></td>
+                  <td>&nbsp;</td>
+                  <td width="15%"align="left">
+                     <input class="button2a" type="button" value="Cancel"  onclick="setCurrentReferralAction('cancel');"/></td>
+                  </tr>                  
 	        </logic:notEqual>
-            
-           </tr>
           </table>
+          
       <table summary="Grants Table" cellpadding="1" cellspacing="1" width="800">
               <tr> 
                  <ncijsp:assignPDTableHeader />  
