@@ -91,9 +91,9 @@ public class GrantReferalDaoImplHelper  {
 	           if (connection != null) {
 	               connection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
 
     public boolean rejectReferral(Long aApplId, String aComments) throws SQLException   {
@@ -130,9 +130,9 @@ public class GrantReferalDaoImplHelper  {
 	           if (connection != null) {
 	               connection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
 
     public boolean reReferReferral(Long aApplId, String aCancerActivityCode, String aComments) throws SQLException   {
@@ -173,9 +173,9 @@ public class GrantReferalDaoImplHelper  {
 	           if (connection != null) {
 	               connection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
 
 
@@ -214,9 +214,9 @@ public class GrantReferalDaoImplHelper  {
 	           if (connection != null) {
 	               connection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
  public String getReferalMessage() {
     /*
