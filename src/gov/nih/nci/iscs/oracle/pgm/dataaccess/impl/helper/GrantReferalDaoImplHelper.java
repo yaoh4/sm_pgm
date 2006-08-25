@@ -59,6 +59,7 @@ public class GrantReferalDaoImplHelper  {
      */
        boolean mReturnVal = true;
        CallableStatement mCallableStatement = null;
+       PreparedStatement mPreparedStatement = null;
        String mQueryString = "{call PD_PORTFOLIO_MGT_PKG.ACCEPT_REFERRAL(?,?,?,?)}";
        try {
 
@@ -73,6 +74,9 @@ public class GrantReferalDaoImplHelper  {
                   oReferalMessage = oReferalMessage + " " + mCallableStatement.getString(4);
                   mReturnVal = false;
               }
+              //Added August 25, 2006 to close impac ii db link due to sniped sessions
+              mPreparedStatement = connection.prepareStatement("alter session close database link impprd");
+              mPreparedStatement.execute();
 
        } catch (SQLException ex) {
 		       oReferalMessage = "AN UNEXPECTED EXCEPTION HAS OCCURRED! Processsing of this request has been terminated. Refer to the application Logs for further information";
@@ -81,7 +85,9 @@ public class GrantReferalDaoImplHelper  {
 	           if (mCallableStatement != null) {
 	               mCallableStatement.close();
 	           }
-
+	           if (mPreparedStatement != null) {
+	               mPreparedStatement.close();
+	           } 
 	           if (connection != null) {
 	               connection.commit();
 	           }
