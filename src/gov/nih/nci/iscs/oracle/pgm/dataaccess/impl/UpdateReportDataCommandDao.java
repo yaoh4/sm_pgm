@@ -130,9 +130,9 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
 	           if (mConnection != null) {
 	               mConnection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
 
     public boolean deleteData(String mSessionId, Long mReportId, Connection mConnection, 
@@ -166,9 +166,9 @@ public class UpdateReportDataCommandDao extends ActionCommandDao implements  Upd
 	           if (mConnection != null) {
 	               mConnection.commit();
 	           }
-	   			return mReturnVal;
+	   			
 	    }
-
+        return mReturnVal;
     }
 
 }
