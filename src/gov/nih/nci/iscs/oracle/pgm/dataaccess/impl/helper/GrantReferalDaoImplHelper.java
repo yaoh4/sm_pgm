@@ -59,10 +59,9 @@ public class GrantReferalDaoImplHelper  {
      */
        boolean mReturnVal = true;
        CallableStatement mCallableStatement  = null;
-       CallableStatement closeDBLinkCallableStatement = null;
-       //PreparedStatement mPreparedStatement = null;
+       CallableStatement closeDBLinkCallableStatement = null;       
        String mQueryString = "{call PD_PORTFOLIO_MGT_PKG.ACCEPT_REFERRAL(?,?,?,?)}";
-       String closeDBLinkQueryString = "{call nci_util.p_close_db_link(?)}";
+       String closeDBLinkString = "{call nci_util.p_close_db_link(?)}";
        try {
 
 		      mCallableStatement = connection.prepareCall(mQueryString);
@@ -76,10 +75,8 @@ public class GrantReferalDaoImplHelper  {
                   oReferalMessage = oReferalMessage + " " + mCallableStatement.getString(4);
                   mReturnVal = false;
               }
-              //Added August 25, 2006 to close impac ii db link due to sniped sessions
-             // mPreparedStatement = connection.prepareStatement("alter session close database link impprd");
-            //  mPreparedStatement.execute();
-             closeDBLinkCallableStatement = connection.prepareCall(closeDBLinkQueryString);
+              //Added August 25, 2006 to close impac ii db link due to sniped sessions             
+             closeDBLinkCallableStatement = connection.prepareCall(closeDBLinkString);
              closeDBLinkCallableStatement.setString(1, "impprd");
              closeDBLinkCallableStatement.execute();
        } catch (SQLException ex) {

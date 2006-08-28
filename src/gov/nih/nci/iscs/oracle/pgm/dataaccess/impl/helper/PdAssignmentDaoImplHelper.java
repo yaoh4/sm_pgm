@@ -64,11 +64,11 @@ public class PdAssignmentDaoImplHelper {
      */
         boolean mReturnVal = true;
         CallableStatement mCallableStatement = null;
-        PreparedStatement mPreparedStatement = null;
+        CallableStatement closeDBLinkCallableStatement = null;                          
         String mQueryString = 
             "{call PD_PORTFOLIO_MGT_PKG.ASSIGN_CA_PD(?,?,?,?,?,?,?)}";
-
-        java.sql.Timestamp mDate = (java.sql.Timestamp)aAssignmentDate;
+        String closeDBLinkString = "{call nci_util.p_close_db_link(?)}";      
+        
         try {
             mCallableStatement = connection.prepareCall(mQueryString);
             mCallableStatement.setLong(1, aApplId.longValue());
@@ -86,9 +86,9 @@ public class PdAssignmentDaoImplHelper {
                 mReturnVal = false;
             }
             //Added August 25, 2006 to close impac ii db link due to sniped sessions
-            mPreparedStatement = 
-                    connection.prepareStatement("alter session close database link impprd");
-            mPreparedStatement.execute();
+            closeDBLinkCallableStatement = connection.prepareCall(closeDBLinkString);
+            closeDBLinkCallableStatement.setString(1, "impprd");
+            closeDBLinkCallableStatement.execute();
         } catch (SQLException ex) {
             oAssignmentMessage = 
                     "AN UNEXPECTED EXCEPTION HAS OCCURRED! Processsing of this request has been terminated. Refer to the application Logs for further information";
@@ -97,8 +97,8 @@ public class PdAssignmentDaoImplHelper {
             if (mCallableStatement != null) {
                 mCallableStatement.close();
             }
-            if (mPreparedStatement != null) {
-                mPreparedStatement.close();
+            if (closeDBLinkCallableStatement != null) {
+                closeDBLinkCallableStatement.close();
             }
             if (connection != null) {
                 //connection.commit();
