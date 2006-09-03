@@ -24,6 +24,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String ncabDate;
     private String currentReferralActivityDate;
     private String eGrantsNumber;
+    private String rfapa;
     private boolean reReferred = false;
 
 
@@ -141,4 +142,11 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
             .toString();
     }
 
+    public void setRfapa(String rfapa) {
+        this.rfapa = rfapa;
+    }
+
+    public String getRfapa() {
+        return rfapa;
+    }
 }

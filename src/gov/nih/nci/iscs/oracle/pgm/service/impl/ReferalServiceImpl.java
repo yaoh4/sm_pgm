@@ -149,7 +149,13 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 			} else {
 				mReferralSearchResultObject.setProjectTitle(ApplicationConstants.EMPTY_STRING );
 			}
-
+                        
+                        if(mNciPdReferral.getRfaPaNumber() != null ) {
+                                mReferralSearchResultObject.setRfapa(mNciPdReferral.getRfaPaNumber() );
+                        } else {
+                                mReferralSearchResultObject.setRfapa(ApplicationConstants.EMPTY_STRING );
+                        }
+                        
 			if(mNciPdReferral.getCayCode() != null ) {
 				mReferralSearchResultObject.setCancerActivity(mNciPdReferral.getCayCode() );
 			} else {

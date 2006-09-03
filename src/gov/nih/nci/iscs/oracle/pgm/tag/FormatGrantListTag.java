@@ -121,6 +121,7 @@ public class FormatGrantListTag extends TagSupport {
       buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getPiLastName() + "&nbsp;</td>");
       buf.append("<td headers=\"header05\" width=\"15%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
       buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
+      buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getRfapa() + "&nbsp;</td>");
       buf.append("<td headers=\"header07\" width=\"6%\" class=" + className + ">" + obj.getAraStatus()+ "&nbsp;</td>");
       buf.append("<td headers=\"header08\" width=\"8%\" class=" + className + ">" + obj.getNcabDate()+ "&nbsp;</td>");
       buf.append("<td headers=\"header09\" width=\"10%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");

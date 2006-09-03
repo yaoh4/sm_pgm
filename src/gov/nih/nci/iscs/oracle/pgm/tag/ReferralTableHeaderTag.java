@@ -81,6 +81,13 @@ public class ReferralTableHeaderTag extends TagSupport
 		  returnText = formatColumnText(false, "Title", "16%", "listCellHead", ApplicationConstants.PROJECT_TITLE_SORT, "header06");
 	  }
       buf.append(returnText);
+      
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.RFA_PA_NUMBER_SORT)){
+                  returnText = formatColumnText(true, "RFA/PA", "16%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header06");
+          } else {
+                  returnText = formatColumnText(false, "RFA/PA", "16%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header06");
+          }
+      buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.ARA_SORT)){
