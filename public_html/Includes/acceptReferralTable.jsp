@@ -36,7 +36,20 @@
               </table>           
             </td>
          </tr> 
-        
+         <tr>
+        <!--Start Search/Clear Buttons-->
+	      <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
+	        <tr> 
+	          <td width="80%" align="right">
+	               <input class="button2a" type="button" value="Accept"  onclick="setCurrentReferralAction('executeAccept');"/></td>
+		  </td> 
+	          <td nowrap width="5">&nbsp;</td>
+	         <td align="left">
+	               <input class="button2a" type="button" value="Cancel"  onclick="setCurrentReferralAction('cancel');"/></td>
+	         </td>               
+	        </tr>
+  </table>
+  </tr>
          <tr>
           <table border="0" cellspacing="0" cellpadding="0" width="800" >
             <tr><td width="7%" align="right">&nbsp;</td>
