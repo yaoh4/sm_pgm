@@ -356,7 +356,7 @@ function openCAHistWindow(applId, grantNumber)
 { 
   var url = "/pgm/ApplCAHist.jsp?applId=" + applId + "&grantNumber=" + grantNumber;
   var winName = "ApplCAHist";
-  var features = "menubar=no,scrollbars=no,resizable=no,toolbar=no,status=no,width=350,height=200,top=300,left=300";
+  var features = "menubar=no,scrollbars=no,resizable=no,toolbar=no,status=no,width=350,height=280,top=300,left=300";
  
   var newWin = window.open(url, winName ,features);
   newWin.focus();

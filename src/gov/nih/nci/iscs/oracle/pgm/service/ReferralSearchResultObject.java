@@ -25,6 +25,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String currentReferralActivityDate;
     private String eGrantsNumber;
     private String rfapa;
+    private String apsComments;
     private boolean reReferred = false;
 
 
@@ -148,5 +149,13 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
 
     public String getRfapa() {
         return rfapa;
+    }
+
+    public void setApsComments(String apsComments) {
+        this.apsComments = apsComments;
+    }
+
+    public String getApsComments() {
+        return apsComments;
     }
 }

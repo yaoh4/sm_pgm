@@ -60,6 +60,19 @@
                 column="FULL_GRANT_NUM"
             </meta> 
         </property>
+        
+        <property 
+            name="currentApsComments" 
+            column="CURRENT_APS_COMMENTS" 
+            type="java.lang.String"
+            length="1000"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="CURRENT_APS_COMMENTS"
+            </meta> 
+        </property>
+        
         <property 
             name="rfaPaNumber" 
             column="RFA_PA_NUMBER" 

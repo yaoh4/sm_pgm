@@ -139,9 +139,12 @@ public class NciPdQueryVw implements Serializable {
 
     /** identifier field */
     private String withdrawnFlag;
+    
+    /** identifier field */
+    private String currentApsComments;
 
     /** full constructor */
-    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, Long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag) {
+    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, Long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag, String apsComments) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
         this.rfaPaNumber = rfaPaNumber;
@@ -184,6 +187,7 @@ public class NciPdQueryVw implements Serializable {
         this.currentReferralActivityCode = currentReferralActivityCode;
         this.currentReferralActivityDate = currentReferralActivityDate;
         this.withdrawnFlag = withdrawnFlag;
+        this.currentApsComments = apsComments;
     }
 
     /** default constructor */
@@ -736,7 +740,14 @@ public class NciPdQueryVw implements Serializable {
     public void setWithdrawnFlag(String withdrawnFlag) {
         this.withdrawnFlag = withdrawnFlag;
     }
+    
+    public void setCurrentApsComments(String currentApsComments) {
+        this.currentApsComments = currentApsComments;
+    }
 
+    public String getCurrentApsComments() {
+        return currentApsComments;
+    }
     public String toString() {
         return new ToStringBuilder(this)
             .append("applId", getApplId())
@@ -781,6 +792,7 @@ public class NciPdQueryVw implements Serializable {
             .append("currentReferralActivityCode", getCurrentReferralActivityCode())
             .append("currentReferralActivityDate", getCurrentReferralActivityDate())
             .append("withdrawnFlag", getWithdrawnFlag())
+            .append("currentApsComments", getCurrentApsComments())
             .toString();
     }
 
@@ -831,6 +843,7 @@ public class NciPdQueryVw implements Serializable {
             .append(this.getCurrentReferralActivityCode(), castOther.getCurrentReferralActivityCode())
             .append(this.getCurrentReferralActivityDate(), castOther.getCurrentReferralActivityDate())
             .append(this.getWithdrawnFlag(), castOther.getWithdrawnFlag())
+            .append(this.getCurrentApsComments(), castOther.getCurrentApsComments())
             .isEquals();
     }
 
@@ -878,7 +891,9 @@ public class NciPdQueryVw implements Serializable {
             .append(getCurrentReferralActivityCode())
             .append(getCurrentReferralActivityDate())
             .append(getWithdrawnFlag())
+            .append(getCurrentApsComments())
             .toHashCode();
     }
 
+    
 }

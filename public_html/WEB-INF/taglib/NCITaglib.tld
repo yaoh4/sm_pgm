@@ -277,6 +277,20 @@
       </attribute>   
   </tag>
   <tag>
+        <name>applAPSComments</name>
+        <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.applAPSCommentsTag</tagclass>
+        <bodycontent>EMPTY</bodycontent>
+        <info>
+    	Comments from the previous program for Appl Id
+        </info>
+        <attribute>
+          <name>applId</name>
+          <required>true</required>
+          <rtexprvalue>true</rtexprvalue>
+        </attribute>   
+  </tag>
+  
+  <tag>
       <name>SelectGrant</name>
       <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.SelectGrantTag</tagclass>
       <bodycontent>EMPTY</bodycontent>

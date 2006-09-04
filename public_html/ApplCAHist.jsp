@@ -60,6 +60,9 @@
 
   <br>
   <ncijsp:applCAHistory  applId='<%= applId %>'/> </td>
+  
+  <br>
+  <ncijsp:applAPSComments  applId='<%= applId %>'/> </td>
 
   <br>
   <br>
