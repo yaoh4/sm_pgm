@@ -224,12 +224,15 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	   ActionForm mFormToUse = form;
 
        RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm  = (RetrieveGrantsForPDAForm) request.getSession().getAttribute("previousForm");
-	   //String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
+	   String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
 	   //request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
        /*if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
            mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ) {
           super.search(mRetrieveGrantsForPDAForm, ApplicationConstants.PD_ASSIGNMENT, request);
        }*/
+        if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD )  ) {
+           super.search(mRetrieveGrantsForPDAForm, ApplicationConstants.PD_ASSIGNMENT, request);
+            }       
        request.setAttribute("retrieveGrantsForPDAForm", (ActionForm) mRetrieveGrantsForPDAForm);
        request.getSession().setAttribute(ApplicationConstants.PD_ASSIGNMENT_LIST, new ArrayList());
 	   request.getSession().setAttribute("lastAction", ApplicationConstants.EMPTY_STRING);
@@ -247,7 +250,7 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 	   String mAction = mRetrieveGrantsForPDAForm.getRequestAction();
 	   request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, new SelectedGrants(mapping.getName()));
        if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ||
-           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ) {
+           mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PORTFOLIO) ) {           
           super.search(mRetrieveGrantsForPDAForm, ApplicationConstants.PD_ASSIGNMENT, request);
        }
        request.setAttribute("retrieveGrantsForPDAForm", (ActionForm) mRetrieveGrantsForPDAForm);
