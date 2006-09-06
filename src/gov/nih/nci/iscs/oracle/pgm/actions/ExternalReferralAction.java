@@ -45,7 +45,22 @@ public class ExternalReferralAction extends NciPgmAction{
   private ExternalReferralForm mExternalReferralForm = null;
   ApplicationContext oApplicationContext;
   private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
-
+  
+    public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
+        throws UserLoginException, Exception
+    {
+        ActionForward returnForward = null;
+        if(!verifyUser(request, response))
+        {
+        // if the user does not have the proper role, nothing is returned and no Referral Activity portlet will be shown whatsoever.
+            return null;             
+        }
+        else
+        {
+        returnForward = executeAction(mapping, form, request, response);
+        return returnForward;  
+        }
+    }
   public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
@@ -136,6 +151,7 @@ public class ExternalReferralAction extends NciPgmAction{
         if(nu != null && nu.isValid())
         {
             returnValue = verifyUserForApp(request, response);
+            System.out.println("isInRole 1 $$$$$$$$$$$$$" + returnValue);
         } else
         {
             String remoteUser = (String)request.getParameter("ldapID");
@@ -160,6 +176,7 @@ public class ExternalReferralAction extends NciPgmAction{
                 if(setUserAttributes(nui, request)) {
 					session.setAttribute("nciuser", nui);
                     returnValue = verifyUserForApp(request, response);
+				    System.out.println("isInRole 2 ##################$" + returnValue);
 				} else {
 				   logger.error("User Priviledges denied - 1!!! ");
 					return false;
