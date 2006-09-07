@@ -150,8 +150,7 @@ public class ExternalReferralAction extends NciPgmAction{
         NciUser nu = (NciUser)session.getAttribute("nciuser");
         if(nu != null && nu.isValid())
         {
-            returnValue = verifyUserForApp(request, response);
-            System.out.println("isInRole 1 $$$$$$$$$$$$$" + returnValue);
+            returnValue = verifyUserForApp(request, response);           
         } else
         {
             String remoteUser = (String)request.getParameter("ldapID");
@@ -175,8 +174,7 @@ public class ExternalReferralAction extends NciPgmAction{
                 nui.setUserId(ru.toString());
                 if(setUserAttributes(nui, request)) {
 					session.setAttribute("nciuser", nui);
-                    returnValue = verifyUserForApp(request, response);
-				    System.out.println("isInRole 2 ##################$" + returnValue);
+                    returnValue = verifyUserForApp(request, response);				    
 				} else {
 				   logger.error("User Priviledges denied - 1!!! ");
 					return false;
