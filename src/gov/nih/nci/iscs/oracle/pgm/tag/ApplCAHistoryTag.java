@@ -6,6 +6,8 @@ import gov.nih.nci.iscs.oracle.pgm.hibernate.ApplCaAsgnmtHistoryVw;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.CancerActivityHistoryServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 
+import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
+
 import java.util.*;
 
 import javax.servlet.http.*;
@@ -48,6 +50,10 @@ public class ApplCAHistoryTag extends TagSupport
       buf.append("<tr>");
       buf.append("<td width=\"40%\" align=\"right\" class=\"DefaultTextBold\">POC:</td>");
       buf.append("<td width=\"60%\" align=\"left\" class=\"DefaultText\">" + mApplCaAsgnmtHistoryVw.getPocName() + "</td>");
+      buf.append("</tr>\n");
+      buf.append("<tr>");
+      buf.append("<td width=\"40%\" align=\"right\" valign=\"top\" class=\"DefaultTextBold\">Comments:</td>");
+      buf.append("<td width=\"60%\" align=\"left\" class=\"DefaultText\">" + getAPSComments(applId) + "</td>");      
       buf.append("</tr></table>\n");
       return  buf.toString();
 
@@ -69,6 +75,28 @@ public ApplCaAsgnmtHistoryVw getApplCaAsgnmtHistoryVw(String applId) {
     return mApplCaAsgnmtHistoryVw;
 
 }
+    private String getAPSComments(String applId) {
 
+        HttpServletRequest request = (HttpServletRequest)  pageContext.getRequest();
+        String comments = null;
+        Integer mKey;
+        try {                
+            Map referralQueryResults = (Map) request.getSession().getAttribute(ApplicationConstants.QUERY_RESULTS);            
+            Iterator iterator = referralQueryResults.entrySet().iterator();
+            while  (iterator.hasNext()) {
+                 Map.Entry entry = (Map.Entry) iterator.next();
+                 mKey = (Integer) entry.getKey();
+                 ReferralSearchResultObject obj = (ReferralSearchResultObject) entry.getValue();
+                 if (applId.equalsIgnoreCase(obj.getApplId().toString())){
+                 comments = obj.getApsComments();                
+                 break;
+                 }
+                }            
+        } catch(Exception e) {
+            e.printStackTrace();
+        }
+        return comments;
+
+    }
 
 }
