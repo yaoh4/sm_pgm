@@ -580,7 +580,6 @@ src/gov/nih/nci/iscs/oracle/pgm/tag/RereferReferralTableHeaderTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/RereferReferralTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/SelectGrantTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/WorkbenchApplicationLinkTag.java -text
-src/gov/nih/nci/iscs/oracle/pgm/tag/applAPSCommentsTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/AcceptReferalTest.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/MultiAcceptReferal.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/RejectReferalTest.java -text
