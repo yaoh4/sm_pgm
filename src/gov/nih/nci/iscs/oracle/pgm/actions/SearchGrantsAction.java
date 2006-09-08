@@ -421,15 +421,13 @@ public class SearchGrantsAction extends NciPgmAction  {
            if(mLastSortColumn == null) {
 		      mLastSortColumn = ApplicationConstants.EMPTY_STRING;
 	       }
-           boolean mSortAscendingIndicator = mRetrieveGrantsForm.getSortAscendingIndicator();
-           mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
-           if(mRetrieveGrantsForm.getSortActionSelected()) {
-			   if(mSortAscendingIndicator) {
-				   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
-			   }else{
-				   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_DESC);
-			   }
-
+           boolean mSortAscendingIndicator = mRetrieveGrantsForm.getSortAscendingIndicator();                      
+           if(mSortAscendingIndicator) {
+                   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_ASC);
+           }else{
+                   mRetrieveGrantsForm.setSortOrder(ApplicationConstants.SORT_DESC);
+           }
+           if(mRetrieveGrantsForm.getSortActionSelected()) {			   
 	          mRetrieveGrantsForm.setSortActionSelected(false);
     	   }
   	       PaginationObject mPaginationObject;
