@@ -150,7 +150,7 @@ public class FormatGrantListTag extends TagSupport {
 	     buf.append("<td headers=\"header01\" width=\"16%\" class=" + className + ">");
          buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	     if(obj.getWithdrawn() ){
-		    buf.append("<br> Withdrawn in IMPAC II</td>");
+		    buf.append("<br> Withdrawn in IMPAC II");
 		 }
 		 buf.append("</td>");
 
