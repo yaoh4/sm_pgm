@@ -110,7 +110,7 @@ public class FormatGrantListTag extends TagSupport {
 
       buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	  if(obj.getWithdrawn() ){
-		 buf.append("<br> Withdrawn in IMPAC II</td>");
+		 buf.append("<br> Withdrawn in IMPAC II");
 	  }
       if(obj.getReReferred() ){
          buf.append("<BR> <a href=\"javascript:openCAHistWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\"> Referred from Other CA </a>");
