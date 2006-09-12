@@ -36,7 +36,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("lastName", "getLastName");
        columnMethodMap.put("orgName", "getInstName");
        columnMethodMap.put("projectTitle", "getProjectTitle");
-       columnMethodMap.put("araStatusCode", "getAraStatus");
+       columnMethodMap.put("araStatusCode", "getAraStatusCode");
        columnMethodMap.put("councilMeetingDate", "getNcabDate");
        columnMethodMap.put("dualCayCode", "getDualCA");
        columnMethodMap.put("cayCode", "getCancerActivity");

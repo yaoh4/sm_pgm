@@ -80,15 +80,17 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
                                              super.getUserId());
 
              mapPaginationObject(mQueryPage, aPaginationObject);
-
+             
+             //  there is no need to sort again because hibernate has done this already!!
+              /*
              String sortColumn = aGrantQueryObject.getSortColumn();
              String methodName = (String) columnMethodMap.get(sortColumn);
              if(sortColumn == null || methodName == null ) {
 				 sortColumn = "default";
 				 methodName = "getFullGrantNum";
 			 }
+            
              boolean sortAscendingIndicator = false;
-
              if(aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)){
 				 sortAscendingIndicator = true;
 			 }
@@ -99,7 +101,7 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 			 }else{
 	            Collections.sort((List) mQueryPage.getPageList(), new ReferralListComparator(null, sortAscendingIndicator, methodName));
 			 }
-
+            */
              mQueryResults = mapReferralSearchResults((List) mQueryPage.getPageList(), aPaginationObject);
          } catch (Exception ex) {
 			 logger.error("An exception occurred in grants retrieval process!!! " + ex.toString());
