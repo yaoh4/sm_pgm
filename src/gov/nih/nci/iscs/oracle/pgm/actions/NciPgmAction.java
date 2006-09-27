@@ -1,17 +1,13 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
-import gov.nih.nci.iscs.i2e.oracle.common.struts.NciBaseAction;
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
 import gov.nih.nci.iscs.oracle.common.ldap.LDAPUtil;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper.LookupHelper;
 
-import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
-import javax.servlet.http.*;
 import org.apache.struts.action.*;
 
 import java.util.Set;
@@ -203,11 +199,11 @@ public abstract class NciPgmAction extends Action {
     }
 
   /**
-   * Gets the set of roles a user is granted in the database
-   * @param request
-   * @param nciOracleId
-   * @return
-   */
+     * Gets the set of roles a user is granted in the database.
+     * @param request
+     * @param nciOracleId
+     * @return
+     */
     public Set getUserDbRoles(HttpServletRequest request, String nciOracleId) throws Exception
     {
        Object mApplicationContext = getAppAttribute(request, ApplicationConstants.PGM_CONTEXT_FACTORY);

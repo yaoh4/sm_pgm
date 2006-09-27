@@ -1,10 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.service;
 
 import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.util.List;
 

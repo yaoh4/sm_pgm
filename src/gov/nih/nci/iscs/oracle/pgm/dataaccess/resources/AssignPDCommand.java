@@ -1,7 +1,5 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.resources;
 
-import net.sf.hibernate.SessionFactory;
-import java.util.*;
 
 public interface AssignPDCommand extends ActionCommand {
 

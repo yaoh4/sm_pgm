@@ -15,7 +15,6 @@ import org.apache.struts.action.ActionServlet;
 import org.apache.struts.action.PlugIn;
 import org.apache.struts.config.ModuleConfig;
 
-import java.util.Properties;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;

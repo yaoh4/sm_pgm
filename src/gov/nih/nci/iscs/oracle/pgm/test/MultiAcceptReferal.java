@@ -1,16 +1,6 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
 
-import gov.nih.nci.iscs.oracle.pgm.test.*;
-import org.springframework.orm.hibernate.LocalSessionFactoryBean;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
-import org.springframework.orm.hibernate.SessionHolder;
-import net.sf.hibernate.Session;
-
-import java.text.*;
-import java.util.*;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
-
 public class MultiAcceptReferal extends Thread {
 
     private int delay;

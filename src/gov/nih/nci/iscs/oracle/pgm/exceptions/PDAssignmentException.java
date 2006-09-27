@@ -2,13 +2,10 @@ package gov.nih.nci.iscs.oracle.pgm.exceptions;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
+
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
 import javax.servlet.http.HttpSession;
-import javax.servlet.http.HttpServletRequest;
 
 /**
  * This exception is used to mark business rule violations.

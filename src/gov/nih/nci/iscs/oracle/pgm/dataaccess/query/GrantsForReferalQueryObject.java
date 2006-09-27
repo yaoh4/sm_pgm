@@ -8,9 +8,6 @@ import org.apache.commons.logging.LogFactory;
 
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryObject;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
 
 public class GrantsForReferalQueryObject extends QueryObject {
 

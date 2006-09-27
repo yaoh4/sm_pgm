@@ -1,14 +1,9 @@
 package gov.nih.nci.iscs.oracle.pgm.service;
 
-import java.io.Serializable;
 import java.text.SimpleDateFormat;
-import java.text.ParseException;
 
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import java.util.*;
-import java.text.DateFormat;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 

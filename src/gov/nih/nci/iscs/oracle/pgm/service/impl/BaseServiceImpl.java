@@ -1,8 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.service.impl;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
+
 import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.forms.PaginationObject;

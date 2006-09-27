@@ -1,32 +1,13 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper;
 
-import java.util.List;
-import java.util.*;
 
 import java.sql.*;
-import java.sql.Timestamp;
 
-import java.text.SimpleDateFormat;
-
-import gov.nih.nci.iscs.oracle.pgm.hibernate.*;
-
-import net.sf.hibernate.type.Type;
-import net.sf.hibernate.HibernateException;
-import net.sf.hibernate.Hibernate;
-import net.sf.hibernate.Session;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.springframework.jdbc.object.MappingSqlQuery;
-import org.springframework.jdbc.object.SqlUpdate;
-import org.springframework.jdbc.core.SqlParameter;
-import org.springframework.orm.hibernate.HibernateTemplate;
-import org.springframework.orm.hibernate.SessionFactoryUtils;
-import org.springframework.orm.hibernate.support.HibernateDaoSupport;
-import org.springframework.orm.hibernate.HibernateInterceptor;
 
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.GrantReferalDao;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 public class PdAssignmentDaoImplHelper {

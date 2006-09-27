@@ -4,16 +4,12 @@ import java.util.*;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveRejCommentsCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
-import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.CgRefCodes;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.struts.util.LabelValueBean;
 
 
 /**

@@ -9,14 +9,10 @@ import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserFilterInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserQueriesCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
-import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.DbaRolePrivs;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.GrantQueriesT;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
-import gov.nih.nci.iscs.oracle.pgm.service.LookUpObject;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 

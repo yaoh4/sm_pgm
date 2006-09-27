@@ -6,7 +6,6 @@ import java.util.*;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchService;
-import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchObject;
 import gov.nih.nci.iscs.oracle.pgm.service.PDAQueryObject;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;

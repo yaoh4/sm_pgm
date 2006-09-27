@@ -6,8 +6,6 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-import java.util.List;
-
 
 /** @author Hibernate CodeGenerator */
 public class ApplicationPdsT implements Serializable {

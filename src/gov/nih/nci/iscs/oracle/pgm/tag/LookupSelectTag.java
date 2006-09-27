@@ -7,11 +7,8 @@ import gov.nih.nci.iscs.oracle.pgm.service.LookUpObject;
 import org.springframework.context.ApplicationContext;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Iterator;
-import java.util.*;
 
-import javax.servlet.http.*;
 import javax.servlet.jsp.*;
 import javax.servlet.ServletContext;
 import javax.servlet.jsp.tagext.*;

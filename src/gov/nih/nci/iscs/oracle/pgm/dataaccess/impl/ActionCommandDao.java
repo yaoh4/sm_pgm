@@ -1,13 +1,10 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl;
 
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 
-
-import java.util.*;
 import java.sql.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.springframework.orm.hibernate.support.HibernateDaoSupport;
+
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ActionCommand;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.HibernateException;
@@ -15,10 +12,8 @@ import net.sf.hibernate.SessionFactory;
 
 import java.sql.Connection;
 
-import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
-
- /**
+/**
   * Base abstract class inherited by all CommandDao that perform action
   * calls to the database
   *

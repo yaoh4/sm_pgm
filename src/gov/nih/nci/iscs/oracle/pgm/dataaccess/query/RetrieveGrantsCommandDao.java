@@ -1,36 +1,24 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.query;
 
 // jdk imports
-import java.lang.Class;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 // application imports
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AccessCommandDao;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
-import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
-import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
 // Springfranework imports
-import org.springframework.orm.hibernate.HibernateInterceptor;
-import org.springframework.orm.hibernate.SessionFactoryUtils;
 
 // hibernate imports
 import net.sf.hibernate.*;
 import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.expression.MatchMode;
 import net.sf.hibernate.expression.*;
-import net.sf.hibernate.engine.TypedValue;
-import net.sf.hibernate.type.StringType;
-import net.sf.hibernate.engine.SessionFactoryImplementor;
 import net.sf.hibernate.expression.Order;
-import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
 
 
 public  class RetrieveGrantsCommandDao extends AccessCommandDao {

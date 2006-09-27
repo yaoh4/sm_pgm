@@ -4,7 +4,6 @@ package gov.nih.nci.iscs.oracle.pgm.dataaccess.resources;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 
 //hibernate imports
-import net.sf.hibernate.Criteria;
 
 public interface RetrieveUserInfoCommand {
 

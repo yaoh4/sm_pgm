@@ -1,10 +1,8 @@
 package gov.nih.nci.iscs.oracle.pgm.tag;
 //Jdk Imports
-import gov.nih.nci.iscs.oracle.common.data.persistence.CommonHandlerFactory;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.ApplCaAsgnmtHistoryVw;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.CancerActivityHistoryServiceImpl;
-import gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
 

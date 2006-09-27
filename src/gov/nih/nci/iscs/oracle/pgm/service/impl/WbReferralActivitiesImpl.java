@@ -4,27 +4,21 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveApplicationLinkI
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserFilterInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbRetrieveBoardsCommand;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.GwbLinksT;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.ReferralActivityVw;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbReferralActivitiesInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
+
 import java.util.Map;
-import org.springframework.context.ApplicationContext;
+
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.struts.util.LabelValueBean;
 
 
 /**

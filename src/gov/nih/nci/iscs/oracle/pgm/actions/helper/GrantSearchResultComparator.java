@@ -1,16 +1,9 @@
 package gov.nih.nci.iscs.oracle.pgm.actions.helper;
 
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-import org.apache.commons.beanutils.PropertyUtils;
-
-import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchResultObject;
 
-import javax.servlet.http.HttpSession;
 
-import java.util.*;
 import java.util.Comparator;
 
 

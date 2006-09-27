@@ -2,8 +2,7 @@ package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl;
 
 
 //jdk imports
-import java.util.*;
-import java.sql.Connection;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -12,15 +11,12 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AccessCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 
 // hibernate imports
-import net.sf.hibernate.Session;
-import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.SessionFactory;
 
 // springframework imports
-import org.springframework.orm.hibernate.support.HibernateDaoSupport;
 
 
- /**
+/**
   * Base abstract class inherited by all CommandDao that perform access
   * / retrieve call to the database
   *

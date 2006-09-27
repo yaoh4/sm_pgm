@@ -2,13 +2,8 @@ package gov.nih.nci.iscs.oracle.pgm.service;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
-import org.apache.commons.lang.builder.EqualsBuilder;
-import org.apache.commons.lang.builder.HashCodeBuilder;
-import org.apache.commons.lang.builder.ToStringBuilder;
 
-import java.io.Serializable;
 import java.util.*;
-import java.text.DateFormat;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
@@ -16,7 +11,7 @@ import gov.nih.nci.iscs.oracle.pgm.service.PdAssignmentActionObject;
 
 import gov.nih.nci.iscs.oracle.pgm.service.PDASearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchResultObject;
-import gov.nih.nci.iscs.oracle.pgm.actions.helper.GrantSearchResultComparator;
+
 import org.springframework.context.ApplicationContext;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.ProgamDirectorServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;

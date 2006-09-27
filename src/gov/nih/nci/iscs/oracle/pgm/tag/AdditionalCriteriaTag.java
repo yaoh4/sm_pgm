@@ -1,13 +1,10 @@
 package gov.nih.nci.iscs.oracle.pgm.tag;
 //Jdk Imports
-import gov.nih.nci.iscs.oracle.common.data.persistence.CommonHandlerFactory;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.GrantQueriesT;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Iterator;
 

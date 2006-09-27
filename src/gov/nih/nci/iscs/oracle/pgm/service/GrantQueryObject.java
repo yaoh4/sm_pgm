@@ -1,6 +1,5 @@
 package gov.nih.nci.iscs.oracle.pgm.service;
 
-import gov.nih.nci.iscs.oracle.pgm.forms.PaginationObject;
 import java.util.*;
 
   public interface GrantQueryObject   {

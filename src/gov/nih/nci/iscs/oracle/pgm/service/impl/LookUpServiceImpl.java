@@ -1,20 +1,10 @@
 package gov.nih.nci.iscs.oracle.pgm.service.impl;
 
-import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveLookUpCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
-import gov.nih.nci.iscs.oracle.pgm.constants.LookUpTableConstants;
-import org.springframework.context.ApplicationContext;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.DbaRolePrivs;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.GrantQueriesT;
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
+
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 

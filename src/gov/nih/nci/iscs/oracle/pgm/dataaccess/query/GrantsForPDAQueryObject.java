@@ -12,10 +12,6 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryObject;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.PDAQueryObject;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-
-import java.math.BigDecimal;
 
 public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObject{
 

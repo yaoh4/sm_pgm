@@ -1,25 +1,18 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import org.springframework.context.ApplicationContext;
-
-
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import  gov.nih.nci.iscs.oracle.pgm.forms.GrantSearchErrorForm;
 
 
-import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo;
 import gov.nih.nci.iscs.oracle.util.CommonUtil;
 import gov.nih.nci.iscs.oracle.util.EmailManagerOra;
 import java.io.CharArrayWriter;
 import java.io.PrintWriter;
 import java.util.*;
-import javax.servlet.ServletContext;
+
 import javax.servlet.http.*;
 import org.apache.struts.action.*;
 

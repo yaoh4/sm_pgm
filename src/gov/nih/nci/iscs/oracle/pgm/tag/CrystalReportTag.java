@@ -5,7 +5,6 @@ package gov.nih.nci.iscs.oracle.pgm.tag;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
-import javax.servlet.ServletContext;
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 import javax.servlet.http.*;

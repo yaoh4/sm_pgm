@@ -7,7 +7,7 @@ import org.apache.commons.logging.LogFactory;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.LookUpServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.LookUpServiceHolder;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
+
 import org.springframework.context.ApplicationContext;
 
 

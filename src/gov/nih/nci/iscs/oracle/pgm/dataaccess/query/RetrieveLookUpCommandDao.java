@@ -1,7 +1,6 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.query;
 
 // jdk imports
-import java.lang.Class;
 import java.util.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -9,28 +8,22 @@ import org.apache.commons.logging.LogFactory;
 // application imports
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveLookUpCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.ActionCommandDao;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
-import gov.nih.nci.iscs.oracle.pgm.service.LookUpObject;
 
 
 // Springfranework imports
-import org.springframework.orm.hibernate.HibernateInterceptor;
 import org.springframework.orm.hibernate.SessionFactoryUtils;
 import org.apache.struts.util.LabelValueBean;
 
 // hibernate imports
 import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import java.sql.Connection;
-import java.sql.SQLException;
 
 public class RetrieveLookUpCommandDao extends ActionCommandDao implements  RetrieveLookUpCommand {
    /**

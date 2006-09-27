@@ -1,6 +1,5 @@
 package gov.nih.nci.iscs.oracle.pgm.dataaccess.resources;
 
-import net.sf.hibernate.SessionFactory;
 
 public interface UpdateReportDataCommand extends ActionCommand {
 

@@ -1,11 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.forms;
 
-import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import java.util.*;
-import javax.servlet.http.HttpSession;
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForward;
+
 import org.apache.struts.action.ActionMapping;
 import org.apache.struts.validator.ValidatorForm ;
 import org.apache.commons.lang.builder.ToStringBuilder;
@@ -13,7 +9,6 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 import javax.servlet.http.HttpServletRequest;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
-import gov.nih.nci.iscs.oracle.pgm.service.ReferralQueryObject;
 
 
 public class RereferReferralForm extends ValidatorForm   {

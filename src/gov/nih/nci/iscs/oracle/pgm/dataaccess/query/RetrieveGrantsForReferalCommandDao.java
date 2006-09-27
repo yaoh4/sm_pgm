@@ -15,16 +15,13 @@ import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
 
 
 // Springfranework imports
-import org.springframework.orm.hibernate.HibernateInterceptor;
 import org.springframework.orm.hibernate.SessionFactoryUtils;
 
 
 // hibernate imports
 import net.sf.hibernate.Criteria;
 import net.sf.hibernate.expression.Expression;
-import net.sf.hibernate.expression.Order;
 import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
 
 
 public class RetrieveGrantsForReferalCommandDao extends RetrieveGrantsCommandDao implements  RetrieveGrantsForReferalCommand {

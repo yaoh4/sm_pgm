@@ -4,24 +4,15 @@ package gov.nih.nci.iscs.oracle.pgm.dataaccess.impl;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
 import java.util.*;
-import java.text.SimpleDateFormat;
-import net.sf.hibernate.type.Type;
 
-import net.sf.hibernate.HibernateException;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.springframework.orm.hibernate.SessionFactoryUtils;
-import org.springframework.orm.hibernate.support.HibernateDaoSupport;
-import org.springframework.orm.hibernate.HibernateInterceptor;
-import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
 
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.UpdateReportDataCommand;
-import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 import java.sql.Connection;

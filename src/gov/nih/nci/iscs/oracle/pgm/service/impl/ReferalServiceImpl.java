@@ -4,7 +4,6 @@ import java.util.*;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchService;
-import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchObject;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralQueryObject;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
@@ -15,7 +14,6 @@ import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
-import gov.nih.nci.iscs.oracle.pgm.service.ReferralListComparator;
 
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;

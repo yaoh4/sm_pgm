@@ -2,7 +2,7 @@ package gov.nih.nci.iscs.oracle.pgm.dataaccess.query;
 
 // jdk imports
 import java.util.List;
-import java.lang.Integer;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 

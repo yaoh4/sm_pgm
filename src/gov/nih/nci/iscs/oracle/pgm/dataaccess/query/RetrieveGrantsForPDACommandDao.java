@@ -13,24 +13,16 @@ import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
-import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
-import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
-import gov.nih.nci.iscs.oracle.pgm.service.GrantQueryObject;
 
 
 // Springfranework imports
-import org.springframework.orm.hibernate.HibernateInterceptor;
 import org.springframework.orm.hibernate.SessionFactoryUtils;
 
 
 // hibernate imports
 import net.sf.hibernate.*;
 import net.sf.hibernate.expression.Expression;
-import net.sf.hibernate.expression.*;
-import net.sf.hibernate.expression.Order;
 import net.sf.hibernate.Session;
-import net.sf.hibernate.SessionFactory;
 
 
 public class RetrieveGrantsForPDACommandDao extends RetrieveGrantsCommandDao implements  RetrieveGrantsForPDACommand {
