@@ -105,11 +105,9 @@ public abstract class NciPgmAction extends Action {
     public boolean setUserAttributes(NciUser user, HttpServletRequest request)
         throws UserLoginException, Exception {
         LDAPUtil ctx = (LDAPUtil) this.getAppAttribute(request, ApplicationConstants.LDAP_SEARCHER);
-        String stFDN = null;
-        String userId = null;
+        String stFDN = null;        
         Attributes attribs =  null;
-        boolean result = false;
-
+        
 
           if ((user != null) && (user.isValid())) {
             try {
@@ -223,8 +221,7 @@ public abstract class NciPgmAction extends Action {
     public boolean verifyUserForApp(HttpServletRequest request,
         HttpServletResponse response) throws Exception
     {
-        NciUser nu = this.getUser(request);
-        HttpSession session = request.getSession();
+        NciUser nu = this.getUser(request);       
         Set roleSet = (Set)nu.getAttribute("dbRoles");
         if ((roleSet == null)){
            return false;

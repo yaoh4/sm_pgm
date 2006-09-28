@@ -27,7 +27,7 @@ public class RejectReferralForm extends ValidatorForm   {
     private String rejectionSelection;
 
     public RejectReferralForm() {
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
   	    this.comments = ApplicationConstants.EMPTY_STRING;
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
   	    this.commentsMap = new HashMap();
@@ -114,7 +114,7 @@ public class RejectReferralForm extends ValidatorForm   {
     }
 
     public void setCommentsMap(Map commentsMap) {
-        this.commentsMap = (Map) commentsMap;;
+        this.commentsMap = commentsMap;;
     }
 
    public Object getDbCommentMapped(String key) {
@@ -133,7 +133,7 @@ public class RejectReferralForm extends ValidatorForm   {
     }
 
     public void setDbCommentsMap(Map dbCommentsMap) {
-        this.dbCommentsMap = (Map) dbCommentsMap;;
+        this.dbCommentsMap = dbCommentsMap;;
     }
     public void setSelectedIndx(String[] selectedIndx) {
 		this.selectedIndx = selectedIndx;

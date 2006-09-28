@@ -54,7 +54,7 @@ public class RejectReferalTest {
 	  mApplId = new Long(args[0]);
 	  mComments  = new String(args[1]);
       try{
-          results = (String) GRTest.rejectReferal(mApplId, mComments);
+          results = GRTest.rejectReferal(mApplId, mComments);
           System.out.println("******* REJECT REFERAL MESSAGE IS ******" + results);
       } catch (Exception e) {
           System.out.println("***** exception is ****" + e.toString());

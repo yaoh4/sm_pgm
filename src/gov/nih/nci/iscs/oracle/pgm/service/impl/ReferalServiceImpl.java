@@ -260,7 +260,7 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
             mIndex++;
 	    }
 
-		return  (Map) mQueryResults;
+		return mQueryResults;
 	}
 
 

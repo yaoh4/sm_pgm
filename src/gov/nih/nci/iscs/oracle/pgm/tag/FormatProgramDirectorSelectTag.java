@@ -55,7 +55,7 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
       if(cancerActivity.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) || disableSelect) {
 	     List mList = (List) request.getSession().getAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0]);
 	     if(mList==null){
-			mList = (List) getPDListForCancerActivity(ApplicationConstants.EMPTY_STRING);
+			mList = getPDListForCancerActivity(ApplicationConstants.EMPTY_STRING);
 			request.getSession().setAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0], mList);
 		 }
 	     //List mList = (List) request.getAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0]);
@@ -87,8 +87,8 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
 	        if(mValue.equalsIgnoreCase(key)) {
 	  	       buf.append("<option SELECTED value=");
 	        } else {
@@ -116,8 +116,8 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
 	        if(mValue.equalsIgnoreCase(key)) {
 	  	       buf.append("<option SELECTED value=");
 	        } else {

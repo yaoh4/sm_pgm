@@ -290,7 +290,8 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 
 	  try{
  	     ActionForward mActionForward = super.selectAll(mapping, form, request, response);
-         Map map = (Map) super.search(form, ApplicationConstants.REFERRAL, request, true);
+         Map map = 
+                super.search(form, ApplicationConstants.REFERRAL, request, true);
          SelectedGrants mSelectedGrants = new SelectedGrants(mapping.getName());
          mSelectedGrants.processPageSelect(map, ApplicationConstants.SELECT_ALL);
          request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, mSelectedGrants);

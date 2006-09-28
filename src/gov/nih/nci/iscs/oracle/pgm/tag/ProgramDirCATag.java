@@ -45,8 +45,8 @@ public class ProgramDirCATag extends TagSupport {
       Iterator mIterator = caList.iterator();
       while(mIterator.hasNext() ){
 		  LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-          String mValue = (String) mLookUpValueBean.getValue();
-          String mLabel = (String) mLookUpValueBean.getLabel();
+          String mValue = mLookUpValueBean.getValue();
+          String mLabel = mLookUpValueBean.getLabel();
 	      buf.append("<tr>");
 	      buf.append("<td headers=\"header01\" width=\"70%\" class=listCell>" + mValue + "</td>");
 	      buf.append("<td headers=\"header01\" width=\"30%\" class=listCell5>" + mLabel + "</td>");

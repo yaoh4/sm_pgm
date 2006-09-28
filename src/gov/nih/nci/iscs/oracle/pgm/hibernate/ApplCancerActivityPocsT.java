@@ -7,7 +7,6 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.NciApplElementsT;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.CancerActivityPocsT;
-import java.sql.Timestamp;
 
 /** @author Hibernate CodeGenerator */
 public class ApplCancerActivityPocsT implements Serializable {
@@ -44,7 +43,7 @@ public class ApplCancerActivityPocsT implements Serializable {
         this.startDate = startDate;
         this.nciApplElementsT = nciApplElementsT;
         this.cancerActivityPocsT = cancerActivityPocsT;
-        this.endDate = (Timestamp) endDate;
+        this.endDate = endDate;
         this.createUserId = createUserId;
         this.createDate = createDate;
         this.lastChangeUserId = lastChangeUserId;

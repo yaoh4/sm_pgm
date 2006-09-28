@@ -76,8 +76,7 @@ public class AcceptReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-       messages = new ActionMessages();
-	   AcceptReferralForm mForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");
+       messages = new ActionMessages();	   
 	   // make sure that at least one PD was selected
        if( mReferralActionObjects.size() == 0){
 	       super.logErrors(messages, "validation", "errors.no.pd.selected");
@@ -162,8 +161,7 @@ public class AcceptReferralAction extends NciPgmAction {
 
 	try{
 	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
+       ReferralActionObject mReferralActionObject = null;       
        String[] tokens = new String[3];
        String selectedPd = mAcceptReferralForm.getPdId();
        if(mAcceptReferralForm.getSelectedIndx() != null) {
@@ -206,10 +204,7 @@ public class AcceptReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
-       String[] tokens;
+	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");              
        String filterCA = mAcceptReferralForm.getFilterCA();
    	   Iterator mIterator = mReferralActionList.iterator();
    	   while(mIterator.hasNext()){
@@ -228,17 +223,9 @@ public class AcceptReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
-       String[] tokens;
+	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) request.getAttribute("acceptReferralForm");      
        String sortColumn = mAcceptReferralForm.getSortColumn();
-       boolean sortAscendingIndicator = mAcceptReferralForm.getSortAscendingIndicator();
-   	   /*Iterator mIterator = mReferralActionList.iterator();
-   	   while(mIterator.hasNext()){
-		   ReferralSearchResultObject mReferralSearchResultObject = (ReferralSearchResultObject) mIterator.next();
-		   mReferralSearchResultObject.setSelected(false);
-	   }*/
+       boolean sortAscendingIndicator = mAcceptReferralForm.getSortAscendingIndicator();   	   
 	   Collections.sort(mReferralActionList, new ReferralListComparator(sortColumn, sortAscendingIndicator));
 	  } catch (Exception ex) {
 		  throw new ReferralActionException("AcceptReferralAction", "sortList", ex.toString(), request.getSession(), ex);
@@ -248,10 +235,7 @@ public class AcceptReferralAction extends NciPgmAction {
 
 
    public void performInitialization (ActionForm form, HttpServletRequest request) throws ReferralActionException, Exception  {
-
-	   String mSortColumn = "grantNumber";
-	   boolean mSortAsc = true;
-
+	   
 	try{
 	   AcceptReferralForm mAcceptReferralForm = (AcceptReferralForm) form;
 	   mReferralActionList = (ArrayList) request.getSession().getAttribute(ApplicationConstants.REFERRAL_ACTION_LIST);;
@@ -285,7 +269,7 @@ public class AcceptReferralAction extends NciPgmAction {
 	  if(mKey != null) {
 	     StringTokenizer st = new StringTokenizer(mKey, "*");
 	     while(st.hasMoreTokens()) {
-		    String temp = (String) st.nextToken();
+		    String temp =  st.nextToken();
 		    tokens[indx] = temp;
 		    indx++;
 	     }

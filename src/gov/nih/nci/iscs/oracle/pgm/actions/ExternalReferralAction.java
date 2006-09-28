@@ -57,9 +57,8 @@ public class ExternalReferralAction extends NciPgmAction{
       String mappingString = "";
       try{
 	    mExternalReferralForm = (ExternalReferralForm) form;
-	    mAction = mExternalReferralForm.getRequestAction();
-        NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
-        String oracleId = (String)request.getParameter("oracleID");
+	    mAction = mExternalReferralForm.getRequestAction();        
+        String oracleId = request.getParameter("oracleID");
         if(oracleId == null){
 			mExternalReferralForm.setRequestAction(ApplicationConstants.EXT_SEARCH_ACTION);
 			request.getSession().setAttribute(ApplicationConstants.EXT_SEARCH_ACTION, ApplicationConstants.EXT_SEARCH_ACTION);
@@ -143,7 +142,7 @@ public class ExternalReferralAction extends NciPgmAction{
             returnValue = verifyUserForApp(request, response);           
         } else
         {
-            String remoteUser = (String)request.getParameter("ldapID");
+            String remoteUser = request.getParameter("ldapID");
             if(remoteUser== null) {
 				remoteUser = request.getRemoteUser();
 			}

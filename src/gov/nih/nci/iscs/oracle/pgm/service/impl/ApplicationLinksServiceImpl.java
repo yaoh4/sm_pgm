@@ -43,7 +43,7 @@ public class ApplicationLinksServiceImpl extends BaseServiceImpl
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("ApplicationLinksServiceImpl", "getApplicationLinks", "Unable to obtain Application Links from the database!!! " + ex.toString());
 	      }
-	       return (Map) mApplicationLinks;
+	       return mApplicationLinks;
     }
 
 

@@ -27,7 +27,7 @@ public class StatusForm extends ValidatorForm   {
 
 
 
-    public void setErrorMessage(String userMessage) {
+    public void setErrorMessage(String errorMessage) {
 		this.errorMessage = errorMessage;
 	}
 

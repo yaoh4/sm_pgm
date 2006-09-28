@@ -25,7 +25,7 @@ public class GrantReferalImpl implements  GrantReferal{
     }
 
     public  void setGrantReferalDao(GrantReferalDao grantReferalDao){
-		grantReferalDao = grantReferalDao;
+		this.grantReferalDao = grantReferalDao;
     }
 
 }

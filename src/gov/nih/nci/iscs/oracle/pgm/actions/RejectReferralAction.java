@@ -70,8 +70,7 @@ public class RejectReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws  ReferralActionException, Exception {
 
 	try{
-	   messages = new ActionMessages();
-	   RejectReferralForm mForm = (RejectReferralForm) request.getAttribute("rejectReferralForm");
+	   messages = new ActionMessages();	  
 
 	   boolean mValidationErrors = updateSelected(request);
 	   // make sure that at least one comment was entered
@@ -116,9 +115,7 @@ public class RejectReferralAction extends NciPgmAction {
        String dbComments = new String(ApplicationConstants.EMPTY_STRING);
        String mCA = new String(ApplicationConstants.EMPTY_STRING);
        String mApplId = new String(ApplicationConstants.EMPTY_STRING);
-       String mKey = new String(ApplicationConstants.EMPTY_STRING);
-       Map mCommentsMap = mRejectReferralForm.getCommentsMap();
-       Map mDbCommentsMap = mRejectReferralForm.getDbCommentsMap();
+       String mKey = new String(ApplicationConstants.EMPTY_STRING);    
 	   Map mRejectionComments = (Map) request.getSession().getAttribute("REJ_COMMENTS");
        for (Iterator mIterator = mRejectReferralForm.getCommentsMap().entrySet().iterator(); mIterator.hasNext();) {
             Map.Entry entry = (Map.Entry) mIterator.next();
@@ -224,10 +221,7 @@ public class RejectReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   RejectReferralForm mRejectReferralForm = (RejectReferralForm) request.getAttribute("rejectReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       boolean errorGenerated = false;
-       int indx;
+	   RejectReferralForm mRejectReferralForm = (RejectReferralForm) request.getAttribute("rejectReferralForm");       
        String[] tokens = new String[3];
        String commentsToApply = mRejectReferralForm.getCommentsToApply();
        String rejectionSelection = mRejectReferralForm.getRejectionSelection();
@@ -243,8 +237,7 @@ public class RejectReferralAction extends NciPgmAction {
           String[] mSelectedIndx =  mRejectReferralForm.getSelectedIndx();
 
           for(int i=0; i<mSelectedIndx.length; i++) {
-			  tokens = getKeyTokens(mSelectedIndx[i]);
-	          Integer index = new Integer(tokens[0]);
+			  tokens = getKeyTokens(mSelectedIndx[i]);	          
 			  String mCA = tokens[1];
 			  String mApplId = tokens[2];
 			  String mKey = mCA + "*" + mApplId;
@@ -333,7 +326,7 @@ public class RejectReferralAction extends NciPgmAction {
 	  if(mKey != null) {
 	     StringTokenizer st = new StringTokenizer(mKey, "*");
 	     while(st.hasMoreTokens()) {
-		    String temp = (String) st.nextToken();
+		    String temp =  st.nextToken();
 		    tokens[indx] = temp;
 		    indx++;
 	     }

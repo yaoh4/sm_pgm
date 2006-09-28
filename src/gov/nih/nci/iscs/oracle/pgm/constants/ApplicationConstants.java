@@ -131,7 +131,7 @@ public class ApplicationConstants {
     public static final Date  DEFAULT_DATE() {
 
 		try {
-			return (Date) DateFormat.getDateInstance().parse(DEFAULT_DATE_STRING);
+			return DateFormat.getDateInstance().parse(DEFAULT_DATE_STRING);
 
 	    } catch (ParseException ex) {
 		    return null;
@@ -151,10 +151,10 @@ public class ApplicationConstants {
 	        LabelValueBean mLabelValueBean3 = new LabelValueBean(new String("100"), new String("100"));
 			mList.add(mLabelValueBean3);
 
-			return (List) mList;
+			return mList;
 
 	    } catch (Exception ex) {
-		    return (List) new ArrayList();
+		    return new ArrayList();
 	    }
 	}
 

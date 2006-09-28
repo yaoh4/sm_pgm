@@ -27,7 +27,7 @@ public class AcceptReferralForm extends ValidatorForm   {
     private String sortColumn;
 
     public AcceptReferralForm() {
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
   	    this.pdId = ApplicationConstants.EMPTY_STRING;
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
   	    this.sortColumn = "grantNumber";

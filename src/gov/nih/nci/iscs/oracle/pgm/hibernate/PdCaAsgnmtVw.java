@@ -159,7 +159,7 @@ public class PdCaAsgnmtVw implements Serializable {
         return this.cayStartDate;
     }
 
-    public void setCayStartDate(Date pdStartDate) {
+    public void setCayStartDate(Date cayStartDate) {
         this.cayStartDate = cayStartDate;
     }
 

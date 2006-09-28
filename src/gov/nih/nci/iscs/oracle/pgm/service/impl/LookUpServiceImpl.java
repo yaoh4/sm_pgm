@@ -30,9 +30,10 @@ public class LookUpServiceImpl extends BaseServiceImpl
 	  try{
 		  RetrieveLookUpCommand oRetrieveLookUpCommand = (RetrieveLookUpCommand) getBean("retrieveLookUpCommandDao");
 
-          List oLookUpTableValues  = (List) oRetrieveLookUpCommand.execute(LookUpTableVales[0], (String) LookUpTableVales[1], super.getUserId());
+          List oLookUpTableValues = 
+                oRetrieveLookUpCommand.execute(LookUpTableVales[0], (String) LookUpTableVales[1], super.getUserId());
            // get the list from the page
-          return (List) oLookUpTableValues;
+          return oLookUpTableValues;
 
       } catch (Exception ex) {
 			 throw new ServiceImplException("LookUpServiceImpl", "getLookUpTable", "An exception occurred in LookUp process!!! " + ex.toString());

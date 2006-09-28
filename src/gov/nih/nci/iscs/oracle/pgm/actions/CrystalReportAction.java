@@ -1,8 +1,6 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
 
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
 
 import org.springframework.context.ApplicationContext;
 
@@ -24,7 +22,6 @@ import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
-import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import java.util.*;
 
 import javax.servlet.ServletContext;
@@ -36,11 +33,8 @@ public class CrystalReportAction extends NciPgmAction    {
 
  private HttpSession oSession;
  private ServletContext oServletContext;
- private NciUser oNciUser;
  private ApplicationContext oApplicationContext;
- private String mAction = null;
  private RetrieveGrantsForm mRetrieveGrantsForm = null;
- private static Logger logger = LogManager.getLogger(SearchGrantsAction.class);
  private String mContinueForward = "continueForReferral";
 
  public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
@@ -82,7 +76,7 @@ public class CrystalReportAction extends NciPgmAction    {
 	   	 this.saveMessages(request, messages);
 		 return mapping.findForward(mContinueForward);
 	  }
-      List mSortedList = (List) mSelectedGrants.getSortedSelectedGrants();
+      List mSortedList =  mSelectedGrants.getSortedSelectedGrants();
 
       if(!messages.isEmpty() ) {
 		   return mapping.findForward(mContinueForward);

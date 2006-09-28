@@ -26,7 +26,7 @@ public  class InitContext  {
      public static Object getBean(String aBean) {
 		 // get the bean
 		 Object mBean = null;
-		 mBean = (Object) ApplicationContextFactory.getApplicationContext().getBean(aBean);
+		 mBean = ApplicationContextFactory.getApplicationContext().getBean(aBean);
 
 	     return mBean;
 	 }

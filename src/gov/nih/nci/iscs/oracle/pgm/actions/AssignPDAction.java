@@ -83,8 +83,7 @@ public class AssignPDAction extends NciPgmAction {
 
    public ActionForward executeAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
-
-	   String assignmentType =  (String) request.getSession().getAttribute("assignmentType");
+	   
        String mErrorMsg = ApplicationConstants.EMPTY_STRING;
 	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) form;
        messages = new ActionMessages();
@@ -186,8 +185,7 @@ public class AssignPDAction extends NciPgmAction {
    public ActionForward loadAssignmentAction (ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws Exception {
 
-	   // mark all seleceted grants
-	   String assignmentType =  (String) request.getSession().getAttribute("assignmentType");
+	   // mark all seleceted grants	   
        messages = new ActionMessages();
        String mErrorMsg = ApplicationConstants.EMPTY_STRING;
 	   PdAssignmentForm mPdAssignmentForm = (PdAssignmentForm) form;

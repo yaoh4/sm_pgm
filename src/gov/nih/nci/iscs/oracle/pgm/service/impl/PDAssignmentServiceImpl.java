@@ -172,7 +172,7 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
             mIndex++;
 	    }
 
-		return  (Map) mQueryResults;
+		return mQueryResults;
 	}
 
 

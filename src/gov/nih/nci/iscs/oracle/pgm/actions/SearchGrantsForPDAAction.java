@@ -268,7 +268,8 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
                                         HttpServletResponse response) throws GrantSearchException, Exception {
 
  	   ActionForward mActionForward = super.selectAll(mapping, form, request, response);
-       Map map = (Map) super.search(form, ApplicationConstants.PD_ASSIGNMENT, request, true);
+       Map map = 
+            super.search(form, ApplicationConstants.PD_ASSIGNMENT, request, true);
        SelectedGrants mSelectedGrants = new SelectedGrants(mapping.getName());
        mSelectedGrants.processPageSelect(map, ApplicationConstants.SELECT_ALL);
        request.getSession().setAttribute(ApplicationConstants.SELECTED_GRANTS, mSelectedGrants);

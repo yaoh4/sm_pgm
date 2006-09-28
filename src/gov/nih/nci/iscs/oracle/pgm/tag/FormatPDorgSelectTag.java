@@ -98,8 +98,8 @@ public class FormatPDorgSelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
             buf.append("<option value=");
 	        buf.append(mValue);
 	  	    buf.append(">");
@@ -124,8 +124,8 @@ public class FormatPDorgSelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
 	        if(mValue.equalsIgnoreCase(pdOrg)) {
 	  	       buf.append("<option SELECTED value=");
 	        } else {

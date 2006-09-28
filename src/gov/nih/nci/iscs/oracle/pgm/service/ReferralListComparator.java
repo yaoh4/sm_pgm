@@ -105,8 +105,8 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
             if(rslt2==null) {
 				rslt2 = ApplicationConstants.EMPTY_STRING;
 			}
-            comp1 = (Object) rslt1.toUpperCase().trim();
-            comp2 = (Object) rslt2.toUpperCase().trim();
+            comp1 = rslt1.toUpperCase().trim();
+            comp2 = rslt2.toUpperCase().trim();
         } catch (NoSuchMethodException e) {
         } catch (IllegalAccessException e) {
         } catch (InvocationTargetException e) {}

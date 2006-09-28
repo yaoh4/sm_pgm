@@ -53,7 +53,7 @@ public class CancerActivityPocsT implements Serializable {
         String mDate = mFormatter.format(startDate);
         Date mNewDate = null;
         try {
-          mNewDate = (Date) mFormatter.parse(mDate);
+          mNewDate = mFormatter.parse(mDate);
 	    } catch (Exception e) {}
         this.startDate = mNewDate;
         this.cancerActivitiesT = cancerActivitiesT;
@@ -81,7 +81,7 @@ public class CancerActivityPocsT implements Serializable {
         String mDate = mFormatter.format(startDate);
         Date mNewDate = null;
         try {
-          mNewDate = (Date) mFormatter.parse(mDate);
+          mNewDate = mFormatter.parse(mDate);
 	    } catch (Exception e) {}
         this.startDate = mNewDate;
         this.cancerActivitiesT = cancerActivitiesT;

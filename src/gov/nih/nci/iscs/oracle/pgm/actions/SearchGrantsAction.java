@@ -62,8 +62,7 @@ public class SearchGrantsAction extends NciPgmAction  {
                                        HttpServletResponse response) throws GrantSearchException, Exception {
 
 
-       ActionForward mActionForward = null;
-       boolean selectAllIndicator = false;
+       ActionForward mActionForward = null;      
 	   if ( !setGlobalVariables(form, request, response, mapping) )
            return mapping.findForward(USER_LOGIN_FAILURE);
 
@@ -76,7 +75,7 @@ public class SearchGrantsAction extends NciPgmAction  {
           RetrieveGrantsForm newForm = new RetrieveGrantsForm();
           SearchGrantsActionHelper.resetSession(request.getSession(), newForm, mapping.getName(), true);
           mRetrieveGrantsForm =  (RetrieveGrantsForm) request.getSession().getAttribute(ApplicationConstants.OLD_SEARCH_FORM);
-	      form = (ActionForm) mRetrieveGrantsForm;
+	      form =  mRetrieveGrantsForm;
 	      return mActionForward;
 
 	   }
@@ -192,7 +191,7 @@ public class SearchGrantsAction extends NciPgmAction  {
        RetrieveGrantsForm mRetrieveGrantsForm = (RetrieveGrantsForm) form;
        mRetrieveGrantsForm.setSortColumn( (String)  request.getSession().getAttribute(ApplicationConstants.LAST_SORT_COLUMN));
        mRetrieveGrantsForm.setSortOrder( (String)  request.getSession().getAttribute(ApplicationConstants.LAST_SORT_ORDER));
-       form = (ActionForm) mRetrieveGrantsForm;
+       form =  mRetrieveGrantsForm;
        request.getSession().setAttribute(ApplicationConstants.PAGINATION_OBJECT, mPaginationObject);
        return mActionForward;
 
@@ -208,7 +207,7 @@ public class SearchGrantsAction extends NciPgmAction  {
        RetrieveGrantsForm mRetrieveGrantsForm = (RetrieveGrantsForm) form;
        mRetrieveGrantsForm.setSortColumn( (String)  request.getSession().getAttribute(ApplicationConstants.LAST_SORT_COLUMN));
        mRetrieveGrantsForm.setSortOrder( (String)  request.getSession().getAttribute(ApplicationConstants.LAST_SORT_ORDER));
-       form = (ActionForm) mRetrieveGrantsForm;
+       form = mRetrieveGrantsForm;
        request.getSession().setAttribute(ApplicationConstants.PAGINATION_OBJECT, mPaginationObject);
        return mActionForward;
 
@@ -225,7 +224,7 @@ public class SearchGrantsAction extends NciPgmAction  {
        RetrieveGrantsForm mRetrieveOldGrantsForm =  (RetrieveGrantsForm) request.getSession().getAttribute(ApplicationConstants.OLD_SEARCH_FORM);
        // compare the old form and the new form
        if(!SearchGrantsActionHelper.compareForms(mRetrieveOldGrantsForm, mRetrieveGrantsForm)){
-		   form = (ActionForm) mRetrieveOldGrantsForm;
+		   form = mRetrieveOldGrantsForm;
 	   }
        request.getSession().setAttribute(ApplicationConstants.PAGINATION_OBJECT, mPaginationObject);
        return mActionForward;
@@ -432,10 +431,11 @@ public class SearchGrantsAction extends NciPgmAction  {
 		       }
 	       }
 	       GrantSearchService mGrantSearchService = GrantServiceFactory.getGrantSearchService(action, oApplicationContext);
-	       queryResults = (Map) mGrantSearchService.search(mGrantQueryObject, mPaginationObject, (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO) );
+	       queryResults = 
+                    mGrantSearchService.search(mGrantQueryObject, mPaginationObject, (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO) );
 
            if(selectAllIndicator) {
-		      return (Map) queryResults;
+		      return queryResults;
 	       }
 		   request.getSession().setAttribute("listGenerated", "Y");
            if(queryResults.size() == 0) {
@@ -458,7 +458,7 @@ public class SearchGrantsAction extends NciPgmAction  {
 	        throw new GrantSearchException(this.getClass().getName(), "search", ex.toString(), request.getSession(), ex);
        }
 
-       return (Map) queryResults;
+       return queryResults;
 
   }
   private boolean setGlobalVariables(ActionForm form, HttpServletRequest request,  HttpServletResponse response, ActionMapping mapping )

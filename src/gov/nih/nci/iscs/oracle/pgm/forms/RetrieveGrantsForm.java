@@ -77,7 +77,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
         this.selectedPageSize = new Integer(ApplicationConstants.DEFAULT_PAGE_SIZE).toString();
   	    this.listGenerated = "N";
   	    this.sortAscendingIndicator = true;
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
   	    this.sortActionSelected = false;
 		Timestamp ts = new Timestamp(new Date().getTime());
 		timestamp = ts.toString();
@@ -557,7 +557,7 @@ public class RetrieveGrantsForm extends ValidatorForm  implements GrantQueryObje
 		 destForm.year = new String[ApplicationConstants.MAX_GRANT_NUM_INDEX];
 		 destForm.suffix = new String[ApplicationConstants.MAX_GRANT_NUM_INDEX];
 		 for(int index = 0; index<arraySize; index++ ) {
-			 destForm.tp[index] = (String) this.tp[index];
+			 destForm.tp[index] = this.tp[index];
 			 destForm.icd[index] = this.icd[index];
 			 destForm.mech[index] = this.mech[index];
 			 destForm.srl[index] = this.srl[index];

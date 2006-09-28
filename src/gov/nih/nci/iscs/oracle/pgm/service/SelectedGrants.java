@@ -253,7 +253,7 @@ public class SelectedGrants implements Cloneable {
 		logger.error("**** an exception has been generated in processForPdAssignmentAction ***" + ex.toString());
 
 	  }
-	    return (Set) mErrorMessages;
+	    return mErrorMessages;
 
       }
 
@@ -290,7 +290,7 @@ public class SelectedGrants implements Cloneable {
 	      // make sure that CA selected in in MyCancerActivities
 
 	      boolean caMatched = false;
-			List myCancerActivities = (List) mUserFilterInfo.getCancerActivityCodes();
+			List myCancerActivities = mUserFilterInfo.getCancerActivityCodes();
 	        if(myCancerActivities != null) {
 	           Iterator mIterator = myCancerActivities.iterator();
 	           while(mIterator.hasNext()){
@@ -477,9 +477,9 @@ public class SelectedGrants implements Cloneable {
 
     public Object get(Object key){
        if(oMappingName.equalsIgnoreCase("retrieveGrantsForReferralForm")) {
-          return (ReferralSearchResultObject) oSelectedGrants.get(key);
+          return oSelectedGrants.get(key);
        } else {
-          return (PDASearchResultObject) oSelectedGrants.get(key);
+          return oSelectedGrants.get(key);
 	   }
 	}
 

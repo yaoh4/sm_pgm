@@ -46,7 +46,7 @@ public class RejectionCommentsServiceImpl extends BaseServiceImpl
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("RejectionCommentsServiceImpl", "getRejectionComments", "Unable to obtain Reject Comments from the database!!! " + ex.toString());
 	      }
-	       return (Map) mRejectionComments;
+	       return mRejectionComments;
     }
 
 

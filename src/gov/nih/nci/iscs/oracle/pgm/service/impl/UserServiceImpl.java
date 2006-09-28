@@ -61,7 +61,7 @@ public class UserServiceImpl extends BaseServiceImpl
 		    RetrieveUserFilterInfoCommand oRetrieveUserFilterInfoCommand = (RetrieveUserFilterInfoCommand) getBean("retrieveUserFilterInfoCommandDao");
 		    RetrieveUserFilterInfoCommand bRetrieveUserFilterInfoCommand = (RetrieveUserFilterInfoCommand) getBean("retrieveUserFilterInfoCommandDao");
 
-            UserFilterInfo mUserFilterInfo  = (UserFilterInfo) oRetrieveUserFilterInfoCommand.execute(super.getUserId());
+            UserFilterInfo mUserFilterInfo = oRetrieveUserFilterInfoCommand.execute(super.getUserId());
 
             return mUserFilterInfo;
 		} catch (Exception ex) {

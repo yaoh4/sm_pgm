@@ -28,7 +28,7 @@ public class RereferReferralForm extends ValidatorForm   {
     private String sortColumn;
 
     public RereferReferralForm() {
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
   	    this.rereferCA = ApplicationConstants.EMPTY_STRING;
   	    this.comments = ApplicationConstants.EMPTY_STRING;
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
@@ -140,7 +140,7 @@ public class RereferReferralForm extends ValidatorForm   {
     }
 
     public void setCommentsMap(Map commentsMap) {
-        this.commentsMap = (Map) commentsMap;;
+        this.commentsMap = commentsMap;;
     }
 
    public Object getCancerActivityMapped(String key) {
@@ -158,7 +158,7 @@ public class RereferReferralForm extends ValidatorForm   {
     }
 
     public void setCancerActivitiesMap(Map cancerActivitiesMap) {
-        this.cancerActivitiesMap = (Map) cancerActivitiesMap;;
+        this.cancerActivitiesMap = cancerActivitiesMap;;
     }
 
     public void setSelectedIndx(String[] selectedIndx) {

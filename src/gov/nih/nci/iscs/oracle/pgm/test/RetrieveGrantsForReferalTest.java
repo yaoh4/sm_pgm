@@ -64,7 +64,8 @@ public class RetrieveGrantsForReferalTest {
 	  mPageNumber  = new Integer (args[1]).intValue();
 	  Integer mFiscalYearFrom = new Integer (args[2]);
       try{
-          results = (String) GRTest.retrieveGrantsForReferal(mGrantNumber, mFiscalYearFrom, mPageNumber);
+          results = 
+                    GRTest.retrieveGrantsForReferal(mGrantNumber, mFiscalYearFrom, mPageNumber);
           System.out.println("******* RETRIEVE MESSAGE IS ******" + results);
       } catch (Exception e) {
           System.out.println("***** exception is ****" + e.toString());

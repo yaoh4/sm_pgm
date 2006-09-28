@@ -79,8 +79,8 @@ public class FormatCancerActivitySelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
 	        if(mValue.equalsIgnoreCase(cancerActivity)) {
 	  	       buf.append("<option SELECTED value=");
 	        } else {
@@ -108,8 +108,8 @@ public class FormatCancerActivitySelectTag extends TagSupport {
 
 	     while(mIterator.hasNext() ){
 	        LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-	        String mValue = (String) mLookUpValueBean.getValue();
-	        String mLabel = (String) mLookUpValueBean.getLabel();
+	        String mValue = mLookUpValueBean.getValue();
+	        String mLabel = mLookUpValueBean.getLabel();
 	        if(mValue.equalsIgnoreCase(cancerActivity)) {
 	  	       buf.append("<option SELECTED value=");
 	        } else {

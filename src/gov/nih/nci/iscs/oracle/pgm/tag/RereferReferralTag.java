@@ -101,8 +101,8 @@ public class RereferReferralTag extends TagSupport {
       Iterator mIterator = caList.iterator();
       while(mIterator.hasNext() ){
 		  LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-          String mValue = (String) mLookUpValueBean.getValue();
-          String mLabel = (String) mLookUpValueBean.getLabel();
+          String mValue = mLookUpValueBean.getValue();
+          String mLabel = mLookUpValueBean.getLabel();
           if(cancerActivity.equalsIgnoreCase(mValue) ) {
 		    buf.append("<option SELECTED value=");
 		  } else {
@@ -150,7 +150,7 @@ public class RereferReferralTag extends TagSupport {
   private  StringBuffer formatCAForApply(StringBuffer buf, HttpServletRequest request) {
       RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");
 
-      String caForApply = (String) mRereferReferralForm.getCaToApply();
+      String caForApply = mRereferReferralForm.getCaToApply();
       buf.append("<SELECT NAME=caToApply SIZE=\"1\" >");
 	  buf.append("<option SELECTED value=");
 	  buf.append(ApplicationConstants.EMPTY_STRING);
@@ -162,8 +162,8 @@ public class RereferReferralTag extends TagSupport {
       Iterator mIterator = caList.iterator();
       while(mIterator.hasNext() ){
 		  LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
-          String mValue = (String) mLookUpValueBean.getValue();
-          String mLabel = (String) mLookUpValueBean.getLabel();
+          String mValue = mLookUpValueBean.getValue();
+          String mLabel = mLookUpValueBean.getLabel();
           if(caForApply.equalsIgnoreCase(mValue) ) {
 		    buf.append("<option SELECTED value=");
 		  } else {

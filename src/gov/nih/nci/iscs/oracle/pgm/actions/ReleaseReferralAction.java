@@ -66,14 +66,7 @@ public class ReleaseReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws  ReferralActionException, Exception {
 
 	try{
-	   messages = new ActionMessages();
-	   ReleaseReferralForm mForm = (ReleaseReferralForm) request.getAttribute("releaseReferralForm");
-	   /* make sure that at least one PD was selected
-       if( mReferralActionObjects.size() == 0){
-	       super.logErrors(messages, "executereferralaction", "errors.no.release.action.selected");
-           this.saveMessages(request, messages);
-		   return mapping.findForward("continue");
-	   }*/
+	   messages = new ActionMessages();	   
 	   NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
 	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId() );
 	   boolean mResults = mReferralActionService.performReferral("release");
@@ -110,10 +103,7 @@ public class ReleaseReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   ReleaseReferralForm mReleaseReferralForm = (ReleaseReferralForm) request.getAttribute("releaseReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
-       String[] tokens;
+	   ReleaseReferralForm mReleaseReferralForm = (ReleaseReferralForm) request.getAttribute("releaseReferralForm");       
        String sortColumn = mReleaseReferralForm.getSortColumn();
        boolean sortAscendingIndicator = mReleaseReferralForm.getSortAscendingIndicator();
    	   Iterator mIterator = mReferralActionList.iterator();

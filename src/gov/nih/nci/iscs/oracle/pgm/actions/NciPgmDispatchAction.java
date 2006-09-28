@@ -40,8 +40,7 @@ public abstract class NciPgmDispatchAction extends NciBaseDispatchAction {
     public void setUserAttributes(NciUser user, HttpServletRequest request)
         throws Exception {
         LDAPUtil ctx = (LDAPUtil) this.getAppAttribute(request, ApplicationConstants.LDAP_SEARCHER);
-        String stFDN = null;
-        String userId = null;
+        String stFDN = null;        
         Attributes attribs =  null;
 
 
@@ -147,8 +146,7 @@ public abstract class NciPgmDispatchAction extends NciBaseDispatchAction {
         HttpServletResponse response) throws Exception
     {
         NciUser nu = this.getUser(request);
-        System.out.println("**** in verifyUserForApp and user is ***" +  nu);
-        HttpSession session = request.getSession();
+        System.out.println("**** in verifyUserForApp and user is ***" +  nu);        
         Set roleSet = (Set)nu.getAttribute("dbRoles");
         if ((roleSet == null)||(!(roleSet.contains("CMBB_USER"))))
         {

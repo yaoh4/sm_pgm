@@ -28,7 +28,7 @@ public class PdAssignmentForm extends ValidatorForm   {
     private Map PrgIdsMap;
 
     public PdAssignmentForm() {
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
         this.pdId = new String[this.queryResults.size()];
         this.selectedIndx = new String[this.queryResults.size()];
         this.selected = new String[this.queryResults.size()];
@@ -73,7 +73,7 @@ public class PdAssignmentForm extends ValidatorForm   {
     }
 
     public void setPrgIdsMap(Map PrgIdsMap) {
-        this.PrgIdsMap = (Map) PrgIdsMap;;
+        this.PrgIdsMap = PrgIdsMap;;
     }
    public void setQueryResults(List queryResults) {
 		this.count = queryResults.size();

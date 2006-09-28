@@ -47,7 +47,7 @@ public class CancerActivitiesServiceImpl extends BaseServiceImpl
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("CancerActivitiesServiceImpl", "getActiveCancerActivities", "Unable to obtain Active Cancer Activities from the database!!! " + ex.toString());
 	      }
-	       return (List) mReturnList;
+	       return mReturnList;
     }
 
 

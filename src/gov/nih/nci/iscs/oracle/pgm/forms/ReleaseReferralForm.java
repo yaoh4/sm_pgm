@@ -22,7 +22,7 @@ public class ReleaseReferralForm extends ValidatorForm   {
     private String[] selectedIndx;
 
     public ReleaseReferralForm() {
-  	    this.queryResults = (List) new ArrayList();
+  	    this.queryResults = new ArrayList();
   	    this.requestAction = ApplicationConstants.EMPTY_STRING;
   	    this.sortColumn = "grantNumber";
   	    this.sortAscendingIndicator = true;

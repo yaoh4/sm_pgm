@@ -70,11 +70,8 @@ public class RereferReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   messages = new ActionMessages();
-	   RereferReferralForm mForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");
-	   boolean mValidationErrors = updateSelected(request);
-	   // verify that ca and comments entered.
-	   ArrayList tempList = new ArrayList();
+	   messages = new ActionMessages();	   
+	   boolean mValidationErrors = updateSelected(request);	  
 
 	   // make sure that at comments and CA entered for all selecetd
        if( mValidationErrors){
@@ -109,8 +106,7 @@ public class RereferReferralAction extends NciPgmAction {
 
    public boolean updateSelected (HttpServletRequest request) throws ReferralActionException, Exception {
 
-	try{
-       String mComments = null;
+	try{       
        boolean mValidationErrors = false;
        mReferralActionObjects = new TreeMap();
        String comments = new String(ApplicationConstants.EMPTY_STRING);
@@ -118,8 +114,7 @@ public class RereferReferralAction extends NciPgmAction {
        String mCA = new String(ApplicationConstants.EMPTY_STRING);
        String mApplId = new String(ApplicationConstants.EMPTY_STRING);
        String mKey = new String(ApplicationConstants.EMPTY_STRING);
- 	   RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");
-       Map mCommentsMap = mRereferReferralForm.getCommentsMap();
+ 	   RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");       
        for (Iterator mIterator = mRereferReferralForm.getCommentsMap().entrySet().iterator(); mIterator.hasNext();) {
             Map.Entry entry = (Map.Entry) mIterator.next();
             mKey = (String)entry.getKey();
@@ -161,8 +156,7 @@ public class RereferReferralAction extends NciPgmAction {
 
 	try{
 	   RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
+       
        String[] tokens = new String[3];
        String commentsToApply = mRereferReferralForm.getCommentsToApply();
        String caToApply = mRereferReferralForm.getCaToApply();
@@ -171,8 +165,7 @@ public class RereferReferralAction extends NciPgmAction {
           String[] mSelectedIndx =  mRereferReferralForm.getSelectedIndx();
 
           for(int i=0; i<mSelectedIndx.length; i++) {
-			  tokens = getKeyTokens(mSelectedIndx[i]);
-	       	  Integer index = new Integer(tokens[0]);
+			  tokens = getKeyTokens(mSelectedIndx[i]);	       	  
 			  String mCA = tokens[1];
 			  String mApplId = tokens[2];
 			  String mKey = mCA + "*" + mApplId;
@@ -211,10 +204,7 @@ public class RereferReferralAction extends NciPgmAction {
                                        HttpServletResponse response) throws ReferralActionException, Exception {
 
 	try{
-	   RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");
-       ReferralActionObject mReferralActionObject = null;
-       int indx;
-       String[] tokens;
+	   RereferReferralForm mRereferReferralForm = (RereferReferralForm) request.getAttribute("rereferReferralForm");       
        String sortColumn = mRereferReferralForm.getSortColumn();
        boolean sortAscendingIndicator = mRereferReferralForm.getSortAscendingIndicator();
    	   Iterator mIterator = mReferralActionList.iterator();
@@ -277,7 +267,7 @@ public class RereferReferralAction extends NciPgmAction {
 	  if(mKey != null) {
 	     StringTokenizer st = new StringTokenizer(mKey, "*");
 	     while(st.hasMoreTokens()) {
-		    String temp = (String) st.nextToken();
+		    String temp =  st.nextToken();
 		    tokens[indx] = temp;
 		    indx++;
 	     }

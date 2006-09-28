@@ -64,7 +64,7 @@ public class RetrieveGrantsForPDATest {
 	  mPageNumber  = new Integer (args[1]).intValue();
 	  String mGroupCode = new String (args[2]);
       try{
-          results = (String) GRTest.retrieveGrantsForPDA(mGrantNumber, mGroupCode, mPageNumber);
+          results = GRTest.retrieveGrantsForPDA(mGrantNumber, mGroupCode, mPageNumber);
           System.out.println("******* RETRIEVE MESSAGE IS ******" + results);
       } catch (Exception e) {
           System.out.println("***** exception is ****" + e.toString());

@@ -144,7 +144,7 @@ public class GrantsForPDAQueryObject extends QueryObject implements PDAQueryObje
       return irgFlexCode;
     }
 
-    public void setIrgFlexCode(String irgCode) {
+    public void setIrgFlexCode(String irgFlexCode) {
       this.irgFlexCode = irgFlexCode;
     }
 

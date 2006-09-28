@@ -36,7 +36,7 @@ public class BaseServiceImpl
 
     public Object getBean(String beanName) throws Exception
     {
-		  Object hibernateBean = (Object)  oContextFactory.getBean(beanName);
+		  Object hibernateBean = oContextFactory.getBean(beanName);
 		  return hibernateBean;
 
     }

@@ -73,7 +73,7 @@ public class WbReferralActivitiesImpl extends BaseServiceImpl
 		  } catch (Exception ex) {
 			 throw new ServiceImplException("WbReferralActivitiesImpl", "getReferralActivities", "Unable to obtain referral activities from the database!!! " + ex.toString());
 	      }
-	      return (List) mList;
+	      return mList;
     }
   /**
    * Get the board council meeting dates for previous, current, and next boards.
@@ -107,7 +107,7 @@ public class WbReferralActivitiesImpl extends BaseServiceImpl
       try {
        RetrieveApplicationLinkInfoCommand oRetrieveApplicationLinkInfoCommand = (RetrieveApplicationLinkInfoCommand) getBean("retrieveApplicationLinkInfoCommandDao");
        QueryPage aQueryPage = oRetrieveApplicationLinkInfoCommand.execute(applicationName, super.getUserId());
-       List mList = (ArrayList) aQueryPage.getList();
+       List mList = aQueryPage.getList();
        if (mList.size()>0)
        {
           GwbLinksT oGwbLinksT = (GwbLinksT)mList.get(0);

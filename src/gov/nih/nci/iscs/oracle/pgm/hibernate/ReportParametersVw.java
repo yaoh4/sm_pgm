@@ -105,7 +105,7 @@ public class ReportParametersVw implements Serializable {
         return this.defaultValue;
     }
 
-    public void setDefaultValue(String sequenceNum) {
+    public void setDefaultValue(String defaultValue) {
         this.defaultValue = defaultValue;
     }
 

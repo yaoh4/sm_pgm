@@ -183,7 +183,7 @@ public List getReportsList() {
     } catch(Exception e) {
         e.printStackTrace();
     }
-    return (List) mReportsList;
+    return mReportsList;
 
 }
 
