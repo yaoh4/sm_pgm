@@ -38,17 +38,18 @@ public class ReferralActivityPortletTag extends TagSupport
         JspWriter out = pageContext.getOut();
         StringBuffer buf = new StringBuffer();
         if ((referralActivity != null)&&(referralActivity.size()>0))
-        {
+        {  
            buf.append("<tr><td class=\"listCell3\">&nbsp;</td><td class=\"listCell3\">&nbsp;</td></tr>\n");
            Iterator iterate = referralActivity.iterator();
            ReferralActivityVw rav = (ReferralActivityVw)iterate.next();
-           do {
+           do { 
            	 String currentCA =  rav.getCayCode();
              String currentCouncil = rav.getCouncilMeetingDate();
            	 boolean sameCA=true;
              int activityCount = rav.getActCount().toBigInteger().intValue();
            	 while ((sameCA)&&(iterate.hasNext()))
-           	 {
+           	 {  
+           	     
            	    rav = (ReferralActivityVw)iterate.next();
            	    if (rav.getCayCode().equals(currentCA)){
                   activityCount += rav.getActCount().toBigInteger().intValue();
@@ -58,8 +59,10 @@ public class ReferralActivityPortletTag extends TagSupport
            	    }
            	 }
              buf.append(getCARow(currentCA, activityCount, currentCouncil));
+             logger.info(buf.toString());
            }while (iterate.hasNext());
         }
+        logger.info(buf.toString());
         out.write(buf.toString());
     	return TagSupport.SKIP_BODY;
       }
