@@ -20,6 +20,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String currentPoc;
     private String ncabDate;
     private String currentReferralActivityDate;
+    private String currentReferralActivityCode;
     private String eGrantsNumber;
     private String rfapa;
     private String apsComments;
@@ -154,5 +155,13 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
 
     public String getApsComments() {
         return apsComments;
+    }
+
+    public void setCurrentReferralActivityCode(String currentReferralActivityCode) {
+        this.currentReferralActivityCode = currentReferralActivityCode;
+    }
+
+    public String getCurrentReferralActivityCode() {
+        return currentReferralActivityCode;
     }
 }

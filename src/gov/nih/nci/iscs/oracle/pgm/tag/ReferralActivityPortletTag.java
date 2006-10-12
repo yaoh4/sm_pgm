@@ -40,27 +40,40 @@ public class ReferralActivityPortletTag extends TagSupport
         if ((referralActivity != null)&&(referralActivity.size()>0))
         {  
            buf.append("<tr><td class=\"listCell3\">&nbsp;</td><td class=\"listCell3\">&nbsp;</td></tr>\n");
+           boolean sameCA = true;
+            boolean lastCA = false;
+           String currentCA = null;
+           String currentCouncil = null;
+           int activityCount = 0;
+           ReferralActivityVw last = null;
            Iterator iterate = referralActivity.iterator();
            ReferralActivityVw rav = (ReferralActivityVw)iterate.next();
            do { 
-           	 String currentCA =  rav.getCayCode();
-             String currentCouncil = rav.getCouncilMeetingDate();
-           	 boolean sameCA=true;
-             int activityCount = rav.getActCount().toBigInteger().intValue();
+             currentCA =  rav.getCayCode();
+             currentCouncil = rav.getCouncilMeetingDate();
+             sameCA = true;
+             activityCount = rav.getActCount().toBigInteger().intValue();                        
            	 while ((sameCA)&&(iterate.hasNext()))
-           	 {  
-           	     
-           	    rav = (ReferralActivityVw)iterate.next();
+           	 {             	     
+           	    rav = (ReferralActivityVw)iterate.next();           	     
            	    if (rav.getCayCode().equals(currentCA)){
-                  activityCount += rav.getActCount().toBigInteger().intValue();
+                      activityCount += rav.getActCount().toBigInteger().intValue();
            	    }
            	    else {
-           	    	sameCA = false;
+           	    	sameCA = false;           	       
+                        if (!iterate.hasNext()){ 
+                        lastCA = true;
+                        last = rav;                            
+                        }
            	    }
            	 }
              buf.append(getCARow(currentCA, activityCount, currentCouncil));
              logger.info(buf.toString());
            }while (iterate.hasNext());
+           
+           if (lastCA )           
+           buf.append(getCARow(last.getCayCode(), last.getActCount().toBigInteger().intValue(), last.getCouncilMeetingDate()));
+           
         }
         logger.info(buf.toString());
         out.write(buf.toString());

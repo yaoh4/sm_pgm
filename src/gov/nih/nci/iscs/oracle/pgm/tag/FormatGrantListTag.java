@@ -108,6 +108,9 @@ public class FormatGrantListTag extends TagSupport {
       if(obj.getReReferred() ){
          buf.append("<BR> <a href=\"javascript:openCAHistWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\"> Referred from Other CA </a>");
       }
+      if(obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF") || obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF-D") ){
+         buf.append("<BR> <a href=\"javascript:openReferralOfficeCommentsWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\"> Referral Office Comments </a>");
+      }
 	  buf.append("</td>");
       buf.append("<td headers=\"header02\" width=\"6%\" class=" + className + ">" +  obj.getCancerActivity() + "&nbsp;</td>");
 	  buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + " <INPUT  type=\"button\" class=" + underlineButtonClassName + " id=\"" + controlName + "\" value=\"" + obj.getDualCA() + "\" onmouseover=\"javascript:moveOver(" + "\'" + pocInfo + "\', \'" + selIndex + "\');\" onmouseout=\"javascript:moveOut();\"></a>&nbsp;</td>");

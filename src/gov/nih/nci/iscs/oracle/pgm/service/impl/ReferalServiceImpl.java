@@ -225,7 +225,11 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 				if(mNciPdReferral.getCurrentReferralActivityCode().trim().equalsIgnoreCase("REREF")) {
 				   mReferralSearchResultObject.setReReferred(true);
 			    }
-			}
+			    mReferralSearchResultObject.setCurrentReferralActivityCode(mNciPdReferral.getCurrentReferralActivityCode().trim());
+			} 
+                        else {
+	                    mReferralSearchResultObject.setCurrentReferralActivityCode(ApplicationConstants.EMPTY_STRING);
+	                               }
 
 			String mEgrantsNumber = null;
 			if(mNciPdReferral.getAdminPhsOrgCode() == null ||
