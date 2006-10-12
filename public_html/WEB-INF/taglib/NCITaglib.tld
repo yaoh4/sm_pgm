@@ -276,12 +276,14 @@
         <rtexprvalue>true</rtexprvalue>
       </attribute>   
   </tag>
+  
+  
   <tag>
-        <name>applAPSComments</name>
-        <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.applAPSCommentsTag</tagclass>
+        <name>applOfficeComments</name>
+        <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.ApplOfficeCommentsTag</tagclass>
         <bodycontent>EMPTY</bodycontent>
         <info>
-    	Comments from the previous program for Appl Id
+    	Cancer Activity History for Appl Id
         </info>
         <attribute>
           <name>applId</name>
@@ -289,6 +291,7 @@
           <rtexprvalue>true</rtexprvalue>
         </attribute>   
   </tag>
+    
   
   <tag>
       <name>SelectGrant</name>
