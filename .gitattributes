@@ -530,6 +530,7 @@ src/gov/nih/nci/iscs/oracle/pgm/tag/AcceptReferralTableHeaderTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/AcceptReferralTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/AdditionalCriteriaTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/ApplCAHistoryTag.java -text
+src/gov/nih/nci/iscs/oracle/pgm/tag/ApplOfficeCommentsTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/ApplyToAllTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/AssignPDTableHeaderTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/CrystalReportTag.java -text
