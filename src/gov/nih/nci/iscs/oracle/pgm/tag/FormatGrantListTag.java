@@ -108,7 +108,7 @@ public class FormatGrantListTag extends TagSupport {
       if(obj.getReReferred() ){
          buf.append("<BR> <a href=\"javascript:openCAHistWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\"> Referred from Other CA </a>");
       }
-      if(obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF") || obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF-D") ){
+      if(obj.getApsComments()!= null && ( obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF") || obj.getCurrentReferralActivityCode().equalsIgnoreCase("REF-D")) ){
          buf.append("<BR> <a href=\"javascript:openReferralOfficeCommentsWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\"> Referral Office Comments </a>");
       }
 	  buf.append("</td>");
