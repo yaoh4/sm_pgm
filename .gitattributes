@@ -60,6 +60,7 @@ lib/j2ee.jar -text
 lib/jdom.jar -text
 lib/junit.jar -text
 lib/log4j-1.2.8.jar -text
+lib/log4j-props.jar -text
 lib/ojdbc14.jar -text
 lib/spring.jar -text
 lib/struts.jar -text
