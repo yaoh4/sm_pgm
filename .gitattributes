@@ -49,6 +49,7 @@ lib/commons-digester.jar -text
 lib/commons-fileupload.jar -text
 lib/commons-jxpath.jar -text
 lib/commons-lang-1.0.1.jar -text
+lib/commons-lang.jar -text
 lib/commons-logging.jar -text
 lib/commons-pool-1.1.jar -text
 lib/commons-validator-1.3.0.jar -text
