@@ -156,7 +156,6 @@ public_html/WEB-INF/lib/jdom.jar -text
 public_html/WEB-INF/lib/junit.jar -text
 public_html/WEB-INF/lib/log4j-1.2.8.jar -text
 public_html/WEB-INF/lib/log4j-props.jar -text
-public_html/WEB-INF/lib/log4j.properties -text
 public_html/WEB-INF/lib/odmg.jar -text
 public_html/WEB-INF/lib/ojdbc14.jar -text
 public_html/WEB-INF/lib/spring-aop.jar -text
