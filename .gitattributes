@@ -177,6 +177,7 @@ public_html/WEB-INF/lib/commons-lang-1.0.1.jar -text
 public_html/WEB-INF/lib/commons-logging.jar -text
 public_html/WEB-INF/lib/commons-pool-1.1.jar -text
 public_html/WEB-INF/lib/commons-validator.jar -text
+public_html/WEB-INF/lib/commons.jar -text
 public_html/WEB-INF/lib/dirctxdispenser.jar -text
 public_html/WEB-INF/lib/dom4j-1.4.jar -text
 public_html/WEB-INF/lib/ehcache-0.7.jar -text
