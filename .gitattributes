@@ -133,9 +133,7 @@ public_html/Stylesheets/tabs.css -text
 public_html/UserLoginErrorPage.jsp -text
 public_html/ViewProgramDir.jsp -text
 public_html/WEB-INF/lib/aopalliance.jar -text
-public_html/WEB-INF/lib/app.jar -text
 public_html/WEB-INF/lib/c3p0-0.8.5.jar -text
-public_html/WEB-INF/lib/c3p0-oracle-thin-extras-0.8.5.jar -text
 public_html/WEB-INF/lib/c3p0.license.txt -text
 public_html/WEB-INF/lib/cglib-full-2.0.1.jar -text
 public_html/WEB-INF/lib/commons-beanutils.jar -text
