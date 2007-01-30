@@ -1,150 +1,151 @@
-package gov.nih.nci.iscs.oracle.pgm.hibernate;
+package gov.nih.nci.iscs.oracle.referral.hibernate;
 
 import java.io.Serializable;
-import java.util.Date;
 import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
-
-/**
+/** 
  *        @hibernate.class
  *         table="NCI_PD_QUERY_VW"
- *
+ *     
 */
 public class NciPdQueryVw implements Serializable {
 
     /** identifier field */
-    private long applId;
+    private java.lang.Long applId;
 
     /** identifier field */
-    private String fullGrantNum;
+    private java.lang.String fullGrantNum;
 
     /** identifier field */
-    private String rfaPaNumber;
+    private java.lang.String rfaPaNumber;
 
     /** identifier field */
-    private String councilMeetingDate;
+    private java.lang.String councilMeetingDate;
 
     /** identifier field */
-    private String firstName;
+    private java.lang.String firstName;
 
     /** identifier field */
-    private String miName;
+    private java.lang.String miName;
 
     /** identifier field */
-    private String lastName;
+    private java.lang.String lastName;
 
     /** identifier field */
-    private String applTypeCode;
+    private java.lang.String applTypeCode;
 
     /** identifier field */
-    private String adminPhsOrgCode;
+    private java.lang.String adminPhsOrgCode;
 
     /** identifier field */
-    private String activityCode;
+    private java.lang.String activityCode;
 
     /** identifier field */
-    private Integer serialNum;
+    private java.lang.Integer serialNum;
 
     /** identifier field */
-    private Integer supportYear;
+    private java.lang.Integer supportYear;
 
     /** identifier field */
-    private String suffixCode;
+    private java.lang.String suffixCode;
 
     /** identifier field */
-    private String applStatusCode;
+    private java.lang.String applStatusCode;
 
     /** identifier field */
-    private String applStatusGroupCode;
+    private java.lang.String applStatusGroupCode;
 
     /** identifier field */
-    private Date budgetStartDate;
+    private java.util.Date budgetStartDate;
 
     /** identifier field */
-    private Date budgetEndDate;
+    private java.util.Date budgetEndDate;
 
     /** identifier field */
-    private Integer fy;
+    private java.lang.Integer fy;
 
     /** identifier field */
-    private Long ipf;
+    private java.lang.Long ipf;
 
     /** identifier field */
-    private String orgName;
+    private java.lang.String orgName;
 
     /** identifier field */
-    private String institutionCity;
+    private java.lang.String institutionCity;
 
     /** identifier field */
-    private String institutionState;
+    private java.lang.String institutionState;
 
     /** identifier field */
-    private String projectTitle;
+    private java.lang.String projectTitle;
 
     /** identifier field */
-    private String legacySourceFile;
+    private java.lang.String legacySourceFile;
 
     /** identifier field */
-    private String cayCode;
+    private java.lang.String cayCode;
 
     /** identifier field */
-    private String dualCayCode;
+    private java.lang.String dualCayCode;
 
     /** identifier field */
-    private Long pocNpnId;
+    private java.lang.Long pocNpnId;
 
     /** identifier field */
-    private String pocLastName;
+    private java.lang.String pocLastName;
 
     /** identifier field */
-    private String pocFirstName;
+    private java.lang.String pocFirstName;
 
     /** identifier field */
-    private String pocMiName;
+    private java.lang.String pocMiName;
 
     /** identifier field */
-    private String pocFullName;
+    private java.lang.String pocFullName;
 
     /** identifier field */
-    private Long dualPocNpnId;
+    private java.lang.Long dualPocNpnId;
 
     /** identifier field */
-    private String dualPocLastName;
+    private java.lang.String dualPocLastName;
 
     /** identifier field */
-    private String dualPocFirstName;
+    private java.lang.String dualPocFirstName;
 
     /** identifier field */
-    private String dualPocMiName;
+    private java.lang.String dualPocMiName;
 
     /** identifier field */
-    private String dualPocFullName;
+    private java.lang.String dualPocFullName;
 
     /** identifier field */
-    private String araStatusCode;
+    private java.lang.String araStatusCode;
 
     /** identifier field */
-    private String araMatchFlag;
+    private java.lang.Long araId;
 
     /** identifier field */
-    private String currentFutureBoardFlag;
+    private java.lang.String araMatchFlag;
 
     /** identifier field */
-    private String currentReferralActivityCode;
+    private java.lang.String currentFutureBoardFlag;
 
     /** identifier field */
-    private Date currentReferralActivityDate;
+    private java.lang.String currentReferralActivityCode;
 
     /** identifier field */
-    private String withdrawnFlag;
-    
+    private java.util.Date currentReferralActivityDate;
+
     /** identifier field */
-    private String currentApsComments;
+    private java.lang.String withdrawnFlag;
+
+    /** identifier field */
+    private java.lang.String currentApsComments;
 
     /** full constructor */
-    public NciPdQueryVw(long applId, String fullGrantNum, String rfaPaNumber, String councilMeetingDate, String firstName, String miName, String lastName, String applTypeCode, String adminPhsOrgCode, String activityCode, Integer serialNum, Integer supportYear, String suffixCode, String applStatusCode, String applStatusGroupCode, Date budgetStartDate, Date budgetEndDate, Integer fy, Long ipf, String orgName, String institutionCity, String institutionState, String projectTitle, String legacySourceFile, String cayCode, String dualCayCode, Long pocNpnId, String pocLastName, String pocFirstName, String pocMiName, String pocFullName, Long dualPocNpnId, String dualPocLastName, String dualPocFirstName, String dualPocMiName, String dualPocFullName, String araStatusCode, String araMatchFlag, String currentFutureBoardFlag, String currentReferralActivityCode, Date currentReferralActivityDate, String withdrawnFlag, String apsComments) {
+    public NciPdQueryVw(java.lang.Long applId, java.lang.String fullGrantNum, java.lang.String rfaPaNumber, java.lang.String councilMeetingDate, java.lang.String firstName, java.lang.String miName, java.lang.String lastName, java.lang.String applTypeCode, java.lang.String adminPhsOrgCode, java.lang.String activityCode, java.lang.Integer serialNum, java.lang.Integer supportYear, java.lang.String suffixCode, java.lang.String applStatusCode, java.lang.String applStatusGroupCode, java.util.Date budgetStartDate, java.util.Date budgetEndDate, java.lang.Integer fy, java.lang.Long ipf, java.lang.String orgName, java.lang.String institutionCity, java.lang.String institutionState, java.lang.String projectTitle, java.lang.String legacySourceFile, java.lang.String cayCode, java.lang.String dualCayCode, java.lang.Long pocNpnId, java.lang.String pocLastName, java.lang.String pocFirstName, java.lang.String pocMiName, java.lang.String pocFullName, java.lang.Long dualPocNpnId, java.lang.String dualPocLastName, java.lang.String dualPocFirstName, java.lang.String dualPocMiName, java.lang.String dualPocFullName, java.lang.String araStatusCode, java.lang.Long araId, java.lang.String araMatchFlag, java.lang.String currentFutureBoardFlag, java.lang.String currentReferralActivityCode, java.util.Date currentReferralActivityDate, java.lang.String withdrawnFlag, java.lang.String currentApsComments) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
         this.rfaPaNumber = rfaPaNumber;
@@ -182,572 +183,591 @@ public class NciPdQueryVw implements Serializable {
         this.dualPocMiName = dualPocMiName;
         this.dualPocFullName = dualPocFullName;
         this.araStatusCode = araStatusCode;
+        this.araId = araId;
         this.araMatchFlag = araMatchFlag;
         this.currentFutureBoardFlag = currentFutureBoardFlag;
         this.currentReferralActivityCode = currentReferralActivityCode;
         this.currentReferralActivityDate = currentReferralActivityDate;
         this.withdrawnFlag = withdrawnFlag;
-        this.currentApsComments = apsComments;
+        this.currentApsComments = currentApsComments;
     }
 
     /** default constructor */
     public NciPdQueryVw() {
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="APPL_ID"
-     *
+     *             
      */
-    public long getApplId() {
+    public java.lang.Long getApplId() {
         return this.applId;
     }
 
-    public void setApplId(long applId) {
+    public void setApplId(java.lang.Long applId) {
         this.applId = applId;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="FULL_GRANT_NUM"
-     *
+     *             
      */
-    public String getFullGrantNum() {
+    public java.lang.String getFullGrantNum() {
         return this.fullGrantNum;
     }
 
-    public void setFullGrantNum(String fullGrantNum) {
+    public void setFullGrantNum(java.lang.String fullGrantNum) {
         this.fullGrantNum = fullGrantNum;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="RFA_PA_NUMBER"
-     *
+     *             
      */
-    public String getRfaPaNumber() {
+    public java.lang.String getRfaPaNumber() {
         return this.rfaPaNumber;
     }
 
-    public void setRfaPaNumber(String rfaPaNumber) {
+    public void setRfaPaNumber(java.lang.String rfaPaNumber) {
         this.rfaPaNumber = rfaPaNumber;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="COUNCIL_MEETING_DATE"
-     *
+     *             
      */
-    public String getCouncilMeetingDate() {
+    public java.lang.String getCouncilMeetingDate() {
         return this.councilMeetingDate;
     }
 
-    public void setCouncilMeetingDate(String councilMeetingDate) {
+    public void setCouncilMeetingDate(java.lang.String councilMeetingDate) {
         this.councilMeetingDate = councilMeetingDate;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="FIRST_NAME"
-     *
+     *             
      */
-    public String getFirstName() {
+    public java.lang.String getFirstName() {
         return this.firstName;
     }
 
-    public void setFirstName(String firstName) {
+    public void setFirstName(java.lang.String firstName) {
         this.firstName = firstName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="MI_NAME"
-     *
+     *             
      */
-    public String getMiName() {
+    public java.lang.String getMiName() {
         return this.miName;
     }
 
-    public void setMiName(String miName) {
+    public void setMiName(java.lang.String miName) {
         this.miName = miName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="LAST_NAME"
-     *
+     *             
      */
-    public String getLastName() {
+    public java.lang.String getLastName() {
         return this.lastName;
     }
 
-    public void setLastName(String lastName) {
+    public void setLastName(java.lang.String lastName) {
         this.lastName = lastName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="APPL_TYPE_CODE"
-     *
+     *             
      */
-    public String getApplTypeCode() {
+    public java.lang.String getApplTypeCode() {
         return this.applTypeCode;
     }
 
-    public void setApplTypeCode(String applTypeCode) {
+    public void setApplTypeCode(java.lang.String applTypeCode) {
         this.applTypeCode = applTypeCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="ADMIN_PHS_ORG_CODE"
-     *
+     *             
      */
-    public String getAdminPhsOrgCode() {
+    public java.lang.String getAdminPhsOrgCode() {
         return this.adminPhsOrgCode;
     }
 
-    public void setAdminPhsOrgCode(String adminPhsOrgCode) {
+    public void setAdminPhsOrgCode(java.lang.String adminPhsOrgCode) {
         this.adminPhsOrgCode = adminPhsOrgCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="ACTIVITY_CODE"
-     *
+     *             
      */
-    public String getActivityCode() {
+    public java.lang.String getActivityCode() {
         return this.activityCode;
     }
 
-    public void setActivityCode(String activityCode) {
+    public void setActivityCode(java.lang.String activityCode) {
         this.activityCode = activityCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="SERIAL_NUM"
-     *
+     *             
      */
-    public Integer getSerialNum() {
+    public java.lang.Integer getSerialNum() {
         return this.serialNum;
     }
 
-    public void setSerialNum(Integer serialNum) {
+    public void setSerialNum(java.lang.Integer serialNum) {
         this.serialNum = serialNum;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="SUPPORT_YEAR"
-     *
+     *             
      */
-    public Integer getSupportYear() {
+    public java.lang.Integer getSupportYear() {
         return this.supportYear;
     }
 
-    public void setSupportYear(Integer supportYear) {
+    public void setSupportYear(java.lang.Integer supportYear) {
         this.supportYear = supportYear;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="SUFFIX_CODE"
-     *
+     *             
      */
-    public String getSuffixCode() {
+    public java.lang.String getSuffixCode() {
         return this.suffixCode;
     }
 
-    public void setSuffixCode(String suffixCode) {
+    public void setSuffixCode(java.lang.String suffixCode) {
         this.suffixCode = suffixCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="APPL_STATUS_CODE"
-     *
+     *             
      */
-    public String getApplStatusCode() {
+    public java.lang.String getApplStatusCode() {
         return this.applStatusCode;
     }
 
-    public void setApplStatusCode(String applStatusCode) {
+    public void setApplStatusCode(java.lang.String applStatusCode) {
         this.applStatusCode = applStatusCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="APPL_STATUS_GROUP_CODE"
-     *
+     *             
      */
-    public String getApplStatusGroupCode() {
+    public java.lang.String getApplStatusGroupCode() {
         return this.applStatusGroupCode;
     }
 
-    public void setApplStatusGroupCode(String applStatusGroupCode) {
+    public void setApplStatusGroupCode(java.lang.String applStatusGroupCode) {
         this.applStatusGroupCode = applStatusGroupCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="BUDGET_START_DATE"
-     *
+     *             
      */
-    public Date getBudgetStartDate() {
+    public java.util.Date getBudgetStartDate() {
         return this.budgetStartDate;
     }
 
-    public void setBudgetStartDate(Date budgetStartDate) {
+    public void setBudgetStartDate(java.util.Date budgetStartDate) {
         this.budgetStartDate = budgetStartDate;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="BUDGET_END_DATE"
-     *
+     *             
      */
-    public Date getBudgetEndDate() {
+    public java.util.Date getBudgetEndDate() {
         return this.budgetEndDate;
     }
 
-    public void setBudgetEndDate(Date budgetEndDate) {
+    public void setBudgetEndDate(java.util.Date budgetEndDate) {
         this.budgetEndDate = budgetEndDate;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="FY"
-     *
+     *             
      */
-    public Integer getFy() {
+    public java.lang.Integer getFy() {
         return this.fy;
     }
 
-    public void setFy(Integer fy) {
+    public void setFy(java.lang.Integer fy) {
         this.fy = fy;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="IPF"
-     *
+     *             
      */
-    public Long getIpf() {
+    public java.lang.Long getIpf() {
         return this.ipf;
     }
 
-    public void setIpf(Long ipf) {
+    public void setIpf(java.lang.Long ipf) {
         this.ipf = ipf;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="ORG_NAME"
-     *
+     *             
      */
-    public String getOrgName() {
+    public java.lang.String getOrgName() {
         return this.orgName;
     }
 
-    public void setOrgName(String orgName) {
+    public void setOrgName(java.lang.String orgName) {
         this.orgName = orgName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="INSTITUTION_CITY"
-     *
+     *             
      */
-    public String getInstitutionCity() {
+    public java.lang.String getInstitutionCity() {
         return this.institutionCity;
     }
 
-    public void setInstitutionCity(String institutionCity) {
+    public void setInstitutionCity(java.lang.String institutionCity) {
         this.institutionCity = institutionCity;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="INSTITUTION_STATE"
-     *
+     *             
      */
-    public String getInstitutionState() {
+    public java.lang.String getInstitutionState() {
         return this.institutionState;
     }
 
-    public void setInstitutionState(String institutionState) {
+    public void setInstitutionState(java.lang.String institutionState) {
         this.institutionState = institutionState;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="PROJECT_TITLE"
-     *
+     *             
      */
-    public String getProjectTitle() {
+    public java.lang.String getProjectTitle() {
         return this.projectTitle;
     }
 
-    public void setProjectTitle(String projectTitle) {
+    public void setProjectTitle(java.lang.String projectTitle) {
         this.projectTitle = projectTitle;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="LEGACY_SOURCE_FILE"
-     *
+     *             
      */
-    public String getLegacySourceFile() {
+    public java.lang.String getLegacySourceFile() {
         return this.legacySourceFile;
     }
 
-    public void setLegacySourceFile(String legacySourceFile) {
+    public void setLegacySourceFile(java.lang.String legacySourceFile) {
         this.legacySourceFile = legacySourceFile;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="CAY_CODE"
-     *
+     *             
      */
-    public String getCayCode() {
+    public java.lang.String getCayCode() {
         return this.cayCode;
     }
 
-    public void setCayCode(String cayCode) {
+    public void setCayCode(java.lang.String cayCode) {
         this.cayCode = cayCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_CAY_CODE"
-     *
+     *             
      */
-    public String getDualCayCode() {
+    public java.lang.String getDualCayCode() {
         return this.dualCayCode;
     }
 
-    public void setDualCayCode(String dualCayCode) {
+    public void setDualCayCode(java.lang.String dualCayCode) {
         this.dualCayCode = dualCayCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="POC_NPN_ID"
-     *
+     *             
      */
-    public Long getPocNpnId() {
-		return this.pocNpnId;
+    public java.lang.Long getPocNpnId() {
+        return this.pocNpnId;
     }
 
-    public void setPocNpnId(Long pocNpnId) {
-
+    public void setPocNpnId(java.lang.Long pocNpnId) {
         this.pocNpnId = pocNpnId;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="POC_LAST_NAME"
-     *
+     *             
      */
-    public String getPocLastName() {
+    public java.lang.String getPocLastName() {
         return this.pocLastName;
     }
 
-    public void setPocLastName(String pocLastName) {
+    public void setPocLastName(java.lang.String pocLastName) {
         this.pocLastName = pocLastName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="POC_FIRST_NAME"
-     *
+     *             
      */
-    public String getPocFirstName() {
+    public java.lang.String getPocFirstName() {
         return this.pocFirstName;
     }
 
-    public void setPocFirstName(String pocFirstName) {
+    public void setPocFirstName(java.lang.String pocFirstName) {
         this.pocFirstName = pocFirstName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="POC_MI_NAME"
-     *
+     *             
      */
-    public String getPocMiName() {
+    public java.lang.String getPocMiName() {
         return this.pocMiName;
     }
 
-    public void setPocMiName(String pocMiName) {
+    public void setPocMiName(java.lang.String pocMiName) {
         this.pocMiName = pocMiName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="POC_FULL_NAME"
-     *
+     *             
      */
-    public String getPocFullName() {
+    public java.lang.String getPocFullName() {
         return this.pocFullName;
     }
 
-    public void setPocFullName(String pocFullName) {
+    public void setPocFullName(java.lang.String pocFullName) {
         this.pocFullName = pocFullName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_POC_NPN_ID"
-     *
+     *             
      */
-    public Long getDualPocNpnId() {
+    public java.lang.Long getDualPocNpnId() {
         return this.dualPocNpnId;
     }
 
-    public void setDualPocNpnId(Long dualPocNpnId) {
+    public void setDualPocNpnId(java.lang.Long dualPocNpnId) {
         this.dualPocNpnId = dualPocNpnId;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_POC_LAST_NAME"
-     *
+     *             
      */
-    public String getDualPocLastName() {
+    public java.lang.String getDualPocLastName() {
         return this.dualPocLastName;
     }
 
-    public void setDualPocLastName(String dualPocLastName) {
+    public void setDualPocLastName(java.lang.String dualPocLastName) {
         this.dualPocLastName = dualPocLastName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_POC_FIRST_NAME"
-     *
+     *             
      */
-    public String getDualPocFirstName() {
+    public java.lang.String getDualPocFirstName() {
         return this.dualPocFirstName;
     }
 
-    public void setDualPocFirstName(String dualPocFirstName) {
+    public void setDualPocFirstName(java.lang.String dualPocFirstName) {
         this.dualPocFirstName = dualPocFirstName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_POC_MI_NAME"
-     *
+     *             
      */
-    public String getDualPocMiName() {
+    public java.lang.String getDualPocMiName() {
         return this.dualPocMiName;
     }
 
-    public void setDualPocMiName(String dualPocMiName) {
+    public void setDualPocMiName(java.lang.String dualPocMiName) {
         this.dualPocMiName = dualPocMiName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="DUAL_POC_FULL_NAME"
-     *
+     *             
      */
-    public String getDualPocFullName() {
+    public java.lang.String getDualPocFullName() {
         return this.dualPocFullName;
     }
 
-    public void setDualPocFullName(String dualPocFullName) {
+    public void setDualPocFullName(java.lang.String dualPocFullName) {
         this.dualPocFullName = dualPocFullName;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="ARA_STATUS_CODE"
-     *
+     *             
      */
-    public String getAraStatusCode() {
+    public java.lang.String getAraStatusCode() {
         return this.araStatusCode;
     }
 
-    public void setAraStatusCode(String araStatusCode) {
+    public void setAraStatusCode(java.lang.String araStatusCode) {
         this.araStatusCode = araStatusCode;
     }
 
-    /**
+    /** 
+     *                @hibernate.property
+     *                 column="ARA_ID"
+     *             
+     */
+    public java.lang.Long getAraId() {
+        return this.araId;
+    }
+
+    public void setAraId(java.lang.Long araId) {
+        this.araId = araId;
+    }
+
+    /** 
      *                @hibernate.property
      *                 column="ARA_MATCH_FLAG"
-     *
+     *             
      */
-    public String getAraMatchFlag() {
+    public java.lang.String getAraMatchFlag() {
         return this.araMatchFlag;
     }
 
-    public void setAraMatchFlag(String araMatchFlag) {
+    public void setAraMatchFlag(java.lang.String araMatchFlag) {
         this.araMatchFlag = araMatchFlag;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="CURRENT_FUTURE_BOARD_FLAG"
-     *
+     *             
      */
-    public String getCurrentFutureBoardFlag() {
+    public java.lang.String getCurrentFutureBoardFlag() {
         return this.currentFutureBoardFlag;
     }
 
-    public void setCurrentFutureBoardFlag(String currentFutureBoardFlag) {
+    public void setCurrentFutureBoardFlag(java.lang.String currentFutureBoardFlag) {
         this.currentFutureBoardFlag = currentFutureBoardFlag;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="CURRENT_REFERRAL_ACTIVITY_CODE"
-     *
+     *             
      */
-    public String getCurrentReferralActivityCode() {
+    public java.lang.String getCurrentReferralActivityCode() {
         return this.currentReferralActivityCode;
     }
 
-    public void setCurrentReferralActivityCode(String currentReferralActivityCode) {
+    public void setCurrentReferralActivityCode(java.lang.String currentReferralActivityCode) {
         this.currentReferralActivityCode = currentReferralActivityCode;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="CURRENT_REFERRAL_ACTIVITY_DATE"
-     *
+     *             
      */
-    public Date getCurrentReferralActivityDate() {
+    public java.util.Date getCurrentReferralActivityDate() {
         return this.currentReferralActivityDate;
     }
 
-    public void setCurrentReferralActivityDate(Date currentReferralActivityDate) {
+    public void setCurrentReferralActivityDate(java.util.Date currentReferralActivityDate) {
         this.currentReferralActivityDate = currentReferralActivityDate;
     }
 
-    /**
+    /** 
      *                @hibernate.property
      *                 column="WITHDRAWN_FLAG"
-     *
+     *             
      */
-    public String getWithdrawnFlag() {
+    public java.lang.String getWithdrawnFlag() {
         return this.withdrawnFlag;
     }
 
-    public void setWithdrawnFlag(String withdrawnFlag) {
+    public void setWithdrawnFlag(java.lang.String withdrawnFlag) {
         this.withdrawnFlag = withdrawnFlag;
     }
-    
-    public void setCurrentApsComments(String currentApsComments) {
+
+    /** 
+     *                @hibernate.property
+     *                 column="CURRENT_APS_COMMENTS"
+     *             
+     */
+    public java.lang.String getCurrentApsComments() {
+        return this.currentApsComments;
+    }
+
+    public void setCurrentApsComments(java.lang.String currentApsComments) {
         this.currentApsComments = currentApsComments;
     }
 
-    public String getCurrentApsComments() {
-        return currentApsComments;
-    }
     public String toString() {
         return new ToStringBuilder(this)
             .append("applId", getApplId())
@@ -787,6 +807,7 @@ public class NciPdQueryVw implements Serializable {
             .append("dualPocMiName", getDualPocMiName())
             .append("dualPocFullName", getDualPocFullName())
             .append("araStatusCode", getAraStatusCode())
+            .append("araId", getAraId())
             .append("araMatchFlag", getAraMatchFlag())
             .append("currentFutureBoardFlag", getCurrentFutureBoardFlag())
             .append("currentReferralActivityCode", getCurrentReferralActivityCode())
@@ -797,7 +818,6 @@ public class NciPdQueryVw implements Serializable {
     }
 
     public boolean equals(Object other) {
-        if ( (this == other ) ) return true;
         if ( !(other instanceof NciPdQueryVw) ) return false;
         NciPdQueryVw castOther = (NciPdQueryVw) other;
         return new EqualsBuilder()
@@ -838,6 +858,7 @@ public class NciPdQueryVw implements Serializable {
             .append(this.getDualPocMiName(), castOther.getDualPocMiName())
             .append(this.getDualPocFullName(), castOther.getDualPocFullName())
             .append(this.getAraStatusCode(), castOther.getAraStatusCode())
+            .append(this.getAraId(), castOther.getAraId())
             .append(this.getAraMatchFlag(), castOther.getAraMatchFlag())
             .append(this.getCurrentFutureBoardFlag(), castOther.getCurrentFutureBoardFlag())
             .append(this.getCurrentReferralActivityCode(), castOther.getCurrentReferralActivityCode())
@@ -886,6 +907,7 @@ public class NciPdQueryVw implements Serializable {
             .append(getDualPocMiName())
             .append(getDualPocFullName())
             .append(getAraStatusCode())
+            .append(getAraId())
             .append(getAraMatchFlag())
             .append(getCurrentFutureBoardFlag())
             .append(getCurrentReferralActivityCode())
@@ -895,5 +917,4 @@ public class NciPdQueryVw implements Serializable {
             .toHashCode();
     }
 
-    
 }
