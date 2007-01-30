@@ -6,7 +6,7 @@ import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 /** 
- *        @hibernate.class
+ *        
  *         table="NCI_PD_QUERY_VW"
  *     
 */

@@ -12,7 +12,7 @@
 -->
 
 <class 
-    name="gov.nih.nci.iscs.oracle.referral.hibernate.NciPdQueryVw" 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPdQueryVw" 
     table="NCI_PD_QUERY_VW"
 >
     <meta attribute="class-description" inherit="false">
