@@ -539,6 +539,18 @@ function validateFyRange() {
 
 }
 
+function araView(araId)
+{ 
+
+  var url = "/araacr/ViewAra.do?araID=" + araId;
+  //var winName = "ApplRefHist";
+  //var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
+  //var newWin = window.open(url, winName ,features);
+  var newWin = window.open(url);
+  newWin.focus();
+ 
+}
+
 
 // This script tests for Netscape 4 
 // which determines whether we're going to apply table cell styles or not
