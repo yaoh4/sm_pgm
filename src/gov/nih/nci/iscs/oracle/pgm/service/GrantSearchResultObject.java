@@ -14,6 +14,7 @@ public class GrantSearchResultObject {
     private String grantNumber;
     private String pdFullName;
     private Long   applId;
+    private Long   araId;
     private boolean withdrawn = false;
     private boolean marked = false;
     protected DateFormat formatter = DateFormat.getDateInstance(DateFormat.SHORT);
@@ -41,6 +42,13 @@ public class GrantSearchResultObject {
     public Long getApplId() {
 		return this.applId;
 	}
+        
+    public void setAraId(Long araId) {
+                this.araId = araId;
+        }
+    public Long getAraId() {
+                return this.araId;
+        }        
 
     public String getPdFullName() {
 		return this.pdFullName;
