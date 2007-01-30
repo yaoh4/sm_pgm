@@ -255,7 +255,8 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 			mReferralSearchResultObject.setEGrantsNumber(mEgrantsNumber);
 
 
-		    mReferralSearchResultObject.setApplId(new Long(mNciPdReferral.getApplId()) );
+		    mReferralSearchResultObject.setApplId(mNciPdReferral.getApplId()) ;
+                    mReferralSearchResultObject.setAraId(mNciPdReferral.getAraId()) ;
 
 			mReferralSearchResultObject.setSelected(false);
 			mReferralSearchResultObject.setSortIndex(mIndex * pageNumber);
