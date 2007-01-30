@@ -1,4 +1,4 @@
-package gov.nih.nci.iscs.oracle.referral.hibernate;
+package gov.nih.nci.iscs.oracle.pgm.hibernate;
 
 import java.io.Serializable;
 import org.apache.commons.lang.builder.EqualsBuilder;
