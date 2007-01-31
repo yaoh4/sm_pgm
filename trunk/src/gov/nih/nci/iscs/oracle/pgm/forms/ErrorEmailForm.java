@@ -1,0 +1,55 @@
+package gov.nih.nci.iscs.oracle.pgm.forms;
+
+
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.validator.ValidatorForm ;
+import org.apache.commons.lang.builder.ToStringBuilder;
+
+import javax.servlet.http.HttpServletRequest;
+
+import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+
+
+public class ErrorEmailForm extends ValidatorForm   {
+
+    private String userMessage;
+    private String requestAction;
+
+
+    public ErrorEmailForm() {
+  	    this.userMessage = ApplicationConstants.EMPTY_STRING;
+  	    this.requestAction = ApplicationConstants.EMPTY_STRING;
+    }
+
+    public void reset(ActionMapping mapping, HttpServletRequest request) {
+        super.reset(mapping, request);
+    }
+
+
+
+    public void setUserMessage(String userMessage) {
+		this.userMessage = userMessage;
+	}
+
+	public String getUserMessage() {
+		return userMessage;
+	}
+
+   public void setRequestAction(String requestAction) {
+		this.requestAction = requestAction;
+	}
+
+	public String getRequestAction() {
+		return requestAction;
+	}
+
+
+
+    public String toString() {
+       return new ToStringBuilder(this)
+           .append("userMessage ", getUserMessage())
+           .append("requestAction ", getRequestAction())
+           .toString();
+	}
+
+}
