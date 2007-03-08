@@ -43,8 +43,8 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("fy", "getFy");
        columnMethodMap.put("lastName", "getPiLastName");
        columnMethodMap.put("pdStartDate", "getPdStartDate");
-       columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityDatey");
-
+       columnMethodMap.put("rfaPaNumber", "getRfapa");
+       columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityCode");          
       }
 
 
