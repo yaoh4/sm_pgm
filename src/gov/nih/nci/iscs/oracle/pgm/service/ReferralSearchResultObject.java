@@ -24,6 +24,11 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String eGrantsNumber;
     private String rfapa;
     private String apsComments;
+    private String adminPhsOrgCode;
+    private String activityCode;
+    private String serialNum;
+    private String supportYear;
+    private String suffixCode;
     private boolean reReferred = false;
 
 
@@ -163,5 +168,45 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
 
     public String getCurrentReferralActivityCode() {
         return currentReferralActivityCode;
+    }
+
+    public void setAdminPhsOrgCode(String adminPhsOrgCode) {
+        this.adminPhsOrgCode = adminPhsOrgCode;
+    }
+
+    public String getAdminPhsOrgCode() {
+        return adminPhsOrgCode;
+    }
+
+    public void setActivityCode(String activityCode) {
+        this.activityCode = activityCode;
+    }
+
+    public String getActivityCode() {
+        return activityCode;
+    }
+
+    public void setSerialNum(String serialNum) {
+        this.serialNum = serialNum;
+    }
+
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSupportYear(String supportYear) {
+        this.supportYear = supportYear;
+    }
+
+    public String getSupportYear() {
+        return supportYear;
+    }
+
+    public void setSuffixCode(String suffixCode) {
+        this.suffixCode = suffixCode;
+    }
+
+    public String getSuffixCode() {
+        return suffixCode;
     }
 }

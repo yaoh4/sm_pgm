@@ -205,6 +205,37 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 			} else {
 				mReferralSearchResultObject.setNcabDate(ApplicationConstants.EMPTY_STRING);
 			}
+                        
+                    if(mNciPdReferral.getAdminPhsOrgCode() != null )  {
+                            mReferralSearchResultObject.setAdminPhsOrgCode(mNciPdReferral.getAdminPhsOrgCode());
+                    } else {
+                            mReferralSearchResultObject.setAdminPhsOrgCode(ApplicationConstants.EMPTY_STRING );
+                    }
+                    
+                    if(mNciPdReferral.getActivityCode() != null )  {
+                            mReferralSearchResultObject.setActivityCode(mNciPdReferral.getActivityCode());
+                    } else {
+                            mReferralSearchResultObject.setActivityCode(ApplicationConstants.EMPTY_STRING );
+                    }
+                    
+                    if(mNciPdReferral.getSerialNum() != null )  {
+                            mReferralSearchResultObject.setSerialNum(mNciPdReferral.getSerialNum().toString());
+                    } else {
+                            mReferralSearchResultObject.setSerialNum(ApplicationConstants.EMPTY_STRING );
+                    }
+                    
+                    if(mNciPdReferral.getSupportYear() != null )  {
+                            mReferralSearchResultObject.setSupportYear(mNciPdReferral.getSupportYear().toString());
+                    } else {
+                            mReferralSearchResultObject.setSupportYear(ApplicationConstants.EMPTY_STRING );
+                    }
+                      
+                    if(mNciPdReferral.getSuffixCode() != null )  {
+                            mReferralSearchResultObject.setSuffixCode(mNciPdReferral.getSuffixCode());
+                    } else {
+                            mReferralSearchResultObject.setSuffixCode(ApplicationConstants.EMPTY_STRING );
+                    }      
+                        
 
 			if(mNciPdReferral.getCurrentReferralActivityDate() != null ) {
 				String temp = mNciPdReferral.getCurrentReferralActivityDate().toString();
