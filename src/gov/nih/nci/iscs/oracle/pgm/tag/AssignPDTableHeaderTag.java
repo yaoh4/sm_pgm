@@ -38,10 +38,10 @@ public class AssignPDTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">Grant Number");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">Grant Number");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\" alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\" alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
@@ -58,10 +58,10 @@ public class AssignPDTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">Current PD");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"  alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"  alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">Current PD");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"  alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"  alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
@@ -78,10 +78,10 @@ public class AssignPDTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">Current CA");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"  alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"  alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">Current CA");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\" alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\" alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {

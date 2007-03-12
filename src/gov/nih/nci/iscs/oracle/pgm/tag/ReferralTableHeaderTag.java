@@ -132,8 +132,8 @@ private String formatSortImages(String sortColumn) {
 	boolean mTrue = true;
 	String mFalseString = ", \'" + mFalse + "\')\">" + sortColumn;
 	String mTrueString = ", \'" + mTrue + "\')\">" + sortColumn;
-	String mUpArrowText = "&nbsp; <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\">";
-	String mDownArrowText = "&nbsp; <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">";
+	String mUpArrowText = "&nbsp; <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\">";
+	String mDownArrowText = "&nbsp; <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"Reverse Sort\">";
 
 	if(lastSortOrderAsc){
 		mReturn = mFalseString + mUpArrowText;

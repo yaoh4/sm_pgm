@@ -35,10 +35,10 @@ public class AcceptReferralTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">Grant Number");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">Grant Number");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
@@ -54,10 +54,10 @@ public class AcceptReferralTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">CA");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">CA");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
@@ -73,10 +73,10 @@ public class AcceptReferralTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">PI Name");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">PI Name");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
@@ -92,10 +92,10 @@ public class AcceptReferralTableHeaderTag extends TagSupport
 		  buf.append("\'");
 	      if (lastSortOrderAsc){
 			  buf.append(", \'" + mFalse + "\')\">Institution");
-              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"asc\"> ");
+              buf.append("&nbsp;  <img src=\"/pgm/images/uparrow.gif\" border=\"0\"   alt=\"Normal Sort\"> ");
 		  }else{
 			  buf.append(", \'" + mTrue + "\')\">Institution");
-             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"asc\">");
+             buf.append("&nbsp;  <img src=\"/pgm/images/downarrow.gif\"  border=\"0\"   alt=\"Reverse Sort\">");
 		  }
 		  buf.append("</a></th>");
 	  } else {
