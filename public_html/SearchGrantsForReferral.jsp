@@ -54,11 +54,11 @@
    <tr>
       <td width="20" align="right">&nbsp;</td>
       <td colspan="5" background="images/TabBG.gif">
-        <td height="5" nowrap><img src="images/spacer.gif" width="2" height="5"></td>
+        <td height="5" nowrap><img src="images/spacer.gif" alt="" width="2" height="5"></td>
        </td>
-        <td height="5" nowrap><img src="images/spacer.gif" width="2" height="5"></td>
+        <td height="5" nowrap><img src="images/spacer.gif" alt="" width="2" height="5"></td>
        <td>
-        <td height="5" nowrap><img src="images/spacer.gif" width="2" height="5"></td>
+        <td height="5" nowrap><img src="images/spacer.gif" alt="" width="2" height="5"></td>
       </td>
       <td valign="top" width="20">&nbsp;</td>
     </tr>

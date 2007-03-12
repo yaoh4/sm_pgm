@@ -55,7 +55,7 @@
  </table>
  <table width="100%" border="0" cellspacing="0" cellpadding="0" >
    <tr>
-     <td  bgcolor="#3F7EFF"><img src="images/spacer.gif" width="100" height="3"></td>
+     <td  bgcolor="#3F7EFF"><img src="images/spacer.gif" alt="" width="100" height="3"></td>
   </tr>
  
 </table>

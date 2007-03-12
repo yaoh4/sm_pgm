@@ -7,20 +7,20 @@
           <td nowrap valign="bottom">Env: <b><%=ygApplInfo.getApplicationKey("ENVIRONMENT")%></b></td>
           <td nowrap valign="bottom">&nbsp;</td>
           <td nowrap valign="bottom">Version: <b><%=ygApplInfo.getApplicationKey("VERSION")%></b></td>
-          <td nowrap valign="bottom"><img src="images/spacer.gif" width="60" height="5">
+          <td nowrap valign="bottom"><img src="images/spacer.gif" alt="" width="60" height="5">
             <a href="mailto:<%=ygApplInfo.getApplicationKey("COMMENTS_EMAIL")%>?subject=YourGrants">Send Comments</a>
-            <img src="images/spacer.gif" width="5" height="5"> 
-            <img src="images/spacer.gif" width="5" height="5"> 
-            <img src="images/spacer.gif" width="5" height="5"> 
+            <img src="images/spacer.gif" alt="" width="5" height="5"> 
+            <img src="images/spacer.gif" alt="" width="5" height="5"> 
+            <img src="images/spacer.gif" alt="" width="5" height="5"> 
             <a href="#" onClick=window.open('<%=ygApplInfo.getApplicationKey("HELP_URI")%>')>Help</A>
-            <img src="images/spacer.gif" width="40" height="5"> 
+            <img src="images/spacer.gif" alt="" width="40" height="5"> 
           </td> 
         </tr>
         <tr>
-          <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
-          <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
-          <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
-          <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
-          <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
+          <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
+          <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
+          <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
+          <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
+          <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
         </tr>
       </table>

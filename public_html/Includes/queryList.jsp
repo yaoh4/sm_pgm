@@ -17,7 +17,7 @@
             <td valign="middle"> 
 		    <ncijsp:UserQueryList jsString="loadQuery(this)" selectedValue="<%=(String)cleBean.getInfo("pStoredQueryId")%>" queryType="QUERY" ldapUserId="<%=usernameOra%>" oracleUserId="<%=userOracleId%>" fieldName="pStoredQueryId"/>
             </td>
-            <td><img src="images/spacer.gif" alt="" width="20" height="12"></td>
+            <td><img src="images/spacer.gif" alt="" alt="" width="20" height="12"></td>
             <td width="100%"> 
               <table border="0" cellspacing="0" cellpadding="0">
                 <tr> 
@@ -35,7 +35,7 @@
             </td>
           </tr>
           <tr valign="top"> 
-            <td nowrap height="10" colspan="5"><img src="images/spacer.gif" width="10" height="10"></td>
+            <td nowrap height="10" colspan="5"><img src="images/spacer.gif" alt="" width="10" height="10"></td>
           </tr>
           <tr valign="middle"> 
             <td nowrap align="right">&nbsp;</td>
@@ -53,7 +53,7 @@
 
  </tr>
           <tr valign="top"> 
-            <td nowrap height="10" colspan="5"><img src="images/spacer.gif" width="10" height="10"></td>
+            <td nowrap height="10" colspan="5"><img src="images/spacer.gif" alt="" width="10" height="10"></td>
           </tr>
           <tr valign="middle" align="center"> 
             <td nowrap colspan="5"><b>--- Or Search Below ---</b></td>

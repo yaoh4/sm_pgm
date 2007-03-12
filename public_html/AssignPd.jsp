@@ -89,7 +89,7 @@
  
  </body>
 <!--  PopCalendar(tag name and id must match) Tags should sit at the page bottom -->
-<iframe width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
+<iframe title="Calendar" width=174 height=189 name="gToday:normal:agenda.js" id="gToday:normal:agenda.js" src="ipopeng.htm" scrolling="no" frameborder="0" style="visibility:visible; z-index:999; position:absolute; left:-500px; top:0px;">
 <LAYER name="gToday:normal:agenda.js" src="npopeng.htm">     </LAYER>
 </iframe> 
  

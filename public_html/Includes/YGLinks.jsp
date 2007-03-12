@@ -14,10 +14,10 @@
                   </td>
               </tr>
                <tr>
-                <td><img src="images/spacer.gif" width="10" height="3"></td>
+                <td><img src="images/spacer.gif" alt="" width="10" height="3"></td>
                </tr>              
                <tr> 
-                <td bgcolor="#99CCFF"><img src="images/spacer.gif" width="10" height="3"></td>
+                <td bgcolor="#99CCFF"><img src="images/spacer.gif" alt="" width="10" height="3"></td>
                </tr>               
               <tr>
  

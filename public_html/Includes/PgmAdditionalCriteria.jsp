@@ -7,6 +7,6 @@
 		        <html:options collection="<%= ApplicationConstants.USER_FILTER_INFO %>" property="value"  labelProperty="label" />
 		   </html:select>
                </td>
-               <td height="5" nowrap><img src="images/spacer.gif" width="10" height="5"></td>
+               <td height="5" nowrap><img src="images/spacer.gif" alt="" width="10" height="5"></td>
              </table>
        

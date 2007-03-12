@@ -46,7 +46,7 @@
       </td>
     </tr>
   <tr>
-    <td colspan="2" bgcolor="3F7EFF"><img src="images/spacer.gif" width="320" height="2"></td>
+    <td colspan="2" bgcolor="3F7EFF"><img src="images/spacer.gif" alt="" width="320" height="2"></td>
   </tr>
   <tr valign="top">
     <td width="100%" colspan="2" align="top"><INPUT type="button" class="button2a" value="Close Window" onclick="window.close();"/> 
@@ -69,7 +69,7 @@
  
 <table cellspacing="0" cellspacing = "0" class="logoTitle">
    <tr>
-     <td   bgcolor="3F7EFF"><img src="images/spacer.gif" width="320" height="2"></td>
+     <td   bgcolor="3F7EFF"><img src="images/spacer.gif" alt="" width="320" height="2"></td>
    </tr>
   <tr valign="top">
     <td align="top"><INPUT type="button" class="button2a" value="Close Window" onclick="window.close();"/> </td>
