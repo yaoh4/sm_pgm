@@ -134,12 +134,12 @@
                 
                 <table border=0 cellpadding=0 cellspacing=1 >
                   <tr> 
-                    <td nowrap><label for="pApplId"><b>Appl Id:</b></label> 
+                    <td nowrap><label for="applId"><b>Appl Id:</b></label> 
                       <br> 
                        <html:text property="applId" size="8" maxlength="8"/>
                     </td>
                     <td nowrap width="5">&nbsp;</td>
-                    <td nowrap><label for="pProjectTitle"><b>Project Title:</b></label> 
+                    <td nowrap><label for="projectTitle"><b>Project Title:</b></label> 
                       <br> 
                       <html:text property="projectTitle" size="30" maxlength="30"/> 
                     </td>

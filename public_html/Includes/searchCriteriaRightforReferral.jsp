@@ -47,7 +47,7 @@
                     <td nowrap> 
                       <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                         <tr> 
-                          <td nowrap width="27%"><b>RFA/PA</b></td>
+                          <td nowrap width="27%"><label for "rfaPa"><b>RFA/PA</b></label></td>
                           <td nowrap ><b>Fiscal Year (YYYY)</b></td>
                         </tr>
                        </table>
@@ -58,7 +58,7 @@
                       <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                         <tr> 
                           <td>
-                             <html:text property="rfaPa" size="10" maxlength="10"/> </label>
+                             <html:text property="rfaPa" size="10" maxlength="10"/> 
                           </td>
                           <td nowrap><label for="fyFrom"><b><bean:message key="labels.search.field.fyFrom" /></b></td>
                           <td nowrap> 

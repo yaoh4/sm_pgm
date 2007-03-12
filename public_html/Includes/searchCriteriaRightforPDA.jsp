@@ -61,7 +61,7 @@
                         <tr> 
                           <td nowrap width="75%" ><b>NCAB</b></td>
                           <td title="RFA/PA"  nowrap width="25%" >
-                          <b>RFA/PA  </b></td>
+                          <label for "rfaPa"><b>RFA/PA  </b></label></td>
                         </tr>
                        </table>
                     </td>
@@ -82,7 +82,7 @@
 			     </html:select>
                           </td>
                            <td nowrap align="left" width="25%">
-                             <html:text property="rfaPa" size="10" maxlength="10"/> </label>
+                             <html:text property="rfaPa" size="10" maxlength="10"/>
                           </td>
                          </tr>
                        </table>

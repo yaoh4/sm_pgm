@@ -131,12 +131,12 @@
                     <% } %>
                 <table border=0 cellpadding=0 cellspacing=1 >
                   <tr> 
-                    <td nowrap><label for="pApplId"><b>Appl Id:</b></label> 
+                    <td nowrap><label for="applId"><b>Appl Id:</b></label> 
                       <br> 
                        <html:text property="applId" size="8" maxlength="8"/>
                     </td>
                     <td nowrap width="5">&nbsp;</td>
-                    <td nowrap><label for="pProjectTitle"><b>Project Title:</b></label> 
+                    <td nowrap><label for="projectTitle"><b>Project Title:</b></label> 
                       <br> 
                       <html:text property="projectTitle" size="30" maxlength="30"/> 
                     </td>
@@ -219,7 +219,7 @@
                     <td nowrap> 
                       <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                         <tr> 
-                          <td nowrap width="27%"><b>RFA/PA</b></td>
+                          <td nowrap width="27%"><label for "rfaPa"><b>RFA/PA</b></label></td>
                           <td nowrap ><b>Fiscal Year (YYYY)</b></td>
                         </tr>
                        </table>
@@ -230,7 +230,7 @@
                       <table border=0 cellpadding=0 cellspacing=0 width="100%" >
                         <tr> 
                           <td>
-                             <html:text property="rfaPa" size="10" maxlength="10"/> </label>
+                             <html:text property="rfaPa" size="10" maxlength="10"/> 
                           </td>
                           <td nowrap><label for="fyFrom"><b><bean:message key="labels.search.field.fyFrom" /></b></td>
                           <td nowrap> 

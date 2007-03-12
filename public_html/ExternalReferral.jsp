@@ -54,7 +54,7 @@
 </SCRIPT>
 <!-- Start Referral Activity Module Header -->
 <table class="ModuleHeader" align="center" border="0" cellpadding="0" cellspacing="0" width="820">
-  <tbody><tr>
+  <tr>
     <td class="ModuleHeaderTitleBar" nowrap="nowrap"> <table border="0" cellpadding="1" cellspacing="0" width="820">
           <tbody><tr>
             <td align="right"><img src="images/spacer.gif" alt="" height="10" width="7"><a href="#" onclick="WM_Submit_toggle('ModuleReferralActivityBody'); return false"><img src="images/IconModuleOpened.gif" alt="Show/Hide Module" name="ModuleReferralActivityToggleImage" id="ModuleReferralActivityToggleImage" border="0" height="13" width="13"></a></td>
@@ -68,9 +68,9 @@
               </tbody></table></td>
             <td><img src="images/spacer.gif" alt="" height="10" width="20"></td>
           </tr>
-        </tbody></table></td>
+        </table></td>
   </tr>
-</tbody></table>
+</table>
 <!-- End Referral Activity Module Header -->
 <div id="ModuleReferralActivityBody" style="display: block">
 <table class="ModuleBody" cellspacing="0" cellpadding="0" width="820" align="center" border="1">
