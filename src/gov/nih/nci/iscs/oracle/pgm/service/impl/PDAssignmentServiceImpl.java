@@ -126,9 +126,9 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 
 
 			if(mNciPdTransfer.getLastName() != null) {
-				mPDASearchResultObject.setPiName(mNciPdTransfer.getLastName() + ", " + mNciPdTransfer.getFirstName());
+				mPDASearchResultObject.setPiLastName(mNciPdTransfer.getLastName() + ", " + mNciPdTransfer.getFirstName());
 			}else {
-				mPDASearchResultObject.setPiName(ApplicationConstants.EMPTY_STRING);
+				mPDASearchResultObject.setPiLastName(ApplicationConstants.EMPTY_STRING);
 			}
 
 			if(mNciPdTransfer.getFy() != null) {
@@ -136,7 +136,35 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 			}else {
 				mPDASearchResultObject.setFy(ApplicationConstants.EMPTY_STRING);
 			}
-
+	        if(mNciPdTransfer.getAdminPhsOrgCode() != null )  {
+	                mPDASearchResultObject.setAdminPhsOrgCode(mNciPdTransfer.getAdminPhsOrgCode());
+	        } else {
+	                mPDASearchResultObject.setAdminPhsOrgCode(ApplicationConstants.EMPTY_STRING );
+	        }
+	        
+	        if(mNciPdTransfer.getActivityCode() != null )  {
+	                mPDASearchResultObject.setActivityCode(mNciPdTransfer.getActivityCode());
+	        } else {
+	                mPDASearchResultObject.setActivityCode(ApplicationConstants.EMPTY_STRING );
+	        }
+	        
+	        if(mNciPdTransfer.getSerialNum() != null )  {
+	                mPDASearchResultObject.setSerialNum(mNciPdTransfer.getSerialNum().toString());
+	        } else {
+	                mPDASearchResultObject.setSerialNum(ApplicationConstants.EMPTY_STRING );
+	        }
+	        
+	        if(mNciPdTransfer.getSupportYear() != null )  {
+	                mPDASearchResultObject.setSupportYear(mNciPdTransfer.getSupportYear().toString());
+	        } else {
+	                mPDASearchResultObject.setSupportYear(ApplicationConstants.EMPTY_STRING );
+	        }
+	          
+	        if(mNciPdTransfer.getSuffixCode() != null )  {
+	                mPDASearchResultObject.setSuffixCode(mNciPdTransfer.getSuffixCode());
+	        } else {
+	                mPDASearchResultObject.setSuffixCode(ApplicationConstants.EMPTY_STRING );
+	        }      
 			if(mNciPdTransfer.getCouncilMeetingDate() != null ){
 			   try{
 				  mPDASearchResultObject.setNcabDate(mNciPdTransfer.getCouncilMeetingDate().substring(4,6) + "/" + mNciPdTransfer.getCouncilMeetingDate().substring(0,4) );
@@ -148,9 +176,9 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 			}
 
 			if(mNciPdTransfer.getRfaPaNumber() != null) {
-				mPDASearchResultObject.setRfaPaNumber(mNciPdTransfer.getRfaPaNumber() );
+				mPDASearchResultObject.setRfapa(mNciPdTransfer.getRfaPaNumber() );
 			}else {
-				mPDASearchResultObject.setRfaPaNumber(ApplicationConstants.EMPTY_STRING);
+				mPDASearchResultObject.setRfapa(ApplicationConstants.EMPTY_STRING);
 			}
 
 

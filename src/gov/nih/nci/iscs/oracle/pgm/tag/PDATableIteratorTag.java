@@ -38,7 +38,7 @@ public class PDATableIteratorTag extends TagSupport
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header02\" width=\"30%\" class=listCell>");
-		  buf.append(queryResultObject.getPiName());
+		  buf.append(queryResultObject.getPiLastName());
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header03\" width=\"10%\" class=listCell>");
@@ -50,7 +50,7 @@ public class PDATableIteratorTag extends TagSupport
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header05\" width=\"6%\" class=listCell>");
-		  buf.append(queryResultObject.getRfaPaNumber());
+		  buf.append(queryResultObject.getRfapa());
 		  buf.append("</td>");
 
 		  buf.append("<td headers=\"header06\" width=\"3%\" class=listCell>");

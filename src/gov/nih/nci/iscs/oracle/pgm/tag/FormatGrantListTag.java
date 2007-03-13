@@ -150,11 +150,11 @@ public class FormatGrantListTag extends TagSupport {
 		 }
 		 buf.append("</td>");
 
-         buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">" + obj.getPiName()+ "&nbsp;</td>");
+         buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">" + obj.getPiLastName()+ "&nbsp;</td>");
          buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + obj.getFy() + "&nbsp;</td>");
          buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getNcabDate() + "&nbsp;</td>");
 
-         buf.append("<td headers=\"header05\" width=\"10%\" class=" + className + ">" + obj.getRfaPaNumber() + "&nbsp;</td>");
+         buf.append("<td headers=\"header05\" width=\"10%\" class=" + className + ">" + obj.getRfapa() + "&nbsp;</td>");
          buf.append("<td headers=\"header06\" width=\"6%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;</td>");
 
          buf.append("<td headers=\"header07\" width=\"14%\" class=" + className + ">" + obj.getPdFullName()+ "&nbsp;</td>");

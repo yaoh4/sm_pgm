@@ -11,7 +11,7 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 
 
     /** identifier field */
-    private String piName;
+    private String piLastName;
     private String PdId;
     private String fy;
     private String ncabDate;
@@ -19,8 +19,13 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     private Date pdStartDate;
     private java.sql.Timestamp pdAssignmentStartDate;
     private String pdTransferCode;
-    private String rfaPaNumber;
+    private String rfapa;
     private String key;
+    private String adminPhsOrgCode;
+    private String activityCode;
+    private String serialNum;
+    private String supportYear;
+    private String suffixCode;
     public static java.sql.Timestamp mToday;
     public static java.sql.Timestamp mYesterday;
 
@@ -32,11 +37,11 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 		pdAssignmentStartDate = new java.sql.Timestamp(Calendar.getInstance().getTimeInMillis());
 	}
 
-    public String getPiName() {
-		return this.piName;
+    public String getPiLastName() {
+		return this.piLastName;
 	}
-    public void setPiName(String piName) {
-		this.piName = piName;
+    public void setPiLastName(String piName) {
+		this.piLastName = piName;
 	}
 
     public String getPdId() {
@@ -102,11 +107,11 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 		this.pdTransferCode = pdTransferCode;
 	}
 
-    public String getRfaPaNumber() {
-		return this.rfaPaNumber;
+    public String getRfapa() {
+		return this.rfapa;
 	}
-    public void setRfaPaNumber(String rfaPaNumber) {
-		this.rfaPaNumber = rfaPaNumber;
+    public void setRfapa(String rfaPaNumber) {
+		this.rfapa = rfaPaNumber;
 	}
 
     public String getKey() {
@@ -136,16 +141,55 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     public String toString() {
         return new ToStringBuilder(this)
             .append("super ", super.toString())
-            .append("piName ", getPiName())
+            .append("piName ", getPiLastName())
             .append("PdId ", getPdId())
             .append("Fy ", getFy())
             .append("NcabDate ", getNcabDate())
             .append("assignmentCA ", getAssignmentCA())
             .append("PdStartDate ", getPdStartDate())
             .append("PdTransferCode ", getPdTransferCode())
-            .append("rfaPaNumber ", getRfaPaNumber())
+            .append("rfaPaNumber ", getRfapa())
             .append("key ", getKey())
             .toString();
     }
 
+    public void setAdminPhsOrgCode(String adminPhsOrgCode) {
+        this.adminPhsOrgCode = adminPhsOrgCode;
+    }
+
+    public String getAdminPhsOrgCode() {
+        return adminPhsOrgCode;
+    }
+
+    public void setActivityCode(String activityCode) {
+        this.activityCode = activityCode;
+    }
+
+    public String getActivityCode() {
+        return activityCode;
+    }
+
+    public void setSerialNum(String serialNum) {
+        this.serialNum = serialNum;
+    }
+
+    public String getSerialNum() {
+        return serialNum;
+    }
+
+    public void setSupportYear(String supportYear) {
+        this.supportYear = supportYear;
+    }
+
+    public String getSupportYear() {
+        return supportYear;
+    }
+
+    public void setSuffixCode(String suffixCode) {
+        this.suffixCode = suffixCode;
+    }
+
+    public String getSuffixCode() {
+        return suffixCode;
+    }
 }

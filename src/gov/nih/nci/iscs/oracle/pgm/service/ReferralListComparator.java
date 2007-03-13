@@ -85,17 +85,14 @@ public class ReferralListComparator extends Object implements Comparator {
             methodName = invokeMethodName;
         } else {
             methodName = (String)columnMethodMap.get(columnName);
-        }
-        try {
-
-            Method o1_Method = o1.getClass().getMethod(methodName, null);
-            Method o2_Method = o2.getClass().getMethod(methodName, null);
-
+        }        
+        try {           
+            Method o1_Method = o1.getClass().getMethod(methodName, null);            
+            Method o2_Method = o2.getClass().getMethod(methodName, null);            
             Method o11_Method = 
                 o1.getClass().getMethod(getAdminPhsOrgCode_Method, null);
             Method o21_Method = 
                 o2.getClass().getMethod(getAdminPhsOrgCode_Method, null);
-
             Method o12_Method = 
                 o1.getClass().getMethod(getActivityCode_Method, null);
             Method o22_Method = 
@@ -144,35 +141,33 @@ public class ReferralListComparator extends Object implements Comparator {
                 rslt2 = ApplicationConstants.EMPTY_STRING;
             }
 
-            if (columnName.equalsIgnoreCase("grantNumber") || 
-                columnName.equalsIgnoreCase("fullGrantNum") || 
-                columnName.equalsIgnoreCase("default")) {
+            if (methodName.equalsIgnoreCase("getGrantNumber")) {
 
                 rslt1 = 
                         (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
                                                                                         null) + 
-                        (String)o13_Method.invoke(o1, null) + 
-                        (String)o14_Method.invoke(o1, null) + 
+                        (Object)o13_Method.invoke(o1, null) + 
+                        (Object)o14_Method.invoke(o1, null) + 
                         (String)o15_Method.invoke(o1, null);
                 rslt2 = 
                         (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
                                                                                         null) + 
-                        (String)o23_Method.invoke(o2, null) + 
-                        (String)o24_Method.invoke(o2, null) + 
+                        (Object)o23_Method.invoke(o2, null) + 
+                        (Object)o24_Method.invoke(o2, null) + 
                         (String)o25_Method.invoke(o2, null);
             } else {
 
                 rslt1 = 
                         rslt1 + (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
                                                                                                 null) + 
-                        (String)o13_Method.invoke(o1, null) + 
-                        (String)o14_Method.invoke(o1, null) + 
+                        (Object)o13_Method.invoke(o1, null) + 
+                        (Object)o14_Method.invoke(o1, null) + 
                         (String)o15_Method.invoke(o1, null);
                 rslt2 = 
                         rslt2 + (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
                                                                                                 null) + 
-                        (String)o23_Method.invoke(o2, null) + 
-                        (String)o24_Method.invoke(o2, null) + 
+                        (Object)o23_Method.invoke(o2, null) + 
+                        (Object)o24_Method.invoke(o2, null) + 
                         (String)o25_Method.invoke(o2, null);
             }
 
