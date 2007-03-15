@@ -88,7 +88,7 @@ public class ReferralListComparator extends Object implements Comparator {
         }        
         try {           
             Method o1_Method = o1.getClass().getMethod(methodName, null);            
-            Method o2_Method = o2.getClass().getMethod(methodName, null);            
+            Method o2_Method = o2.getClass().getMethod(methodName, null);              
             Method o11_Method = 
                 o1.getClass().getMethod(getAdminPhsOrgCode_Method, null);
             Method o21_Method = 
@@ -118,13 +118,13 @@ public class ReferralListComparator extends Object implements Comparator {
                 Date temp1 = (Date)o1_Method.invoke(o1, null);
                 Date temp2 = (Date)o2_Method.invoke(o2, null);
                 rslt1 = convertToString(temp1);
-                rslt2 = convertToString(temp1);
+                rslt2 = convertToString(temp2);                
             } else {
                 if (o1_Method.getReturnType().getName().equalsIgnoreCase("java.lang.Integer")) {
                     Integer temp1 = (Integer)o1_Method.invoke(o1, null);
                     Integer temp2 = (Integer)o2_Method.invoke(o2, null);
                     rslt1 = convertToString(temp1);
-                    rslt2 = convertToString(temp1);
+                    rslt2 = convertToString(temp2);
                 } else {
                     rslt1 = (String)o1_Method.invoke(o1, null);
                     rslt2 = (String)o2_Method.invoke(o2, null);
