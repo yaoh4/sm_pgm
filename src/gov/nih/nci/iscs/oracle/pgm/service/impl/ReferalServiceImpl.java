@@ -237,12 +237,9 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
                     }      
                         
 
-			if(mNciPdReferral.getCurrentReferralActivityDate() != null ) {
-				String temp = mNciPdReferral.getCurrentReferralActivityDate().toString();
-				mReferralSearchResultObject.setCurrentReferralActivityDate(temp.substring(5,7) + "/" + temp.substring(8,10) + "/" + temp.substring(0,4) );
-			} else {
-				mReferralSearchResultObject.setCurrentReferralActivityDate(ApplicationConstants.EMPTY_STRING);
-			}
+			if(mNciPdReferral.getCurrentReferralActivityDate() != null ) 
+				
+				mReferralSearchResultObject.setCurrentReferralActivityDate(mNciPdReferral.getCurrentReferralActivityDate());			
 
 			mReferralSearchResultObject.setWithdrawn(false);
 			if(mNciPdReferral.getWithdrawnFlag() != null ) {

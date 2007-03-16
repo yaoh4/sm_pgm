@@ -120,7 +120,14 @@ public class FormatGrantListTag extends TagSupport {
       buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getRfapa() + "&nbsp;</td>");
       buf.append("<td headers=\"header07\" width=\"6%\" class=" + className + ">" + obj.getAraStatus()+ "&nbsp;</td>");
       buf.append("<td headers=\"header08\" width=\"8%\" class=" + className + ">" + obj.getNcabDate()+ "&nbsp;</td>");
-      buf.append("<td headers=\"header09\" width=\"10%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");
+      //buf.append("<td headers=\"header09\" width=\"10%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");
+      if(obj.getCurrentReferralActivityDate() != null) {
+                      String temp = obj.getCurrentReferralActivityDate().toString();
+                      temp = temp.substring(5,7) + "/" + temp.substring(8,10) + "/" + temp.substring(0,4);
+                      buf.append("<td headers=\"header08\" width=\"15%\" class=" + borderClassName + ">" + temp + "&nbsp;</td>");
+              }else {
+                      buf.append("<td headers=\"header08\" width=\"15%\" class=" + borderClassName + ">" + ApplicationConstants.EMPTY_STRING + "&nbsp;</td>");
+              }
       buf.append("<td headers=\"header10\" width=\"5%\" class=" + borderClassName + ">" + "<a href=\"javascript:openEGrantsWindow(\'" + obj.getEGrantsNumber() + "\');\"><img src=\"images/egrants.gif\" alt=\"eGrants\"  border=\"0\"> </a></td>");
 
 

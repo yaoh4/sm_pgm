@@ -5,6 +5,8 @@ import org.apache.commons.lang.builder.ToStringBuilder;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
+import java.util.Date;
+
 /** @author Hibernate CodeGenerator */
 public class ReferralSearchResultObject extends GrantSearchResultObject {
 
@@ -19,7 +21,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String dualPoc;
     private String currentPoc;
     private String ncabDate;
-    private String currentReferralActivityDate;
+    private Date currentReferralActivityDate;
     private String currentReferralActivityCode;
     private String eGrantsNumber;
     private String rfapa;
@@ -112,12 +114,10 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
 		this.ncabDate = ncabDate;
 	}
 
-    public String getCurrentReferralActivityDate() {
-		if (currentReferralActivityDate == null)
-		    return ApplicationConstants.EMPTY_STRING;
+    public Date getCurrentReferralActivityDate() {                            
 		return this.currentReferralActivityDate;
 	}
-    public void setCurrentReferralActivityDate(String currentReferralActivityDate) {
+    public void setCurrentReferralActivityDate(Date currentReferralActivityDate) {
 		this.currentReferralActivityDate = currentReferralActivityDate;
 	}
 
