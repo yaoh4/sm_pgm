@@ -48,13 +48,15 @@ public class CrystalReportAction extends NciPgmAction    {
       oApplicationContext =  (ApplicationContext) oServletContext.getAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY);
       ActionMessages messages = new ActionMessages();
     String reportType = null;
-      mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");
-      reportType = ApplicationConstants.REFERRAL_REPORT;
+      mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForReferralForm");      
+      reportType = ApplicationConstants.REFERRAL_REPORT;    
       if(mRetrieveGrantsForm == null) {
          mRetrieveGrantsForm = (RetrieveGrantsForm) request.getAttribute("retrieveGrantsForPDAForm");
-         mContinueForward = "continueForPDA";
+         mContinueForward = "continueForPDA";	      
          reportType = ApplicationConstants.PD_ASSIGNMENT_REPORT;
 	  }
+    else 
+              mContinueForward = "continueForReferral";  
 
       String mReportFormat = mRetrieveGrantsForm.getFormatSelected();
       String mReportSelected = mRetrieveGrantsForm.getReportSelected();
@@ -89,10 +91,6 @@ public class CrystalReportAction extends NciPgmAction    {
       mReportSelectorServiceImpl.insertDataForReport(mSortedList, reportType, oSession.getId(), mReportsVw.getCrystalId());
       oSession.setAttribute("reportDetails", mReportsVw);
       oSession.setAttribute("reportAction",  "run");
-
-
-
-
       return mapping.findForward(mContinueForward);
 
    }
