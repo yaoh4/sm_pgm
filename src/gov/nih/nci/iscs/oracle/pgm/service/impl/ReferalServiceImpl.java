@@ -218,17 +218,13 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
                             mReferralSearchResultObject.setActivityCode(ApplicationConstants.EMPTY_STRING );
                     }
                     
-                    if(mNciPdReferral.getSerialNum() != null )  {
-                            mReferralSearchResultObject.setSerialNum(mNciPdReferral.getSerialNum().toString());
-                    } else {
-                            mReferralSearchResultObject.setSerialNum(ApplicationConstants.EMPTY_STRING );
-                    }
+                    if(mNciPdReferral.getSerialNum() != null )  
+                            mReferralSearchResultObject.setSerialNum(mNciPdReferral.getSerialNum());
+                  
                     
-                    if(mNciPdReferral.getSupportYear() != null )  {
-                            mReferralSearchResultObject.setSupportYear(mNciPdReferral.getSupportYear().toString());
-                    } else {
-                            mReferralSearchResultObject.setSupportYear(ApplicationConstants.EMPTY_STRING );
-                    }
+                    if(mNciPdReferral.getSupportYear() != null )  
+                            mReferralSearchResultObject.setSupportYear(mNciPdReferral.getSupportYear());
+                    
                       
                     if(mNciPdReferral.getSuffixCode() != null )  {
                             mReferralSearchResultObject.setSuffixCode(mNciPdReferral.getSuffixCode());

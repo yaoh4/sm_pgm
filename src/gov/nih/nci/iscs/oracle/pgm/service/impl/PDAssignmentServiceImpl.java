@@ -149,16 +149,12 @@ public class PDAssignmentServiceImpl extends BaseServiceImpl implements GrantSea
 	        }
 	        
 	        if(mNciPdTransfer.getSerialNum() != null )  {
-	                mPDASearchResultObject.setSerialNum(mNciPdTransfer.getSerialNum().toString());
-	        } else {
-	                mPDASearchResultObject.setSerialNum(ApplicationConstants.EMPTY_STRING );
-	        }
+	                mPDASearchResultObject.setSerialNum(mNciPdTransfer.getSerialNum());
+	        } 
 	        
 	        if(mNciPdTransfer.getSupportYear() != null )  {
-	                mPDASearchResultObject.setSupportYear(mNciPdTransfer.getSupportYear().toString());
-	        } else {
-	                mPDASearchResultObject.setSupportYear(ApplicationConstants.EMPTY_STRING );
-	        }
+	                mPDASearchResultObject.setSupportYear(mNciPdTransfer.getSupportYear());
+	        } 
 	          
 	        if(mNciPdTransfer.getSuffixCode() != null )  {
 	                mPDASearchResultObject.setSuffixCode(mNciPdTransfer.getSuffixCode());

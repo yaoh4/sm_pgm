@@ -23,8 +23,8 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     private String key;
     private String adminPhsOrgCode;
     private String activityCode;
-    private String serialNum;
-    private String supportYear;
+    private Integer serialNum;
+    private Integer supportYear;
     private String suffixCode;
     public static java.sql.Timestamp mToday;
     public static java.sql.Timestamp mYesterday;
@@ -169,19 +169,19 @@ public class PDASearchResultObject extends GrantSearchResultObject {
         return activityCode;
     }
 
-    public void setSerialNum(String serialNum) {
+    public void setSerialNum(Integer serialNum) {
         this.serialNum = serialNum;
     }
 
-    public String getSerialNum() {
+    public Integer getSerialNum() {
         return serialNum;
     }
 
-    public void setSupportYear(String supportYear) {
+    public void setSupportYear(Integer supportYear) {
         this.supportYear = supportYear;
     }
 
-    public String getSupportYear() {
+    public Integer getSupportYear() {
         return supportYear;
     }
 
