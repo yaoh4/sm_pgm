@@ -85,27 +85,27 @@ public class ReferralListComparator extends Object implements Comparator {
             methodName = invokeMethodName;
         } else {
             methodName = (String)columnMethodMap.get(columnName);
-        }        
-        try {           
-            Method o1_Method = o1.getClass().getMethod(methodName, null);            
-            Method o2_Method = o2.getClass().getMethod(methodName, null);                 
+        }
+        try {
+            Method o1_Method = o1.getClass().getMethod(methodName, null);
+            Method o2_Method = o2.getClass().getMethod(methodName, null);
             Method o11_Method = 
-                o1.getClass().getMethod(getAdminPhsOrgCode_Method, null);            
+                o1.getClass().getMethod(getAdminPhsOrgCode_Method, null);
             Method o21_Method = 
                 o2.getClass().getMethod(getAdminPhsOrgCode_Method, null);
             Method o12_Method = 
-                o1.getClass().getMethod(getActivityCode_Method, null);            
+                o1.getClass().getMethod(getActivityCode_Method, null);
             Method o22_Method = 
                 o2.getClass().getMethod(getActivityCode_Method, null);
 
             Method o13_Method = 
                 o1.getClass().getMethod(getSerialNum_Method, null);
             Method o23_Method = 
-                o2.getClass().getMethod(getSerialNum_Method, null);            
+                o2.getClass().getMethod(getSerialNum_Method, null);
             Method o14_Method = 
                 o1.getClass().getMethod(getSupportYear_Method, null);
             Method o24_Method = 
-                o2.getClass().getMethod(getSupportYear_Method, null);            
+                o2.getClass().getMethod(getSupportYear_Method, null);
             Method o15_Method = 
                 o1.getClass().getMethod(getSuffixCode_Method, null);
             Method o25_Method = 
@@ -116,7 +116,7 @@ public class ReferralListComparator extends Object implements Comparator {
                 Date temp1 = (Date)o1_Method.invoke(o1, null);
                 Date temp2 = (Date)o2_Method.invoke(o2, null);
                 rslt1 = convertToString(temp1);
-                rslt2 = convertToString(temp2);                   
+                rslt2 = convertToString(temp2);
             } else {
                 if (o1_Method.getReturnType().getName().equalsIgnoreCase("java.lang.Integer")) {
                     Integer temp1 = (Integer)o1_Method.invoke(o1, null);
@@ -141,47 +141,64 @@ public class ReferralListComparator extends Object implements Comparator {
 
             if (methodName.equalsIgnoreCase("getGrantNumber")) {
 
+
                 rslt1 = 
-                        (String)o11_Method.invoke(o1, null) + "$$" + (String)o12_Method.invoke(o1, 
-                                                                                        null) + "$$" +
-                        convertToStringForSupportYear((Integer)o13_Method.invoke(o1, null)) + "$$" +
-                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, null)) + "$$" +
-                      convertToStringForSuffix( (String)o15_Method.invoke(o1, null));
+                        (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
+                                                                                        null) + 
+                        convertToStringForSerialNum((Integer)o13_Method.invoke(o1, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, 
+                                                                                 null)) + 
+                        convertToStringForSuffix((String)o15_Method.invoke(o1, 
+                                                                           null));
+
+
                 rslt2 = 
-                        (String)o21_Method.invoke(o2, null) + "$$" +(String)o22_Method.invoke(o2, 
-                                                                                        null) + "$$" +
-                       convertToStringForSupportYear( (Integer)o23_Method.invoke(o2, null)) + "$$" +
-                       convertToStringForSupportYear( (Integer)o24_Method.invoke(o2, null)) + "$$" +
-                       convertToStringForSuffix( (String)o25_Method.invoke(o2, null));               
-            }   else if (methodName.equalsIgnoreCase("getNcabDate")) {
+                        (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
+                                                                                        null) + 
+                        convertToStringForSerialNum((Integer)o23_Method.invoke(o2, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o24_Method.invoke(o2, 
+                                                                                 null)) + 
+                        convertToStringForSuffix((String)o25_Method.invoke(o2, 
+                                                                           null));
+            } else if (methodName.equalsIgnoreCase("getNcabDate")) {
                 rslt1 = 
                         reformat(rslt1) + (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
-                                                                                                null) + 
-                        (Object)o13_Method.invoke(o1, null) + 
-                        (Object)o14_Method.invoke(o1, null) + 
-                        convertToStringForSuffix((String)o15_Method.invoke(o1, null));
+                                                                                                          null) + 
+                        convertToStringForSerialNum((Integer)o13_Method.invoke(o1, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, 
+                                                                                 null)) + 
+                        convertToStringForSuffix((String)o15_Method.invoke(o1, 
+                                                                           null));
                 rslt2 = 
                         reformat(rslt2) + (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
-                                                                                                null) + 
-                        (Object)o23_Method.invoke(o2, null) + 
-                        (Object)o24_Method.invoke(o2, null) + 
-                        convertToStringForSuffix((String)o25_Method.invoke(o2, null));        
-                
-            }   else {
+                                                                                                          null) + 
+                        convertToStringForSerialNum((Integer)o23_Method.invoke(o2, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o24_Method.invoke(o2, 
+                                                                                 null)) + 
+                        convertToStringForSuffix((String)o25_Method.invoke(o2, 
+                                                                           null));
+
+            } else {
 
                 rslt1 = 
                         rslt1 + (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
                                                                                                 null) + 
-                        (Object)o13_Method.invoke(o1, null) + 
-                        (Object)o14_Method.invoke(o1, null) + 
-                       convertToStringForSuffix( (String)o15_Method.invoke(o1, null));
+                        convertToStringForSerialNum((Integer)o13_Method.invoke(o1, null)) + 
+                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, null)) + 
+                        convertToStringForSuffix((String)o15_Method.invoke(o1, 
+                                                                           null));
                 rslt2 = 
                         rslt2 + (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
                                                                                                 null) + 
-                        (Object)o23_Method.invoke(o2, null) + 
-                        (Object)o24_Method.invoke(o2, null) + 
-                       convertToStringForSuffix( (String)o25_Method.invoke(o2, null));                        
-            }            
+                        convertToStringForSerialNum((Integer)o23_Method.invoke(o2, null)) + 
+                        convertToStringForSupportYear((Integer)o24_Method.invoke(o2, null)) + 
+                        convertToStringForSuffix((String)o25_Method.invoke(o2, 
+                                                                           null));
+            }
             comp1 = rslt1.toUpperCase().trim();
             comp2 = rslt2.toUpperCase().trim();
         } catch (NoSuchMethodException e) {
@@ -212,13 +229,13 @@ public class ReferralListComparator extends Object implements Comparator {
 
         return returnVal;
     }
-    
+
     private String convertToStringForSupportYear(Object temp) {
         String returnVal;
         try {
-        if (temp.toString().length() == 1)
-            returnVal = "0" + temp.toString();
-            else 
+            if (temp.toString().length() == 1)
+                returnVal = "0" + temp.toString();
+            else
                 returnVal = temp.toString();
         } catch (NullPointerException ex) {
             returnVal = ApplicationConstants.EMPTY_STRING;
@@ -226,18 +243,39 @@ public class ReferralListComparator extends Object implements Comparator {
 
         return returnVal;
     }
-    
+
     private String convertToStringForSuffix(String temp) {
-        String returnVal;        
+        String returnVal;
         try {
-        if (temp  == null || temp.length() == 0){            
-            returnVal = "ZZ";
-        }
-            else {                
+            if (temp == null || temp.length() == 0) {
+                returnVal = "ZZ";
+            } else {
                 returnVal = temp.toString();
             }
         } catch (NullPointerException ex) {
             returnVal = ApplicationConstants.EMPTY_STRING;
+        }
+
+        return returnVal;
+    }
+
+    private String convertToStringForSerialNum(Integer SerialNum) {
+        String returnVal = null;
+        int SerialNumLength = SerialNum.toString().length();
+        
+            switch (SerialNumLength) {
+            case 1:
+                returnVal = "00000" + SerialNum.toString();
+            case 2:
+                returnVal = "0000" + SerialNum.toString();
+            case 3:
+                returnVal = "000" + SerialNum.toString();
+            case 4:
+                returnVal = "00" + SerialNum.toString();
+            case 5:
+                returnVal = "0" + SerialNum.toString();
+            case 6:
+                returnVal = SerialNum.toString();           
         }
 
         return returnVal;
@@ -260,12 +298,12 @@ public class ReferralListComparator extends Object implements Comparator {
             System.out.println();
         }
     }
-    
-    private String reformat(String temp){
-    if (temp != null && temp.length() != 0)
-        temp = temp.substring(3,7) + "/" + temp.substring(0,2);
-    else 
-        temp = "9000/12";
+
+    private String reformat(String temp) {
+        if (temp != null && temp.length() != 0)
+            temp = temp.substring(3, 7) + "/" + temp.substring(0, 2);
+        else
+            temp = "9000/12";
         return temp;
     }
 
