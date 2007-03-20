@@ -187,15 +187,19 @@ public class ReferralListComparator extends Object implements Comparator {
                 rslt1 = 
                         rslt1 + (String)o11_Method.invoke(o1, null) + (String)o12_Method.invoke(o1, 
                                                                                                 null) + 
-                        convertToStringForSerialNum((Integer)o13_Method.invoke(o1, null)) + 
-                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, null)) + 
+                        convertToStringForSerialNum((Integer)o13_Method.invoke(o1, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o14_Method.invoke(o1, 
+                                                                                 null)) + 
                         convertToStringForSuffix((String)o15_Method.invoke(o1, 
                                                                            null));
                 rslt2 = 
                         rslt2 + (String)o21_Method.invoke(o2, null) + (String)o22_Method.invoke(o2, 
                                                                                                 null) + 
-                        convertToStringForSerialNum((Integer)o23_Method.invoke(o2, null)) + 
-                        convertToStringForSupportYear((Integer)o24_Method.invoke(o2, null)) + 
+                        convertToStringForSerialNum((Integer)o23_Method.invoke(o2, 
+                                                                               null)) + 
+                        convertToStringForSupportYear((Integer)o24_Method.invoke(o2, 
+                                                                                 null)) + 
                         convertToStringForSuffix((String)o25_Method.invoke(o2, 
                                                                            null));
             }
@@ -262,20 +266,26 @@ public class ReferralListComparator extends Object implements Comparator {
     private String convertToStringForSerialNum(Integer SerialNum) {
         String returnVal = null;
         int SerialNumLength = SerialNum.toString().length();
-        
-            switch (SerialNumLength) {
-            case 1:
-                returnVal = "00000" + SerialNum.toString();
-            case 2:
-                returnVal = "0000" + SerialNum.toString();
-            case 3:
-                returnVal = "000" + SerialNum.toString();
-            case 4:
-                returnVal = "00" + SerialNum.toString();
-            case 5:
-                returnVal = "0" + SerialNum.toString();
-            case 6:
-                returnVal = SerialNum.toString();           
+
+        switch (SerialNumLength) {
+        case 1:
+            returnVal = "00000" + SerialNum.toString();            
+            break;
+        case 2:
+            returnVal = "0000" + SerialNum.toString();            
+            break;
+        case 3:
+            returnVal = "000" + SerialNum.toString();            
+            break;
+        case 4:
+            returnVal = "00" + SerialNum.toString();
+            break;
+        case 5:
+            returnVal = "0" + SerialNum.toString();
+            break;
+        case 6:
+            returnVal = SerialNum.toString();            
+            break;
         }
 
         return returnVal;
