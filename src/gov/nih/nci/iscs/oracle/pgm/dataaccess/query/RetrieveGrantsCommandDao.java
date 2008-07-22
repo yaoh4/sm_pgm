@@ -14,6 +14,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 // Springfranework imports
 
 // hibernate imports
+
 import net.sf.hibernate.*;
 import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.expression.MatchMode;
@@ -36,7 +37,7 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
     protected final Log logger = LogFactory.getLog(getClass());
     public static final String PERCENT_SYMBOL = "%";
     public static final String DEFAULT_GRANT_NUM = "____________-__%";
-
+    
 
    /*
     * Class constructor
@@ -77,7 +78,6 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
      */
 
     protected Criteria buildGrantsQueryCriteria(Criteria aCriteria, UserFilterInfo oUserFilterInfo, GrantQueryObject aGrantQueryObject) {
-
 
 
         ArrayList mGrantNumberList = new ArrayList();
@@ -122,10 +122,10 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		   aCriteria.add(Expression.ilike("projectTitle", aGrantQueryObject.getProjectTitle().trim(), MatchMode.ANYWHERE));
 
  	    // add the PI Last Name search criterion
-		if ( !(aGrantQueryObject.getPiLastName() == null || aGrantQueryObject.getPiLastName().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)))
-		   aCriteria.add(Expression.ilike("lastName", aGrantQueryObject.getPiLastName().trim() + PERCENT_SYMBOL ));
-
-	    // add the PI First Name search criterion
+ 	         if ( !(aGrantQueryObject.getPiLastName() == null || aGrantQueryObject.getPiLastName().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)))
+ 	            aCriteria.add(Expression.ilike("lastName", aGrantQueryObject.getPiLastName().trim() + PERCENT_SYMBOL ));
+	 
+            // add the PI First Name search criterion
 		if ( !(aGrantQueryObject.getPiFirstName() == null || aGrantQueryObject.getPiFirstName().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING) ))
 		   aCriteria.add(Expression.ilike("firstName", aGrantQueryObject.getPiFirstName().trim() + PERCENT_SYMBOL ));
 
@@ -185,8 +185,6 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 		    aCriteria.add(Expression.in("cayCode",valuesArray));
 		}
 
-
-
 		// add the sort order search criterion
 		if (aGrantQueryObject.getSortOrder().equalsIgnoreCase(ApplicationConstants.SORT_ASC)) {
 			if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("default") ||
@@ -199,8 +197,12 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 				aCriteria.addOrder( Order.asc(ApplicationConstants.SUPPORT_YEAR_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.SUFFIX_CODE_SORT));
 			} else {
-			    aCriteria.addOrder( Order.asc(aGrantQueryObject.getSortColumn()) );
-				aCriteria.addOrder( Order.asc(ApplicationConstants.PHS_ORG_CODE_SORT));
+                            if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
+                                aCriteria.addOrder( Order.asc("lastNameUpper"));
+                            }else{
+			    aCriteria.addOrder( Order.asc(aGrantQueryObject.getSortColumn()));
+			    }	
+                                aCriteria.addOrder( Order.asc(ApplicationConstants.PHS_ORG_CODE_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.ACTIVITY_CODE_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.SERIAL_NUM_SORT));
 				aCriteria.addOrder( Order.asc(ApplicationConstants.SUPPORT_YEAR_SORT));
@@ -217,7 +219,11 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 				aCriteria.addOrder( Order.desc(ApplicationConstants.SUPPORT_YEAR_SORT));
 				aCriteria.addOrder( Order.desc(ApplicationConstants.SUFFIX_CODE_SORT));
 			} else {
-			    aCriteria.addOrder( Order.desc(aGrantQueryObject.getSortColumn()) );
+			    if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
+			        aCriteria.addOrder( Order.desc("lastNameUpper"));
+			    }else{
+			    aCriteria.addOrder( Order.desc(aGrantQueryObject.getSortColumn()));
+			    }   
 				aCriteria.addOrder( Order.desc(ApplicationConstants.PHS_ORG_CODE_SORT));
 				aCriteria.addOrder( Order.desc(ApplicationConstants.ACTIVITY_CODE_SORT));
 				aCriteria.addOrder( Order.desc(ApplicationConstants.SERIAL_NUM_SORT));
