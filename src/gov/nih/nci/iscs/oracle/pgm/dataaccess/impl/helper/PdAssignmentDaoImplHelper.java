@@ -39,7 +39,7 @@ public class PdAssignmentDaoImplHelper {
         /*
      * Call the assignment stored procedure
      *
-     * @return boolean - verification pass/faik
+     * @return boolean - verification pass/fail
      * @param aApplId - the Appl id
      * @param aNpeId  - the Npe id
      */
