@@ -103,6 +103,17 @@
             </meta> 
         </key-property>
         <key-property 
+            name="lastNameUpper" 
+            column="LAST_NAME_UPPER" 
+            type="java.lang.String"
+            length="30"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="LAST_NAME_UPPER"
+            </meta> 
+        </key-property>
+        <key-property 
             name="applTypeCode" 
             column="APPL_TYPE_CODE" 
             type="java.lang.String"

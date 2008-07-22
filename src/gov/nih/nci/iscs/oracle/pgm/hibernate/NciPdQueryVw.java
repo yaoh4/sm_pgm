@@ -32,6 +32,9 @@ public class NciPdQueryVw implements Serializable {
 
     /** identifier field */
     private java.lang.String lastName;
+    
+    /** identifier field */
+    private java.lang.String lastNameUpper;
 
     /** identifier field */
     private java.lang.String applTypeCode;
@@ -153,6 +156,7 @@ public class NciPdQueryVw implements Serializable {
         this.firstName = firstName;
         this.miName = miName;
         this.lastName = lastName;
+        this.lastNameUpper = lastNameUpper;
         this.applTypeCode = applTypeCode;
         this.adminPhsOrgCode = adminPhsOrgCode;
         this.activityCode = activityCode;
@@ -286,7 +290,20 @@ public class NciPdQueryVw implements Serializable {
     public void setLastName(java.lang.String lastName) {
         this.lastName = lastName;
     }
+    
+    /** 
+     *                @hibernate.property
+     *                 column="LAST_NAME_UPPER"
+     *             
+     */
+    public java.lang.String getLastNameUpper() {
+        return this.lastNameUpper;
+    }
 
+    public void setLastNameUpper(java.lang.String lastNameUpper) {
+        this.lastNameUpper = lastNameUpper;
+    }
+    
     /** 
      *                @hibernate.property
      *                 column="APPL_TYPE_CODE"
@@ -777,6 +794,7 @@ public class NciPdQueryVw implements Serializable {
             .append("firstName", getFirstName())
             .append("miName", getMiName())
             .append("lastName", getLastName())
+            .append("lastNameUpper", getLastNameUpper())
             .append("applTypeCode", getApplTypeCode())
             .append("adminPhsOrgCode", getAdminPhsOrgCode())
             .append("activityCode", getActivityCode())
@@ -828,6 +846,7 @@ public class NciPdQueryVw implements Serializable {
             .append(this.getFirstName(), castOther.getFirstName())
             .append(this.getMiName(), castOther.getMiName())
             .append(this.getLastName(), castOther.getLastName())
+            .append(this.getLastNameUpper(), castOther.getLastNameUpper())
             .append(this.getApplTypeCode(), castOther.getApplTypeCode())
             .append(this.getAdminPhsOrgCode(), castOther.getAdminPhsOrgCode())
             .append(this.getActivityCode(), castOther.getActivityCode())
@@ -877,6 +896,7 @@ public class NciPdQueryVw implements Serializable {
             .append(getFirstName())
             .append(getMiName())
             .append(getLastName())
+            .append(getLastNameUpper())
             .append(getApplTypeCode())
             .append(getAdminPhsOrgCode())
             .append(getActivityCode())
