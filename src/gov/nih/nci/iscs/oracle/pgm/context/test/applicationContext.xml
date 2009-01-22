@@ -9,7 +9,7 @@
 	 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"><value>oracle.jdbc.driver.OracleDriver</value></property>
-		<property name="url"><value>jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = app1-db2.nci.nih.gov)(PORT = 1526))) (CONNECT_DATA = (SERVICE_NAME = a1d2_at.nci.nih.gov) ) )</value></property>
+		<property name="url"><value>jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = nci-test-db05.nci.nih.gov)(PORT = 1555))) (CONNECT_DATA = (SERVICE_NAME = i2et.nci.nih.gov) ) )</value></property>
 		<property name="username"><value>nci_app_user</value></property>
 		<property name="password"><value>orac1e</value></property>
 	</bean>
