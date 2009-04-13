@@ -18,9 +18,10 @@ import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 public class ApplicationContextFactory {
 	private static Log logger = LogFactory.getLog(ApplicationContextFactory.class);
 
-	private static String contextResourceLocation = "gov/nih/nci/iscs/oracle/pgm/context/applicationContext.xml";
+	//private static String contextResourceLocation = "gov/nih/nci/iscs/oracle/pgm/context/applicationContext.xml";
+	 private static String contextResourceLocation = "gov/nih/nci/iscs/oracle/pgm/context/development/applicationContext.xml";
 	private static ApplicationContextFactory cApplicationContextFactoryInstance = null;
-    private static ApplicationContext oApplicationContext = null;
+       private static ApplicationContext oApplicationContext = null;
 
 
 

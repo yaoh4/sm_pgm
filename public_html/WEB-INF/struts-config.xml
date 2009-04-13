@@ -181,5 +181,5 @@
   <plug-in className="org.apache.struts.validator.ValidatorPlugIn">
   <set-property property="pathnames" value="/WEB-INF/validator-rules.xml,/WEB-INF/validation.xml" />
   </plug-in>
-   <plug-in className="gov.nih.nci.iscs.plugins.PgmApplicationPlugin" />
+   <plug-in className="gov.nih.nci.iscs.oracle.pgm.plugins.PgmApplicationPlugin" />
 </struts-config>

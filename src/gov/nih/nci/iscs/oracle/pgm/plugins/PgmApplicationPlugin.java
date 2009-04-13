@@ -1,4 +1,4 @@
-package gov.nih.nci.iscs.plugins;
+package gov.nih.nci.iscs.oracle.pgm.plugins;
 
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;

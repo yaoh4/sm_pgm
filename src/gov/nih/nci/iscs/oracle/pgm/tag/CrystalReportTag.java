@@ -54,10 +54,11 @@ public class CrystalReportTag extends TagSupport {
 
       if ((mReportAction != null)&&(mReportAction.equalsIgnoreCase("run"))&&(mReportDetails != null)&&(mTempReportId != null)) {
          String vCrystalUrl = applInfo.getApplicationKey("CRYSTAL.SERVER.URL");
-         String vApsName = applInfo.getApplicationKey("CRYSTAL.SERVER.APSNAME");
+  //       String vApsName = applInfo.getApplicationKey("CRYSTAL.SERVER.APSNAME");
          String vApsUser = applInfo.getApplicationKey("CRYSTAL.SERVER.APSUSER");
+         String vApsPassword = applInfo.getApplicationKey("CRYSTAL.SERVER.APSPASSWORD");
          String vApsAuthType = applInfo.getApplicationKey("CRYSTAL.SERVER.APSAUTHTYPE");
-         String vAuthUrl = "&apsname="+vApsName+"&user="+vApsUser+"&apsauthtype="+vApsAuthType;
+         String vAuthUrl = "&apsuser="+vApsUser+"&apspassword="+vApsPassword+"&apsauthtype="+vApsAuthType;
          String vExportFormat = "";
 
          if (mReportFormat.equals("PDF")) {

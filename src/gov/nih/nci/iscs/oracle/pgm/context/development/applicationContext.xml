@@ -2,21 +2,21 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<!-- 
+	<!--
 		Datasource that works in any application server
 		You could easily use J2EE data source instead if this were
 		running inside of a J2EE container.
 	 -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName"><value>oracle.jdbc.driver.OracleDriver</value></property>
-		<property name="url"><value>jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = app1-cm1.nci.nih.gov)(PORT = 1610))) (CONNECT_DATA = (SERVICE_NAME = a1d3_ad.nci.nih.gov) ) )</value></property>
+		<property name="url"><value>jdbc:oracle:thin:@(DESCRIPTION = (ADDRESS_LIST = (ADDRESS = (PROTOCOL = TCP)(HOST = nci-oraclecm-dev.nci.nih.gov)(PORT = 1610))) (CONNECT_DATA = (SERVICE_NAME = i2ed.nci.nih.gov) ) )</value></property>
 		<property name="username"><value>nci_app_user</value></property>
 		<property name="password"><value>orac1e</value></property>
 	</bean>
 	<!-- Hibernate SessionFactory -->
 	<bean id="sessionFactory" class="org.springframework.orm.hibernate.LocalSessionFactoryBean">
 		<property name="dataSource"><ref local="dataSource"/></property>
-		
+
 		<!-- Must references all OR mapping files. -->
 		<property name="mappingResources">
 			<list>
@@ -47,7 +47,7 @@
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PdOrgVw4.hbm.xml</value>
 			</list>
 		</property>
-		
+
 		<property name="hibernateProperties">
 			<props>
 				<prop key="hibernate.dialect">net.sf.hibernate.dialect.Oracle9Dialect</prop>
@@ -57,8 +57,8 @@
 				<prop key="hibernate.c3p0.max_statements">100</prop>
 				<prop key="hibernate.c3p0.idle_test_period">300</prop>
                                 <prop key="hibernate.c3p0.acquire_increment">2</prop>
-				<prop key="hibernate.show_sql">true</prop>								
-				<prop key="hibernate.cglib.use_reflection_optimizer">false</prop>								
+				<prop key="hibernate.show_sql">true</prop>
+				<prop key="hibernate.cglib.use_reflection_optimizer">false</prop>
 			</props>
 		</property>
 	</bean>
@@ -73,7 +73,7 @@
 	<!-- Pass the session factory to our GrantReferalDAOImpl -->
 
 
-       <bean id="actionCommand" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true"> 
+       <bean id="actionCommand" class="org.springframework.aop.framework.ProxyFactoryBean" abstract="true">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ActionCommand</value>
 	   </property>
@@ -94,7 +94,7 @@
         </bean>
 
 
-       <bean id="accessCommand" class="org.springframework.aop.framework.ProxyFactoryBean"  > 
+       <bean id="accessCommand" class="org.springframework.aop.framework.ProxyFactoryBean"  >
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AccessCommand</value>
 	   </property>
@@ -115,7 +115,7 @@
         </bean>
 
 
-       <bean id="retrieveGrantsCommand" 
+       <bean id="retrieveGrantsCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean" >
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsCommand</value>
@@ -124,7 +124,7 @@
              <ref bean="retrieveGrantsCommandDao"/>
            </property>
        </bean>
-       <bean id="retrieveGrantsForReferalCommand" 
+       <bean id="retrieveGrantsForReferalCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForReferalCommand</value>
@@ -133,7 +133,7 @@
              <ref bean="retrieveGrantsForReferalCommandDao"/>
            </property>
        </bean>
-       <bean id="retrieveGrantsForPDACommand" 
+       <bean id="retrieveGrantsForPDACommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForPDACommand</value>
@@ -142,7 +142,7 @@
              <ref bean="retrieveGrantsForPDACommandDao"/>
            </property>
        </bean>
-       <bean id="retrieveUserInfoCommand" 
+       <bean id="retrieveUserInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand</value>
@@ -152,7 +152,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveUserFilterInfoCommand" 
+       <bean id="retrieveUserFilterInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserFilterInfoCommand</value>
@@ -162,7 +162,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveLookUpCommand" 
+       <bean id="retrieveLookUpCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveLookUpCommand</value>
@@ -171,8 +171,8 @@
              <ref bean="retrieveLookUpCommandDao"/>
            </property>
        </bean>
-       
-       <bean id="retrieveProgamDirectorInfoCommand" 
+
+       <bean id="retrieveProgamDirectorInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorInfoCommand</value>
@@ -182,7 +182,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveProgamDirectorsInfoCommand" 
+       <bean id="retrieveProgamDirectorsInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorsInfoCommand</value>
@@ -192,7 +192,7 @@
            </property>
        </bean>
 
-       <bean id="retrievePDInfoForAssignmentCommand" 
+       <bean id="retrievePDInfoForAssignmentCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDInfoForAssignmentCommand</value>
@@ -202,7 +202,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveActivePDInfoCommand" 
+       <bean id="retrieveActivePDInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand</value>
@@ -212,8 +212,8 @@
            </property>
        </bean>
 
-       
-       <bean id="retrievePDCancerActivityInfoCommand" 
+
+       <bean id="retrievePDCancerActivityInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand</value>
@@ -223,7 +223,7 @@
            </property>
        </bean>
 
-       <bean id="retrievePDOrgInfoCommand" 
+       <bean id="retrievePDOrgInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDOrgInfoCommand</value>
@@ -233,7 +233,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveCAHistoryCommand" 
+       <bean id="retrieveCAHistoryCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCAHistoryCommand</value>
@@ -243,7 +243,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveCAInfoCommand" 
+       <bean id="retrieveCAInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCAInfoCommand</value>
@@ -253,7 +253,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveAppLinksCommand" 
+       <bean id="retrieveAppLinksCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveAppLinksCommand</value>
@@ -263,7 +263,7 @@
            </property>
        </bean>
 
-       <bean id="wbReferralActivitiesInfoCommand" 
+       <bean id="wbReferralActivitiesInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbReferralActivitiesInfoCommand</value>
@@ -274,7 +274,7 @@
        </bean>
 
 
-       <bean id="retrieveRejCommentsCommand" 
+       <bean id="retrieveRejCommentsCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveRejCommentsCommand</value>
@@ -284,7 +284,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveApplicationLinkInfoCommand" 
+       <bean id="retrieveApplicationLinkInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveApplicationLinkInfoCommand</value>
@@ -293,8 +293,8 @@
              <ref bean="retrieveApplicationLinkInfoCommandDao"/>
            </property>
        </bean>
-       
-        <bean id="wbRetrieveBoardsCommand" 
+
+        <bean id="wbRetrieveBoardsCommand"
             class="org.springframework.aop.framework.ProxyFactoryBean">
             <property name="proxyInterfaces">
  	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.WbRetrieveBoardsCommand</value>
@@ -303,8 +303,8 @@
               <ref bean="wbRetrieveBoardsCommandDao"/>
             </property>
         </bean>
-        
-       <bean id="retrieveReportsInfoCommand" 
+
+       <bean id="retrieveReportsInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveReportsInfoCommand</value>
@@ -314,7 +314,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveCrystalParamsCommand" 
+       <bean id="retrieveCrystalParamsCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveCrystalParamsCommand</value>
@@ -324,7 +324,7 @@
            </property>
        </bean>
 
-       <bean id="retrieveGrantInfoCommand" 
+       <bean id="retrieveGrantInfoCommand"
            class="org.springframework.aop.framework.ProxyFactoryBean">
            <property name="proxyInterfaces">
 	       <value>gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantInfoCommand</value>
@@ -350,7 +350,7 @@
 	<bean id="reReferReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.ReReferReferalCommandDao"
 	        parent="actionCommandDao">
 	</bean>
-        
+
 	<bean id="assignPDCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AssignPDCommandDao"
 	        parent="actionCommandDao">
 	</bean>
@@ -443,7 +443,7 @@
 	        parent="accessCommandDao">
 	</bean>
 
-       <bean id="updateReportDataCommand" 
+       <bean id="updateReportDataCommand"
            class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
            <property name="transactionManager">
                 <ref bean="myTransactionManager"/>
@@ -459,7 +459,7 @@
          <property name="postInterceptors"><ref bean="debug"/></property>
         </bean>
 
-      <bean id="acceptReferalCommand" 
+      <bean id="acceptReferalCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
@@ -474,8 +474,8 @@
         </property>
         <property name="postInterceptors"><ref bean="debug"/></property>
        </bean>
-       
-      <bean id="rejectReferalCommand" 
+
+      <bean id="rejectReferalCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
@@ -491,7 +491,7 @@
         <property name="postInterceptors"><ref bean="debug"/></property>
        </bean>
 
-      <bean id="releaseReferalCommand" 
+      <bean id="releaseReferalCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
@@ -507,7 +507,7 @@
         <property name="postInterceptors"><ref bean="debug"/></property>
        </bean>
 
-    <bean id="reReferReferalCommand" 
+    <bean id="reReferReferalCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
@@ -529,7 +529,7 @@
           </property>
        </bean>
 
-      <bean id="assignPDCommand" 
+      <bean id="assignPDCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
@@ -555,6 +555,6 @@
             </value>
         </property>
       </bean-->
-  
-    
+
+
 </beans>
