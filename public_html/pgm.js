@@ -542,7 +542,7 @@ function validateFyRange() {
 function araView(araId)
 { 
 
-  var url = "/araacr/ViewAra.do?araID=" + araId;
+  var url = "/ara/ViewAra.do?araID=" + araId;
   //var winName = "ApplRefHist";
   //var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
   //var newWin = window.open(url, winName ,features);
