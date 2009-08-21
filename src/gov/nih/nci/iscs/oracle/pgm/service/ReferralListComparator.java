@@ -8,7 +8,8 @@ import java.util.*;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
 
-    public class ReferralListComparator extends Object implements Comparator {
+
+public class ReferralListComparator extends Object implements Comparator {
     	private String columnName = "grantNumber";
     	private boolean sortAscIndicator = true;
     	private String invokeMethodName;
@@ -44,7 +45,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
        columnMethodMap.put("lastName", "getPiLastName");
        columnMethodMap.put("pdStartDate", "getPdStartDate");
        columnMethodMap.put("rfaPaNumber", "getRfapa");
-       columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityCode");    
+       columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityDate");    
 
       }
 
@@ -71,6 +72,15 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
      	String rslt1 = null;
      	String rslt2 = null;
      	String methodName = null;
+            String date1 = null;
+            String date2 = null;
+            String yr1 = null;
+            String mon1 = null;
+            String day1 = null;
+            String yr2 = null;
+            String mon2 = null;
+            String day2 = null;
+            
      	if(columnName==null) {
 			methodName = invokeMethodName;
 		} else {
@@ -80,13 +90,32 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
             Method o1_Method = o1.getClass().getMethod(methodName, null);
             Method o2_Method = o2.getClass().getMethod(methodName, null);
+            
+            if ("currentReferralActivityDate".equalsIgnoreCase(columnName)) {
+                
+                 date1 =    (String)o1_Method.invoke(o1, null);    
+                 date2 =    (String)o2_Method.invoke(o2, null);   
+                
+                 yr1 = date1.substring(date1.length()-4);
+                 mon1 = date1.substring(0,2);
+                 day1 = date1.substring(3,5);                                
+                
+                 yr2 = date2.substring(date2.length()-4);
+                 mon2 = date2.substring(0,2);
+                 day2 = date2.substring(3,5);                                                
+                
+                rslt1 = yr1 + "-" + mon1 + "-" + day1;
+                rslt2 = yr2 + "-" + mon2 + "-" + day2; 
+                              
+                              
+            } else {
 
             if(o1_Method.getReturnType().getName().equalsIgnoreCase("java.util.Date")){
 
               Date temp1 = (Date) o1_Method.invoke(o1, null);
               Date temp2 = (Date) o2_Method.invoke(o2, null);
               rslt1 = convertToString(temp1);
-              rslt2 = convertToString(temp1);
+              rslt2 = convertToString(temp2);
 		    }else{
               if(o1_Method.getReturnType().getName().equalsIgnoreCase("java.lang.Integer")){
                   Integer temp1 = (Integer) o1_Method.invoke(o1, null);
@@ -99,18 +128,19 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 		      }
 		    }
 
-
+            }
             if(rslt1==null) {
 				rslt1 = ApplicationConstants.EMPTY_STRING;
 			}
             if(rslt2==null) {
 				rslt2 = ApplicationConstants.EMPTY_STRING;
 			}
-            comp1 = rslt1.toUpperCase().trim();
-            comp2 = rslt2.toUpperCase().trim();
+            comp1 = (Object)rslt1.toUpperCase().trim();
+            comp2 = (Object)rslt2.toUpperCase().trim();
         } catch (NoSuchMethodException e) {
         } catch (IllegalAccessException e) {
-        } catch (InvocationTargetException e) {}
+        } catch (InvocationTargetException e) {
+        } 
                  Comparable c1 = (Comparable) comp1;
                  Comparable c2 = (Comparable) comp2;
                  if(sortAscIndicator) {
