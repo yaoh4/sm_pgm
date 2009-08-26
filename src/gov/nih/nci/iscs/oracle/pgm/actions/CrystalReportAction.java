@@ -35,10 +35,12 @@ public class CrystalReportAction extends NciPgmAction    {
  private ServletContext oServletContext;
  private ApplicationContext oApplicationContext;
  private RetrieveGrantsForm mRetrieveGrantsForm = null;
- private String mContinueForward = "continueForReferral";
+ private String mContinueForward;
 
  public ActionForward executeAction(ActionMapping mapping, ActionForm form, HttpServletRequest request,
                                        HttpServletResponse response) throws GrantSearchException, Exception {
+                                       
+       mContinueForward = "continueForReferral";
 
        if(!SearchGrantsActionHelper.validateSession(request.getSession() )) {
 		   throw new GrantSearchException("CrystalReportAction", "execute", "Your session has expired. You have open a new browser window to continue!", request.getSession());
