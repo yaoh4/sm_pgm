@@ -341,6 +341,17 @@ function openYourGrantsWindow(applId, grantsUrl)
  
 }
 
+function openRfaPaWindow(nihGuideAddrUrl)
+{ 
+
+  var winName = "NihGuideAddr";
+  var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
+ 
+  var newWin = window.open(nihGuideAddrUrl, winName ,features);
+  newWin.focus();
+ 
+}
+
 function openEGrantsWindow(eGrantId)
 { 
   var url = "https://i2e.nci.nih.gov/egrants/egrants.asp?str=" + eGrantId;
@@ -542,15 +553,14 @@ function validateFyRange() {
 function araView(araId)
 { 
 
-  var url = "/ara/ViewAra.do?araID=" + araId;
-  //var winName = "ApplRefHist";
-  //var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
-  //var newWin = window.open(url, winName ,features);
-  var newWin = window.open(url);
+  var url = "https://i2e.nci.nih.gov/ara/ViewAra.do?araID=" + araId;
+  var winName = "ApplRefHist";
+  var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
+  var newWin = window.open(url, winName ,features);
+  //var newWin = window.open(url);
   newWin.focus();
  
 }
-
 
 // This script tests for Netscape 4 
 // which determines whether we're going to apply table cell styles or not
