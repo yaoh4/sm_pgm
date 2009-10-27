@@ -180,7 +180,12 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 			} else {
 				mReferralSearchResultObject.setDualPoc(ApplicationConstants.EMPTY_STRING );
 			}
-
+                        
+                        if(mNciPdReferral.getNihGuideAddr() != null ) {
+                                mReferralSearchResultObject.setNihGuideAddrUrl(mNciPdReferral.getNihGuideAddr());
+                        } else {
+                                mReferralSearchResultObject.setNihGuideAddrUrl(ApplicationConstants.EMPTY_STRING );
+                        } 
 
 			if(mNciPdReferral.getPocFullName() != null )  {
 				mReferralSearchResultObject.setCurrentPoc(mNciPdReferral.getPocFullName());

@@ -24,6 +24,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String eGrantsNumber;
     private String rfapa;
     private String apsComments;
+    private String nihGuideAddrUrl;
     private boolean reReferred = false;
 
 
@@ -163,5 +164,13 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
 
     public String getCurrentReferralActivityCode() {
         return currentReferralActivityCode;
+    }
+    
+    public void setNihGuideAddrUrl(String nihGuideAddrUrl){
+        this.nihGuideAddrUrl = nihGuideAddrUrl;
+    }
+    
+    public String getNihGuideAddrUrl(){
+        return nihGuideAddrUrl;
     }
 }
