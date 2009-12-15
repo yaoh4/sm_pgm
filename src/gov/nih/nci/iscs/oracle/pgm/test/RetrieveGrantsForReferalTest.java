@@ -1,13 +1,18 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForReferalCommand;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class RetrieveGrantsForReferalTest {
 
    private RetrieveGrantsForReferalCommand oGrantRetrieval;
-
+   private static Logger logger = LogManager.getLogger(RetrieveGrantsForReferalTest.class);
+   
    public RetrieveGrantsForReferalTest(){}
 
    public String retrieveGrantsForReferal(String aGrantNumber, Integer aFiscalYearFrom, int aPageNumber){
@@ -34,7 +39,7 @@ public class RetrieveGrantsForReferalTest {
            System.out.println("******* RETRIEVAL  MESSAGE IS ******" + mResults + " " + aGrantsQueryPage );
             */
        } catch (Exception ex) {
-		   System.out.println("**** exceptions  is ****" + ex.toString() );
+		   logger.error("**** exceptions  is ****" + ex.toString() );
 
        }
 
@@ -52,9 +57,6 @@ public class RetrieveGrantsForReferalTest {
 
 
 	  if (args.length < 2) {
-	    	System.out.println("Usage : java RetrieveGrantsForReferalTest \n"+
-			                            "       Grant Number \n"+
-			                            "       Page Number \n");
 
 	    	System.exit(0);
       }
@@ -66,9 +68,8 @@ public class RetrieveGrantsForReferalTest {
       try{
           results = 
                     GRTest.retrieveGrantsForReferal(mGrantNumber, mFiscalYearFrom, mPageNumber);
-          System.out.println("******* RETRIEVE MESSAGE IS ******" + results);
       } catch (Exception e) {
-          System.out.println("***** exception is ****" + e.toString());
+          logger.error("***** exception is ****" + e.toString());
       }
 
 

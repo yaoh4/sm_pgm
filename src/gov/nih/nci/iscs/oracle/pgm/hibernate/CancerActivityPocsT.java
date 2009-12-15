@@ -48,7 +48,6 @@ public class CancerActivityPocsT implements Serializable {
     /** full constructor */
     public CancerActivityPocsT(Long npnId, Date startDate, CancerActivitiesT cancerActivitiesT, Date endDate, String createUserId, Date createDate, String lastChangeUserId, Date lastChangeDate, Integer updateStamp, Set applCancerActivityPocsTs) {
         this.npnId = npnId;
-        System.out.println("**** now in constructr 1 *****");
         SimpleDateFormat mFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");
         String mDate = mFormatter.format(startDate);
         Date mNewDate = null;
@@ -74,7 +73,6 @@ public class CancerActivityPocsT implements Serializable {
 
     /** minimal constructor */
     public CancerActivityPocsT(Long npnId, Date startDate, CancerActivitiesT cancerActivitiesT, String createUserId, Date createDate, Set applCancerActivityPocsTs) {
-        System.out.println("**** now in constructr 2 *****");
 
         this.npnId = npnId;
         SimpleDateFormat mFormatter = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss");

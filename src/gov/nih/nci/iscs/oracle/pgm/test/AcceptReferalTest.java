@@ -1,14 +1,19 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AcceptReferalCommand;
 import gov.nih.nci.iscs.oracle.pgm.factory.*;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class AcceptReferalTest {
 
    private AcceptReferalCommand oGrantReferal;
-
+   private static Logger logger = LogManager.getLogger(AcceptReferalTest.class);
+   
    public AcceptReferalTest(){}
 
    public String AcceptReferal(Long aAppliId, Long aNpeId){
@@ -22,10 +27,9 @@ public class AcceptReferalTest {
 		   //oGrantReferal.setNpeId(aNpeId);
            mResults = (String) oGrantReferal.execute(aAppliId, aNpeId, "");
 
-           System.out.println("******* Accept REFERAL MESSAGE IS ******" + mResults );
 
        } catch (Exception ex) {
-		   System.out.println("**** exceptions  is ****" + ex.toString() );
+		   logger.error("**** exceptions  is ****" + ex.toString() );
 
        }
 
@@ -43,10 +47,6 @@ public class AcceptReferalTest {
 
 
 	  if (args.length < 2) {
-	    	System.out.println("Usage : java AcceptReferal \n"+
-			                            "       Appl Id\n"+
-			                            "       NPE Id\n");
-
 	    	System.exit(0);
       }
       // 1. set the values
@@ -55,9 +55,8 @@ public class AcceptReferalTest {
 	  mNpeId  = new Long(args[1]);
       try{
           results =  GRTest.AcceptReferal(mApplId, mNpeId);
-          System.out.println("******* Accept REFERAL MESSAGE IS ******" + results);
       } catch (Exception e) {
-          System.out.println("***** exception is ****" + e.toString());
+            logger.error("***** exception is ****" + e.toString());
       }
 
 

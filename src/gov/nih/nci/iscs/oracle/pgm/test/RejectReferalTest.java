@@ -1,14 +1,19 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RejectReferalCommand;
 import gov.nih.nci.iscs.oracle.pgm.factory.*;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class RejectReferalTest {
 
    private RejectReferalCommand oGrantReferal;
-
+   private static Logger logger = LogManager.getLogger(RejectReferalTest.class);
+   
    public RejectReferalTest(){}
 
    public String rejectReferal(Long aAppliId, String aComments){
@@ -22,10 +27,8 @@ public class RejectReferalTest {
 		   //oGrantReferal.setComments(aComments);
            mResults = (String) oGrantReferal.execute(aAppliId, aComments, "");
 
-           System.out.println("******* REJECT REFERAL MESSAGE IS ******" + mResults );
-
        } catch (Exception ex) {
-		   System.out.println("**** exceptions  is ****" + ex.toString() );
+		   logger.error("**** exceptions  is ****" + ex.toString() );
 
        }
 
@@ -43,9 +46,6 @@ public class RejectReferalTest {
 
 
 	  if (args.length < 2) {
-	    	System.out.println("Usage : java RejectReferal \n"+
-			                            "       Appl Id\n"+
-			                            "       NPE Id\n");
 
 	    	System.exit(0);
       }
@@ -55,9 +55,8 @@ public class RejectReferalTest {
 	  mComments  = new String(args[1]);
       try{
           results = GRTest.rejectReferal(mApplId, mComments);
-          System.out.println("******* REJECT REFERAL MESSAGE IS ******" + results);
       } catch (Exception e) {
-          System.out.println("***** exception is ****" + e.toString());
+          logger.error("***** exception is ****" + e.toString());
       }
 
 

@@ -13,7 +13,6 @@ public class GrantReferalImpl implements  GrantReferal{
     private GrantReferalDao grantReferalDao;
 
     public String acceptReferal(Long aApplId, Long aNpeId) {
-       System.out.println("**** passed step 2 ****" + grantReferalDao);
 
        //return grantReferalDao.acceptReferal(aApplId, aNpeId);
        return "test";

@@ -1,6 +1,8 @@
 package gov.nih.nci.iscs.oracle.pgm.actions.helper;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
+
 import org.apache.commons.beanutils.PropertyUtils;
 
 import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
@@ -13,9 +15,12 @@ import javax.servlet.http.HttpSession;
 
 import java.util.*;
 
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 
 public class SearchGrantsActionHelper {
-
+    private static Logger logger = LogManager.getLogger(SearchGrantsActionHelper.class);
 
 
 public static boolean validateFiscalYear(String fiscalYear)  {
@@ -130,7 +135,7 @@ public static void copyForms(RetrieveGrantsForm destForm, RetrieveGrantsForm ori
    try {
 	     PropertyUtils.copyProperties(destForm, origForm);
 	 } catch (Exception ex) {
-		 System.out.println("*** error copying froms ****" + ex.toString());
+		 logger.error("Error copying forms " + ex.toString());
 	 }
 
  }

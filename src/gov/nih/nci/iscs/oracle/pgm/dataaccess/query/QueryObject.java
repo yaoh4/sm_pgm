@@ -422,7 +422,6 @@ public class QueryObject implements  GrantQueryObject {
       * @return boolean - false if any of the search column is not null;
       */
      public boolean isNull() {
-         System.out.println("*** now in the parent method  isNull ****");
 
  		if (applId != null )
  		    return false;

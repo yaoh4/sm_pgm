@@ -146,7 +146,6 @@ public abstract class NciPgmDispatchAction extends NciBaseDispatchAction {
         HttpServletResponse response) throws Exception
     {
         NciUser nu = this.getUser(request);
-        System.out.println("**** in verifyUserForApp and user is ***" +  nu);        
         Set roleSet = (Set)nu.getAttribute("dbRoles");
         if ((roleSet == null)||(!(roleSet.contains("CMBB_USER"))))
         {

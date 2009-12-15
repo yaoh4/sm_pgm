@@ -222,7 +222,6 @@ public class SelectedGrants implements Cloneable {
 
      HashSet mErrorMessages = new HashSet();
      this.resetMarked();
-     System.out.println("*** in processForPdAssignmentAction and oSelectedGrants is ** " + oSelectedGrants);
      try {
         Iterator iterator = oSelectedGrants.entrySet().iterator();
         int index = 0;

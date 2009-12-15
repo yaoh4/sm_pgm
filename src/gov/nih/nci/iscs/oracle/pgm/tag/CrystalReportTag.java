@@ -71,7 +71,6 @@ public class CrystalReportTag extends TagSupport {
             vExportFormat = "";
          }
          Object sessionId = session.getId();
-         System.out.println("Report db rec id "+mReportDetails.getCrystalId());
 
          Long crystalReportId = null;
          if (mReportDetails != null)

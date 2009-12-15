@@ -114,7 +114,6 @@ public String parseListItems(String aListType, List aList) {
     } catch(Exception e) {
         e.printStackTrace();
     }
-    System.out.println("**** ended AdditionalCriteriaTag- mUserFilterInfo ***");
     return mUserFilterInfo;
   }
 }

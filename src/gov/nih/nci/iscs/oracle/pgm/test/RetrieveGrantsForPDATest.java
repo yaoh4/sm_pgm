@@ -1,12 +1,17 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantsForPDACommand;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 public class RetrieveGrantsForPDATest {
 
    private RetrieveGrantsForPDACommand oGrantRetrieval;
+   private static Logger logger = LogManager.getLogger(RetrieveGrantsForPDATest.class);
 
    public RetrieveGrantsForPDATest(){}
 
@@ -34,7 +39,7 @@ public class RetrieveGrantsForPDATest {
            System.out.println("******* RETRIEVAL  MESSAGE IS ******" + mResults + " " + aGrantsQueryPage );
           */
        } catch (Exception ex) {
-		   System.out.println("**** exceptions  is ****" + ex.toString() );
+		   logger.error("**** exceptions  is ****" + ex.toString() );
 
        }
 
@@ -52,9 +57,6 @@ public class RetrieveGrantsForPDATest {
 
 
 	  if (args.length < 2) {
-	    	System.out.println("Usage : java RetrieveGrantsForReferalTest \n"+
-			                            "       Grant Number \n"+
-			                            "       Page Number \n");
 
 	    	System.exit(0);
       }
@@ -65,9 +67,8 @@ public class RetrieveGrantsForPDATest {
 	  String mGroupCode = new String (args[2]);
       try{
           results = GRTest.retrieveGrantsForPDA(mGrantNumber, mGroupCode, mPageNumber);
-          System.out.println("******* RETRIEVE MESSAGE IS ******" + results);
       } catch (Exception e) {
-          System.out.println("***** exception is ****" + e.toString());
+          logger.error("***** exception is ****" + e.toString());
       }
 
 

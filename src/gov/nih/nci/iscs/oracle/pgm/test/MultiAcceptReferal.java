@@ -1,12 +1,17 @@
 package gov.nih.nci.iscs.oracle.pgm.test;
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
+
 
 public class MultiAcceptReferal extends Thread {
 
     private int delay;
     private Long oApplId;
     private Long oNpeId;
-
+    private static Logger logger = LogManager.getLogger(MultiAcceptReferal.class);
 
     public MultiAcceptReferal(int delayTime, Long aAppliId, Long aNpeId) {
        delay = delayTime;
@@ -27,7 +32,7 @@ public class MultiAcceptReferal extends Thread {
         } catch (InterruptedException e) {
             return; // end this thread;
         } catch (Exception e) {
-		    System.out.println("***** exception is ****" + e.toString());
+		    logger.error("***** exception is ****" + e.toString());
 	    }
 
     }

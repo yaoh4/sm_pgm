@@ -37,7 +37,6 @@ public class SearchGrantsForPDAAction extends SearchGrantsAction  {
 
      try{
        ActionForward mActionForward = super.executeAction(mapping, form, request, response);
-	   System.out.println("** mActionForward is **  " + mActionForward);
 	   if(mActionForward != null)
 	      return mActionForward;
 	   RetrieveGrantsForPDAForm mRetrieveGrantsForPDAForm = (RetrieveGrantsForPDAForm) form;

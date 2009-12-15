@@ -1,10 +1,15 @@
 package gov.nih.nci.iscs.oracle.pgm.service;
 
 
+import gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsAction;
+
 import org.apache.commons.lang.builder.ToStringBuilder;
 
 import java.util.*;
 import java.text.*;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 /** @author Hibernate CodeGenerator */
 public class PDASearchResultObject extends GrantSearchResultObject {
@@ -23,6 +28,7 @@ public class PDASearchResultObject extends GrantSearchResultObject {
     private String key;
     public static java.sql.Timestamp mToday;
     public static java.sql.Timestamp mYesterday;
+    private static Logger logger = LogManager.getLogger(PDASearchResultObject.class);
 
     static{
 	}
@@ -125,7 +131,7 @@ public class PDASearchResultObject extends GrantSearchResultObject {
 	       return mReturnValue;
 
 	  }catch(Exception ex) {
-		  System.out.println("****unable to parse date **** " + ex.toString());
+		  logger.error("****unable to parse date **** " + ex.toString());
 		  return mReturnValue;
 	  }
 
