@@ -53,7 +53,7 @@ public abstract class NciPgmAction extends Action {
         ActionForward returnForward = null;
         if(!verifyUser(request, response))
         {
-           throw new UserLoginException(this.getClass().getName(), "execute", "Error verifying the user permissions and roles required for this application1. ", request.getSession());
+           throw new UserLoginException(this.getClass().getName(), "execute", "Error verifying the user permissions and roles required for this application. ", request.getSession());
         }
 
         returnForward = executeAction(mapping, form, request, response);
