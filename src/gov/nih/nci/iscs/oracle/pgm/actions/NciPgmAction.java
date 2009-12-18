@@ -31,9 +31,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import org.apache.commons.lang.StringUtils;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import sun.misc.BASE64Decoder;
+
 
 public abstract class NciPgmAction extends Action {
-    private Logger logger = LogManager.getLogger(NciPgmAction.class);
+  //  private Logger logger = LogManager.getLogger(NciPgmAction.class);
+    private Log logger = LogFactory.getLog(NciPgmAction.class);
     private static String USER_LOGIN_FAILURE = "failure";
     private String[] stAttrDirIDs = {
         "nciOracleID", "fullName", "givenName", "sn", "mail", "telephoneNumber",
@@ -42,11 +49,11 @@ public abstract class NciPgmAction extends Action {
 
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
         throws UserLoginException, Exception
-    {
+    {   
         ActionForward returnForward = null;
         if(!verifyUser(request, response))
         {
-           throw new UserLoginException(this.getClass().getName(), "execute", "Error verifying the user permissions and roles required for this application. ", request.getSession());
+           throw new UserLoginException(this.getClass().getName(), "execute", "Error verifying the user permissions and roles required for this application1. ", request.getSession());
         }
 
         returnForward = executeAction(mapping, form, request, response);
@@ -58,7 +65,6 @@ public abstract class NciPgmAction extends Action {
     {
         boolean returnValue = false;
         HttpSession session = request.getSession(true);
-
         NciUser nu = (NciUser)session.getAttribute("nciuser");
         if(nu != null && nu.isValid())
         {
@@ -66,6 +72,18 @@ public abstract class NciPgmAction extends Action {
         } else
         {
             String remoteUser = request.getRemoteUser();
+            
+            if (remoteUser == null) {
+                String authUser = request.getHeader("Authorization");
+                
+                if (StringUtils.isNotEmpty(authUser)) {
+                        BASE64Decoder decoder = new BASE64Decoder();
+
+                        authUser = new String(decoder.decodeBuffer(authUser.substring(6)));
+                        remoteUser = authUser.substring(0, authUser.indexOf(":"));
+               }
+
+            }
             if(remoteUser != null && !remoteUser.equals(""))
             {
                 NciUserImpl nui = new NciUserImpl();
@@ -227,6 +245,7 @@ public abstract class NciPgmAction extends Action {
            return false;
         }
 	    if ( !(roleSet.contains("PGM_L1")) & (!(roleSet.contains("PGM_L2")))){
+            logger.info("VERIFY USER IS FALSE");
 			return false;
 		}
 
