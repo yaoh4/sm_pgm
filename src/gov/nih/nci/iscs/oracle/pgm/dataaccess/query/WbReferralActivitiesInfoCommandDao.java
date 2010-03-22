@@ -20,6 +20,7 @@ import org.springframework.orm.hibernate.SessionFactoryUtils;
 import net.sf.hibernate.Criteria;
 import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.Session;
+import net.sf.hibernate.expression.Order;
 
 
 public class WbReferralActivitiesInfoCommandDao extends AccessCommandDao implements  WbReferralActivitiesInfoCommand {
@@ -82,6 +83,7 @@ public class WbReferralActivitiesInfoCommandDao extends AccessCommandDao impleme
         try{
             mReferralActivityVw = Class.forName("gov.nih.nci.iscs.oracle.pgm.hibernate.ReferralActivityVw");
     		    mCriteria = aSession.createCriteria(mReferralActivityVw);
+	          mCriteria.addOrder(Order.asc("cayCode"));
 	          mCriteria.add(Expression.eq("councilMeetingDate", oCouncilMeetingDate) );
             if (cancerActivities == null)
             {
