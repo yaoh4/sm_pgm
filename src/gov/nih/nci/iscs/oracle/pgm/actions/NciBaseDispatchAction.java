@@ -22,7 +22,13 @@ public abstract class NciBaseDispatchAction extends LookupDispatchAction  {
             returnValue = verifyUserForApp(request, response);
         } else
         {
-            String remoteUser = request.getRemoteUser();
+            // get the User header from Site Minder
+             String remoteUser = request.getHeader("SM_USER");
+            // when deployed locally and authenticated from apache,
+            // check the user from remote user  
+             if (remoteUser== null){
+                 remoteUser = request.getRemoteUser();
+             }
             if(remoteUser != null && !remoteUser.equals(""))
             {
                 NciUserImpl nui = new NciUserImpl();
