@@ -53,6 +53,7 @@ public class ApplicationConstants {
 	public static final String DUAL_CANCER_ACTIVITY_SORT = "dualCA";
 	public static final String DUAL_POC_SORT = "dualPoc";
 	public static final String PI_LAST_NAME_SORT = "lastName";
+        public static final String PI_LAST_NAME_PDA__SORT = "lastNamePDA";
 	public static final String RFA_PA_NUMBER_SORT = "rfaPaNumber";
 	public static final String INST_NAME_SORT = "instName";
 	public static final String ORGANIZATION_SORT = "orgName";

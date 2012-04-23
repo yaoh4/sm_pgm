@@ -73,6 +73,7 @@
         <mkdir dir="${classes.dir}"/>
         <mkdir dir="${conf.dir}/integration/${app.name}"/>
         <javac
+			 debug="on"
              srcdir="${src.dir}"
              destdir="${classes.dir}"
              classpathref="master-classpath"
@@ -96,7 +97,7 @@
    <target name="copy_properties_files" depends="make_deployment_dirs"
                 description="copies properties files to deployment folders" >
      <!-- copy log4j.properties to classes folder -->
-     <copy file="${properties.dir}/pgm.properties" todir="${conf.dir}/integration/${app.name}"/>
+     <copy file="${properties.dir}/pgm.properties" todir="${conf.dir}/${app.name}"/>
 
    </target>    
 

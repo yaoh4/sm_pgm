@@ -45,10 +45,10 @@ public class PDATableHeaderTag extends TagSupport
 	  }
       buf.append(returnText);
 
-      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_SORT)){
-		  returnText = formatColumnText(true, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header02");
+      if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_PDA__SORT)){
+		  returnText = formatColumnText(true, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_PDA__SORT, "header02");
 	  } else {
-		  returnText = formatColumnText(false, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header02");
+		  returnText = formatColumnText(false, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_PDA__SORT, "header02");
 	  }
       buf.append(returnText);
 

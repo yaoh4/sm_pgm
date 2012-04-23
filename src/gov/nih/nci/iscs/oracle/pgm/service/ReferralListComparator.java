@@ -43,6 +43,7 @@ public class ReferralListComparator extends Object implements Comparator {
        columnMethodMap.put("cayCode", "getCancerActivity");
        columnMethodMap.put("fy", "getFy");
        columnMethodMap.put("lastName", "getPiLastName");
+       columnMethodMap.put("lastNamePDA", "getLastName");          
        columnMethodMap.put("pdStartDate", "getPdStartDate");
        columnMethodMap.put("rfaPaNumber", "getRfapa");
        columnMethodMap.put("currentReferralActivityDate", "getCurrentReferralActivityDate");    

@@ -199,7 +199,9 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 			} else {
                             if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
                                 aCriteria.addOrder( Order.asc("lastNameUpper"));
-                            }else{
+                            } else if (aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastNamePDA")) {
+                                aCriteria.addOrder( Order.asc("lastName"));
+                            } else{
 			    aCriteria.addOrder( Order.asc(aGrantQueryObject.getSortColumn()));
 			    }	
                                 aCriteria.addOrder( Order.asc(ApplicationConstants.PHS_ORG_CODE_SORT));
@@ -221,7 +223,9 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 			} else {
 			    if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
 			        aCriteria.addOrder( Order.desc("lastNameUpper"));
-			    }else{
+			    } else if (aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastNamePDA")) {
+                                aCriteria.addOrder( Order.desc("lastName"));
+                            } else{
 			    aCriteria.addOrder( Order.desc(aGrantQueryObject.getSortColumn()));
 			    }   
 				aCriteria.addOrder( Order.desc(ApplicationConstants.PHS_ORG_CODE_SORT));
