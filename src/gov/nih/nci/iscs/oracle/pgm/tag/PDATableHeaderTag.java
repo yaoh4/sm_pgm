@@ -44,7 +44,7 @@ public class PDATableHeaderTag extends TagSupport
 		  returnText = formatColumnText(false, "Grant Number", "16%", "listCellHead", ApplicationConstants.GRANT_NUMBER_SORT, "header01");
 	  }
       buf.append(returnText);
-
+      //bug fix for PROGRAMMANAGEMENT-190
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_PDA__SORT)){
 		  returnText = formatColumnText(true, "PI Name", "20%", "listCellHead", ApplicationConstants.PI_LAST_NAME_PDA__SORT, "header02");
 	  } else {

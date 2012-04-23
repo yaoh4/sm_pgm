@@ -199,6 +199,7 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 			} else {
                             if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
                                 aCriteria.addOrder( Order.asc("lastNameUpper"));
+                                //bug fix for PROGRAMMANAGEMENT-190
                             } else if (aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastNamePDA")) {
                                 aCriteria.addOrder( Order.asc("lastName"));
                             } else{
@@ -223,6 +224,7 @@ public  class RetrieveGrantsCommandDao extends AccessCommandDao {
 			} else {
 			    if(aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastName")){
 			        aCriteria.addOrder( Order.desc("lastNameUpper"));
+			        //bug fix for PROGRAMMANAGEMENT-190
 			    } else if (aGrantQueryObject.getSortColumn().equalsIgnoreCase("lastNamePDA")) {
                                 aCriteria.addOrder( Order.desc("lastName"));
                             } else{
