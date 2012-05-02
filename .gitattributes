@@ -1,6 +1,7 @@
 * text=auto !eol
 build/build.properties -text
 build/build.xml -text
+build/env.properties -text
 build/hibernate.cfg.xml -text
 build/hibernate.properties -text
 build/updatescript.txt -text

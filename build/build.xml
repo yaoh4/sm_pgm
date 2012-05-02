@@ -1,234 +1,199 @@
 <?xml version="1.0"?>
 
 <project name="pgm" default="all" basedir="..">
+<!-- ANT build.xml.
+     Tag                                 Description
+     clean                               Deletes all relevant dirs
+     make_deployment_dirs                Creates all relevant deployment dirs
+     compile                             Compiles the java source code
+     build                               creates the web archive
+     tomcat.deploy                       deploys pgm application to tomcat server and start the application
+     tomcat.undeploy                     undeloys the pgm application
+     test                                executes the JUNIT testcases
+ -->
+
+<tstamp>
+   <format property="start.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
+</tstamp>
+<echo message="Build started: ${start.timestamp}" />
 
  <!-- Defined Environment & property files -->
-     
-    <property environment="env"/>    
-    <property name="name" value="pgm"/>
-    <property file="${basedir}/build/build.properties"/>    
-    <property file="${basedir}/build/user.properties"/>    
 
-    <property name="app.name"   value="pgm"/>
-    <property name="src.dir" value="${basedir}/src/gov/nih/nci/iscs/oracle/pgm"/>
-    <property name="context.dir" value="${src.dir}/context"/>
-    <property name="mapping.dir" value="${src.dir}/hibernate"/>
-    <property name="lib.dir" value="${lib.dir}"/>
+     <property environment="env"/>
+     <property file="${basedir}/build/env.properties"/>
+     <property file="${basedir}/build/build.properties"/>
+     <property file="${basedir}/build/user.properties"/>
 
+<!-- Define project deployment properties -->
 
-    <property name="properties.dir" value="${deploy.dir}/properties"/>
+    <property name="app.name"               value="pgm"/>
+    <property name="package.root"           value="gov"/>
 
     <property name="app.war.dir"            value="${build.war.dir}/${app.name}"/>
     <property name="app.war.inf"            value="${app.war.dir}/WEB-INF"/>
-    <property name="app.war.includes"       value="${app.war.dir}/includes"/>
     <property name="app.war.images"         value="${app.war.dir}/images"/>
-
     <property name="app.distribution.dir"   value="${distribution.dir}/${app.name}"/>
     <property name="app.name.war"           value="${app.name}.war"/>
+    <property name="app.config.zip"         value="${app.name}AppConfig.zip"/>
+    <property name="app.module"             value="${build.dir}/${app.name}.ear"/>
+    <property name="pgm.properties.dir" value="${properties.dir}/${pgm.env}"/>
+    
+    
 
-    <property name="pgm.jrun.deploy.dir"    value="${jrun.servers.dir}"/>
-    <!--patternset id="java.libs" includes="**/*.jar,**/*.zip" / -->
-    <path id="master-classpath">
-       
-       <fileset dir="${lib.dir}">
-       	            <include name="*.jar"/>
+<!-- Define the project Classpath Settings -->
+    <path id="project.classpath">
+        <pathelement path="${classpath}"/>
+        <fileset dir="${lib.dir}">
+           <include name="*.jar"/>
         </fileset>
-      
     </path>
+    <property name="project.classpath" refid="project.classpath"/>
+    <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="project.classpath" />
 
-    <target name="usage">
-        <echo message=""/>
-        <echo message="${name} build file"/>
-        <echo message="-----------------------------------"/>
-        <echo message=""/>
-        <echo message="Available targets are:"/>
-        <echo message=""/>
-        <echo message="build     --> compile all jars"/>
-        <echo message="package     --> create the jar file"/>
-        <echo message="insertCA   --> Insert Cancer Activity"/>
-        <echo message=""/>
-    </target>
     <!-- Create deployment dirs make_deployment_dirs -->
-    <target name="make_deployment_dirs" description="create deployment dirs" depends="clean" >
-        <mkdir dir="${classes.dir}"/>
-        <mkdir dir="${conf.dir}/integration/${app.name}"/>
+    <target name="make_deployment_dirs" description="create deployment dirs" depends="clean">
+        <mkdir dir="${java.classes.dir}"/>
+        <mkdir dir="${doc.dir}"/>
+        <mkdir dir="${javadoc.dir}"/>
         <mkdir dir="${distribution.dir}"/>
         <mkdir dir="${app.distribution.dir}"/>
+        <mkdir dir="${build.dir}"/>
+        <mkdir dir="${build.war.dir}"/>
+        <mkdir dir="${build.ear.dir}"/>
+        <mkdir dir="${app.war.inf}"/>
+        <mkdir dir="${app.war.images}"/>
+        <mkdir dir="${conf.dir}/pgm"/>
+        <mkdir dir="${public_html.dir}/Stylesheets"/>
     </target>
-    <!-- remove deployment dirs before deoplyment -->
-    <target name="clean" description="remove deployment dirs before deployemt">
-        <delete includeEmptyDirs="true" failonerror="false">
-            <fileset dir="${classes.dir}">
-                <include name="**/*.class"/>
-                <include name="${name}.jar"/>
-            </fileset>           
-            <fileset dir="${conf.dir}/integration/${app.name}">
-                <include name="**/*.properties"/>
-            </fileset>   
-        </delete>
-   </target>
-   <!-- compile project source -->
-   <target name="compile" depends="make_deployment_dirs" 
+
+<!-- remove deployment dirs before deoplyment -->
+<target name="clean" description="remove deployment dirs before deployemt">
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${java.classes.dir}" includes="**/*"/>
+    </delete>
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${javadoc.dir}" includes="**/*"/>
+    </delete>
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${distribution.dir}" includes="**/*"/>
+    </delete>
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${build.war.dir}" includes="**/*"/>
+    </delete>
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${build.ear.dir}" includes="**/*"/>
+    </delete>
+    <delete includeEmptyDirs="true" failonerror="false">
+        <fileset dir="${conf.dir}/pgm" includes="**/*"/>
+    </delete>
+</target>
+
+
+<!-- compile project source -->
+<target name="compile" depends="make_deployment_dirs"
         description="compiles the java source files" >
-        <mkdir dir="${classes.dir}"/>
-        <mkdir dir="${conf.dir}/integration/${app.name}"/>
-        <javac
-			 debug="on"
-             srcdir="${src.dir}"
-             destdir="${classes.dir}"
-             classpathref="master-classpath"
-             nowarn="off"
-             fork="yes" >
-        </javac>
-        <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/actions">
-	     <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/actions">
-	        <include name="**/*.properties"/>
-	     </fileset>
-	
-        </copy>
-        <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/context">
-	     <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/context">
-	        <include name="**/*.xml"/>
-	     </fileset>
-	
-        </copy>
-   </target>
-   <!--  copy various proerties files to required directories -->
-   <target name="copy_properties_files" depends="make_deployment_dirs"
+    <javac debug="on"
+        classpath="${project.classpath}"
+        srcdir="${src.dir}"
+        destdir="${java.classes.dir}" />
+    <copy todir="${java.classes.dir}">
+        <fileset dir="${src.dir}" excludes="**/*.java,**/*.svn"/>
+    </copy>
+</target>
+
+<!--  copy various proerties files to required directories -->
+
+<target name="copy_properties_files" depends="make_deployment_dirs"
                 description="copies properties files to deployment folders" >
-     <!-- copy log4j.properties to classes folder -->
-     <copy file="${properties.dir}/pgm.properties" todir="${conf.dir}/${app.name}"/>
+     <echo message="copying property files from : ${pgm.properties.dir}" />
+     <!-- copy other properties to conf folder -->
+     <copy file="${pgm.properties.dir}/pgm.properties" todir="${conf.dir}/pgm" />
+     <copy file="${pgm.properties.dir}/log4j.properties" todir="${conf.dir}/pgm" />	 
+     <copy todir="${java.classes.dir}">
+         <fileset dir="${properties.dir}">
+              <include name="*.*"/>
+         </fileset>
+         <fileset dir="${pgm.properties.dir}">              
+			  <include name="log4j.properties"/>
+          </fileset>        
+          <fileset dir="${public_html.dir}" includes="template/*/*.*"/>
+      </copy>
+</target>
+<!-- creat javadoc from the java source files -->
 
-   </target>    
+<target name="javadoc" depends="make_deployment_dirs" >
+    <javadoc classpath="${project.classpath}"
+             destdir="${javadoc.dir}"
+             sourcepath="${src.dir}"
+             packagenames="${package.root}/*"/>
+</target>
+<!--  build the web archive -->
+<target name="war" depends="compile,copy_properties_files" description="create war file">
+        <copy todir="${app.war.dir}">
+            <fileset dir="${public_html.dir}">
+              <include name="**/*.*"/>
+              <exclude name="template/*/*.*"/>
+            </fileset>
+        </copy>
 
-   <target name="build" depends="make_deployment_dirs, compile" description="Compile main source tree java files">
-       <copy todir="${app.war.dir}">
-           <fileset dir="${public_html.dir}">
-               <include name="**/*.*"/>
-           </fileset>
-       </copy>
-       <copy todir="${classes.dir}/gov/nih/nci/iscs/oracle/pgm/hibernate">
-	    <fileset dir="${src.dir}/gov/nih/nci/iscs/oracle/pgm/hibernate">
-		  <include name="**/*.hbm.xml"/>
-	    </fileset>
-	</copy>
-        <!-- create war file -->
-	<war warfile="${app.distribution.dir}/${app.name.war}" webxml="${app.war.inf}/web.xml" duplicate="preserve">
-	        <fileset dir="${public_html.dir}"/>
-		<classes dir="${classes.dir}"/>
-		<lib dir="${lib.dir}"/>      
-		<!-- webinf dir="${app.war.inf}">
-		   	<exclude name="web.xml"/>
-		   	<exclude name="**/ApplicationResources.properties"/>               
-		</webinf >
-	        <lib dir="${lib.dir}"/-->
-	 </war>
-            
-    </target>
-    
-    <!--  stop the JRUN server -->
-    <target name="stop_jrun" description="stop the JRUN server">
-       <exec executable="${jrun.bin.dir}/jrun.exe" os="${os.name}">
-              <arg line="-stop ${server.name}"/>
+        <war warfile="${app.distribution.dir}/${app.name.war}" webxml="${app.war.inf}/web.xml">
+            <fileset dir="${app.war.dir}">
+               <exclude name="**/web.xml"/>
+            </fileset>
+            <classes dir="${java.classes.dir}"/>
+            <lib dir="${lib.dir}" >
+	    	<exclude name="j2ee.jar"/>	    	
+	    	<exclude name="jasper-compiler.jar"/>
+	    	<exclude name="jasper-runtime.jar"/>
+	    	<exclude name="catalina-ant.jar"/>
+            </lib>
+        </war>
+</target>
+<target name="tomcat.undeploy" >
+  <undeploy url="${tomcat.url}" failOnError="false" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}"/>
+</target>
+
+<target name="tomcat.deploy" depends="tomcat.undeploy,war" >
+  <deploy url="${tomcat.url}" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}" war="${basedir}/${app.distribution.dir}/${app.name.war}"/>
+</target>
+
+<target name="tomcat.start">
+       <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
+        <arg value="/c"/>
+        <arg value="startup.bat"/>
        </exec>
-    </target>
-    
-    <!--  start the JRUN server -->
-    <target name="start_jrun" description="start the JRUN server">
-       <exec executable="${jrun.bin.dir}/jrun.exe" os="${os.name}">
-              <arg line="-start ${server.name}"/>
+</target>
+
+<target name="tomcat.stop">
+       <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
+        <arg value="/c"/>
+        <arg value="shutdown.bat"/>
        </exec>
-    </target>
-    <!--  deploy the war file to the JRUN server -->
-    <target name="deploy_to_jrun" description="deploy the war file to the JRUN server">
-       <copy file="${app.distribution.dir}/${app.name.war}" tofile="${pgm.jrun.deploy.dir}/pgm.war"/>
-    </target>
- 
-   <!-- =================================================================== -->
-   <!-- Accept a Referal                                                    -->
-   <!-- =================================================================== -->
-   <target name="acceptReferal" description="accept a referal">
-      <java 
-         classname="gov.nih.nci.iscs.oracle.pgm.test.AcceptReferalTest" 
-         fork="yes" 
-         failonerror="true">
-         <classpath refid="master-classpath"/>
-         <classpath path="${classes.dir}"/>
-     
-         <arg value="6293672"/>
-         <arg value="2111"/>
+</target>
 
+<!--   run the junit test cases  -->
+<target name="test" description="run JUNIT test">
+    <delete includeEmptyDirs="true" failonerror="false">
+         <fileset dir="${test.report.dir}" includes="**/*"/>
+    </delete>
+    <mkdir dir="${test.report.dir}"/>
+    <junit printsummary="yes" haltonfailure="no" failureProperty="test.failure">
+      <classpath refid="project.classpath" />
+       <formatter type="plain"/>
 
-      </java>
-   </target>
-   <!-- =================================================================== -->
-   <!-- Reject a Referal                                                    -->
-   <!-- =================================================================== -->
-   <target name="rejectReferal" description="reject a referal">
-      <java 
-         classname="gov.nih.nci.iscs.oracle.pgm.test.RejectReferalTest" 
-         fork="yes" 
-         failonerror="true">
-         <classpath refid="master-classpath"/>
-         <classpath path="${classes.dir}"/>
-     
-         <arg value="6293672"/>
-         <arg value="2076"/>
-      </java>
-   </target>
-    <!-- =================================================================== -->
-   <!-- Retrieve Grants for Referal                                          -->
-   <!-- =================================================================== -->
-   <target name="retrieveGrantsForReferalTest" description="retrieve grants for referal">
-      <java 
-         classname="gov.nih.nci.iscs.oracle.pgm.test.RetrieveGrantsForReferalTest" 
-         fork="yes" 
-         failonerror="true">
-         <classpath refid="master-classpath"/>
-         <classpath path="${classes.dir}"/>
-     
-         <arg value="1T32"/>
-         <arg value="1"/>
-         <arg value="1979"/>
-      </java>
-   </target> 
-
-    <!-- =================================================================== -->
-   <!-- Retrieve Grants for PDA                                          -->
-   <!-- =================================================================== -->
-   <target name="retrieveGrantsForPDATest" description="retrieve grants for PDA">
-      <java 
-         classname="gov.nih.nci.iscs.oracle.pgm.test.RetrieveGrantsForPDATest" 
-         fork="yes" 
-         failonerror="true">
-         <classpath refid="master-classpath"/>
-         <classpath path="${classes.dir}"/>
-     
-         <arg value="1T32"/>
-         <arg value="2"/>
-         <arg value="F"/>
-      </java>
-   </target> 
- 
-   <!-- =================================================================== -->
-   <!-- Inserts a cancer activity Program Director                          -->
-   <!-- =================================================================== -->
-   <target name="insertPD" description="insert a cancer activity PD">
-      <java 
-         classname="com.warfrog.hibernatetutorial.hibernate.InsertProgramDirector" 
-         fork="yes" 
-         failonerror="true">
-         <classpath refid="master-classpath"/>
-         <classpath path="${classes.dir}"/>
-         <arg value="111"/>
-         <arg value="mengerma"/>
-         <arg value="mengerma"/>
-         <arg value='233'/>
-      </java>
-   </target>
-   
-   <target name="buildmaster" depends="compile,build,deploy_to_jrun" description="Buildmaster deployment target"/>
-   <target name="preBuildmaster" depends="clean,make_deployment_dirs,copy_properties_files,stop_jrun" description="Deploy application"/>
-   <target name="all" depends="clean,make_deployment_dirs,copy_properties_files,compile,build,stop_jrun,deploy_to_jrun,start_jrun" description="Deploy application"/>
-
+      <batchtest fork="yes"  todir="${test.report.dir}">
+        <fileset dir="${java.classes.dir}">
+           <include name="**/*Test.class"/>
+        </fileset>
+       </batchtest>
+    </junit>
+    <fail message="test failed" if="test.failure" />
+  </target>
+<!-- run ALL targets -->
+  <target name="all" depends="clean,make_deployment_dirs,copy_properties_files,compile,war,tomcat.undeploy,tomcat.deploy">
+      <tstamp>
+        <format property="end.timestamp" pattern="dd-MMM-yy HH:mm:ss" />
+    </tstamp>
+   <echo message="Build ended: ${end.timestamp}" />
+  </target>
 </project>
