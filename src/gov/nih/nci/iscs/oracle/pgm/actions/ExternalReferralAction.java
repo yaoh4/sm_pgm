@@ -29,6 +29,10 @@ import java.util.*;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.lang.StringUtils;
+
+import sun.misc.BASE64Decoder;
+
 public class ExternalReferralAction extends NciPgmAction{
 
   private String mAction = null;
@@ -150,7 +154,18 @@ public class ExternalReferralAction extends NciPgmAction{
                // check the user from remote user  
 	     if (remoteUser== null){
 	         remoteUser = request.getRemoteUser();
-                 }                        
+                 }
+                if (remoteUser == null) {
+                    String authUser = request.getHeader("Authorization");
+                    
+                    if (StringUtils.isNotEmpty(authUser)) {
+                            BASE64Decoder decoder = new BASE64Decoder();
+
+                            authUser = new String(decoder.decodeBuffer(authUser.substring(6)));
+                            remoteUser = authUser.substring(0, authUser.indexOf(":"));
+                   }
+
+                }
             }
             if(remoteUser != null && !remoteUser.equals(""))
             {

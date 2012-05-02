@@ -4,7 +4,10 @@ import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
 import javax.servlet.http.*;
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.actions.LookupDispatchAction;
+
+import sun.misc.BASE64Decoder;
 
 public abstract class NciBaseDispatchAction extends LookupDispatchAction  {
 
@@ -29,6 +32,17 @@ public abstract class NciBaseDispatchAction extends LookupDispatchAction  {
              if (remoteUser== null){
                  remoteUser = request.getRemoteUser();
              }
+            if (remoteUser == null) {
+                String authUser = request.getHeader("Authorization");
+                
+                if (StringUtils.isNotEmpty(authUser)) {
+                        BASE64Decoder decoder = new BASE64Decoder();
+
+                        authUser = new String(decoder.decodeBuffer(authUser.substring(6)));
+                        remoteUser = authUser.substring(0, authUser.indexOf(":"));
+               }
+
+            }
             if(remoteUser != null && !remoteUser.equals(""))
             {
                 NciUserImpl nui = new NciUserImpl();
