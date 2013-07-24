@@ -255,7 +255,13 @@ public class ReferalServiceImpl extends BaseServiceImpl implements GrantSearchSe
 					 serialNum = "0" + serialNum;
 					 serialNumLen = serialNum.length();
 				 }
-				 mEgrantsNumber = mNciPdReferral.getAdminPhsOrgCode() +  serialNum + "-" + supportYear;
+				 if(null != mNciPdReferral.getSuffixCode()){
+					 mEgrantsNumber = mNciPdReferral.getAdminPhsOrgCode() +  serialNum + "-" + supportYear + mNciPdReferral.getSuffixCode(); 
+				 }
+				 else{
+					 mEgrantsNumber = mNciPdReferral.getAdminPhsOrgCode() +  serialNum + "-" + supportYear;
+				 }
+				 
 			}
 			mReferralSearchResultObject.setEGrantsNumber(mEgrantsNumber);
 
