@@ -46,9 +46,13 @@
         <fileset dir="${lib.dir}">
            <include name="*.jar"/>
         </fileset>
+        <fileset dir="${lib.dir}" includes="tomcat/*.jar"/>
     </path>
     <property name="project.classpath" refid="project.classpath"/>
-    <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="project.classpath" />
+    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="project.classpath"/>
+    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="project.classpath"/>
+    <taskdef name="start" classname="org.apache.catalina.ant.StartTask" classpathref="project.classpath"/>
+    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask" classpathref="project.classpath"/>
 
     <!-- Create deployment dirs make_deployment_dirs -->
     <target name="make_deployment_dirs" description="create deployment dirs" depends="clean">
@@ -107,19 +111,19 @@
                 description="copies properties files to deployment folders" >
      <echo message="copying property files from : ${pgm.properties.dir}" />
      <!-- copy other properties to conf folder -->
-     <copy file="${pgm.properties.dir}/pgm.properties" todir="${conf.dir}/pgm" />
-     <copy file="${pgm.properties.dir}/log4j.properties" todir="${conf.dir}/pgm" />	 
+    <copy todir="${conf.dir}/${app.name}">
+        <fileset dir="${pgm.properties.dir}">
+            <include name="*.*"/>
+        </fileset>
+    </copy>
      <copy todir="${java.classes.dir}">
          <fileset dir="${properties.dir}">
               <include name="*.*"/>
          </fileset>
-         <fileset dir="${pgm.properties.dir}">              
-			  <include name="log4j.properties"/>
-          </fileset>        
           <fileset dir="${public_html.dir}" includes="template/*/*.*"/>
       </copy>
 </target>
-<!-- creat javadoc from the java source files -->
+<!-- create javadoc from the java source files -->
 
 <target name="javadoc" depends="make_deployment_dirs" >
     <javadoc classpath="${project.classpath}"
@@ -142,10 +146,8 @@
             </fileset>
             <classes dir="${java.classes.dir}"/>
             <lib dir="${lib.dir}" >
-	    	<exclude name="j2ee.jar"/>	    	
-	    	<exclude name="jasper-compiler.jar"/>
-	    	<exclude name="jasper-runtime.jar"/>
-	    	<exclude name="catalina-ant.jar"/>
+                <exclude name="tomcat/*.jar"/>
+                <exclude name="tomcat"/>
             </lib>
         </war>
 </target>
@@ -157,18 +159,12 @@
   <deploy url="${tomcat.url}" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}" war="${basedir}/${app.distribution.dir}/${app.name.war}"/>
 </target>
 
-<target name="tomcat.start">
-       <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
-        <arg value="/c"/>
-        <arg value="startup.bat"/>
-       </exec>
+<target name="tomcat.start" >
+    <start url="${tomcat.url}" failOnError="false" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}"/>
 </target>
 
-<target name="tomcat.stop">
-       <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
-        <arg value="/c"/>
-        <arg value="shutdown.bat"/>
-       </exec>
+<target name="tomcat.stop" >
+    <stop url="${tomcat.url}" failOnError="false" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}"/>
 </target>
 
 <!--   run the junit test cases  -->

@@ -41,10 +41,10 @@ public class PgmApplicationPlugin implements PlugIn {
 
 
         try {
-			  String contextPath = pgmAi.getApplicationKey(ApplicationConstants.APPLICATION_KEY.toUpperCase() +
-			                        "_CONTEXT_PATH");
-			  logger.info(" contextPath is " + contextPath);
-			  ApplicationContext  contextFactory = ApplicationContextFactory.getApplicationContext(contextPath);
+//			  String contextPath = pgmAi.getApplicationKey(ApplicationConstants.APPLICATION_KEY.toUpperCase() +
+//			                        "_CONTEXT_PATH");
+//			  logger.info(" contextPath is " + contextPath);
+			  ApplicationContext  contextFactory = ApplicationContextFactory.getApplicationContext();
 			  logger.info(" contextFactory is " + contextFactory);
               ServletContext sc = servlet.getServletContext();
 			  logger.info(" ServletContext is " + sc);
