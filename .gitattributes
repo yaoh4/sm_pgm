@@ -69,9 +69,10 @@ lib/struts.jar -text
 lib/tomcat/catalina-ant.jar -text
 lib/tomcat/jasper.jar -text
 lib/tomcat/jsp-api.jar -text
-lib/tomcat/ojdbc5.jar -text
+lib/tomcat/ojdbc6.jar -text
 lib/tomcat/servlet-api.jar -text
 lib/tomcat/tomcat-coyote.jar -text
+lib/tomcat/tomcat-juli.jar -text
 lib/tomcat/tomcat-util.jar -text
 lib/userlogin.jar -text
 middlegen-lib/111 -text

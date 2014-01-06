@@ -49,10 +49,8 @@
         <fileset dir="${lib.dir}" includes="tomcat/*.jar"/>
     </path>
     <property name="project.classpath" refid="project.classpath"/>
-    <taskdef name="deploy" classname="org.apache.catalina.ant.DeployTask" classpathref="project.classpath"/>
-    <taskdef name="undeploy" classname="org.apache.catalina.ant.UndeployTask" classpathref="project.classpath"/>
-    <taskdef name="start" classname="org.apache.catalina.ant.StartTask" classpathref="project.classpath"/>
-    <taskdef name="stop" classname="org.apache.catalina.ant.StopTask" classpathref="project.classpath"/>
+
+    <taskdef resource="org/apache/catalina/ant/catalina.tasks" classpathref="project.classpath" />
 
     <!-- Create deployment dirs make_deployment_dirs -->
     <target name="make_deployment_dirs" description="create deployment dirs" depends="clean">
@@ -159,12 +157,18 @@
   <deploy url="${tomcat.url}" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}" war="${basedir}/${app.distribution.dir}/${app.name.war}"/>
 </target>
 
-<target name="tomcat.start" >
-    <start url="${tomcat.url}" failOnError="false" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}"/>
+<target name="tomcat.start">
+    <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
+        <arg value="/c"/>
+        <arg value="startup.bat"/>
+    </exec>
 </target>
 
-<target name="tomcat.stop" >
-    <stop url="${tomcat.url}" failOnError="false" username="${tomcat.user}" password="${tomcat.password}" path="/${app.name}"/>
+<target name="tomcat.stop">
+    <exec executable="cmd" dir="${tomcat.home}/bin" os="${os.name}">
+        <arg value="/c"/>
+        <arg value="shutdown.bat"/>
+    </exec>
 </target>
 
 <!--   run the junit test cases  -->
