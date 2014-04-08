@@ -119,7 +119,12 @@ public class FormatGrantListTag extends TagSupport {
       buf.append("<td headers=\"header05\" width=\"15%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
       buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
       buf.append("<td headers=\"header06\" width=\"10%\" class=" + className + ">");
-      buf.append("<a href=\"javascript:openRfaPaWindow(\'" + obj.getNihGuideAddrUrl() + "\');\">" + obj.getRfapa().trim() + "</a>");
+      String rfapa = obj.getRfapa().trim();
+      if (rfapa.length() < 1){
+    	  buf.append("&nbsp;"); 
+      }else{
+    	  buf.append("<a href=\"javascript:openRfaPaWindow(\'" + obj.getNihGuideAddrUrl() + "\');\">" + obj.getRfapa().trim() + "</a>");
+      }
       buf.append("<td headers=\"header07\" width=\"6%\" class=" + className + ">" );
       buf.append("<a href=\"javascript:araView(" + obj.getAraId() + ")\" >" +obj.getAraStatus()+ "</a>");
       buf.append("&nbsp;</td>");
@@ -157,7 +162,7 @@ public class FormatGrantListTag extends TagSupport {
          buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">" + obj.getPiName()+ "&nbsp;</td>");
          buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + obj.getFy() + "&nbsp;</td>");
          buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getNcabDate() + "&nbsp;</td>");
-
+ 
          buf.append("<td headers=\"header05\" width=\"10%\" class=" + className + ">" + obj.getRfaPaNumber() + "&nbsp;</td>");
          
          buf.append("<td headers=\"header06\" width=\"6%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;</td>");
