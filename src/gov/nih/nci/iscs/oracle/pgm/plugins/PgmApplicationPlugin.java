@@ -6,6 +6,7 @@ import gov.nih.nci.iscs.oracle.pgm.context.ApplicationContextFactory;
 import gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo;
 import gov.nih.nci.iscs.oracle.common.ldap.LDAPUtil;
 
+import gov.nih.nci.iscs.oracle.pgm.service.impl.ApplicationLinksServiceImpl;
 import org.springframework.context.ApplicationContext;
 
 import org.apache.log4j.LogManager;
@@ -18,6 +19,7 @@ import org.apache.struts.config.ModuleConfig;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
+import java.util.Map;
 
 /**
  * This class initializes the resources required by the application, incuding
@@ -58,6 +60,12 @@ public class PgmApplicationPlugin implements PlugIn {
               sc.setAttribute("applicationInfo", pgmAi);
 
 			  logger.info(" setting applicationInfo is " + pgmAi);
+
+            // application links
+            ApplicationLinksServiceImpl mApplicationLinksServiceImpl =  new ApplicationLinksServiceImpl(contextFactory);
+            Map mApplicationMap  = mApplicationLinksServiceImpl.getApplicationLinks();
+            sc.setAttribute(ApplicationConstants.APP_LINK_LIST, mApplicationMap);
+
         } catch (Exception ex) {
             logger.error(ex);
             throw new ServletException(ex);

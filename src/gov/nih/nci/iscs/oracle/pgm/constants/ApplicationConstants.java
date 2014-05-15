@@ -129,6 +129,7 @@ public class ApplicationConstants {
     public static final String PAGE_SIZES = "pageSizes";
     public static final String REFERRAL_REPORT = "referralReport";
     public static final String PD_ASSIGNMENT_REPORT = "pdAssignmentReport";
+    public static final String APP_LINK_LIST = "appLinkList";
 
     public static final Date  DEFAULT_DATE() {
 

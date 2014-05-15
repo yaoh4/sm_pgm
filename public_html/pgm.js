@@ -352,9 +352,10 @@ function openRfaPaWindow(nihGuideAddrUrl)
  
 }
 
-function openEGrantsWindow(eGrantId)
+function openEGrantsWindow(eGrantURL, eGrantId)
 { 
-  var url = "https://i2e.nci.nih.gov/egrants/egrants.asp?str=" + eGrantId;
+//  var url = "https://i2e.nci.nih.gov/egrants/egrants.asp?str=" + eGrantId;
+  var url = eGrantURL + "egrants.asp?str=" + eGrantId;
   var winName = "eGrants";
   var features = "menubar=yes,scrollbars=yes,resizable=yes,width=850,height=700";
  
