@@ -111,7 +111,7 @@ public class FormatGrantListTag extends TagSupport {
       } else {
 		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
-      buf.append("<td headers=\"header01\" width=\"16%\" class=" + className + ">");
+      buf.append("<td headers=\"header01\" width=\"16%\" style=\"white-space: nowrap;\" class=" + className + ">");
 
       buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	  if(obj.getWithdrawn() ){
@@ -129,7 +129,7 @@ public class FormatGrantListTag extends TagSupport {
       buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getPiLastName() + "&nbsp;</td>");
       buf.append("<td headers=\"header05\" width=\"15%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
       buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
-      buf.append("<td headers=\"header06\" width=\"10%\" class=" + className + ">");
+      buf.append("<td headers=\"header06\" style=\"white-space: nowrap;\" width=\"10%\" class=" + className + ">");
       String rfapa = obj.getRfapa().trim();
       if (rfapa.length() < 1){
     	  buf.append("&nbsp;"); 
