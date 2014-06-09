@@ -5,6 +5,7 @@ package gov.nih.nci.iscs.oracle.pgm.tag;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
+import javax.servlet.ServletContext;
 import javax.servlet.jsp.*;
 import javax.servlet.jsp.tagext.*;
 import javax.servlet.http.*;
@@ -53,11 +54,18 @@ public class CrystalReportTag extends TagSupport {
       // Generate the report only if the report type selected is not null
 
       if ((mReportAction != null)&&(mReportAction.equalsIgnoreCase("run"))&&(mReportDetails != null)&&(mTempReportId != null)) {
-         String vCrystalUrl = applInfo.getApplicationKey("CRYSTAL.SERVER.URL");
-  //       String vApsName = applInfo.getApplicationKey("CRYSTAL.SERVER.APSNAME");
-         String vApsUser = applInfo.getApplicationKey("CRYSTAL.SERVER.APSUSER");
-         String vApsPassword = applInfo.getApplicationKey("CRYSTAL.SERVER.APSPASSWORD");
-         String vApsAuthType = applInfo.getApplicationKey("CRYSTAL.SERVER.APSAUTHTYPE");
+         ServletContext ctx = pageContext.getServletContext();
+
+         String vCrystalUrl = "";
+         String vApsUser = "";
+         String vApsPassword = "";
+         String vApsAuthType = "";
+         if (ctx != null) {
+              vCrystalUrl = ctx.getInitParameter("CRYSTAL.SERVER.URL");
+              vApsUser = ctx.getInitParameter("CRYSTAL.SERVER.APSUSER");
+              vApsPassword = ctx.getInitParameter("CRYSTAL.SERVER.PASSWORD");
+              vApsAuthType = ctx.getInitParameter("CRYSTAL.SERVER.APSAUTHTYPE");
+         }
          String vAuthUrl = "&apsuser="+vApsUser+"&apspassword="+vApsPassword+"&apsauthtype="+vApsAuthType;
          String vExportFormat = "";
 

@@ -3,6 +3,7 @@ package gov.nih.nci.iscs.oracle.pgm.tag;
 
 //Jdk Imports
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.GwbLinksT;
 import gov.nih.nci.iscs.oracle.pgm.service.ReferralSearchResultObject;
 import gov.nih.nci.iscs.oracle.pgm.service.SelectedGrants;
 import gov.nih.nci.iscs.oracle.pgm.service.GrantSearchResultObject;
@@ -57,6 +58,16 @@ public class FormatGrantListTag extends TagSupport {
 	  StringBuffer buf = new StringBuffer();
       mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
       Map referralQueryResults = (Map) request.getSession().getAttribute(ApplicationConstants.QUERY_RESULTS);
+      // get URL to eGrants
+      String eGrantsURL = "";
+      HashMap map = (HashMap) sc.getAttribute(ApplicationConstants.APP_LINK_LIST);
+      if (map != null) {
+          GwbLinksT eGrantLink = (GwbLinksT) map.get("eGrants");
+          if (eGrantLink != null) {
+              eGrantsURL = eGrantLink.getProtocol() + "://" + eGrantLink.getLinkServer() + eGrantLink.getLinkPath();
+          }
+      }
+
       int selIndex = 0;
       Iterator iterator = referralQueryResults.entrySet().iterator();
       while  (iterator.hasNext()) {
@@ -70,7 +81,7 @@ public class FormatGrantListTag extends TagSupport {
 	         }
 	      }
 	      if(formName.equalsIgnoreCase("retrieveGrantsForReferralForm")){
-			  formatReferrals(selIndex, obj, buf);
+			  formatReferrals(selIndex, obj, buf, eGrantsURL);
 		  } else {
 			  formatPDAs(selIndex, obj, buf);
 		  }
@@ -85,7 +96,7 @@ public class FormatGrantListTag extends TagSupport {
    return SKIP_BODY;
   }
 
-  private void 	formatReferrals(int selIndex, GrantSearchResultObject grantObj, StringBuffer buf ){
+  private void 	formatReferrals(int selIndex, GrantSearchResultObject grantObj, StringBuffer buf, String eGrantsURL){
 
 	  ReferralSearchResultObject obj = (ReferralSearchResultObject) grantObj;
 	  setClassForStyles(obj.getMarked());
@@ -100,7 +111,7 @@ public class FormatGrantListTag extends TagSupport {
       } else {
 		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
-      buf.append("<td headers=\"header01\" width=\"16%\" class=" + className + ">");
+      buf.append("<td headers=\"header01\" width=\"16%\" style=\"white-space: nowrap;\" class=" + className + ">");
 
       buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	  if(obj.getWithdrawn() ){
@@ -118,14 +129,19 @@ public class FormatGrantListTag extends TagSupport {
       buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getPiLastName() + "&nbsp;</td>");
       buf.append("<td headers=\"header05\" width=\"15%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
       buf.append("<td headers=\"header06\" width=\"16%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
-      buf.append("<td headers=\"header06\" width=\"10%\" class=" + className + ">");
-      buf.append("<a href=\"javascript:openRfaPaWindow(\'" + obj.getNihGuideAddrUrl() + "\');\">" + obj.getRfapa().trim() + "</a>");
+      buf.append("<td headers=\"header06\" style=\"white-space: nowrap;\" width=\"10%\" class=" + className + ">");
+      String rfapa = obj.getRfapa().trim();
+      if (rfapa.length() < 1){
+    	  buf.append("&nbsp;"); 
+      }else{
+    	  buf.append("<a href=\"javascript:openRfaPaWindow(\'" + obj.getNihGuideAddrUrl() + "\');\">" + obj.getRfapa().trim() + "</a>");
+      }
       buf.append("<td headers=\"header07\" width=\"6%\" class=" + className + ">" );
       buf.append("<a href=\"javascript:araView(" + obj.getAraId() + ")\" >" +obj.getAraStatus()+ "</a>");
       buf.append("&nbsp;</td>");
       buf.append("<td headers=\"header08\" width=\"8%\" class=" + className + ">" + obj.getNcabDate()+ "&nbsp;</td>");
       buf.append("<td headers=\"header09\" width=\"10%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");
-      buf.append("<td headers=\"header10\" width=\"5%\" class=" + borderClassName + ">" + "<a href=\"javascript:openEGrantsWindow(\'" + obj.getEGrantsNumber() + "\');\"><img src=\"images/egrants.gif\" alt=\"eGrants\"  border=\"0\"> </a></td>");
+      buf.append("<td headers=\"header10\" width=\"5%\" class=" + borderClassName + ">" + "<a href=\"javascript:openEGrantsWindow(\'" + eGrantsURL + "\', \'"+ obj.getEGrantsNumber() + "\');\"><img src=\"images/egrants.gif\" alt=\"eGrants\"  border=\"0\"> </a></td>");
 
 
 	  buf.append("</tr>");
@@ -157,7 +173,7 @@ public class FormatGrantListTag extends TagSupport {
          buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">" + obj.getPiName()+ "&nbsp;</td>");
          buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" + obj.getFy() + "&nbsp;</td>");
          buf.append("<td headers=\"header04\" width=\"10%\" class=" + className + ">" + obj.getNcabDate() + "&nbsp;</td>");
-
+ 
          buf.append("<td headers=\"header05\" width=\"10%\" class=" + className + ">" + obj.getRfaPaNumber() + "&nbsp;</td>");
          
          buf.append("<td headers=\"header06\" width=\"6%\" class=" + className + ">" + obj.getCancerActivity() + "&nbsp;</td>");
