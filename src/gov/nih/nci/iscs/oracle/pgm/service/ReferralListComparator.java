@@ -143,15 +143,18 @@ public class ReferralListComparator extends Object implements Comparator {
         } catch (IllegalAccessException e) {
         } catch (InvocationTargetException e) {
         } 
-                 Comparable c1 = (Comparable) comp1;
-                 Comparable c2 = (Comparable) comp2;
-                 if(sortAscIndicator) {
-					 return c1.compareTo(c2) * ASCENDING;
-				 }else{
-					 return c1.compareTo(c2) * DESCENDING;
-				 }
-        }
-
+		Comparable c1 = (Comparable) comp1;
+		Comparable c2 = (Comparable) comp2;
+		if (c1 != null && c2 != null) {
+			if (sortAscIndicator) {
+				return c1.compareTo(c2) * ASCENDING;
+			} else {
+				return c1.compareTo(c2) * DESCENDING;
+			}
+		}else{
+			return 0; //equal
+		}
+	}
 
        	public boolean equals(Object obj) {
              return this.equals(obj);

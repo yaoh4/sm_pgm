@@ -16,7 +16,9 @@
       <td align="left">&nbsp;</td>
     </tr>
     
-  </table>  <%@include file="searchCriteriaLeft.jsp"%>
+  </table>  
+  
+  <%@include file="searchCriteriaLeft.jsp"%>
   <%@include file="searchCriteriaRightforReferral.jsp"%>
   <%@include file="searchCriteriaReferral.jsp"%>
   <%@include file="endSearchCriteria.jsp"%>

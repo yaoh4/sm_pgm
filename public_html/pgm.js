@@ -378,12 +378,13 @@ function openCAHistWindow(applId, grantNumber)
 function openReferralOfficeCommentsWindow(applId, grantNumber)
 { 
   var url = "/pgm/ReferralOfficeComments.jsp?applId=" + applId + "&grantNumber=" + grantNumber;
-  var winName = "Referral Office Comments";
+  var winName = "Referral_Office_Comments";
   var features = "menubar=no,scrollbars=no,resizable=no,toolbar=no,status=no,width=350,height=280,top=300,left=300";
- 
+
   var newWin = window.open(url, winName ,features);
-  newWin.focus();
- 
+  if(newWin != null){
+	  newWin.focus();
+  }
 }
 
 function gotoPage(pageNumber)

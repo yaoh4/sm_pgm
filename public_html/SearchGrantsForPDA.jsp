@@ -50,11 +50,8 @@
 <br>
 
 <!--End Criteria -->
-
-  <%@include file="Includes/assignmentCriteria.jsp"%>
-
-<!--End Criteria -->
-<a name="msgTop"></a>
+<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+<tr><td>
 <DIV ID="searchMessages" class="ErrorTextBoldItalics"
   <logic:messagesPresent name="message" property="validation" message="true">
    <html:messages message="true" id="message" property="validation" header="validation.header" footer="validation.footer">
@@ -69,6 +66,14 @@
   </logic:messagesPresent>
 
 </div>
+</td></tr>
+</table>
+
+  <%@include file="Includes/assignmentCriteria.jsp"%>
+
+<!--End Criteria -->
+<a name="msgTop"></a>
+
 <a name="listTop"></a>
 
 <%@include file="Includes/pdaGrantList.jsp"%>

@@ -71,6 +71,7 @@ public class SearchGrantsForReferralAction extends SearchGrantsAction  {
 		   return search(mapping, form, request, response);
 	   }
      }catch (Exception ex) {
+    	 ex.printStackTrace();
 		   throw new GrantSearchException("SearchGrantsForReferralAction", "executeAction", ex.toString(), request.getSession(), ex);
 	 }
 
