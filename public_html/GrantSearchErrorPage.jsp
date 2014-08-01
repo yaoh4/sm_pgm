@@ -65,6 +65,7 @@
             <%String errorMessage = (String) session.getAttribute(ApplicationConstants.ERROR_MESSAGE);%>
             <%= errorMessage %>
             <br><br>
+        <logic:notPresent name="USER_LOGIN_ERROR">   
 	    <span class="Body">
                <html:form action="GrantSearchError.do" method="POST" >
 	    	   <b><font color="#009999">Error Message Notification</font></b>
@@ -81,6 +82,7 @@
 	 
            <br><br>
       </span>
+      </logic:notPresent>
       </td>
     </tr>
   </table>
