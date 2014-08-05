@@ -81,6 +81,7 @@
   </html:messages>
   </logic:messagesPresent>
 </div>
+
 </td></tr>
 </table>
 <!--Start Criteria -->
