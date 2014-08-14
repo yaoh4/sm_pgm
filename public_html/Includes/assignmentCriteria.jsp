@@ -1,5 +1,5 @@
   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
-  <tr>
+  <tr><td>
       <ul>
            The ONLY grants available in this module are:
        </ul>
@@ -9,12 +9,15 @@
        <li>Grants not processed through the Office of Referral, Review, and 
            Coordination (non-competing grants, some co-funded grants)</li>
       </ul>
+      </td>
    </tr>
    <tr>
+   	<td>
       <ul>
         All initial Program Director assignments for competitive grants in the current and or  
         any future board must be processed using Referral Activity.
       </ul>
+      </td>
     </tr>
   </table>
    

@@ -99,6 +99,9 @@ properties/local/pgm.properties -text
 properties/production/db-connection.properties -text
 properties/production/log4j.properties -text
 properties/production/pgm.properties -text
+properties/stage/db-connection.properties -text
+properties/stage/log4j.properties -text
+properties/stage/pgm.properties -text
 properties/test/db-connection.properties -text
 properties/test/log4j.properties -text
 properties/test/pgm.properties -text

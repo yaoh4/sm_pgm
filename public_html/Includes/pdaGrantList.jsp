@@ -3,7 +3,7 @@
 <jsp:useBean id="PaginationObject" scope="session" type="gov.nih.nci.iscs.oracle.pgm.forms.PaginationObject" />
 <!--Start List Table -->
 
-<table> <tr>
+<table width="800" align="center"> <tr>
   <td> &nbsp; </td>
 </tr></table>
  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
@@ -16,12 +16,13 @@
       <td colspan="3"><img src="images/spacer.gif" alt="" width="20" height="10"></td>
     </tr>
   </table>
+   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
     <tr><td >&nbsp;</td></tr>
         <%@include file="grantListHeader.jsp"%>
         <%@include file="pdaActionButtons.jsp"%>
         <%@include file="selectionButtons.jsp"%>
-
-        </table>
+    </table>
+     <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
         <DIV ID="listMessages" class="ErrorTextBoldItalics"
         <logic:messagesPresent name="message" property="pdAssignmentaction" message="true">
            <html:messages message="true" id="message" property="pdAssignmentaction" header="pdAssignmentaction.header" footer="pdAssignmentaction.footer">
@@ -29,6 +30,7 @@
            </html:messages>
         </logic:messagesPresent>
         </div>
+        </table>
         <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
 
         <tr>
@@ -70,8 +72,7 @@
           <td width="20" height="20">&nbsp;</td>
         </tr>
       </table>
- 
 
-  <%@include file="grantListHeaderLo.jsp"%>
+	  <%@include file="grantListHeaderLo.jsp"%>
 <!--End List Table -->
 

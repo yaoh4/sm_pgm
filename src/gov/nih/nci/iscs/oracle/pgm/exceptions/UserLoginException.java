@@ -20,8 +20,9 @@ public class UserLoginException extends RuntimeException {
 	public UserLoginException(String className, String methodName, String message, HttpSession session) {
 		super(message);
 		formatTags(className, session);
-		String errorMessage = formatMessage(className, methodName, message);
-
+		//String errorMessage = formatMessage(className, methodName, message);
+		String errorMessage = "You do not have permission to access this application.";
+		session.setAttribute("USER_LOGIN_ERROR", "Y");
 	    session.setAttribute(ApplicationConstants.ERROR_MESSAGE, errorMessage);
 		logger.error(" An exception has occurred during authetication/authorization process \n" + errorMessage);
 	}

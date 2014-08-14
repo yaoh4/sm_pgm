@@ -20,7 +20,8 @@
         <%@include file="grantListHeader.jsp"%>
         <%@include file="referralActionButtons.jsp"%>
         <%@include file="selectionButtons.jsp"%>
-
+		<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+		<tr><td>
         <DIV ID="TheTip" class="button4a" STYLE="position:absolute; visibility:hidden;" ></DIV> 
         <DIV ID="listMessages" class="ErrorTextBoldItalics"
           <logic:messagesPresent name="message" property="referralaction" message="true">
@@ -29,6 +30,8 @@
            </html:messages>
           </logic:messagesPresent>
         </div>
+        </td></tr>
+        </table>
         <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
 
         <tr>

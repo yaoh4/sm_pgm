@@ -66,18 +66,9 @@
 <BR>
 <!--Start Load/Description-->
 <!--End Load/Description-->
-
-<!--Start Criteria -->
-<!--Include the search criteria form -->
-  <%@include file="Includes/referralCriteria.jsp"%>
-
-<!--End Criteria -->
-
-  <!--%@include file="Includes/Queries.jsp"%-->
-
-<!--End Criteria -->
-<a name="msgTop"></a>
-<DIV ID="searchMessages" class="ErrorTextBoldItalics"
+<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+<tr><td>
+<DIV ID="searchMessages" class="ErrorTextBoldItalics" >
   <logic:messagesPresent name="message" property="validation" message="true">
    <html:messages message="true" id="message" property="validation" header="validation.header" footer="validation.footer">
         <li><b><bean:write name="message"/></b></li>
@@ -90,6 +81,20 @@
   </html:messages>
   </logic:messagesPresent>
 </div>
+
+</td></tr>
+</table>
+<!--Start Criteria -->
+<!--Include the search criteria form -->
+  <%@include file="Includes/referralCriteria.jsp"%>
+
+<!--End Criteria -->
+
+  <!--%@include file="Includes/Queries.jsp"%-->
+
+<!--End Criteria -->
+<a name="msgTop"></a>
+
 <a name="listTop"></a>
 <%@include file="Includes/referralGrantList.jsp"%>
 
