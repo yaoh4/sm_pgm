@@ -4,7 +4,7 @@
    response.setHeader("Cache-Control","no-store"); //HTTP 1.1 
 %>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
-  <%@ page contentType="text/html;charset=windows-1252"%>
+  <%@ page contentType="text/html;charset=UTF-8"%>
   <%@ taglib  uri="/WEB-INF/taglib/NCITaglib.tld"  prefix="ncijsp" %>
   <%@ include file="Includes/PgmGlobalInclude.jsp"%>
   <%@ taglib uri="/WEB-INF/struts-html.tld" prefix="html"%>
@@ -15,7 +15,7 @@
 <html>
 <head>
 	<title>PD Assignment (Non-Referral)</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <meta http-equiv="Expires" CONTENT="0">
         <meta http-equiv="Cache-Control" CONTENT="no-cache">
         <meta http-equiv="Pragma" CONTENT="no-cache">
