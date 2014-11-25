@@ -54,7 +54,6 @@ lib/commons-lang-1.0.1.jar -text
 lib/commons-logging.jar -text
 lib/commons-pool-1.1.jar -text
 lib/commons-validator.jar -text
-lib/commons.jar -text
 lib/dirctxdispenser.jar -text
 lib/dom4j-1.4.jar -text
 lib/ehcache-0.7.jar -text
