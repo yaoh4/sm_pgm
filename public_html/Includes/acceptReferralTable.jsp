@@ -20,15 +20,15 @@
            <td> 
               <table summary="Grants Table" cellpadding="1" cellspacing="1" width="950" >
                 <tr> 
-                  <td width="8%"> &nbsp;</td>
+                  
                   <ncijsp:acceptReferralCA />
                 </tr> 
                 <tr> 
-                  <td width="8%"> &nbsp;</td>
+                 
                   <td align="left"><B>Assign To:</B></td>
                 </tr> 
                 <tr> 
-                  <td width="6%"> &nbsp;</td>
+                  
                   <td align="left">
                            <ncijsp:applyToAll />
                   
@@ -38,7 +38,7 @@
          </tr> 
          <tr>
         <!--Start Search/Clear Buttons-->
-	      <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
+	      <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
 	        <tr> 
 	          <td width="80%" align="right">
 	               <input class="button2a" type="button" value="Accept"  onclick="setCurrentReferralAction('executeAccept');"/></td>
@@ -65,7 +65,7 @@
     
          <tr>
            <td>
-            <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+            <table border="0" cellspacing="0" cellpadding="0" width="800" align="left">
                <tr>
                     <ncijsp:acceptReferralHeader />
                     <td headers="header05" width="27%" class=listCellHead>Assign To</td>
