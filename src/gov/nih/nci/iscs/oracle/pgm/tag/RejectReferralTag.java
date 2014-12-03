@@ -140,9 +140,9 @@ private StringBuffer appendComments(StringBuffer buf, String commentsControlName
 
 	  String mDefaultkey = new String(" ");
 	  if(commentsControlName.equalsIgnoreCase("rejectionSelection")) {
-		  buf.append("<SELECT NAME=\""+ commentsControlName + "\" SIZE=\"1\" onchange=\"refreshComments(document." + formName + "." + commentsControlName + ".options[document." + formName + "." + commentsControlName + ".selectedIndex].text, document." + formName + "." + controlName + ");\")\">");
+		  buf.append("<SELECT style=\"width: 245px\" NAME=\""+ commentsControlName + "\" SIZE=\"1\" onchange=\"refreshComments(document." + formName + "." + commentsControlName + ".options[document." + formName + "." + commentsControlName + ".selectedIndex].text, document." + formName + "." + controlName + ");\")\">");
 	  }else{
-		  buf.append("<SELECT NAME=\""+ commentsControlName + "\" SIZE=\"1\" onchange=\"refreshSelComments(document." + formName + "." + commentsControlName + ".options[document." + formName + "." + commentsControlName + ".selectedIndex].text, document." + formName + ",\'" +  indx + "\', \'" + mCaApplId + "\');\")\">");
+		  buf.append("<SELECT style=\"width: 245px\" NAME=\""+ commentsControlName + "\" SIZE=\"1\" onchange=\"refreshSelComments(document." + formName + "." + commentsControlName + ".options[document." + formName + "." + commentsControlName + ".selectedIndex].text, document." + formName + ",\'" +  indx + "\', \'" + mCaApplId + "\');\")\">");
 	  }
 
       buf.append("<OPTION SELECTED value=" + mDefaultkey + ">");
