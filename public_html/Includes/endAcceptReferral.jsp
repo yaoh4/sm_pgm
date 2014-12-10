@@ -13,9 +13,9 @@
       </tr>
     </table>
     <!--Start Search/Clear Buttons-->
-      <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+      <table border="0" cellspacing="0" cellpadding="0" width="800" >
         <tr> 
-          <td width="80%" align="right">
+          <td width="730" align="right">
                <input class="button2a" type="button" value="Accept"  onclick="setCurrentReferralAction('executeAccept');"/></td>
 	  </td> 
           <td nowrap width="5">&nbsp;</td>
