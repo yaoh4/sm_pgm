@@ -57,13 +57,12 @@
 	            <td>&nbsp;</td>	          
             </tr>
             <tr>
-              <td width="6%">&nbsp;</td>
               <%@include file="actionSelectionButtons.jsp"%>
-              <td width="15%">&nbsp;</td>
+              <td width="20%">&nbsp;</td>
             </tr>
             </table>
           </tr>
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="left">
+  <table border="0" cellspacing="0" cellpadding="0" width="800" >
 
         <tr>
           
