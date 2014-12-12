@@ -28,7 +28,7 @@ import java.util.Map;
  */
 public class PgmApplicationPlugin implements PlugIn {
     private static Logger logger = LogManager.getLogger(PgmApplicationPlugin.class);
-
+    private static String[] stBaseSearchDN = {"OU=nci,O=nih", "OU=next,O=nih"};
     public PgmApplicationPlugin() {
     }
   /**
@@ -53,7 +53,7 @@ public class PgmApplicationPlugin implements PlugIn {
               sc.setAttribute(ApplicationConstants.PGM_CONTEXT_FACTORY, contextFactory);
 			  logger.info(" setting contextFactory ApplicationConstants.PGM_CONTEXT_FACTORY is " + ApplicationConstants.PGM_CONTEXT_FACTORY);
 
-              LDAPUtil ctx = new LDAPUtil("OU=nci,O=nih", "cn", "oracle");
+              LDAPUtil ctx = new LDAPUtil(stBaseSearchDN, "cn", "oracle");
 			  logger.info(" ctx is " + ctx);
               sc.setAttribute(ApplicationConstants.LDAP_SEARCHER, ctx);
 			  logger.info(" setting ctx ApplicationConstants.LDAP_SEARCHER is " + ApplicationConstants.LDAP_SEARCHER);

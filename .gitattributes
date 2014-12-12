@@ -43,6 +43,7 @@ lib/aopalliance.jar -text
 lib/c3p0-0.8.5.jar -text
 lib/c3p0.license.txt -text
 lib/cglib-full-2.0.1.jar -text
+lib/commons-1.2.jar -text
 lib/commons-beanutils.jar -text
 lib/commons-collections.jar -text
 lib/commons-dbcp-1.1.jar -text
@@ -53,7 +54,6 @@ lib/commons-lang-1.0.1.jar -text
 lib/commons-logging.jar -text
 lib/commons-pool-1.1.jar -text
 lib/commons-validator.jar -text
-lib/commons.jar -text
 lib/dirctxdispenser.jar -text
 lib/dom4j-1.4.jar -text
 lib/ehcache-0.7.jar -text
