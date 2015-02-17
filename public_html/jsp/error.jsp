@@ -5,7 +5,7 @@
 <html>
   <head>
     <title>Program Director Assignment: Error Page</title>
-    <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 
 
 <body  " bgcolor="#FFFFFF" leftmargin="10" topmargin="10" marginwidth="10" marginheight="10">

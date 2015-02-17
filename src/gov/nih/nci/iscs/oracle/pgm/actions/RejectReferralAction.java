@@ -17,6 +17,7 @@ import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -186,6 +187,11 @@ public class RejectReferralAction extends NciPgmAction {
 			}
 	    }
 
+		if(!StringUtils.isEmpty(comments) && comments.length() > 1000){
+			commentsValidationMessage = "errors.rejection.comments.maxlength";
+	        return false;
+		}
+		
 	   // if dbComments is Other verify that comments entered
        if(mCommentText.equalsIgnoreCase("Other") ) {
 		   if(comments.equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {

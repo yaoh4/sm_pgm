@@ -37,9 +37,13 @@
                   <td colspan="2" align="left" class="ErrorTextBoldItalics"> All <bean:write name="pdAssignmentForm" property="count" /> grants will be assigned to the New Program Director </td></tr>
 	        </logic:equal>
                 <logic:notEqual name="pdAssignmentForm" property="requestAction" value="<%= ApplicationConstants.ASSIGN_PORTFOLIO%>">
-                  <td width="3%">&nbsp;</td>
-                  <%@include file="actionSelectionButtons.jsp"%>
-                  <td width="62%">&nbsp;</td>
+                  <td align="left" width="15%">
+               		<a link href="#" onclick="checkAllBoxes();"> Check All Boxes</a>&nbsp;
+           		</td>
+          		 <td width="15%" align="left" >
+               		<a link href="#" onclick="clearAllBoxes();"> Clear All Boxes</a>&nbsp;
+           		</td>
+                  <td width="59%">&nbsp;</td>
                 </tr>
                    <tr>
                    <td>&nbsp;</td>

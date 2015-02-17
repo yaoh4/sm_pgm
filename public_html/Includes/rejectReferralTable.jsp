@@ -17,12 +17,12 @@
            <td> 
               <table summary="Grants Table" cellpadding="1" cellspacing="1" width="800" >
                 <tr> 
-                  <td width="13%"> &nbsp;</td>
+                  
                   <td colspan="2" align="left"><B> Select a Rejection Comment from the list below or select &#39;Other&#39; to enter a different Rejection Comment</B>
 	          </td>         
                 </tr> 
                 <tr> 
-                  <td width="13%"> &nbsp;</td>
+                  
                   <td width="40%" align="left">
                         <ncijsp:RejectReferral action='formatcomments'/>  
                         <% Boolean disbaleComments = (Boolean) request.getAttribute("DisbaleComments");
@@ -47,23 +47,25 @@
             <tr><td width="6%" align="right">&nbsp;</td>
             </tr>       
             <tr> 
-              <td width="6%" align="right">&nbsp;</td>
+             
               <td width="50%" colspan="2"> <b>Comments are required to reject a referral </b> </td>
            
               </td>
               <td width="15%">&nbsp;</td>
             </tr>
             <tr>
-              <td width="6%">&nbsp;</td>
+	            <td>&nbsp;</td>	          
+            </tr>
+            <tr>
               <%@include file="actionSelectionButtons.jsp"%>
-              <td width="15%">&nbsp;</td>
+              <td width="20%">&nbsp;</td>
             </tr>
             </table>
           </tr>
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+  <table border="0" cellspacing="0" cellpadding="0" width="800" >
 
         <tr>
-          <td width="20">&nbsp;</td>
+          
           <td valign="top" colspan="5">
             <script language="JavaScript" type="text/javascript">
               // define table with border attribute for Netscape 4.7x browsers 

@@ -1,6 +1,7 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 
@@ -178,6 +179,15 @@ public class AssignPDAction extends NciPgmAction {
   	   // process PdIds
 	   if( mAction.equalsIgnoreCase(ApplicationConstants.ASSIGN_PD ) ){
           processPdIds();
+	   }
+	   String mLastAction = (String) request.getSession().getAttribute("lastAction");
+	   if(StringUtils.isNotEmpty(mLastAction)){
+		   if(ApplicationConstants.ASSIGN_PORTFOLIO.equalsIgnoreCase(mLastAction)){
+			   mPdAssignmentForm.setRequestAction(ApplicationConstants.ASSIGN_PORTFOLIO);
+		   }
+		   else if(ApplicationConstants.ASSIGN_PD.equalsIgnoreCase(mLastAction)){
+			   mPdAssignmentForm.setRequestAction(ApplicationConstants.ASSIGN_PD);
+		   }
 	   }
        return mapping.findForward("continue");
     }

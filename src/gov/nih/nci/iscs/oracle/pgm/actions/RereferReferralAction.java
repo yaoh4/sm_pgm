@@ -19,6 +19,7 @@ import gov.nih.nci.iscs.oracle.pgm.actions.helper.SearchGrantsActionHelper;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
 
+import org.apache.commons.lang.StringUtils;
 import org.apache.struts.action.ActionMessages;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
@@ -75,7 +76,7 @@ public class RereferReferralAction extends NciPgmAction {
 
 	   // make sure that at comments and CA entered for all selecetd
        if( mValidationErrors){
-	       super.logErrors(messages, "validation", "errors.no.comments.or.ca.for.rerefer");
+	       super.logErrors(messages, "validation", "errors.referral.comments.maxlength");
            this.saveMessages(request, messages);
 		   return mapping.findForward("continue");
 	   }
@@ -121,6 +122,10 @@ public class RereferReferralAction extends NciPgmAction {
             mCA = mKey.substring(0,2);
             mApplId = mKey.substring(3,mKey.length());
             comments = (String) mRereferReferralForm.getCommentMapped(mKey);
+            
+            if(!StringUtils.isEmpty(comments) && comments.length() > 1000){
+            	mValidationErrors = true;
+    		}
             cancerActivity = (String) mRereferReferralForm.getCancerActivityMapped(mKey);
 
             for (Iterator mIterator_obj = mReferralActionList.iterator(); mIterator_obj.hasNext();) {
