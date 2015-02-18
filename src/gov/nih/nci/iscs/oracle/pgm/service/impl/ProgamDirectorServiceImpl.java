@@ -117,14 +117,14 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
     public List getPDForTransfer(String cancerActivity) {
 		  ArrayList mLabelValueBeanList = new ArrayList();
-		  ArrayList mList  = new ArrayList();
+		  List mList;
 		  TreeMap mTempMap;
 		  String mViewName = "pdOrgVw4";
 		  try{
              RetrievePDInfoForAssignmentCommand oRetrievePDInfoForAssignmentCommand = (RetrievePDInfoForAssignmentCommand) getBean("retrievePDInfoForAssignmentCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, mViewName, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             mList =  aPDQueryPage.getList();
              mTempMap = new TreeMap();
 
              String pdName = ApplicationConstants.EMPTY_STRING;
