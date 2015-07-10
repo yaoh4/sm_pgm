@@ -38,14 +38,13 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
 
     public List getProgamDirectorForCA(String cancerActivity) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  try{
              RetrieveProgamDirectorInfoCommand oRetrieveProgamDirectorInfoCommand = (RetrieveProgamDirectorInfoCommand) getBean("retrieveProgamDirectorInfoCommandDao");
 
              QueryPage  aPDQueryPage = oRetrieveProgamDirectorInfoCommand.execute(cancerActivity, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
              Iterator mIterator = mList.iterator();
              while(mIterator.hasNext() ) {
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
@@ -67,14 +66,13 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
 
     public List getProgamDirectorForAllCAs(TreeSet cancerActivities) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  try{
              RetrieveProgamDirectorsInfoCommand oRetrieveProgamDirectorsInfoCommand = (RetrieveProgamDirectorsInfoCommand) getBean("retrieveProgamDirectorsInfoCommandDao");
 
              QueryPage  aPDQueryPage = oRetrieveProgamDirectorsInfoCommand.execute(cancerActivities, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
              Iterator mIterator = mList.iterator();
              while(mIterator.hasNext() ) {
 				  PdCaAsgnmtVw mPdCaAsgnmtVw = (PdCaAsgnmtVw) mIterator.next();
@@ -91,14 +89,13 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
     }
 
     public List getAllProgramDirectors(String cancerActivity, boolean formatPds) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  String mViewName = "pdCaAsgnmtVw";
 		  try{
              RetrievePDInfoForAssignmentCommand oRetrievePDInfoForAssignmentCommand = (RetrievePDInfoForAssignmentCommand) getBean("retrievePDInfoForAssignmentCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, mViewName, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
 
              Iterator mIterator = mList.iterator();
              while(mIterator.hasNext() ) {
@@ -117,14 +114,13 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
     public List getPDForTransfer(String cancerActivity) {
 		  ArrayList mLabelValueBeanList = new ArrayList();
-		  ArrayList mList  = new ArrayList();
 		  TreeMap mTempMap;
 		  String mViewName = "pdOrgVw4";
 		  try{
              RetrievePDInfoForAssignmentCommand oRetrievePDInfoForAssignmentCommand = (RetrievePDInfoForAssignmentCommand) getBean("retrievePDInfoForAssignmentCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDInfoForAssignmentCommand.execute(cancerActivity, mViewName, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  aPDQueryPage.getList();
              mTempMap = new TreeMap();
 
              String pdName = ApplicationConstants.EMPTY_STRING;
@@ -182,14 +178,13 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 	}*/
 
     public List getCancerActivityForPD(String key) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  String mLastCayCode = ApplicationConstants.EMPTY_STRING;
 		  try{
              RetrievePDCancerActivityInfoCommand oRetrievePDCancerActivityInfoCommand = (RetrievePDCancerActivityInfoCommand) getBean("retrievePDCancerActivityInfoCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDCancerActivityInfoCommand.execute(key, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
              if(mList.size() > 1){
 				 HashMap mTempMap = new HashMap(mList.size());
 				 Iterator mIterator = mList.iterator();
@@ -220,13 +215,12 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
 
 
     public List getPDOrgForCA(String cancerActivity, String personId) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  try{
              RetrievePDOrgInfoCommand oRetrievePDOrgInfoCommand = (RetrievePDOrgInfoCommand) getBean("retrievePDOrgInfoCommandDao");
              QueryPage  aPDQueryPage = oRetrievePDOrgInfoCommand.execute(personId, cancerActivity, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
 
              Iterator mIterator = mList.iterator();
              while(mIterator.hasNext() ) {
@@ -244,13 +238,12 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl
     }
 
     public List getAllActiveProgramDirectors(String cancerActivity, boolean formatPds) {
-		  ArrayList mList  = new ArrayList();
 		  ArrayList mLabelValueBeanList = new ArrayList();
 		  try{
              RetrieveActivePDInfoCommand oRetrieveActivePDInfoCommand = (RetrieveActivePDInfoCommand) getBean("retrieveActivePDInfoCommandDao");
              QueryPage  aPDQueryPage = oRetrieveActivePDInfoCommand.execute(cancerActivity, super.getUserId());
               // get the list from the page
-             mList =  (ArrayList) aPDQueryPage.getList();
+             List mList =  (ArrayList) aPDQueryPage.getList();
 
              Iterator mIterator = mList.iterator();
              String mPreviousPd = ApplicationConstants.EMPTY_STRING;
