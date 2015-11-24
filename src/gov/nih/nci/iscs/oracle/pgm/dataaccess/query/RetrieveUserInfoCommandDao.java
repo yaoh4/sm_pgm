@@ -11,13 +11,16 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AccessCommandDao;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPeopleT;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+
 
 // Springfranework imports
 import org.springframework.orm.hibernate.SessionFactoryUtils;
 
 // hibernate imports
 import net.sf.hibernate.Criteria;
+import net.sf.hibernate.HibernateException;
 import net.sf.hibernate.expression.Expression;
 import net.sf.hibernate.Session;
 
@@ -98,7 +101,37 @@ public class RetrieveUserInfoCommandDao extends AccessCommandDao implements  Ret
 		return mCriteria;
     }
 
+    /**
+     * This method checks if logged in user is Valid.
+     * @param oracleId
+     * @return boolean
+     * @throws HibernateException 
+     */
+    public boolean isNciUserValid(String oracleId) throws HibernateException{
+    	logger.info("Validating NCIUser with oracleId : "+oracleId);
+    	boolean isNciUserValid = true; 
+    	Session sess = null;
+    	Criteria criteria = null;
+    	try{
+    		sess = SessionFactoryUtils.getSession(getSessionFactory(), true);
+    		criteria = sess.createCriteria(NciPeopleT.class);     
+    		criteria.add(Expression.eq("userId", oracleId.toUpperCase()));
+    		NciPeopleT nciUser = (NciPeopleT) criteria.uniqueResult();
+    		if(nciUser == null || nciUser.getInactiveDate() != null){
+        		isNciUserValid = false;
+        	}  
 
-
-
+    	} catch (CommandDaoException re) {
+    		logger.error("Error occurred while validating NCIUser : ", re);
+			throw re;
+		}
+    	finally {
+    		if(sess != null){
+    			 SessionFactoryUtils.closeSessionIfNecessary(sess, getSessionFactory());
+    		}
+    	} 
+    	  	
+    	logger.info("Is NCIUser with oracleId : "+oracleId+" Valid? --> "+ isNciUserValid);
+    	return isNciUserValid;
+    }
 }

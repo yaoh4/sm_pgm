@@ -1,0 +1,421 @@
+<?xml version="1.0"?>					
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+    
+<hibernate-mapping>
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.NciPeopleT" 
+    table="NCI_PEOPLE_T"
+    lazy="false"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="NCI_PEOPLE_T"
+    </meta>
+
+    <id
+        name="id"
+        type="java.lang.Long"
+        column="ID"
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.id
+            generator-class="assigned"
+            type="java.lang.Long"
+            column="ID"
+        </meta>
+        <generator class="assigned" />
+    </id>
+
+    <property
+        name="lastName"
+        type="java.lang.String"
+        column="LAST_NAME"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="LAST_NAME"
+            length="30"           
+        </meta>    
+    </property>
+    
+     <property
+        name="firstName"
+        type="java.lang.String"
+        column="FIRST_NAME"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="FIRST_NAME"
+            length="30"           
+        </meta>    
+    </property>
+    
+    <property
+        name="genderCode"
+        type="java.lang.String"
+        column="GENDER_CODE"       
+        length="1"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="GENDER_CODE"
+            length="1"           
+        </meta>    
+    </property>
+    
+     <property
+        name="middelName"
+        type="java.lang.String"
+        column="MI_NAME"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="MI_NAME"
+            length="30"           
+        </meta>    
+    </property>
+    
+    <property
+        name="namePrefix"
+        type="java.lang.String"
+        column="NAME_PREFIX"      
+        length="15"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NAME_PREFIX"
+            length="15"           
+        </meta>    
+    </property>
+    
+     <property
+        name="nameSuffix"
+        type="java.lang.String"
+        column="NAME_SUFFIX"       
+        length="15"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NAME_SUFFIX"
+            length="15"           
+        </meta>    
+    </property>
+    
+     <property
+        name="personTypeCode"
+        type="java.lang.String"
+        column="PERSON_TYPE_CODE"       
+        length="4"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="PERSON_TYPE_CODE"
+            length="4"           
+        </meta>    
+    </property>
+    
+     <property
+        name="title"
+        type="java.lang.String"
+        column="TITLE"       
+        length="240"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="TITLE"
+            length="240"           
+        </meta>    
+    </property>
+    
+     <property
+        name="emailAddress"
+        type="java.lang.String"
+        column="EMAIL_ADDRESS"       
+        length="80"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="EMAIL_ADDRESS"
+            length="80"           
+        </meta>    
+    </property>   
+   
+   <property
+        name="createUserId"
+        type="java.lang.String"
+        column="CREATE_USER_ID"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="CREATE_USER_ID"
+            length="30"           
+        </meta>    
+    </property>
+    
+    <property
+        name="createDate"
+        type="java.sql.Timestamp"
+        column="CREATE_DATE"       
+        length="7"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="CREATE_DATE"
+            length="7"           
+        </meta>    
+    </property>
+    
+    <property
+        name="lastChangeUserId"
+        type="java.lang.String"
+        column="LAST_CHANGE_USER_ID"
+        length="30"    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="LAST_CHANGE_USER_ID"
+            length="30"
+        </meta>    
+    </property>
+    
+    <property
+        name="lastChangeDate"
+        type="java.sql.Timestamp"
+        column="LAST_CHANGE_DATE"
+        length="7"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="LAST_CHANGE_DATE"
+            length="7"
+        </meta>    
+    </property>
+    
+    <property
+        name="updateStamp"
+        type="java.lang.Integer"
+        column="UPDATE_STAMP"
+        length="5"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="UPDATE_STAMP"
+            length="5"
+        </meta>    
+    </property>
+    
+     <property
+        name="userId"
+        type="java.lang.String"
+        column="USERID"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="USERID"
+            length="30"           
+        </meta>    
+    </property>
+    
+    <property
+        name="specialty"
+        type="java.lang.String"
+        column="SPECIALTY"       
+        length="75"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="SPECIALTY"
+            length="75"           
+        </meta>    
+    </property>
+    
+    <property
+        name="rrlId"
+        type="java.lang.Long"
+        column="RRL_ID"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            type="java.lang.Long"
+            column="RRL_ID"
+			length="10"
+        </meta>        
+    </property>
+
+    <property
+        name="nipId"
+        type="java.lang.Long"
+        column="NIP_ID"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            type="java.lang.Long"
+            column="NIP_ID"
+			length="10"
+        </meta>        
+    </property>
+    
+     <property
+        name="ardPubVerifiedFlag"
+        type="java.lang.String"
+        column="ARD_PUB_VERIFIED_FLAG"       
+        length="1"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ARD_PUB_VERIFIED_FLAG"
+            length="1"           
+        </meta>    
+    </property>
+    
+     <property
+        name="ardNotes"
+        type="java.lang.String"
+        column="ARD_NOTES"       
+        length="1000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ARD_NOTES"
+            length="1000"           
+        </meta>    
+    </property>
+    
+    <property
+        name="ardVerifiedFlag"
+        type="java.lang.String"
+        column="ARD_VERIFIED_FLAG"       
+        length="1"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ARD_VERIFIED_FLAG"
+            length="1"           
+        </meta>    
+    </property>
+
+	<property
+        name="biography"
+        type="java.lang.String"
+        column="BIOGRAPHY"       
+        length="2000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="BIOGRAPHY"
+            length="2000"           
+        </meta>    
+    </property>
+    
+    <property
+        name="publicationNotes"
+        type="java.lang.String"
+        column="PUBLICATION_NOTES"       
+        length="1000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="PUBLICATION_NOTES"
+            length="1000"           
+        </meta>    
+    </property>
+    
+     <property
+        name="researchTitle"
+        type="java.lang.String"
+        column="RESEARCH_TITLE"       
+        length="100"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="RESEARCH_TITLE"
+            length="100"           
+        </meta>    
+    </property>
+    
+    <property
+        name="tfsId"
+        type="java.lang.Long"
+        column="TFS_ID"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            type="java.lang.Long"
+            column="TFS_ID"
+			length="10"
+        </meta>        
+    </property>
+    
+     <property
+        name="researchDescription"
+        type="clob"
+        column="RESEARCH_DESCRIPTION"       
+      
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="RESEARCH_DESCRIPTION"           
+        </meta>    
+    </property>    
+    
+     <property
+        name="inactiveDate"
+        type="java.sql.Timestamp"
+        column="INACTIVE_DATE"
+        length="7"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="INACTIVE_DATE"
+            length="7"
+        </meta>    
+    </property>
+    
+    <property
+        name="nciLdapCn"
+        type="java.lang.String"
+        column="NCI_LDAP_CN"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NCI_LDAP_CN"
+            length="30"           
+        </meta>    
+    </property>
+    
+     <property
+        name="personProfileId"
+        type="java.lang.Long"
+        column="PERSON_PROFILE_ID"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            type="java.lang.Long"
+            column="PERSON_PROFILE_ID"
+			length="10"
+        </meta>        
+    </property>
+    
+     <property
+        name="lastLoginDate"
+        type="java.sql.Timestamp"
+        column="LAST_LOGIN_DATE"
+        length="7"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="LAST_LOGIN_DATE"
+            length="7"
+        </meta>    
+    </property>
+    
+</class>
+</hibernate-mapping>

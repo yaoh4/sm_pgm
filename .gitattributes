@@ -169,6 +169,7 @@ public_html/Includes/searchCriteriaRightforPDA.jsp -text
 public_html/Includes/searchCriteriaRightforReferral.jsp -text
 public_html/Includes/selectionButtons.jsp -text
 public_html/JavascriptFiles.js -text
+public_html/LoginError.jsp -text
 public_html/NextRecordAction.do.jsp -text
 public_html/PDAssignment.pdf -text svneol=unset#unset
 public_html/PgmMgmtQuickGuide.pdf -text svneol=unset#unset
@@ -444,6 +445,8 @@ src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.java -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleT.hbm.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/PdCaAsgnmtVw.hbm.xml -text
