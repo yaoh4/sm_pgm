@@ -48,6 +48,7 @@ public abstract class NciPgmAction extends Action {
         "nciOracleID", "fullName", "givenName", "sn", "mail", "telephoneNumber",
         "cn"
     };
+    private static final String INVALID_LDAP_ENTRY="Could not find entry in LDAP server.";
 
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
         throws UserLoginException, Exception
@@ -157,8 +158,22 @@ public abstract class NciPgmAction extends Action {
                 stFDN = ctx.getUserFDN(user.getUserId());
 
                 attribs = ctx.getAttributes(stFDN, stAttrDirIDs);
+                
+            }
+            catch (Exception ex) {
+            	logger.error(ex);     
+            	if(INVALID_LDAP_ENTRY.equalsIgnoreCase(ex.getMessage())){        			            
+            		throw new UserLoginException(this.getClass().getName(), 
+            				"setUserAttributes", 
+            				"Error while connecting to LDAP. " + 	ex.getMessage(),request.getSession());
+            	}
+            	else{
+            		throw ex;
+            	}
+            }   
 
-                if (attribs.get("mail").get() != null) {
+            try{ 
+            	if (attribs.get("mail").get() != null) {
                     user.setAttribute("mail", attribs.get("mail").get());
                 } else {
                     user.setAttribute("mail", null);

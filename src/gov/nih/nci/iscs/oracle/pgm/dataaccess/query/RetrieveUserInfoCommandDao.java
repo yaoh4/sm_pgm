@@ -11,7 +11,7 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AccessCommandDao;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.CommandDaoException;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPeopleT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPeopleVw;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 
 
@@ -114,10 +114,10 @@ public class RetrieveUserInfoCommandDao extends AccessCommandDao implements  Ret
     	Criteria criteria = null;
     	try{
     		sess = SessionFactoryUtils.getSession(getSessionFactory(), true);
-    		criteria = sess.createCriteria(NciPeopleT.class);     
-    		criteria.add(Expression.eq("userId", oracleId.toUpperCase()));
-    		NciPeopleT nciUser = (NciPeopleT) criteria.uniqueResult();
-    		if(nciUser == null || nciUser.getInactiveDate() != null){
+    		criteria = sess.createCriteria(NciPeopleVw.class);     
+    		criteria.add(Expression.eq("oracleId", oracleId.toUpperCase()));
+    		NciPeopleVw nciUser = (NciPeopleVw) criteria.uniqueResult();
+    		if(nciUser == null || "N".equalsIgnoreCase(nciUser.getActiveFlag())){
         		isNciUserValid = false;
         	}  
 

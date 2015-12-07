@@ -6,7 +6,7 @@
 
 <html>
 <head>
-<title>User Authourization Error</title>
+<title>User Authorization Error</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css"
 	type="text/css">
@@ -15,22 +15,24 @@
 	marginheight="10">
 	<!--Start Header -->
 	<!--Include the header -->
-	<% String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">"; %>
+	<%
+		String titleImage = "<img src=\"images/TitleQueries.gif\" width=\"98\" height=\"18\" alt=\"Queries\">";
+	%>
 	<%@ include file="Includes/PgmHeader.jsp"%>
 	<!--End Your Grants Header -->
 	<!--Start Info-->
-	<table width="800" border="0" cellspacing="0" cellpadding="0"
-		align="center">
-		<tr>
-			<td valign="top" align="left">&nbsp;</td>
-			<td valign="top" align="left" width="100%"><br> <br> <b><font
-					color="#009999">Description</font></b><br/> You do not have
-				permission to access this application. <br> If you have any
-				questions, please send an email to List NCI-NOW-L <a
-				href="mailto:NCI-NOW-L@LIST.NIH.GOV?subject=WorkBench Access">&lt;NCI-NOW-L&#64;LIST.NIH.GOV&gt;</a>
-				<br></td>
-		</tr>
-	</table>
+
+
+	<div style="width: 1000px; margin: 0px auto;">
+		<fieldset class="loginError">
+			<div>
+				<b><font color="#009999">Description</font></b><br /> <br> You
+				do not have permission to access this application. <br> If you
+				have any questions, please send an email to List NCI-NOW-L <a
+					href="mailto:NCI-NOW-L@LIST.NIH.GOV?subject=Referral Activity/ PD Assignment Access">&lt;NCI-NOW-L&#64;LIST.NIH.GOV&gt;</a>
+			</div>
+		</fieldset>
+	</div>
 	<br>
 	<%@ include file="Includes/StandardFooter.jsp"%>
 </body>

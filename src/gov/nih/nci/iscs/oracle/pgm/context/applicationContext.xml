@@ -51,7 +51,7 @@
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml</value>
                         <value>gov/nih/nci/iscs/oracle/pgm/hibernate/PdOrgVw4.hbm.xml</value>
-                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleT.hbm.xml</value>
+                        <value>gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleVw.hbm.xml</value>
 			</list>
 		</property>
 

@@ -445,8 +445,8 @@ src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdReferralVw.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPdTransferVw.java -text
-src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleT.hbm.xml -text
-src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleT.java -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleVw.hbm.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPeopleVw.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciPersonOrgRolesT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/PdCaAsgnmtVw.hbm.xml -text
