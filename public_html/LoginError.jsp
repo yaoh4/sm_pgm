@@ -33,7 +33,7 @@
 			</div>
 		</fieldset>
 	</div>
-	<br>
+	
 	<%@ include file="Includes/StandardFooter.jsp"%>
 </body>
 </html>
