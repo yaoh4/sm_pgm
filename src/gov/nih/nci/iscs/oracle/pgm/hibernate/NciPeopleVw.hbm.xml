@@ -1,6 +1,7 @@
-<?xml version="1.0"?>					
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
-"http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd">
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+    "-//Hibernate/Hibernate Mapping DTD 2.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-2.0.dtd" >
 
     
 <hibernate-mapping>
@@ -20,11 +21,7 @@
         column="NPN_ID"
         length="10"
     >
-        <meta attribute="field-description">
-           @hibernate.id            
-            type="java.lang.Long"
-            column="NPN_ID"
-        </meta>        
+        <generator class="assigned" />  
     </id>
              
   <property
