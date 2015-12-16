@@ -16,6 +16,8 @@ import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
+import net.sf.hibernate.HibernateException;
+
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.struts.util.LabelValueBean;
@@ -139,5 +141,22 @@ public class UserServiceImpl extends BaseServiceImpl
         mStringBuffer.append(")");
         return mStringBuffer.toString().replaceAll("'", "");
     }
+    
+    /**
+     * This method checks if logged in user is Valid.
+     * @param oracleId
+     * @return boolean
+      */
+    public boolean isNciUserValid(String oracleId) {
+    	boolean isNciUserValid = true;
+		  try{
+           RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+           isNciUserValid = oRetrieveUserInfoCommand.isNciUserValid(oracleId);
+          
+		  } catch (Exception ex) {
+			 throw new ServiceImplException("UserServiceImpl", "isNciUserValid", "Unable to verify if user is Valid!!! " + ex.toString());
+	      }
+	       return isNciUserValid;
+  }
 
 }

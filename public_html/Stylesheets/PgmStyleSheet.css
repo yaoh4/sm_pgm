@@ -56,9 +56,15 @@ table,td,input,select,textarea,ul,li
 }
 
 
-
-
-
+.loginError{
+	width: 925px; 
+	border: 3px solid rgb(177, 214, 251); 
+	padding: 10px;
+	margin: 10px 20px 20px 0px;	
+	FONT-FAMILY: Verdana, Arial, Helvetica, sans-serif; 
+	FONT-SIZE: 8pt;
+	COLOR: #000000
+}
 
 /* 
 Default Links.  Note that hover doesn't work in older Netscape browsers.

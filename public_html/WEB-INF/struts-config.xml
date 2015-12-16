@@ -60,6 +60,7 @@
             <forward name="generateReport" path="/crystalReport.do" />
             <forward name="continue" path="/SearchGrantsForPDA.jsp" />
             <forward name="error" path="/GrantSearchErrorPage.jsp" />
+            <forward name="loginError" path="/LoginError.jsp" />
         </action>
        <action  name="retrieveGrantsForReferralForm"
             path="/SearchGrantsForReferral"
@@ -75,6 +76,7 @@
             <forward name="generateReport" path="/crystalReport.do" />
             <forward name="showPDs" path="/applCAHist.jsp" />
             <forward name="failure" path="/GrantSearchError.do" />
+            <forward name="loginError" path="/LoginError.jsp" />
         </action>
        <action  name="acceptReferralForm"
             path="/AcceptReferral"
