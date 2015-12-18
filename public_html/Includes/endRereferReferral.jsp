@@ -16,9 +16,9 @@
       </tr>
     </table>
     <!--Start Search/Clear Buttons-->
-      <table border="0" cellspacing="0" cellpadding="0" width="800" align="right">
+      <table border="0" cellspacing="0" cellpadding="0" width="800" align="left">
         <tr> 
-          <td width="7%"  nowrap >&nbsp;</td>
+          <td width="55%"  nowrap >&nbsp;</td>
 
           <td align="right">
                <input class="button2a" type="button" value="View PD for CA"  onclick="javascript:transferview()"/></td>
