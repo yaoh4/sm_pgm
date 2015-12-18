@@ -49,16 +49,24 @@ public class ReleaseReferalCommandDao extends ActionCommandDao implements  Relea
     public Object execute(Long oApplId, String oCancerActicityCode, String oUserId) {
 
        boolean mReferalPassed = false;
+       String params = null;
 
        // get the Session object
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
        Connection mConnection = getConnection(mSession, oUserId);
        GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(mConnection);
        try {
+    	     params = "Parameters: p_appl_id - " + oApplId + 
+             		", p_released_cay_code - " + oCancerActicityCode;
+      	     logCaller(oUserId, logger,"PD_PORTFOLIO_MGT_PKG.RELEASE_REFERRAL: " + params);
   			 mReferalPassed = mGrantReferalDaoImplHelper.releaseReferral(oApplId, oCancerActicityCode);
 	   } catch (CommandDaoException ex) {
+		   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.RELEASE_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Release Referral Failed!!!" + ex.toString() );
        } catch (SQLException ex ) {
+    	   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.RELEASE_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Release Referral Failed!!!" + ex.toString() );
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());

@@ -80,5 +80,28 @@ public abstract class ActionCommandDao implements  ActionCommand {
         }
     }
 
+	/**
+ 	 * Log Caller information before DB operation
+ 	 * 
+ 	 * @param user
+ 	 * @param logger
+ 	 * @param message
+ 	 */
+ 	protected static void logCaller(String user, Log logger, String message){ 
+ 		logger.info("User " + user + ": " + message);
+ 	}
+ 	
+ 	/**
+ 	 * Log Error information after DB operation
+ 	 * 
+ 	 * @param user
+ 	 * @param logger
+ 	 * @param message
+ 	 */
+ 	protected static void logError(String user, Log logger, String message, Exception ex){ 
+ 		logger.error("User " + user + ": " + message, ex);
+ 	}
+ 	
+    
 
 }

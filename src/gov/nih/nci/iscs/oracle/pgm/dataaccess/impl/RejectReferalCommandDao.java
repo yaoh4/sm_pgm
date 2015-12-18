@@ -47,17 +47,25 @@ public class RejectReferalCommandDao extends ActionCommandDao implements  Reject
     public Object execute(Long oApplId, String oComments, String oUserId) {
 
        boolean mReferalPassed = false;
+       String params = null;
 
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
        Connection mConnection = getConnection(mSession, oUserId);
        GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(mConnection);
 
        try {
+    	    params = "Parameters: p_appl_id - " + oApplId + 
+              		", p_comments - " + oComments;
+       	    logCaller(oUserId, logger,"Calling PD_PORTFOLIO_MGT_PKG.REJECT_REFERRAL: " + params);
   			mReferalPassed =  mGrantReferalDaoImplHelper.rejectReferral(oApplId, oComments);
 
 	   } catch (CommandDaoException ex) {
+		   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.REJECT_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Reject Referral Failed!!!" + ex.toString() );
        } catch (SQLException ex ) {
+    	   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.REJECT_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Reject Referral Failed!!!" + ex.toString() );
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());
