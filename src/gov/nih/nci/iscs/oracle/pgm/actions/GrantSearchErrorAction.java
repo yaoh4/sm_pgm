@@ -65,7 +65,8 @@ public class GrantSearchErrorAction extends Action {
           }else{
               mailHandler.setFrom(userEmail);
 		  }
-          mailHandler.setTo(appInfo.getApplicationKey("ERROR_EMAIL"));
+          String to[] = appInfo.getApplicationKey("ERROR_EMAIL").split(",");
+          mailHandler.setTo(to);
           //mailHandler.setTo("michelle.engermann@oracle.com");
 
           String mSubject = ApplicationConstants.EMPTY_STRING;
