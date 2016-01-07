@@ -167,29 +167,19 @@ public class ExternalReferralAction extends NciPgmAction{
 
                 }
             }
-            if(remoteUser != null && !remoteUser.equals(""))
-            {
-                NciUserImpl nui = new NciUserImpl();
-                StringBuffer ru = new StringBuffer(50);
-                if(remoteUser.indexOf("cn=") >= 0)
-                {
-                    int cnIdx = remoteUser.indexOf("cn=");
-                    for(int i = cnIdx + 3; i < remoteUser.length() && remoteUser.charAt(i) != ','; i++)
-                        ru.append(remoteUser.charAt(i));
-
-                } else
-                {
-                    ru.append(remoteUser);
+            if(StringUtils.isNotEmpty(remoteUser)) {
+            	
+            	NciUserImpl nui = getNCIUser(request,remoteUser);
+            	
+            	//If User is Inactive/Restricted, then navigate the user to Login Error page.
+                if(nui == null || StringUtils.isEmpty(nui.getOracleId()) || "N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
+                	return false;
                 }
-                nui.setUserId(ru.toString());
-                if(setUserAttributes(nui, request)) {
-					session.setAttribute("nciuser", nui);
-                    returnValue = verifyUserForApp(request, response);				    
-				} else {
-				   logger.error("User Priviledges denied - 1!!! ");
-					return false;
-				}
-            }
+                nui.setAttribute("dbRoles", getUserDbRoles(request, (String)nui.getAttribute("nciOracleId")));
+            	session.setAttribute("nciuser", nui);
+            	returnValue = verifyUserForApp(request, response);
+
+            }            
         }
         return returnValue;
     }

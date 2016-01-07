@@ -5,12 +5,15 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
+
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserFilterInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveUserQueriesCommand;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.DbaRolePrivs;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.GrantQueriesT;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.NciPeopleVw;
 import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
@@ -141,22 +144,43 @@ public class UserServiceImpl extends BaseServiceImpl
         mStringBuffer.append(")");
         return mStringBuffer.toString().replaceAll("'", "");
     }
-    
+     
     /**
-     * This method checks if logged in user is Valid.
-     * @param oracleId
-     * @return boolean
-      */
-    public boolean isNciUserValid(String oracleId) {
-    	boolean isNciUserValid = true;
-		  try{
-           RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
-           isNciUserValid = oRetrieveUserInfoCommand.isNciUserValid(oracleId);
-          
-		  } catch (Exception ex) {
-			 throw new ServiceImplException("UserServiceImpl", "isNciUserValid", "Unable to verify if user is Valid!!! " + ex.toString());
-	      }
-	       return isNciUserValid;
-  }
+     * This method retrieves information of logged in user from NciPeopleVw and populates NCIUser.
+     * @param userId    
+     * @return nciUser
+     */
+    public NciUserImpl getNCIUser(String userId) {
+    	NciPeopleVw nciPeopleVw = null;
+    	try{
+    		RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+    		nciPeopleVw = oRetrieveUserInfoCommand.getNCIUserInformation(userId);
+
+    	} catch (Exception ex) {
+    		throw new ServiceImplException("UserServiceImpl", "getNCIUser", "Unable to retrieve NciPeopleVw. " + ex.toString());
+    	} 
+
+    	if(nciPeopleVw == null){
+    		logger.info("I2E Account doesn't exist for User with userId: "+userId);
+    		return null;
+    	}
+
+    	NciUserImpl nciUser = new NciUserImpl();
+    	nciUser.setUserId(nciPeopleVw.getNihNetworkId());
+    	nciUser.setAttribute("nciOracleId", nciPeopleVw.getOracleId());
+    	nciUser.setAttribute("givenName", nciPeopleVw.getFirstName());
+    	nciUser.setAttribute("lastName", nciPeopleVw.getLastName());
+
+    	String givenName = (String)nciUser.getAttribute("givenName");
+    	String lastName = (String)nciUser.getAttribute("lastName");
+    	if (givenName ==  null) givenName = "";
+    	if (lastName == null) lastName = "";
+    	nciUser.setAttribute("fullName",givenName+" "+lastName);
+
+    	nciUser.setAttribute("mail", nciPeopleVw.getEmailAddress());
+    	nciUser.setAttribute("activeFlag", nciPeopleVw.getActiveFlag());
+
+    	return nciUser;
+    }
 
 }

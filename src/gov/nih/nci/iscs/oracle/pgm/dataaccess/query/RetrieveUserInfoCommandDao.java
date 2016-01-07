@@ -101,37 +101,31 @@ public class RetrieveUserInfoCommandDao extends AccessCommandDao implements  Ret
 		return mCriteria;
     }
 
+    
     /**
-     * This method checks if logged in user is Valid.
-     * @param oracleId
-     * @return boolean
-     * @throws HibernateException 
+     * This method retrieves information of logged in user from NciPeopleVw.
+     * @param userId    
+     * @return nciPeopleVw    
      */
-    public boolean isNciUserValid(String oracleId) throws HibernateException{
-    	logger.info("Validating NCIUser with oracleId : "+oracleId);
-    	boolean isNciUserValid = true; 
-    	Session sess = null;
+    public NciPeopleVw getNCIUserInformation(String userId) throws Exception{ 
+    	NciPeopleVw nciPeopleVw = null;
     	Criteria criteria = null;
+    	Session session = null;
     	try{
-    		sess = SessionFactoryUtils.getSession(getSessionFactory(), true);
-    		criteria = sess.createCriteria(NciPeopleVw.class);     
-    		criteria.add(Expression.eq("oracleId", oracleId.toUpperCase()));
-    		NciPeopleVw nciUser = (NciPeopleVw) criteria.uniqueResult();
-    		if(nciUser == null || "N".equalsIgnoreCase(nciUser.getActiveFlag())){
-        		isNciUserValid = false;
-        	}  
-
-    	} catch (CommandDaoException re) {
-    		logger.error("Error occurred while validating NCIUser : ", re);
-			throw re;
+    		session = SessionFactoryUtils.getSession(getSessionFactory(), true);
+    		criteria = session.createCriteria(NciPeopleVw.class);      		
+    		criteria.add(Expression.eq("nihNetworkId", userId.toUpperCase()));    		
+    		nciPeopleVw = (NciPeopleVw) criteria.uniqueResult();
+        	
+    	} catch (Throwable ex) {
+    		logger.error("Error occurred while retrieving I2E Account of NCI User with nihNetworkId: "+userId, ex);
+			throw ex;
 		}
-    	finally {
-    		if(sess != null){
-    			 SessionFactoryUtils.closeSessionIfNecessary(sess, getSessionFactory());
+    	finally{
+    		if(session != null){
+    			SessionFactoryUtils.closeSessionIfNecessary(session, getSessionFactory());
     		}
-    	} 
-    	  	
-    	logger.info("Is NCIUser with oracleId : "+oracleId+" Valid? --> "+ isNciUserValid);
-    	return isNciUserValid;
-    }
+    	}    	
+    	return nciPeopleVw;
+    }      
 }

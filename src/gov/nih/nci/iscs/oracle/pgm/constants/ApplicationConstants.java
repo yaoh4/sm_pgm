@@ -11,7 +11,6 @@ public class ApplicationConstants {
 	public static final String APPLICATION_KEY = "pgm";
 	public static final String USER_LOGIN_FAILURE = "failure";
     public static final String PGM_CONTEXT_FACTORY = "pgmContextFactory";
-    public static final String LDAP_SEARCHER = "ldapsearcher";
     public static final String ALL_VALUES = "ALL_VALUES";
 	public static final String MY_PORTFOLIO = "PD_NPE_ID";
 	public static final String USER_QUERY_LIST = "queryList";

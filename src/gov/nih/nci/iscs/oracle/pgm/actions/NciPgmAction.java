@@ -1,31 +1,14 @@
 package gov.nih.nci.iscs.oracle.pgm.actions;
 
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.UserLoginException;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
-import gov.nih.nci.iscs.oracle.common.ldap.LDAPUtil;
 
-import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
-import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
-
-import org.apache.struts.action.*;
-
+import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
-import org.apache.log4j.LogManager;
-import org.apache.log4j.Logger;
-
-import org.apache.struts.action.ActionMessage;
-import org.apache.struts.action.ActionMessages;
-import org.apache.struts.action.ActionError;
-import org.apache.struts.action.ActionErrors;
-import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
-import org.apache.struts.action.ActionMapping;
-
-import java.util.*;
-
-import javax.naming.directory.Attributes;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -35,21 +18,23 @@ import javax.servlet.http.HttpSession;
 import org.apache.commons.lang.StringUtils;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.struts.action.Action;
+import org.apache.struts.action.ActionError;
+import org.apache.struts.action.ActionErrors;
+import org.apache.struts.action.ActionForm;
+import org.apache.struts.action.ActionForward;
+import org.apache.struts.action.ActionMapping;
+import org.apache.struts.action.ActionMessage;
+import org.apache.struts.action.ActionMessages;
 
 import sun.misc.BASE64Decoder;
 
 
 public abstract class NciPgmAction extends Action {
-  //  private Logger logger = LogManager.getLogger(NciPgmAction.class);
+  
     private Log logger = LogFactory.getLog(NciPgmAction.class);
-    private static String USER_LOGIN_FAILURE = "failure";
     private static String LOGIN_ERROR = "loginError";
-    private String[] stAttrDirIDs = {
-        "nciOracleID", "fullName", "givenName", "sn", "mail", "telephoneNumber",
-        "cn"
-    };
-    private static final String INVALID_LDAP_ENTRY="Could not find entry in LDAP server.";
-
+   
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
         throws UserLoginException, Exception
     {   
@@ -94,165 +79,25 @@ public abstract class NciPgmAction extends Action {
                }
 
             }
-            if(remoteUser != null && !remoteUser.equals(""))
-            {
-                NciUserImpl nui = new NciUserImpl();
-                StringBuffer ru = new StringBuffer(50);
-                if(remoteUser.indexOf("cn=") >= 0)
-                {
-                    int cnIdx = remoteUser.indexOf("cn=");
-                    for(int i = cnIdx + 3; i < remoteUser.length() && remoteUser.charAt(i) != ','; i++)
-                        ru.append(remoteUser.charAt(i));
+            if(StringUtils.isNotEmpty(remoteUser)) {
+            	
+            	NciUserImpl nui = getNCIUser(request,remoteUser);
+            	
+            	//If User is Inactive/Restricted, then navigate the user to Login Error page.
+                if(nui == null || StringUtils.isEmpty(nui.getOracleId()) || "N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
+                	logger.error(new UserLoginException(this.getClass().getName(), "isNciUserValid", "Invalid NCI user. ", request.getSession()));
+                	return false;
+                }
+                nui.setAttribute("dbRoles", getUserDbRoles(request, (String)nui.getAttribute("nciOracleId")));
+            	session.setAttribute("nciuser", nui);
+            	returnValue = verifyUserForApp(request, response);
 
-                } else
-                {
-                    ru.append(remoteUser);
-                }
-                nui.setUserId(ru.toString());
-                
-                boolean isLdapSuccessful = true;
-                try{
-                	isLdapSuccessful = setUserAttributes(nui, request);
-                }catch (UserLoginException ex) {
-                    logger.error( "Error while retrieving Ldap data. ",ex);
-                     return false;
-                }
-                
-                if(isLdapSuccessful) {
-                	
-                	//If User is Inactive, then navigate the user to Login Error page.
-                    if(!isNciUserValid(request, (String)nui.getAttribute("nciOracleId"))){                    	 
-                    	logger.error(new UserLoginException(this.getClass().getName(), "isNciUserValid", "Invalid NCI user. ", request.getSession()));
-                    	return false;
-                    }
-                	
-					session.setAttribute("nciuser", nui);
-                    returnValue = verifyUserForApp(request, response);
-				} else {
-				   logger.error("User Priviledges denied - 1!!! ");
-					return false;
-				}
             }
         }
         return returnValue;
     }
     public abstract ActionForward executeAction(ActionMapping actionmapping, ActionForm actionform, HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse)
         throws Exception;
-
-  /**
-   * Sets the user attributes from Ldap, this method is called from the super class
-   * after it gets the remote user.
-   * @param user
-   * @param request
-   * @throws java.lang.Exception
-   */
-    public boolean setUserAttributes(NciUser user, HttpServletRequest request)
-        throws UserLoginException, Exception {
-        LDAPUtil ctx = (LDAPUtil) this.getAppAttribute(request, ApplicationConstants.LDAP_SEARCHER);
-        String stFDN = null;        
-        Attributes attribs =  null;
-        
-
-          if ((user != null) && (user.isValid())) {
-            try {
-                stFDN = ctx.getUserFDN(user.getUserId());
-
-                attribs = ctx.getAttributes(stFDN, stAttrDirIDs);
-                
-            }
-            catch (Exception ex) {
-            	logger.error(ex);     
-            	if(INVALID_LDAP_ENTRY.equalsIgnoreCase(ex.getMessage())){        			            
-            		throw new UserLoginException(this.getClass().getName(), 
-            				"setUserAttributes", 
-            				"Error while connecting to LDAP. " + 	ex.getMessage(),request.getSession());
-            	}
-            	else{
-            		throw ex;
-            	}
-            }   
-
-            try{ 
-            	if (attribs.get("mail").get() != null) {
-                    user.setAttribute("mail", attribs.get("mail").get());
-                } else {
-                    user.setAttribute("mail", null);
-                }
-            } catch (Exception ex) {
-                logger.error(ex);
-                throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP User attribute mail. " + ex.getMessage(), request.getSession());
-            }
-
-            try {
-                if (attribs.get("nciOracleId").get() != null) {
-                    user.setAttribute("nciOracleId",
-                        attribs.get("nciOracleId").get());
-                } else {
-                    user.setAttribute(("nciOracleId"), null);
-                }
-            } catch (Exception ex) {
-                logger.error(ex);
-    		    throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP attribute for nciOracleId. " + ex.getMessage(), request.getSession());
-        }
-
-            try {
-                if (attribs.get("givenName").get() != null) {
-                    user.setAttribute("givenName",
-                        attribs.get("givenName").get());
-                } else {
-                    user.setAttribute("givenName", null);
-                }
-            } catch (Exception ex) {
-                logger.error(ex);
-                //throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
-
-            }
-            try
-            {
-                 if (attribs.get("sn").get() != null)
-                 {
-                     user.setAttribute("lastName", attribs.get("sn").get());
-                 }
-                 else
-                 {
-                    user.setAttribute("lastName", null);
-                 }
-            } catch(Exception ex) {
-                logger.error(ex);
-				throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Invalid LDAP attribute for lastName.. " + ex.getMessage(),  request.getSession());
-            }
-
-            try {
-                if (attribs.get("fullName").get() != null) {
-                    user.setAttribute("fullName", attribs.get("fullName").get());
-                } else {
-                    user.setAttribute("fullName", null);
-                }
-            } catch (Exception ex) {
-                String givenName = (String)user.getAttribute("givenName");
-                String lastName = (String)user.getAttribute("lastName");
-                if (givenName ==  null) givenName = "";
-                if (lastName == null) lastName = "";
-                user.setAttribute("fullName",givenName+" "+lastName);
-                logger.error(ex);
-				//throw new UserLoginException("Error verifying the user permissions and roles required for this application.", ex, request.getSession());
-            }
-            try
-            {
-               Set roleSet = getUserDbRoles(request, (String)user.getAttribute("nciOracleId"));
-               if(roleSet.size() == 0){
-				   throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application.", request.getSession());
-			   }
-               user.setAttribute("dbRoles", roleSet);
-            }
-            catch (Exception ex)
-            {
-			   throw new UserLoginException(this.getClass().getName(), "setUserAttributes", "Error verifying the user permissions and roles required for this application." + ex.getMessage(), request.getSession());
-            }
-        }
-
-        return true;
-    }
 
   /**
      * Gets the set of roles a user is granted in the database.
@@ -270,17 +115,15 @@ public abstract class NciPgmAction extends Action {
     }
     
     /**
-     * This method checks if logged in user is Valid.
-     * @param oracleId
-     * @return boolean
+     * This method retrieves information of logged in user from NciPeopleVw and populates NCIUser.
+     * @param userId    
+     * @return NciUserImpl
      */
-    public boolean isNciUserValid(HttpServletRequest request, String nciOracleId) throws Exception
+    public NciUserImpl getNCIUser(HttpServletRequest request, String userId) throws Exception
     {
        Object mApplicationContext = getAppAttribute(request, ApplicationConstants.PGM_CONTEXT_FACTORY);
-       UserServiceImpl mUserServiceImpl =  new UserServiceImpl(mApplicationContext, nciOracleId);
-       boolean isNciUserValid = mUserServiceImpl.isNciUserValid(nciOracleId);
-       return isNciUserValid;
-
+       UserServiceImpl mUserServiceImpl =  new UserServiceImpl(mApplicationContext, userId);
+       return  mUserServiceImpl.getNCIUser(userId);
     }
     
     /**
