@@ -54,7 +54,7 @@
              <td width="25%">&nbsp;</td>
             
           </tr>
-        <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+        <table border="0" cellspacing="0" cellpadding="0" width="100%" align="left">
 
         <tr>
           <td width="20">&nbsp;</td>
@@ -62,16 +62,16 @@
             <script language="JavaScript" type="text/javascript">
               // define table with border attribute for Netscape 4.7x browsers 
               if (ns4 == 1) {
-                document.write('<table summary="Grants Table" border="1" cellpadding="1" cellspacing="1" width="100%">'); 
+                document.write('<table summary="Grants Table" border="1" cellpadding="1" cellspacing="1" width="800">'); 
               } else {
                 // otherwise no border is required
-                document.write('<table summary="Grants Table" cellpadding="1" cellspacing="1" width="100%">'); 
+                document.write('<table summary="Grants Table" cellpadding="1" cellspacing="1" width="800">'); 
               } 
            </script>
      
   
            <noscript>
-             <table summary="Grants Table" cellpadding="1" cellspacing="1" width="100%">
+             <table summary="Grants Table" cellpadding="1" cellspacing="1" width="800">
            </noscript>	  
               <tr> 
                   <ncijsp:rereferReferralHeader />

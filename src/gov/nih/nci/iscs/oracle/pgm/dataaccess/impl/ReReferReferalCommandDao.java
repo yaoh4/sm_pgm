@@ -45,6 +45,7 @@ public class ReReferReferalCommandDao extends ActionCommandDao implements  ReRef
     public Object execute(Long oApplId, String oCancerActicityCode, String oComments, String oUserId) {
 
        boolean mReferalPassed = false;
+       String params = null;
 
        // get the Session object
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
@@ -52,11 +53,19 @@ public class ReReferReferalCommandDao extends ActionCommandDao implements  ReRef
        GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(mConnection);
 
        try {
+    	     params = "Parameters: p_appl_id - " + oApplId + 
+              		", p_new_cay_code - " + oCancerActicityCode +
+              		", p_comments - " + oComments;
+       	     logCaller(oUserId, logger,"Calling PD_PORTFOLIO_MGT_PKG.REREFER_REFERRAL: " + params);
   			 mReferalPassed = mGrantReferalDaoImplHelper.reReferReferral(oApplId, oCancerActicityCode, oComments);
 
 	   } catch (CommandDaoException ex) {
+		   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.REREFER_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Re-refer Referral Failed!!!" + ex.toString() );
        } catch (SQLException ex ) {
+    	   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.REREFER_REFERRAL : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("Re-refer Referral Failed!!!" + ex.toString() );
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());
