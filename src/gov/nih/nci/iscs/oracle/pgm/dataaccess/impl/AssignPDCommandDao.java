@@ -46,6 +46,7 @@ public class AssignPDCommandDao extends ActionCommandDao implements  AssignPDCom
                            java.sql.Timestamp oAssignmentDate, String oPdTransferCode, String oUserId) {
 
        boolean mAssignmentPassed = false;
+       String params = null;
 
        // get the Session object
        Session mSession = SessionFactoryUtils.getSession(getSessionFactory(), true);
@@ -53,10 +54,20 @@ public class AssignPDCommandDao extends ActionCommandDao implements  AssignPDCom
        PdAssignmentDaoImplHelper mPdAssignmentDaoImplHelper = new PdAssignmentDaoImplHelper(mConnection);
 
        try {
+    	     params = "Parameters: p_appl_id - " + oApplId + 
+           		", p_new_npe_id - " + oNpeId + 
+           		", p_new_cay_code - " + oCancerActivity +
+           		", p_pd_transfer_initial_code - " + oPdTransferCode + 
+           		", p_new_date" + oAssignmentDate;
+    	     logCaller(oUserId, logger,"Calling PD_PORTFOLIO_MGT_PKG.ASSIGN_CA_PD: " + params);
   			 mAssignmentPassed = mPdAssignmentDaoImplHelper.assignPD(oApplId, oNpeId, oCancerActivity, oPdTransferCode, oAssignmentDate);
 	   } catch (CommandDaoException ex) {
+		   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.ASSIGN_CA_PD : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("PD Assignment Failed!!!" + ex.toString() );
        } catch (SQLException ex ) {
+    	   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.ASSIGN_CA_PD : ", ex);
+           logger.error(params);
 		   throw new CommandDaoException("PD Assignment Failed!!!" + ex.toString() );
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());

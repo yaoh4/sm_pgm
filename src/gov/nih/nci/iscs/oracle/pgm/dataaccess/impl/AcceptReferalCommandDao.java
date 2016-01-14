@@ -53,10 +53,17 @@ public class AcceptReferalCommandDao extends ActionCommandDao implements  Accept
        GrantReferalDaoImplHelper mGrantReferalDaoImplHelper = new GrantReferalDaoImplHelper(mConnection);
 
        try {
+    	     logCaller(oUserId, logger,"Calling PD_PORTFOLIO_MGT_PKG.ACCEPT_REFERRAL, appl id: " + oApplId + " npe id: " + oNpeId);
   			 mReferalPassed = mGrantReferalDaoImplHelper.acceptReferral(oApplId, oNpeId);
 	   } catch (CommandDaoException ex) {
+		   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.ACCEPT_REFERRAL : ", ex);
+           logger.error("Parameters: p_appl_id - " + oApplId +
+           		", p_new_npe_id - " + oNpeId);
 		   throw new CommandDaoException("Accept Referral Failed!!!" + ex.toString() );
        } catch (SQLException ex ) {
+    	   logError(oUserId, logger,"error occured during PD_PORTFOLIO_MGT_PKG.ACCEPT_REFERRAL : ", ex);
+           logger.error("Parameters: p_appl_id - " + oApplId +
+           		", p_new_npe_id - " + oNpeId);
 		   throw new CommandDaoException("Accept Referral Failed!!!" + ex.toString() );
        } finally {
 		   SessionFactoryUtils.closeSessionIfNecessary(mSession, getSessionFactory());

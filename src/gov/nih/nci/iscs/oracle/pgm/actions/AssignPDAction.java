@@ -144,6 +144,8 @@ public class AssignPDAction extends NciPgmAction {
        if(pdIdForLoad == null || pdIdForLoad.trim().equalsIgnoreCase(ApplicationConstants.EMPTY_STRING)) {
           super.logErrors(messages, "validation", "errors.no.asignment.pd.selected");
 	   	  this.saveMessages(request, messages);
+	   	  mPdAssignmentForm.setRequestAction(ApplicationConstants.ASSIGN_PORTFOLIO);
+	   	  return mapping.findForward("continue");
 	   }else{
 		   mSelectedGrants = (SelectedGrants) request.getSession().getAttribute(ApplicationConstants.SELECTED_GRANTS);
 	       mSelectedGrants.processKeyForPortfolioAssignmentAction(pdIdForLoad.substring(2), pdIdForLoad.substring(0,2));
