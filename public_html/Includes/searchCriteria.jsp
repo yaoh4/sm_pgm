@@ -168,7 +168,7 @@
                   <td nowrap align="right"><b>Name:</b></td>
                   <td nowrap width="5"><img src="images/spacer.gif" alt="" width="5" height="10"></td>
                   <td nowrap> 
-                    <html:text property="instName" size="30" maxlength="30"/>
+                    <html:text property="instName" size="30" maxlength="120"/>
                   </td>
                 </tr>
                 <tr> 
