@@ -85,7 +85,18 @@ public abstract class NciPgmAction extends Action {
             	
             	//If User is Inactive/Restricted, then navigate the user to Login Error page.
                 if(nui == null || StringUtils.isEmpty(nui.getOracleId()) || "N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
-                	logger.error(new UserLoginException(this.getClass().getName(), "isNciUserValid", "Invalid NCI user. ", request.getSession()));
+                	
+                	String accessError = "User "+ remoteUser +" is not authorized to access PGM application. ";
+            		String errorReason = "";
+            		if(nui != null){
+            			if(StringUtils.isEmpty(nui.getOracleId())){
+            				errorReason = "OracleId is Null.";
+            			}
+            			else if("N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
+            				errorReason = "I2E Account is not Active.";
+            			}            			
+            		}            		
+                	logger.error(new UserLoginException(this.getClass().getName(), "isNciUserValid", accessError + errorReason, request.getSession()));
                 	return false;
                 }
                 nui.setAttribute("dbRoles", getUserDbRoles(request, (String)nui.getAttribute("nciOracleId")));
