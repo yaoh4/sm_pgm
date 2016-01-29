@@ -15,7 +15,7 @@ public class CommandDaoException extends RuntimeException {
 
 	public CommandDaoException(String message) {
 		super(message);
-		logger.error(" An application exception has aoocurred!!! " + message);
+		logger.error(" An application exception has occurred!!! " + message, this);
 	}
 
 	//public CommandDaoException(String message, Throwable cause) {

@@ -81,28 +81,40 @@ public abstract class NciPgmAction extends Action {
             }
             if(StringUtils.isNotEmpty(remoteUser)) {
             	
-            	NciUserImpl nui = getNCIUser(request,remoteUser);
+            	NciUserImpl nciUser = getNCIUser(request,remoteUser);
             	
-            	//If User is Inactive/Restricted, then navigate the user to Login Error page.
-                if(nui == null || StringUtils.isEmpty(nui.getOracleId()) || "N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
-                	
-                	String accessError = "User "+ remoteUser +" is not authorized to access PGM application. ";
-            		String errorReason = "";
-            		if(nui != null){
-            			if(StringUtils.isEmpty(nui.getOracleId())){
-            				errorReason = "OracleId is Null.";
-            			}
-            			else if("N".equalsIgnoreCase((String)nui.getAttribute("activeFlag"))){
-            				errorReason = "I2E Account is not Active.";
-            			}            			
-            		}            		
-                	logger.error(new UserLoginException(this.getClass().getName(), "isNciUserValid", accessError + errorReason, request.getSession()));
+            	String accessError = "User "+ remoteUser +" is not authorized to access PGM application. ";
+        		String errorReason = "";
+        		
+        		if(nciUser == null){
+        			logger.error(accessError);
+                	navigateToHome(this.getClass().getName(),request.getSession());
                 	return false;
-                }
-                nui.setAttribute("dbRoles", getUserDbRoles(request, (String)nui.getAttribute("nciOracleId")));
-            	session.setAttribute("nciuser", nui);
+        		}
+        		
+        		//If OracleId is Null
+        		if(StringUtils.isEmpty(nciUser.getOracleId())){
+    				errorReason = "OracleId is Null.";
+    			}
+        		//If User is Inactive
+    			else if("N".equalsIgnoreCase((String)nciUser.getAttribute("activeFlag"))){
+    				errorReason = "I2E Account is not Active.";
+    			}   
+        		
+        		//If User is Inactive, then navigate the user to Login Error page.
+        		if(StringUtils.isNotEmpty(errorReason)){
+        			logger.error(accessError + errorReason);
+                	navigateToHome(this.getClass().getName(),request.getSession());
+                	return false;
+        		}
+            	
+                nciUser.setAttribute("dbRoles", getUserDbRoles(request, (String)nciUser.getAttribute("nciOracleId")));
+            	session.setAttribute("nciuser", nciUser);
             	returnValue = verifyUserForApp(request, response);
 
+            }
+            else{
+            	throw new Exception("Site Minder did not pass the SM User.");
             }
         }
         return returnValue;
@@ -225,5 +237,33 @@ public abstract class NciPgmAction extends Action {
     }*/
 
  }
+ 
+ /**
+  * This method decides which application should be displayed :  PD assignment or Referral activity.
+  * @param className
+  * @param session
+  */
+ private void navigateToHome(String className, HttpSession session){
 
+	    if(className.equalsIgnoreCase("SearchGrantsForReferralAction") ||
+	       className.equalsIgnoreCase("ExternalReferralAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.ExternalReferralAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForReferralAction")){
+	       session.setAttribute("returnTag", "Referral Activity Query");
+	       session.setAttribute("returnAction", "SearchGrantsForReferral");
+	       session.setAttribute("applicationName", "Referral");
+	       return;
+	    }
+	    if(className.equalsIgnoreCase("SearchGrantsForPDAAction") ||
+	       className.equalsIgnoreCase("gov.nih.nci.iscs.oracle.pgm.actions.SearchGrantsForPDAAction")){
+	       session.setAttribute("returnTag", "PD Assignment Query");
+	       session.setAttribute("returnAction", "SearchGrantsForPDA");
+	       session.setAttribute("applicationName", "PD");
+	       return;
+	    }
+	    session.setAttribute("returnTag", "PD Assignment Query");
+	    session.setAttribute("returnAction", "SearchGrantsForPDA");
+	    session.setAttribute("applicationName", "PD");
+
+	 }
 }

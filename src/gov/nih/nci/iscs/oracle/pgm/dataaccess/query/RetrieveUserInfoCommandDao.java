@@ -118,8 +118,7 @@ public class RetrieveUserInfoCommandDao extends AccessCommandDao implements  Ret
     		nciPeopleVw = (NciPeopleVw) criteria.uniqueResult();
         	
     	} catch (Throwable ex) {
-    		logger.error("Error occurred while retrieving I2E Account of NCI User with nihNetworkId: "+userId, ex);
-			throw ex;
+    		throw new CommandDaoException("Error occurred while retrieving I2E Account of NCI User with nihNetworkId: "+userId);			
 		}
     	finally{
     		if(session != null){

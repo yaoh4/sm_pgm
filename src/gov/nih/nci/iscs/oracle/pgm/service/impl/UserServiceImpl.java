@@ -150,15 +150,10 @@ public class UserServiceImpl extends BaseServiceImpl
      * @param userId    
      * @return nciUser
      */
-    public NciUserImpl getNCIUser(String userId) {
+    public NciUserImpl getNCIUser(String userId) throws Exception {
     	NciPeopleVw nciPeopleVw = null;
-    	try{
-    		RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
-    		nciPeopleVw = oRetrieveUserInfoCommand.getNCIUserInformation(userId);
-
-    	} catch (Exception ex) {
-    		throw new ServiceImplException("UserServiceImpl", "getNCIUser", "Unable to retrieve NciPeopleVw. " + ex.toString());
-    	} 
+    	RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+    	nciPeopleVw = oRetrieveUserInfoCommand.getNCIUserInformation(userId);
 
     	if(nciPeopleVw == null){
     		logger.info("I2E Account doesn't exist for User with userId: "+userId);
