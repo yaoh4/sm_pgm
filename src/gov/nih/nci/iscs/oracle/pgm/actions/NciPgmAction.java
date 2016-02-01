@@ -96,6 +96,10 @@ public abstract class NciPgmAction extends Action {
         		if(StringUtils.isEmpty(nciUser.getOracleId())){
     				errorReason = "OracleId is Null.";
     			}
+        		//If Email is Null
+                if(StringUtils.isEmpty((String)nciUser.getAttribute("mail"))){
+    				errorReason = "Email is Null.";
+    			}
         		//If User is Inactive
     			else if("N".equalsIgnoreCase((String)nciUser.getAttribute("activeFlag"))){
     				errorReason = "I2E Account is not Active.";
