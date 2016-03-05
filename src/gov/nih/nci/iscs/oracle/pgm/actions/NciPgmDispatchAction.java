@@ -50,7 +50,8 @@ public abstract class NciPgmDispatchAction extends NciBaseDispatchAction {
 
                 attribs = ctx.getAttributes(stFDN, stAttrDirIDs);
 
-                if (attribs.get("mail").get() != null) {
+                //Changed for appscan support
+                if (attribs.get("mail") != null) {
                     user.setAttribute("mail", attribs.get("mail").get());
                 } else {
                     user.setAttribute("mail", null);
