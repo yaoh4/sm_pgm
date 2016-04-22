@@ -40,8 +40,27 @@
         <td align="left">&nbsp;</td>
       </tr>
   </table>
+  
   <%@include file="searchCriteriaLeft.jsp"%>
-  <%@include file="searchCriteriaRightforPDA.jsp"%>
+  
+  <input type="hidden" name="mock.version" value="<%= request.getParameter("mock.version") %>" />
+  
+  <logic:notPresent parameter="mock.version">
+	  <%@include file="searchCriteriaRightforPDA.jsp"%>
+  </logic:notPresent>
+  <logic:equal parameter="mock.version" value="null">
+  	<%@include file="searchCriteriaRightforPDA.jsp"%>
+  </logic:equal>
+  <logic:equal parameter="mock.version" value="check">
+  	<%@include file="searchCriteriaRightforPDA_checkbox.jsp"%>
+  </logic:equal>
+  <logic:equal parameter="mock.version" value="inactive">
+	<%@include file="searchCriteriaRightforPDA_inactive.jsp"%>
+</logic:equal>
+  <logic:equal parameter="mock.version" value="separator">
+  	<%@include file="searchCriteriaRightforPDA_separator.jsp"%>
+  </logic:equal>
+  
   <%@include file="searchCriteriaPDA.jsp"%>
   <%@include file="endSearchCriteria.jsp"%>
 </logic:notEqual>
