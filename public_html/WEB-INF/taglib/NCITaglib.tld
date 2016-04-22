@@ -485,6 +485,24 @@
        </info>
 
    </tag>
+      <tag>
+       <name>formatProgramDirectorSelectTagInactive</name>
+       <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.FormatProgramDirectorSelectTagInactive</tagclass>
+       <bodycontent>EMPTY</bodycontent>
+       <info>
+   	format the referral result
+       </info>
+
+   </tag>
+      <tag>
+       <name>formatProgramDirectorSelectTagSeparator</name>
+       <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.FormatProgramDirectorSelectTagSeparator</tagclass>
+       <bodycontent>EMPTY</bodycontent>
+       <info>
+   	format the referral result
+       </info>
+
+   </tag>
    <tag>
       <name>formatSortCriteria</name>
       <tagclass>gov.nih.nci.iscs.oracle.pgm.tag.FormatSortCriteria</tagclass>
