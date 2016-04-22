@@ -166,6 +166,9 @@ public_html/Includes/searchCriteriaPDA.jsp -text
 public_html/Includes/searchCriteriaPDAOrg.jsp -text
 public_html/Includes/searchCriteriaReferral.jsp -text
 public_html/Includes/searchCriteriaRightforPDA.jsp -text
+public_html/Includes/searchCriteriaRightforPDA_checkbox.jsp -text
+public_html/Includes/searchCriteriaRightforPDA_inactive.jsp -text
+public_html/Includes/searchCriteriaRightforPDA_separator.jsp -text
 public_html/Includes/searchCriteriaRightforReferral.jsp -text
 public_html/Includes/selectionButtons.jsp -text
 public_html/JavascriptFiles.js -text
