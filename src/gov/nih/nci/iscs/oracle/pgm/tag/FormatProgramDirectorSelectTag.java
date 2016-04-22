@@ -130,14 +130,14 @@ public class FormatProgramDirectorSelectTag extends TagSupport {
 		}
 
 		return buf;
-  }
-   private List getPDListForCancerActivity(String cancerActivity) {
+	}
 
- 	// get the lookup infomation
-     ProgamDirectorServiceImpl mProgamDirectorServiceImpl =  new ProgamDirectorServiceImpl(mApplicationContext);
- 	 List mList  = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity);
-     return mList;
-   }
+	private List getPDListForCancerActivity(String cancerActivity) {
 
+		// get the lookup infomation
+		ProgamDirectorServiceImpl mProgamDirectorServiceImpl = new ProgamDirectorServiceImpl(mApplicationContext);
+		List mList = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity, false, false);
+		return mList;
+	}
 
- }
+}
