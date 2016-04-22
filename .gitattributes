@@ -517,6 +517,8 @@ src/gov/nih/nci/iscs/oracle/pgm/tag/FormatGrantListTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatPDAssignmentListTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatPDorgSelectTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTag.java -text
+src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTagInactive.java -text
+src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTagSeparator.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatReferralResultTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatSortCriteria.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/LookupSelectTag.java -text
