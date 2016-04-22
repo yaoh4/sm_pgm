@@ -297,7 +297,9 @@ src/gov/nih/nci/iscs/oracle/pgm/actions/SearchGrantsForPDAAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/SearchGrantsForReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/StatusAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/helper/GrantSearchResultComparator.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/helper/LabelValueBeanComparator.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/helper/SearchGrantsActionHelper.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/helper/TimeInsensitiveDateComparator.java -text
 src/gov/nih/nci/iscs/oracle/pgm/businessobject/GrantReferal.java -text
 src/gov/nih/nci/iscs/oracle/pgm/businessobject/GrantReferalImpl.java -text
 src/gov/nih/nci/iscs/oracle/pgm/constants/ApplicationConstants.java -text
