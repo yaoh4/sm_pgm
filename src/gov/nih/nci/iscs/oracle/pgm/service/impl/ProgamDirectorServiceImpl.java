@@ -196,7 +196,19 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl {
 			throw new ServiceImplException("ProgamDirectorServiceImpl", "getAllProgramDirectors",
 					"Unable to obtain Program Director from the database!!! " + ex.toString());
 		}
-		if(sortInactive) Collections.sort(mLabelValueBeanList);
+		if(sortInactive) {
+			Collections.sort(mLabelValueBeanList);
+			int index = 0;
+			boolean foundInactive = false;
+			for(Iterator i = mLabelValueBeanList.iterator(); i.hasNext();) {
+				if(((ActiveLabelValueBean)i.next()).getActive() == false) {
+					foundInactive = true;
+					break;
+				}
+				index++;
+			}
+			if(foundInactive) mLabelValueBeanList.add(index, new ActiveLabelValueBean("-------- Inactive PDs --------", "-1", false));
+		}
 		return mLabelValueBeanList;
 	}
 	/*
