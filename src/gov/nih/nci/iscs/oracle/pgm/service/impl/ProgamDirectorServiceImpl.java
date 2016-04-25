@@ -1,27 +1,34 @@
 package gov.nih.nci.iscs.oracle.pgm.service.impl;
 
-import java.util.HashSet;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
-import java.util.*;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
-import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorsInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDOrgInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDInfoForAssignmentCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
-import gov.nih.nci.iscs.oracle.pgm.actions.helper.LabelValueBeanComparator;
-import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
-import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw;
-import gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.apache.struts.util.LabelValueBean;
-import org.apache.commons.lang.StringUtils;
+
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.ActiveLabelValueBean;
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.LabelValueBeanComparator;
+import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveActivePDInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDCancerActivityInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDInfoForAssignmentCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrievePDOrgInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveProgamDirectorsInfoCommand;
+import gov.nih.nci.iscs.oracle.pgm.exceptions.ServiceImplException;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.PdCaAsgnmtVw;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.PdOrgVw4;
 
 /**
  * A jdbc implementation of the UserHandler interface.
@@ -182,14 +189,14 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl {
 
 				}
 				String inactiveIndicator = displayInactive ? (activePDs.contains(pdName) ? "" : " [Inactive]") : "";
-				mLabelValueBean = new LabelValueBean(pdName + pdCode + ")" + inactiveIndicator , personId);
+				mLabelValueBean = new ActiveLabelValueBean(pdName + pdCode + ")" + inactiveIndicator , personId, activePDs.contains(pdName));
 				mLabelValueBeanList.add(mLabelValueBean);
 			}
 		} catch (Exception ex) {
 			throw new ServiceImplException("ProgamDirectorServiceImpl", "getAllProgramDirectors",
 					"Unable to obtain Program Director from the database!!! " + ex.toString());
 		}
-		if(sortInactive) Collections.sort(mLabelValueBeanList, new LabelValueBeanComparator());
+		if(sortInactive) Collections.sort(mLabelValueBeanList);
 		return mLabelValueBeanList;
 	}
 	/*

@@ -2,6 +2,7 @@ package gov.nih.nci.iscs.oracle.pgm.tag;
 
 import org.apache.struts.util.LabelValueBean;
 
+import gov.nih.nci.iscs.oracle.pgm.actions.helper.ActiveLabelValueBean;
 //Jdk Imports
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.constants.LookUpTableConstants;
@@ -86,13 +87,15 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 		Iterator mIterator = mList.iterator();
 
 		while (mIterator.hasNext()) {
-			LabelValueBean mLookUpValueBean = (LabelValueBean) mIterator.next();
+			ActiveLabelValueBean mLookUpValueBean = (ActiveLabelValueBean) mIterator.next();
 			String mValue = mLookUpValueBean.getValue();
 			String mLabel = mLookUpValueBean.getLabel();
+			String style = "";
+			if(!mLookUpValueBean.getActive()) style = "style=\"font-style: italic; font-weight: bold;\"";
 			if (mValue.equalsIgnoreCase(key)) {
-				buf.append("<option SELECTED value=");
+				buf.append("<option " + style + " SELECTED value=");
 			} else {
-				buf.append("<option value=");
+				buf.append("<option " + style + " value=");
 			}
 			buf.append(mValue);
 			buf.append(">");
@@ -136,7 +139,7 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 
 		// get the lookup infomation
 		ProgamDirectorServiceImpl mProgamDirectorServiceImpl = new ProgamDirectorServiceImpl(mApplicationContext);
-		List mList = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity, true, true);
+		List mList = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity, false, true);
 		return mList;
 	}
 
