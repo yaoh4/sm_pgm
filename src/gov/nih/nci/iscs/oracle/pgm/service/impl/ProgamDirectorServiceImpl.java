@@ -153,7 +153,6 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl {
 			while (mIterator.hasNext()) {
 				HashSet mTempSet = new HashSet();
 				PdOrgVw4 mPdOrgVw4 = (PdOrgVw4) mIterator.next();
-				logger.info(mPdOrgVw4);
 				pdName = mPdOrgVw4.getPdName();
 				if(mPdOrgVw4.isActive()) {
 					activePDs.add(mPdOrgVw4.getPdName());
@@ -169,7 +168,7 @@ public class ProgamDirectorServiceImpl extends BaseServiceImpl {
 				mTempMap.put(pdName + "*" + personId, mTempSet);
 			}
 
-			LabelValueBean mLabelValueBean = null;
+			ActiveLabelValueBean mLabelValueBean = null;
 			for (mIterator = mTempMap.entrySet().iterator(); mIterator.hasNext();) {
 				Map.Entry entry = (Map.Entry) mIterator.next();
 				String key = (String) entry.getKey();

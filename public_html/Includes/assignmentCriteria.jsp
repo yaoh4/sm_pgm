@@ -60,7 +60,11 @@
   <logic:equal parameter="mock.version" value="separator">
   	<%@include file="searchCriteriaRightforPDA_separator.jsp"%>
   </logic:equal>
+  <logic:equal parameter="mock.version" value="dual">
+  	<%@include file="searchCriteriaRightforPDA_dual.jsp"%>
+  </logic:equal>
   
+    
   <%@include file="searchCriteriaPDA.jsp"%>
   <%@include file="endSearchCriteria.jsp"%>
 </logic:notEqual>

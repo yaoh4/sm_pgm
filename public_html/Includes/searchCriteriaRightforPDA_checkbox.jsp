@@ -6,16 +6,22 @@
 		color="#FFFFFF" size="2">Program Director Information</font></b><br>
 	<table border=0 cellpadding=0 cellspacing=0 width="400">
 		<tr>
-			<td nowrap><b>Program Director:</b></td>
-
-			<td nowrap><b>Cancer Activity:</b></td>
-
-			<td nowrap><b>Show Inactive PDs:</b></td>
+			<td nowrap colspan="3" align="left"><b>Cancer Activity:</b></td>
 		</tr>
 		<tr>
-			<td nowrap><ncijsp:formatProgramDirectorSelectTag /></td>
-			<td align="left"><ncijsp:formatCancerActivitySelectTag /></td>
-			<td><input type="checkbox"></input></td>
+			<td colspan="3" align="left"><ncijsp:formatCancerActivitySelectTag />
+			</td>
+		</tr>
+		<tr>
+			<td nowrap width="70%"><b>Program Director:</b></td>
+
+			<td nowrap width="15%">&nbsp;</td>
+			<td nowrap width="20%"><b>Show Inactive PDs:</b></td>
+		</tr>
+		<tr>
+			<td nowrap width="70%"><ncijsp:formatProgramDirectorSelectTag /></td>
+			<td align="left" width="15%">&nbsp;</td>
+			<td width="20%"><input type="checkbox"></input></td>
 		</tr>
 		<tr>
 			<td colspan="3" align="left"><input class="button2a"
@@ -42,8 +48,8 @@
 			<td nowrap>
 				<table border=0 cellpadding=0 cellspacing=0 width="100%">
 					<tr>
-						<td nowrap><b>I2 Status:</b> <html:select
-								property="i2Status" name="retrieveGrantsForPDAForm">
+						<td nowrap><b>I2 Status:</b> <html:select property="i2Status"
+								name="retrieveGrantsForPDAForm">
 								<html:options
 									collection="<%=LookUpTableConstants.APPL_STATUS_GROUPS_MV_LOOKUP[0]%>"
 									property="value" labelProperty="label" />
@@ -60,7 +66,8 @@
 				<table border=0 cellpadding=0 cellspacing=0 width="100%">
 					<tr>
 						<td nowrap width="75%"><b>NCAB</b></td>
-						<td title="RFA/PA" nowrap width="25%"><labelfor "rfaPa"><b>RFA/PA  </b></label></td>
+						<td title="RFA/PA" nowrap width="25%"><labelfor"rfaPa">
+							<b>RFA/PA </b> </label></td>
 					</tr>
 				</table>
 			</td>

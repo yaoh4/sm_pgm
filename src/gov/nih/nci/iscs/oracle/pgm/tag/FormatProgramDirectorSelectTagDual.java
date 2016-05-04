@@ -1,5 +1,6 @@
 package gov.nih.nci.iscs.oracle.pgm.tag;
 
+import org.apache.log4j.Logger;
 import org.apache.struts.util.LabelValueBean;
 
 import gov.nih.nci.iscs.oracle.pgm.actions.helper.ActiveLabelValueBean;
@@ -17,16 +18,27 @@ import javax.servlet.ServletContext;
 import javax.servlet.jsp.tagext.*;
 //Application imports
 
-public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
+public class FormatProgramDirectorSelectTagDual extends TagSupport {
+	
+	private static final Logger logger = Logger.getLogger(FormatProgramDirectorSelectTagDual.class);
 
 	private String key;
+	private String key2;
 	private String cancerActivity;
 	private ApplicationContext mApplicationContext;
 	boolean disableSelect = false;
+	boolean active = false;
+	private String myid;
 
 	public void setKey(String key) {
 
+		logger.debug("setKey('" + key + "'");
 		this.key = key;
+	}
+	
+	public void setKey2(String key2) {
+		logger.debug("setKey2('" + key2 + "'");
+		this.key2 = key2;
 	}
 
 	public int doStartTag() {
@@ -39,6 +51,7 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 					.getAttribute("retrieveGrantsForPDAForm");
 			this.cancerActivity = mRetrieveGrantsForPDAForm.getCancerActivity();
 			this.key = mRetrieveGrantsForPDAForm.getPdId();
+			this.key2 = mRetrieveGrantsForPDAForm.getPdId2();
 			StringBuffer buf = new StringBuffer();
 			if (cancerActivity == null) {
 				cancerActivity = ApplicationConstants.EMPTY_STRING;
@@ -59,8 +72,7 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 					mList = getPDListForCancerActivity(ApplicationConstants.EMPTY_STRING);
 					request.getSession().setAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0], mList);
 				}
-				// List mList = (List)
-				// request.getAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0]);
+				//List mList = (List) request.getAttribute(LookUpTableConstants.PD_NAME_VW4_LOOKUP[0]);
 				formatEmptySelect(buf, mList);
 			}
 
@@ -74,10 +86,11 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 	private StringBuffer formatEmptySelect(StringBuffer buf, List mList) {
 
 		if (disableSelect) {
-			buf.append("<SELECT style=\"width: 100%\" NAME=\"pdId\" SIZE=\"1\" DISABLED=true>");
+			buf.append("<SELECT style=\"width: 100%\" NAME=\"" + myid + "\" SIZE=\"1\" DISABLED=true>");
 			disableSelect = false;
 		} else {
-			buf.append("<SELECT style=\"width: 100%\" NAME=\"pdId\" SIZE=\"1\" onchange=\"setPDAction('continue')\">");
+			buf.append("<SELECT style=\"width: 100%\" NAME=\"" + myid
+					+ "\" SIZE=\"1\" onchange=\"setPDAction('continue')\">");
 		}
 		buf.append("<option SELECTED value=");
 		buf.append(ApplicationConstants.EMPTY_STRING);
@@ -88,16 +101,14 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 
 		while (mIterator.hasNext()) {
 			ActiveLabelValueBean mLookUpValueBean = (ActiveLabelValueBean) mIterator.next();
+			if (!(mLookUpValueBean.getActive()) == active)
+				continue;
 			String mValue = mLookUpValueBean.getValue();
 			String mLabel = mLookUpValueBean.getLabel();
-			String style = "";
-			if(!mLookUpValueBean.getActive()) style = "style=\"font-style: italic; font-weight: bold;\"";
-			if (mValue.equalsIgnoreCase(key)) {
-				buf.append("<option " + style + " SELECTED value=");
-			} else if (mValue.equals("-1")) {
-				buf.append("<option " + style + " DISABLED value=");
+			if ((mValue.equalsIgnoreCase(key) && active) || (mValue.equalsIgnoreCase(key2) && !active)) {
+				buf.append("<option SELECTED value=");
 			} else {
-				buf.append("<option " + style + " value=");
+				buf.append("<option value=");
 			}
 			buf.append(mValue);
 			buf.append(">");
@@ -141,8 +152,24 @@ public class FormatProgramDirectorSelectTagSeparator extends TagSupport {
 
 		// get the lookup infomation
 		ProgamDirectorServiceImpl mProgamDirectorServiceImpl = new ProgamDirectorServiceImpl(mApplicationContext);
-		List mList = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity, false, true);
+		List mList = mProgamDirectorServiceImpl.getPDForTransfer(cancerActivity, false, false);
 		return mList;
+	}
+
+	public boolean isActive() {
+		return active;
+	}
+
+	public void setActive(boolean active) {
+		this.active = active;
+	}
+
+	public String getMyid() {
+		return myid;
+	}
+
+	public void setMyid(String myid) {
+		this.myid = myid;
 	}
 
 }

@@ -73,10 +73,10 @@ public class FormatProgramDirectorSelectTagInactive extends TagSupport {
 	private StringBuffer formatEmptySelect(StringBuffer buf, List mList) {
 
 		if (disableSelect) {
-			buf.append("<SELECT NAME=\"pdId\" SIZE=\"1\" DISABLED=true>");
+			buf.append("<SELECT style=\"width: 100%\" NAME=\"pdId\" SIZE=\"1\" DISABLED=true>");
 			disableSelect = false;
 		} else {
-			buf.append("<SELECT NAME=\"pdId\" SIZE=\"1\" onchange=\"setPDAction('continue')\">");
+			buf.append("<SELECT style=\"width: 100%\" NAME=\"pdId\" SIZE=\"1\" onchange=\"setPDAction('continue')\">");
 		}
 		buf.append("<option SELECTED value=");
 		buf.append(ApplicationConstants.EMPTY_STRING);

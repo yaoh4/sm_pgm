@@ -11,19 +11,22 @@
 		<tr>
 			<td colspan="3" align="left"><ncijsp:formatCancerActivitySelectTag />
 			</td>
-		</tr>	
-		<tr>
-			<td nowrap width="70%"><b>Program Director:</b></td>
-
-			<td nowrap width="15%" align="right">&nbsp;</td>
-			<td width="20%" align="right"></td>
 		</tr>
 		<tr>
-			<td nowrap width="70%"><ncijsp:formatProgramDirectorSelectTagSeparator />
-			</td>
-			<td width="15%" align="left">&nbsp;
-			</td>
-			<td width="20%" align="right"><input class="button2a"
+			<td nowrap width="48%"><b>Active Program Director:</b></td>
+			<td nowrap width="4%">&nbsp;</td>
+			<td nowrap width="48%"><b>Inactive Program Director:</b></td>
+		</tr>
+		<tr>
+			<td nowrap width="48%"><ncijsp:formatProgramDirectorSelectTagDual
+					myid="pdId" active="true" /></td>
+			<td nowrap width="4%">&nbsp;</td>
+			<td nowrap width="48%"><ncijsp:formatProgramDirectorSelectTagDual
+					myid="pdId2" active="false" /></td>
+		</tr>
+		<tr>
+
+			<td colspan="3" align="left"><input class="button2a"
 				type="button" value="Clear PD"
 				onclick="clearPDCriteria('continue');" /></td>
 		</tr>

@@ -167,6 +167,7 @@ public_html/Includes/searchCriteriaPDAOrg.jsp -text
 public_html/Includes/searchCriteriaReferral.jsp -text
 public_html/Includes/searchCriteriaRightforPDA.jsp -text
 public_html/Includes/searchCriteriaRightforPDA_checkbox.jsp -text
+public_html/Includes/searchCriteriaRightforPDA_dual.jsp -text
 public_html/Includes/searchCriteriaRightforPDA_inactive.jsp -text
 public_html/Includes/searchCriteriaRightforPDA_separator.jsp -text
 public_html/Includes/searchCriteriaRightforReferral.jsp -text
@@ -518,6 +519,7 @@ src/gov/nih/nci/iscs/oracle/pgm/tag/FormatGrantListTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatPDAssignmentListTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatPDorgSelectTag.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTag.java -text
+src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTagDual.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTagInactive.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatProgramDirectorSelectTagSeparator.java -text
 src/gov/nih/nci/iscs/oracle/pgm/tag/FormatReferralResultTag.java -text
