@@ -14,16 +14,18 @@
 		</tr>
 		<tr>
 			<td nowrap width="70%"><b>Program Director:</b></td>
-
-			<td nowrap width="15%" align="right">&nbsp;</td>
-			<td width="20%" align="right"></td>
+			<td nowrap width="15%">&nbsp;</td>
+			<td nowrap width="20%"><b>Show Inactive PDs:</b></td>
 		</tr>
 		<tr>
 			<td nowrap width="70%"><ncijsp:formatProgramDirectorSelectTagInactive />
 			</td>
 			<td width="15%" align="left">&nbsp;
 			</td>
-			<td width="20%" align="right"><input class="button2a"
+			<td width="20%"><input type="checkbox"></input></td>
+		</tr>
+		<tr>
+		<td colspan="3" align="left"><input class="button2a"
 				type="button" value="Clear PD"
 				onclick="clearPDCriteria('continue');" /></td>
 		</tr>

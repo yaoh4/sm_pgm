@@ -14,7 +14,6 @@
 		</tr>
 		<tr>
 			<td nowrap width="70%"><b>Program Director:</b></td>
-
 			<td nowrap width="15%">&nbsp;</td>
 			<td nowrap width="20%"><b>Show Inactive PDs:</b></td>
 		</tr>
