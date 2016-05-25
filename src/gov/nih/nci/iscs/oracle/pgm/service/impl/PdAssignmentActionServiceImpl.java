@@ -6,8 +6,8 @@ import java.util.*;
 
 import gov.nih.nci.iscs.oracle.pgm.service.impl.BaseServiceImpl;
 import gov.nih.nci.iscs.oracle.pgm.service.PdAssignmentActionService;
+import gov.nih.nci.iscs.oracle.pgm.service.AssignPDService;
 import gov.nih.nci.iscs.oracle.pgm.service.PdAssignmentActionObject;
-import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AssignPDCommand;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.RetrieveGrantInfoCommand;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.query.QueryPage;
@@ -31,7 +31,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
     public static final String SUCCESS_LITERAL = "SUCCESS";
     private Map pdAssignmentActionGrants;
     private PdAssignmentActionObject pdAssignmentActionObject;
-    private AssignPDCommand assignPDCommand;
+    private AssignPDService assignPDCommand;
     private String oAction;
 
 
@@ -62,7 +62,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
  		 try{
 
 			 if( action.equalsIgnoreCase("assign") ) {
-		         assignPDCommand = (AssignPDCommand) getBean("assignPDCommandDao");
+		         assignPDCommand = (AssignPDService) getBean("assignPDCommand");
 			 }
 			 ArrayList grantList = new ArrayList(pdAssignmentActionGrants.values());
 			 Iterator  mIterator = grantList.iterator();

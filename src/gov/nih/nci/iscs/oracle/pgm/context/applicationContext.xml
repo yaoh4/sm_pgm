@@ -353,7 +353,10 @@
 	</bean>
 
 	<bean id="assignPDCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.AssignPDCommandDao"
-	        parent="actionCommandDao">
+	        >
+	        <property name="sessionFactory">
+                <ref local="sessionFactory"/>
+             </property>
 	</bean>
 
 	<bean id="retrieveGrantsForReferalCommandDao" class="gov.nih.nci.iscs.oracle.pgm.dataaccess.query.RetrieveGrantsForReferalCommandDao"
@@ -532,13 +535,18 @@
           </property>
        </bean>
 
+	   <bean id="assignPDCommandTarget"
+		   class="gov.nih.nci.iscs.oracle.pgm.service.impl.AssignPDServiceImpl">
+		  <property name="assignPDCommandDao" ref="assignPDCommandDao" />
+	   </bean>
+	
       <bean id="assignPDCommand"
           class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean">
           <property name="transactionManager">
                <ref bean="myTransactionManager"/>
           </property>
           <property name="target">
-            <ref bean="assignPDCommandDao"/>
+            <ref bean="assignPDCommandTarget"/>
           </property>
           <property name="transactionAttributes">
             <props>
