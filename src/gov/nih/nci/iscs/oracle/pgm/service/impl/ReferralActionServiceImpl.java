@@ -71,7 +71,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
    			 actionResult = (String) acceptReferalCommand.execute(referralActionObject.getApplId(), new Long(referralActionObject.getPdId()), super.getUserId() );
              if(actionResult != null && actionResult.contains("The chosen program director")) {
             	 String pdName = actionResult.substring(actionResult.indexOf('(') + 1, actionResult.indexOf(')') - 1);
-            	 actionResult = "The Program Director " + pdName + " is not setup in IMPAC II to be assigned to grants. Please contact the <a href='https://i2e.nci.nih.gov/documentation/application/EntRoleMaintRep.pdf' target='_blank'>IC Coordinators</a> from your organization to assist you with this issue.";
+            	 actionResult = "The Program Director " + pdName + " is not setup in IMPAC II to be assigned to grants. Please contact the <a href='https://i2e.nci.nih.gov/documentation/application/EntRoleMaintRep.pdf' target='_blank'>IMPAC II IC Coordinators</a> from your organization to assist you with this issue.";
              }
    			 referralActionObject.setResults(actionResult);
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
