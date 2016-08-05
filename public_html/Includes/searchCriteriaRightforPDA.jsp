@@ -3,12 +3,12 @@
               
               <td colspan="3" valign="top" bgcolor="#99CCFF"><b><font color="#FFFFFF" size="2">Program Director 
                 Information</font></b><br>
-                <table border=0 cellpadding=0 cellspacing=0 width="400">
+                <table border=0 cellpadding=0 cellspacing=0 width="470">
 		   <tr>
 		      <td nowrap width="70%"><b>Program Director:</b></td>
 		      <td width="15%"><b>Show Inactive PDs:</b></td>
 		            
-		      <td nowrap width="15%" align="right"><b>Cancer Activity:</b></td>
+		      <td width="15%"><b>Cancer Activity:</b></td>
                       <td width="15%" align="right">                     
                       </td>
 		   </tr>
@@ -16,7 +16,7 @@
 		       <td nowrap width="70%">
                            <ncijsp:formatProgramDirectorSelectTag /> 
 		        </td>
-		        <td width="15%"><html:checkbox property="showInactivePDs" onchange="setPDAction('continue')"/></td>
+		        <td width="15%"><html:checkbox property="showInactivePDs" onchange="toggleShowInactivePDs()"/></td>
 	                <td width="15%" align="left">
                            <ncijsp:formatCancerActivitySelectTag /> 
                         </td>
