@@ -18,6 +18,7 @@
         <meta http-equiv="Expires" CONTENT="0">
         <meta http-equiv="Cache-Control" CONTENT="no-cache">
         <meta http-equiv="Pragma" CONTENT="no-cache">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
     <link rel="stylesheet" href="Stylesheets/PgmStyleSheet.css" type="text/css">
 
     <SCRIPT language=JavaScript src="pgm.js" type="text/javascript">
