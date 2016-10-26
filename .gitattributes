@@ -279,6 +279,7 @@ src/gov/nih/nci/iscs/oracle/pgm/ReferalCriteriaEntryForm.java1 -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/AcceptReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ApplicationResources.properties -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/AssignPDAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/ChangeUserAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/CrystalReportAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ExternalReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/GrantSearchErrorAction.java -text
