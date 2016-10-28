@@ -97,7 +97,13 @@
     <javac debug="on"
         classpath="${project.classpath}"
         srcdir="${src.dir}"
-        destdir="${java.classes.dir}" />
+        destdir="${java.classes.dir}" 
+        nowarn="true" 
+        includeantruntime="false">
+    <compilerarg value="-Xlint:none" />
+    <compilerarg value="-Xlint:-deprecation" />
+    <compilerarg value="-XDignore.symbol.file" />
+    </javac>
     <copy todir="${java.classes.dir}">
         <fileset dir="${src.dir}" excludes="**/*.java,**/*.svn"/>
     </copy>

@@ -98,7 +98,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
    			                         pdAssignmentActionObject.getAssignmentDate(),
    			                         pdAssignmentActionObject.getPdTransferCode(),
    			                         super.getUserId());
-			 if (actionResult != null && actionResult.contains("The chosen program director")) {
+			 if (actionResult != null && actionResult.contains("is not a program director")) {
 				String pdName = actionResult.substring(actionResult.indexOf('(') + 1, actionResult.indexOf(')') - 1);
 				actionResult = "The Program Director " + pdName
 						+ " is not set up in IMPAC II to be assigned to grants. Please contact the appropriate <a href='https://i2e.nci.nih.gov/documentation/application/EntRoleMaintRep.pdf' target='_blank'>NCI IMPAC II IC Coordinator(s)</a> for assistance.";

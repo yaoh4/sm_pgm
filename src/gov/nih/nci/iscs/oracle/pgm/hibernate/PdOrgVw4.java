@@ -6,6 +6,8 @@ import org.apache.commons.lang.builder.EqualsBuilder;
 import org.apache.commons.lang.builder.HashCodeBuilder;
 import org.apache.commons.lang.builder.ToStringBuilder;
 
+import gov.nih.nci.iscs.oracle.pgm.util.TimeInsensitiveDateComparator;
+
 
 /**
  *        @hibernate.class
@@ -49,7 +51,7 @@ public class PdOrgVw4 implements Serializable {
 
     /** identifier field */
     private Date cayEndDate;
-
+    
     /** full constructor */
     public PdOrgVw4(Long npeId, String pdCode, String pdName, Long personId, long orgId, String orgDesc, String orgAbbrv, Date pdStartDate, Date pdEndDate, String cayCode, Date cayStartDate, Date cayEndDate) {
         this.npeId = npeId;
@@ -280,4 +282,21 @@ public class PdOrgVw4 implements Serializable {
             .toHashCode();
     }
 
+    
+	private static class ComparatorHolder {
+		static TimeInsensitiveDateComparator instance = new TimeInsensitiveDateComparator();
+	}
+
+	public Boolean isActive() {
+		final TimeInsensitiveDateComparator tComp = ComparatorHolder.instance;
+
+		if (((pdEndDate == null) || (tComp.compare(pdEndDate, new Date()) >= 0))
+				&& ((pdStartDate == null) || (tComp.compare(pdStartDate, new Date()) <= 0))
+				&& ((cayEndDate == null) || (tComp.compare(cayEndDate, new Date()) >= 0))
+				&& ((cayStartDate == null) || (tComp.compare(cayStartDate, new Date()) <= 0))) {
+			return true;
+		}
+
+		return false;
+	}
 }

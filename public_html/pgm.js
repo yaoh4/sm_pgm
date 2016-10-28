@@ -41,6 +41,7 @@ function clearPDCriteria(oAction)
    document.forms[0].cancerActivity.value = "";
    document.forms[0].pdOrg.value = "";
    document.forms[0].requestAction.value = oAction;
+   document.forms[0].showInactivePDs.checked = false;
    document.forms[0].submit();
 }
 function sortReferralList(sortColumn, sortOrder) 
@@ -277,6 +278,12 @@ function setReferralAction(oAction)
    document.forms[0].requestAction.value = oAction;
    document.forms[0].submit();
     
+}
+
+function toggleShowInactivePDs()
+{
+	document.forms[0].pdId.value = "";
+	setPDAction('Continue');
 }
 
 function setPDAction(oAction)

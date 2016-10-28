@@ -530,3 +530,5 @@ src/gov/nih/nci/iscs/oracle/pgm/test/MultiAcceptReferal.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/RejectReferalTest.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/RetrieveGrantsForPDATest.java -text
 src/gov/nih/nci/iscs/oracle/pgm/test/RetrieveGrantsForReferalTest.java -text
+src/gov/nih/nci/iscs/oracle/pgm/util/ActiveLabelValueBean.java -text
+src/gov/nih/nci/iscs/oracle/pgm/util/TimeInsensitiveDateComparator.java -text
