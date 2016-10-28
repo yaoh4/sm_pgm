@@ -33,7 +33,7 @@ import sun.misc.BASE64Decoder;
 public abstract class NciPgmAction extends Action {
   
     private Log logger = LogFactory.getLog(NciPgmAction.class);
-    private static String LOGIN_ERROR = "loginError";
+    protected static String LOGIN_ERROR = "loginError";
    
     public ActionForward execute(ActionMapping mapping, ActionForm form, HttpServletRequest request, HttpServletResponse response)
         throws UserLoginException, Exception
@@ -80,42 +80,7 @@ public abstract class NciPgmAction extends Action {
 
             }
             if(StringUtils.isNotEmpty(remoteUser)) {
-            	
-            	NciUserImpl nciUser = getNCIUser(request,remoteUser);
-            	
-            	String accessError = "User "+ remoteUser +" is not authorized to access PGM application. ";
-        		String errorReason = "";
-        		
-        		if(nciUser == null){
-        			logger.error(accessError);
-                	navigateToHome(this.getClass().getName(),request.getSession());
-                	return false;
-        		}
-        		
-        		//If OracleId is Null
-        		if(StringUtils.isEmpty(nciUser.getOracleId())){
-    				errorReason = "OracleId is Null.";
-    			}
-        		//If Email is Null
-                if(StringUtils.isEmpty((String)nciUser.getAttribute("mail"))){
-    				errorReason = "Email is Null.";
-    			}
-        		//If User is Inactive
-    			else if("N".equalsIgnoreCase((String)nciUser.getAttribute("activeFlag"))){
-    				errorReason = "I2E Account is not Active.";
-    			}   
-        		
-        		//If User is Inactive, then navigate the user to Login Error page.
-        		if(StringUtils.isNotEmpty(errorReason)){
-        			logger.error(accessError + errorReason);
-                	navigateToHome(this.getClass().getName(),request.getSession());
-                	return false;
-        		}
-            	
-                nciUser.setAttribute("dbRoles", getUserDbRoles(request, (String)nciUser.getAttribute("nciOracleId")));
-            	session.setAttribute("nciuser", nciUser);
-            	returnValue = verifyUserForApp(request, response);
-
+            	return isUserValid(request, response, remoteUser);
             }
             else{
             	throw new Exception("Site Minder did not pass the SM User.");
@@ -123,6 +88,47 @@ public abstract class NciPgmAction extends Action {
         }
         return returnValue;
     }
+    
+    protected boolean isUserValid(HttpServletRequest request, 
+    		HttpServletResponse response, String remoteUser) throws Exception {
+    	NciUserImpl nciUser = getNCIUser(request, remoteUser);
+    	
+    	String accessError = "User "+ remoteUser +" is not authorized to access PGM application. ";
+		String errorReason = "";
+		
+		if(nciUser == null){
+			logger.error(accessError);
+        	navigateToHome(this.getClass().getName(),request.getSession());
+        	return false;
+		}
+		
+		//If OracleId is Null
+		if(StringUtils.isEmpty(nciUser.getOracleId())){
+			errorReason = "OracleId is Null.";
+		}
+		//If Email is Null
+        if(StringUtils.isEmpty((String)nciUser.getAttribute("mail"))){
+			errorReason = "Email is Null.";
+		}
+		//If User is Inactive
+		else if("N".equalsIgnoreCase((String)nciUser.getAttribute("activeFlag"))){
+			errorReason = "I2E Account is not Active.";
+		}   
+		
+		//If User is Inactive, then navigate the user to Login Error page.
+		if(StringUtils.isNotEmpty(errorReason)){
+			logger.error(accessError + errorReason);
+        	navigateToHome(this.getClass().getName(),request.getSession());
+        	return false;
+		}
+    	
+        nciUser.setAttribute("dbRoles", getUserDbRoles(request, (String)nciUser.getAttribute("nciOracleId")));
+        HttpSession session = request.getSession(true);
+        session.setAttribute("nciuser", nciUser);
+    	return verifyUserForApp(request, response);
+    }
+    
+    
     public abstract ActionForward executeAction(ActionMapping actionmapping, ActionForm actionform, HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse)
         throws Exception;
 
@@ -164,17 +170,23 @@ public abstract class NciPgmAction extends Action {
     public boolean verifyUserForApp(HttpServletRequest request,
         HttpServletResponse response) throws Exception
     {
+    	boolean result = true;
+    	
         NciUser nu = this.getUser(request);       
         Set roleSet = (Set)nu.getAttribute("dbRoles");
         if ((roleSet == null)){
-           return false;
+        	logger.info("RoleSet is null for user " + nu.getUserId());
+           result = false;
         }
 	    if ( !(roleSet.contains("PGM_L1")) & (!(roleSet.contains("PGM_L2")))){
-            logger.info("VERIFY USER IS FALSE");
-			return false;
+            logger.info("Required roles for set for user "  +nu.getUserId());
+			result =  false;
 		}
 
-        return true;
+	    if(result == false) {
+	    	navigateToHome(this.getClass().getName(),request.getSession());
+	    }
+        return result;
     }
    /**
    * Returns the NciUser object stored in the session.
