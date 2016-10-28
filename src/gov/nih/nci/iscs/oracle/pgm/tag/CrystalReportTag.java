@@ -94,7 +94,7 @@ public class CrystalReportTag extends TagSupport {
             buf.append("</SCRIPT>\n");
          }
       }
-      logger.debug(buf);
+      //logger.debug(buf);
       session.setAttribute("reportAction", null);
       out.print( buf.toString());
     }

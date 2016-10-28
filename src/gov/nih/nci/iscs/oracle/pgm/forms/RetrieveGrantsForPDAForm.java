@@ -32,6 +32,7 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
     private String percentileTo;
     private String priorityScoreFrom;
     private String priorityScoreTo;
+    private boolean showInactivePDs;
 
 
     public RetrieveGrantsForPDAForm() {
@@ -390,6 +391,14 @@ public class RetrieveGrantsForPDAForm extends RetrieveGrantsForm implements PDAQ
 
        return super.validate(validationMessages);
 
+     }
+     
+     public boolean getShowInactivePDs () {
+     	return showInactivePDs;
+     }
+     
+     public void setShowInactivePDs(boolean showInactivePDs) {
+     	this.showInactivePDs = showInactivePDs;
      }
 
 }
