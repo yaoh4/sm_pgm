@@ -176,6 +176,13 @@
             validate="false">
             <forward name="continue" path="/Status.jsp" />
     </action>
+    
+    <!--  Change user functionality -->
+    <action path="/ChangeUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserAction"  scope="request"
+            validate="false">
+			<forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
+            <forward name="loginError" path="/LoginError.jsp" />
+	</action>
 
     </action-mappings> 
 

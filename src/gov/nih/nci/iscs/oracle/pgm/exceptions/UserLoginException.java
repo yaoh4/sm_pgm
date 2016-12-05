@@ -1,10 +1,11 @@
 package gov.nih.nci.iscs.oracle.pgm.exceptions;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+
 import javax.servlet.http.HttpSession;
+
+import org.apache.log4j.LogManager;
+import org.apache.log4j.Logger;
 
 
 /**
@@ -14,7 +15,7 @@ import javax.servlet.http.HttpSession;
  */
 public class UserLoginException extends RuntimeException {
 
-    protected final Log logger = LogFactory.getLog(getClass());
+	 private Logger logger = LogManager.getLogger(UserLoginException.class);
 	public UserLoginException() {}
 
 	public UserLoginException(String className, String methodName, String message, HttpSession session) {
