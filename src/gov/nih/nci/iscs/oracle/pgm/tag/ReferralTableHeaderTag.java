@@ -43,72 +43,77 @@ public class ReferralTableHeaderTag extends TagSupport
 		  returnText = formatColumnText(false, "Grant Number", "16%", "listCellHead", ApplicationConstants.GRANT_NUMBER_SORT, "header01");
 	  }
       buf.append(returnText);
+      
+      
+      returnText = formatColumnText(true, "RO Comments", "6%", "listCellHead", null, "header02");	  
+      buf.append(returnText);
+
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.CANCER_ACTIVITY_SORT)){
-		  returnText = formatColumnText(true, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header02");
+		  returnText = formatColumnText(true, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header03");
 	  } else {
-		  returnText = formatColumnText(false, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header02");
+		  returnText = formatColumnText(false, "CA", "6%", "listCellHead", ApplicationConstants.CANCER_ACTIVITY_SORT, "header03");
 	  }
       buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.DUAL_CA_SORT)){
-		  returnText = formatColumnText(true, "Dual CA", "6%", "listCellHead", ApplicationConstants.DUAL_CA_SORT, "header03");
+		  returnText = formatColumnText(true, "Dual CA", "6%", "listCellHead", ApplicationConstants.DUAL_CA_SORT, "header04");
 	  } else {
-		  returnText = formatColumnText(false, "Dual CA", "6%", "listCellHead", ApplicationConstants.DUAL_CA_SORT, "header03");
+		  returnText = formatColumnText(false, "Dual CA", "6%", "listCellHead", ApplicationConstants.DUAL_CA_SORT, "header04");
 	  }
       buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PI_LAST_NAME_SORT)){
-		  returnText = formatColumnText(true, "PI", "10%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header04");
+		  returnText = formatColumnText(true, "PI", "10%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header05");
 	  } else {
-		  returnText = formatColumnText(false, "PI", "10%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header04");
+		  returnText = formatColumnText(false, "PI", "10%", "listCellHead", ApplicationConstants.PI_LAST_NAME_SORT, "header05");
 	  }
       buf.append(returnText);
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.ORGANIZATION_SORT)){
-		  returnText = formatColumnText(true, "Institution", "15%", "listCellHead", ApplicationConstants.ORGANIZATION_SORT, "header05");
+		  returnText = formatColumnText(true, "Institution", "15%", "listCellHead", ApplicationConstants.ORGANIZATION_SORT, "header06");
 	  } else {
-		  returnText = formatColumnText(false, "Institution", "15%", "listCellHead", ApplicationConstants.ORGANIZATION_SORT, "header05");
+		  returnText = formatColumnText(false, "Institution", "15%", "listCellHead", ApplicationConstants.ORGANIZATION_SORT, "header06");
 	  }
       buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.PROJECT_TITLE_SORT)){
-		  returnText = formatColumnText(true, "Title", "16%", "listCellHead", ApplicationConstants.PROJECT_TITLE_SORT, "header06");
+		  returnText = formatColumnText(true, "Title", "16%", "listCellHead", ApplicationConstants.PROJECT_TITLE_SORT, "header07");
 	  } else {
-		  returnText = formatColumnText(false, "Title", "16%", "listCellHead", ApplicationConstants.PROJECT_TITLE_SORT, "header06");
+		  returnText = formatColumnText(false, "Title", "16%", "listCellHead", ApplicationConstants.PROJECT_TITLE_SORT, "header07");
 	  }
       buf.append(returnText);
       
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.RFA_PA_NUMBER_SORT)){
-                  returnText = formatColumnText(true, "RFA/PA", "16%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header06");
+                  returnText = formatColumnText(true, "RFA/PA", "10%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header08");
           } else {
-                  returnText = formatColumnText(false, "RFA/PA", "16%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header06");
+                  returnText = formatColumnText(false, "RFA/PA", "10%", "listCellHead", ApplicationConstants.RFA_PA_NUMBER_SORT, "header08");
           }
       buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.ARA_SORT)){
-		  returnText = formatColumnText(true, "ARA?", "6%", "listCellHead", ApplicationConstants.ARA_SORT, "header07");
+		  returnText = formatColumnText(true, "ARA?", "6%", "listCellHead", ApplicationConstants.ARA_SORT, "header09");
 	  } else {
-		  returnText = formatColumnText(false, "ARA?", "6%", "listCellHead", ApplicationConstants.ARA_SORT, "header07");
+		  returnText = formatColumnText(false, "ARA?", "6%", "listCellHead", ApplicationConstants.ARA_SORT, "header09");
 	  }
       buf.append(returnText);
 
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.NCAB_SORT)){
-		  returnText = formatColumnText(true, "NCAB", "8%", "listCellHead", ApplicationConstants.NCAB_SORT, "header08");
+		  returnText = formatColumnText(true, "NCAB", "8%", "listCellHead", ApplicationConstants.NCAB_SORT, "header10");
 	  } else {
-		  returnText = formatColumnText(false, "NCAB", "8%", "listCellHead", ApplicationConstants.NCAB_SORT, "header08");
+		  returnText = formatColumnText(false, "NCAB", "8%", "listCellHead", ApplicationConstants.NCAB_SORT, "header10");
 	  }
       buf.append(returnText);
 
       if(lastSortColumn.equalsIgnoreCase(ApplicationConstants.CURR_REFERRAL_DATE_SORT)){
-		  returnText = formatColumnText(true, "Referred Date", "10%", "listCellHead", ApplicationConstants.CURR_REFERRAL_DATE_SORT, "header09");
+		  returnText = formatColumnText(true, "Referred Date", "10%", "listCellHead", ApplicationConstants.CURR_REFERRAL_DATE_SORT, "header11");
 	  } else {
-		  returnText = formatColumnText(false, "Referred Date", "10%", "listCellHead", ApplicationConstants.CURR_REFERRAL_DATE_SORT, "header09");
+		  returnText = formatColumnText(false, "Referred Date", "10%", "listCellHead", ApplicationConstants.CURR_REFERRAL_DATE_SORT, "header11");
 
 	  }
       buf.append(returnText);
