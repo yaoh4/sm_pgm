@@ -3,10 +3,10 @@
 <jsp:useBean id="PaginationObject" scope="session" type="gov.nih.nci.iscs.oracle.pgm.forms.PaginationObject" />
 <!--Start List Table -->
 
-<table width="800" align="center"> <tr>
+<table width="1000" align="center"> <tr>
   <td> &nbsp; </td>
 </tr></table>
- <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+ <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr>
       <td width="20" align="right"><img src="images/CriteriaOpen.gif" width="18" height="13"></td>
       <td class="TitlePrimary">Grants</td>
@@ -16,13 +16,13 @@
       <td colspan="3"><img src="images/spacer.gif" alt="" width="20" height="10"></td>
     </tr>
   </table>
-   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+   <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr><td >&nbsp;</td></tr>
         <%@include file="grantListHeader.jsp"%>
         <%@include file="pdaActionButtons.jsp"%>
         <%@include file="selectionButtons.jsp"%>
     </table>
-     <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+     <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
         <DIV ID="listMessages" class="ErrorTextBoldItalics"
         <logic:messagesPresent name="message" property="pdAssignmentaction" message="true">
            <html:messages message="true" id="message" property="pdAssignmentaction" header="pdAssignmentaction.header" footer="pdAssignmentaction.footer">
@@ -31,10 +31,10 @@
         </logic:messagesPresent>
         </div>
         </table>
-        <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
+        <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
 
         <tr>
-          <td width="20">&nbsp;</td>
+         <!--  <td width="20">&nbsp;</td> -->
           <td valign="top" colspan="5">
             <script language="JavaScript" type="text/javascript">
               // define table with border attribute for Netscape 4.7x browsers 
@@ -64,12 +64,12 @@
               <ncijsp:formatGrantList  formName='retrieveGrantsForPDAForm'/> </td>
              </table>
           </td>
-          <td width="20">&nbsp;</td>
+        <!--   <td width="20">&nbsp;</td> -->
         </tr>
         <tr> 
-          <td width="20" height="20">&nbsp;</td>
+       <!--   <td width="20" height="20">&nbsp;</td> -->
           <td nowrap align="right" colspan="5" height="20">&nbsp;</td>
-          <td width="20" height="20">&nbsp;</td>
+       <!--   <td width="20" height="20">&nbsp;</td> -->
         </tr>
       </table>
 

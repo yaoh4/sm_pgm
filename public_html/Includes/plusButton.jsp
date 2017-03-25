@@ -1,4 +1,4 @@
-   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center"  >
+   <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center"  >
     <tr> 
       <td  align="left"><img src="images/CriteriaClosed.gif" width="18" height="13" border="0" name="ToggleImage" alt="Show/Hide Criteria" onclick="javascript:LoseIt('expand');"></a></td>
       <td align="left" class="TitlePrimary">Criteria </td>

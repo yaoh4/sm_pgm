@@ -1,5 +1,5 @@
   <%@ page import="gov.nih.nci.iscs.oracle.pgm.constants.LookUpTableConstants" %>
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+  <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr>
      <td>
      
@@ -13,7 +13,7 @@
   <br>
   <% String action = (String) request.getAttribute(ApplicationConstants.SEARCH_ACTION); %>
 
-   <table  border="0" align="center" cellspacing="0" cellpadding="0" width="800"  bgcolor="#99CCFF">
+   <table  border="0" align="center" cellspacing="0" cellpadding="0" width="1000"  bgcolor="#99CCFF">
       <tr> 
         <td width="20">&nbsp;</td>
         <td valign="top"> 

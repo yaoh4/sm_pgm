@@ -1,4 +1,4 @@
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+  <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
   <tr><td>
       <ul>
            The ONLY grants available in this module are:
@@ -31,7 +31,7 @@
 <logic:notEqual value="<%= ApplicationConstants.ACTION_COLLAPSE_CRITERIA %>" name="retrieveGrantsForPDAForm" property="requestAction">
   <%@include file="minusButton.jsp"%>
 
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+  <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
       <tr> 
         <td align="left" class="DefaultTextBold">A grant serial number (Srl #) or Program Director is required to perform a 
         search.</td>

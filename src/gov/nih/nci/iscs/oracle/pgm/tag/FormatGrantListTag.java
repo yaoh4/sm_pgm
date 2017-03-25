@@ -113,7 +113,7 @@ public class FormatGrantListTag extends TagSupport {
       } else {
 		 buf.append("<td headers=\"header00\" width=\"3%\" class=listCell><input type=\"checkbox\" value=\"" + mKey + "\" NAME=\"selectedIndx\"></td>");
 	  }
-      buf.append("<td headers=\"header01\" width=\"14%\" style=\"white-space: nowrap;\" class=" + className + ">");
+      buf.append("<td headers=\"header01\" width=\"12%\" style=\"white-space: nowrap;\" class=" + className + ">");
 
       buf.append("<a href=\"javascript:openYourGrantsWindow(\'" + obj.getApplId() + "\', \'" + grantsUrl + "\');\">" + obj.getGrantNumber() + "&nbsp;</a>");
 	  if(obj.getWithdrawn() ){
@@ -124,35 +124,35 @@ public class FormatGrantListTag extends TagSupport {
       }
 	  buf.append("</td>");
 	  
-	  buf.append("<td headers=\"header02\" width=\"14%\" class=" + className + ">");
+	  buf.append("<td headers=\"header02\" width=\"12%\" class=" + className + ">");
 	  if(StringUtils.isNotEmpty(obj.getReferralComments())){
 		  if(obj.getReferralComments().length() <= 100) {
 			  buf.append(obj.getReferralComments());
 		  } else {
 			  String truncatedComments = StringUtils.substring(obj.getReferralComments(), 0, 96);
-	         buf.append("<div title = \"" + obj.getReferralComments() + "\"><a href=\"javascript:openReferralOfficeCommentsWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\">" + truncatedComments + "..." + " </a></div>");
+	         buf.append("<div title = \"" + obj.getReferralComments() + "\"><a href=\"javascript:openReferralOfficeCommentsWindow(\'" + obj.getApplId() + "\',\'" + obj.getGrantNumber() + "\');\">" + truncatedComments + "..." + "</a></div>");
 		  }
 	  }
-	  buf.append("</td>");
+	  buf.append("&nbsp;</td>");
 	  
-      buf.append("<td headers=\"header03\" width=\"6%\" class=" + className + ">" +  obj.getCancerActivity() + "&nbsp;</td>");
-	  buf.append("<td headers=\"header04\" width=\"6%\" class=" + className + ">" + " <INPUT  type=\"button\" class=" + underlineButtonClassName + " id=\"" + controlName + "\" value=\"" + obj.getDualCA() + "\" onmouseover=\"javascript:moveOver(" + "\'" + pocInfo + "\', \'" + selIndex + "\');\" onmouseout=\"javascript:moveOut();\"></a>&nbsp;</td>");
-      buf.append("<td headers=\"header05\" width=\"9%\" class=" + className + ">" + obj.getPiLastName() + "&nbsp;</td>");
-      buf.append("<td headers=\"header06\" width=\"14%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
-      buf.append("<td headers=\"header07\" width=\"14%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
-      buf.append("<td headers=\"header08\" style=\"white-space: nowrap;\" width=\"10%\" class=" + className + ">");
+      buf.append("<td headers=\"header03\" width=\"4%\" class=" + className + ">" +  obj.getCancerActivity() + "&nbsp;</td>");
+	  buf.append("<td headers=\"header04\" width=\"5%\" class=" + className + ">" + " <INPUT  type=\"button\" class=" + underlineButtonClassName + " id=\"" + controlName + "\" value=\"" + obj.getDualCA() + "\" onmouseover=\"javascript:moveOver(" + "\'" + pocInfo + "\', \'" + selIndex + "\');\" onmouseout=\"javascript:moveOut();\"></a>&nbsp;</td>");
+      buf.append("<td headers=\"header05\" width=\"8%\" class=" + className + ">" + obj.getPiLastName() + "&nbsp;</td>");
+      buf.append("<td headers=\"header06\" width=\"12%\" class=" + className + ">" + obj.getInstName()+ "&nbsp;</td>");
+      buf.append("<td headers=\"header07\" width=\"12%\" class=" + className + ">" + obj.getProjectTitle() + "&nbsp;</td>");
+      buf.append("<td headers=\"header08\" style=\"white-space: nowrap;\" width=\"8%\" class=" + className + ">");
       String rfapa = obj.getRfapa().trim();
       if (rfapa.length() < 1){
     	  buf.append("&nbsp;"); 
       }else{
     	  buf.append("<a href=\"javascript:openRfaPaWindow(\'" + obj.getNihGuideAddrUrl() + "\');\">" + obj.getRfapa().trim() + "</a>");
       }
-      buf.append("<td headers=\"header09\" width=\"6%\" class=" + className + ">" );
+      buf.append("<td headers=\"header09\" width=\"5%\" class=" + className + ">" );
       buf.append("<a href=\"javascript:araView(" + obj.getAraId() + ")\" >" +obj.getAraStatus()+ "</a>");
       buf.append("&nbsp;</td>");
       buf.append("<td headers=\"header10\" width=\"7%\" class=" + className + ">" + obj.getNcabDate()+ "&nbsp;</td>");
-      buf.append("<td headers=\"header09\" width=\"9%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");
-      buf.append("<td headers=\"header11\" width=\"5%\" class=" + borderClassName + ">" + "<a href=\"javascript:openEGrantsWindow(\'" + eGrantsURL + "\', \'"+ obj.getEGrantsNumber() + "\');\"><img src=\"images/egrants.gif\" alt=\"eGrants\"  border=\"0\"> </a></td>");
+      buf.append("<td headers=\"header09\" width=\"8%\" class=" + className + ">" + obj.getCurrentReferralActivityDate()+ "&nbsp;</td>");
+      buf.append("<td headers=\"header11\" width=\"4%\" class=" + borderClassName + ">" + "<a href=\"javascript:openEGrantsWindow(\'" + eGrantsURL + "\', \'"+ obj.getEGrantsNumber() + "\');\"><img src=\"images/egrants.gif\" alt=\"eGrants\"  border=\"0\"> </a></td>");
 
 
 	  buf.append("</tr>");

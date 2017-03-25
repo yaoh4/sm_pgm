@@ -1,5 +1,5 @@
 <!--Start referral action buttons -->
-        <table  width="800" align="center">
+        <table  width="1000" align="center">
           <tr>
              <td nowrap width="10%">&nbsp;</td>
              <td nowrap align="right" width="15%"><b>Selected Grants:</b></td>
