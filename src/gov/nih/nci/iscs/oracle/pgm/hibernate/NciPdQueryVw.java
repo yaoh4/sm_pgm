@@ -146,12 +146,15 @@ public class NciPdQueryVw implements Serializable {
 
     /** identifier field */
     private java.lang.String currentApsComments;
+    
+    /** identifier field */
+    private java.lang.String referralComments;
 
     /** identifier field */
     private java.lang.String nihGuideAddr;
 
     /** full constructor */
-    public NciPdQueryVw(java.lang.Long applId, java.lang.String fullGrantNum, java.lang.String rfaPaNumber, java.lang.String councilMeetingDate, java.lang.String firstName, java.lang.String miName, java.lang.String lastName, java.lang.String applTypeCode, java.lang.String adminPhsOrgCode, java.lang.String activityCode, java.lang.Integer serialNum, java.lang.Integer supportYear, java.lang.String suffixCode, java.lang.String applStatusCode, java.lang.String applStatusGroupCode, java.util.Date budgetStartDate, java.util.Date budgetEndDate, java.lang.Integer fy, java.lang.Long ipf, java.lang.String orgName, java.lang.String institutionCity, java.lang.String institutionState, java.lang.String projectTitle, java.lang.String legacySourceFile, java.lang.String cayCode, java.lang.String dualCayCode, java.lang.Long pocNpnId, java.lang.String pocLastName, java.lang.String pocFirstName, java.lang.String pocMiName, java.lang.String pocFullName, java.lang.Long dualPocNpnId, java.lang.String dualPocLastName, java.lang.String dualPocFirstName, java.lang.String dualPocMiName, java.lang.String dualPocFullName, java.lang.String araStatusCode, java.lang.Long araId, java.lang.String araMatchFlag, java.lang.String currentFutureBoardFlag, java.lang.String currentReferralActivityCode, java.util.Date currentReferralActivityDate, java.lang.String withdrawnFlag, java.lang.String currentApsComments) {
+    public NciPdQueryVw(java.lang.Long applId, java.lang.String fullGrantNum, java.lang.String rfaPaNumber, java.lang.String councilMeetingDate, java.lang.String firstName, java.lang.String miName, java.lang.String lastName, java.lang.String applTypeCode, java.lang.String adminPhsOrgCode, java.lang.String activityCode, java.lang.Integer serialNum, java.lang.Integer supportYear, java.lang.String suffixCode, java.lang.String applStatusCode, java.lang.String applStatusGroupCode, java.util.Date budgetStartDate, java.util.Date budgetEndDate, java.lang.Integer fy, java.lang.Long ipf, java.lang.String orgName, java.lang.String institutionCity, java.lang.String institutionState, java.lang.String projectTitle, java.lang.String legacySourceFile, java.lang.String cayCode, java.lang.String dualCayCode, java.lang.Long pocNpnId, java.lang.String pocLastName, java.lang.String pocFirstName, java.lang.String pocMiName, java.lang.String pocFullName, java.lang.Long dualPocNpnId, java.lang.String dualPocLastName, java.lang.String dualPocFirstName, java.lang.String dualPocMiName, java.lang.String dualPocFullName, java.lang.String araStatusCode, java.lang.Long araId, java.lang.String araMatchFlag, java.lang.String currentFutureBoardFlag, java.lang.String currentReferralActivityCode, java.util.Date currentReferralActivityDate, java.lang.String withdrawnFlag, java.lang.String currentApsComments, java.lang.String referralComments) {
         this.applId = applId;
         this.fullGrantNum = fullGrantNum;
         this.rfaPaNumber = rfaPaNumber;
@@ -197,6 +200,7 @@ public class NciPdQueryVw implements Serializable {
         this.currentReferralActivityDate = currentReferralActivityDate;
         this.withdrawnFlag = withdrawnFlag;
         this.currentApsComments = currentApsComments;
+        this.referralComments = referralComments;
         this.nihGuideAddr = nihGuideAddr;
     }
 
@@ -790,6 +794,20 @@ public class NciPdQueryVw implements Serializable {
     }
 
     /**
+	 * @return the referralComments
+	 */
+	public java.lang.String getReferralComments() {
+		return referralComments;
+	}
+
+	/**
+	 * @param referralComments the referralComments to set
+	 */
+	public void setReferralComments(java.lang.String referralComments) {
+		this.referralComments = referralComments;
+	}
+
+	/**
 	 *                @hibernate.property
 	 *                 column="NIH_GUIDE_ADDR"
 	 *
@@ -903,6 +921,7 @@ public class NciPdQueryVw implements Serializable {
             .append(this.getCurrentReferralActivityDate(), castOther.getCurrentReferralActivityDate())
             .append(this.getWithdrawnFlag(), castOther.getWithdrawnFlag())
             .append(this.getCurrentApsComments(), castOther.getCurrentApsComments())
+            .append(this.getReferralComments(), castOther.getReferralComments())
             .append(this.getNihGuideAddr(), castOther.getNihGuideAddr())
             .isEquals();
     }

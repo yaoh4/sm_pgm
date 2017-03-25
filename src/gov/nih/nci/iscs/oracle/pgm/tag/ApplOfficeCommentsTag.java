@@ -75,7 +75,7 @@ public ApplCaAsgnmtHistoryVw getApplCaAsgnmtHistoryVw(String applId) {
                  mKey = (Integer) entry.getKey();
                  ReferralSearchResultObject obj = (ReferralSearchResultObject) entry.getValue();
                  if (applId.equalsIgnoreCase(obj.getApplId().toString())){
-                 comments = obj.getApsComments();                
+                 comments = obj.getReferralComments();                
                  break;
                  }
                 }            
