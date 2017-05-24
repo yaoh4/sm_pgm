@@ -1,6 +1,6 @@
 <!--Start selection buttons -->
 
-        <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+        <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
         <tr><td width="15" align="right">&nbsp;</td>
         </tr>         
         <tr>
@@ -17,7 +17,7 @@
            <td  width="22%" align="left" >
                <a link href="#grants" onclick="selectionType('clearAllOnPage');"> Clear All Boxes on Page</a>&nbsp;
            </td>
-          <td  width="5%" align="left" >&nbsp;</td>
+         <!-- <td  width="5%" align="left" >&nbsp;</td> -->
           <td class="DefaultText" width=15%" nowrap><label for="selectedPageSize"><b>Change Page Size:</b></label> 
               <html:select property="selectedPageSize" >
 	        <html:options collection="<%= ApplicationConstants.PAGE_SIZES %>" property="value"  labelProperty="label" />

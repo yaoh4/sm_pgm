@@ -50,7 +50,7 @@
 <br>
 
 <!--End Criteria -->
-<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+<table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
 <tr><td>
 <DIV ID="searchMessages" class="ErrorTextBoldItalics"
   <logic:messagesPresent name="message" property="validation" message="true">

@@ -7,7 +7,7 @@
 <logic:notEqual value="<%= ApplicationConstants.ACTION_COLLAPSE_CRITERIA %>" name="retrieveGrantsForReferralForm" property="requestAction">
   <%@include file="minusButton.jsp"%>
 </table>
-  <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+  <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr> 
       <td align="left" class="DefaultTextBold">A NCAB date range is required to perform a 
       search.</td>

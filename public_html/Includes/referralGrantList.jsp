@@ -6,7 +6,7 @@
 <table> <tr>
   <td> &nbsp; </td>
 </tr></table>
- <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+ <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr>
       <td width="20" align="right"><img src="images/CriteriaOpen.gif" width="18" height="13"></td>
       <td class="TitlePrimary">Grants</td>
@@ -20,10 +20,10 @@
         <%@include file="grantListHeader.jsp"%>
         <%@include file="referralActionButtons.jsp"%>
         <%@include file="selectionButtons.jsp"%>
-		<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+		<table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
 		<tr><td>
         <DIV ID="TheTip" class="button4a" STYLE="position:absolute; visibility:hidden;" ></DIV> 
-        <DIV ID="listMessages" class="ErrorTextBoldItalics"
+        <DIV ID="listMessages" class="ErrorTextBoldItalics">
           <logic:messagesPresent name="message" property="referralaction" message="true">
            <html:messages message="true" id="message" property="referralaction" header="referalaction.header" footer="referalaction.footer">
              <li><b><bean:write name="message"/></b></li>
@@ -32,10 +32,10 @@
         </div>
         </td></tr>
         </table>
-        <table border="0" cellspacing="0" cellpadding="0" width="820" align="center">
+        <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
 
         <tr>
-          <td width="20">&nbsp;</td>
+        <!--   <td width="20">&nbsp;</td> -->
           <td valign="top" colspan="5">
             <script language="JavaScript" type="text/javascript">
               // define table with border attribute for Netscape 4.7x browsers 
@@ -65,12 +65,12 @@
               <ncijsp:formatGrantList  formName='retrieveGrantsForReferralForm'/> </td>
              </table>
           </td>
-          <td width="20">&nbsp;</td>
+        <!--  <td width="20">&nbsp;</td> -->
         </tr>
         <tr> 
-          <td width="20" height="20">&nbsp;</td>
+         <!-- <td width="20" height="20">&nbsp;</td>-->
           <td nowrap align="right" colspan="5" height="20">&nbsp;</td>
-          <td width="20" height="20">&nbsp;</td>
+      <!--    <td width="20" height="20">&nbsp;</td> -->
         </tr>
       </table>
  

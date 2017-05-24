@@ -47,6 +47,7 @@ public class ApplicationConstants {
 	public static final int    DEFAULT_PAGE_SIZE = 100;
 	public static final int    FIRST_PAGE = 1;
 	public static final String CURRENT_PAGE_SIZE = "currentPageSize";
+	public static final String REFERRAL_COMMENTS_SORT = "referralComments";
 	public static final String CANCER_ACTIVITY_SORT = "cayCode";
 	public static final String CA_SORT = "cancerActivity";
 	public static final String DUAL_CANCER_ACTIVITY_SORT = "dualCA";

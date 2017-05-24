@@ -1,4 +1,4 @@
-   <table class="DefaultText" border="0" align="center" cellspacing="0" cellpadding="0" width="800" align="center" bgcolor="#99CCFF">
+   <table class="DefaultText" border="0" align="center" cellspacing="0" cellpadding="0" width="1000" align="center" bgcolor="#99CCFF">
       <tr>
         <td width="75%">
             <table  cellspacing="0">

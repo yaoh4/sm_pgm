@@ -49,7 +49,7 @@
   <%@ include file="Includes/PgmHeader.jsp"%>
 <!--End Your Grants Header -->
 <!--Start Tabs/Load -->
-<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+<table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
    <tr>
       <td width="20" align="right">&nbsp;</td>
       <td colspan="5" background="images/TabBG.gif">
@@ -65,7 +65,7 @@
 <BR>
 <!--Start Load/Description-->
 <!--End Load/Description-->
-<table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+<table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
 <tr><td>
 <DIV ID="searchMessages" class="ErrorTextBoldItalics" >
   <logic:messagesPresent name="message" property="validation" message="true">

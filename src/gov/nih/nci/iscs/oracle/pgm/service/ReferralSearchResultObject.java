@@ -24,6 +24,7 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
     private String eGrantsNumber;
     private String rfapa;
     private String apsComments;
+    private String referralComments;
     private String nihGuideAddrUrl;
     private boolean reReferred = false;
 
@@ -158,7 +159,21 @@ public class ReferralSearchResultObject extends GrantSearchResultObject {
         return apsComments;
     }
 
-    public void setCurrentReferralActivityCode(String currentReferralActivityCode) {
+    /**
+	 * @return the referralComments
+	 */
+	public String getReferralComments() {
+		return referralComments;
+	}
+
+	/**
+	 * @param referralComments the referralComments to set
+	 */
+	public void setReferralComments(String referralComments) {
+		this.referralComments = referralComments;
+	}
+
+	public void setCurrentReferralActivityCode(String currentReferralActivityCode) {
         this.currentReferralActivityCode = currentReferralActivityCode;
     }
 

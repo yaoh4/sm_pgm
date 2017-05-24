@@ -521,6 +521,17 @@
             </meta>
         </key-property>
         <key-property
+            name="referralComments"
+            column="REFERRAL_COMMENTS"
+            type="java.lang.String"
+            length="1000"
+        >
+            <meta attribute="field-description">
+               @hibernate.property
+                column="REFERRAL_COMMENTS"
+            </meta>
+        </key-property>
+        <key-property
 			name="nihGuideAddr"
 			column="NIH_GUIDE_ADDR"
 			type="java.lang.String"

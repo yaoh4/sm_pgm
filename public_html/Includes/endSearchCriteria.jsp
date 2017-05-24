@@ -13,7 +13,7 @@
       </tr>
     </table>
     <!--Start Search/Clear Buttons-->
-   <table border="0" cellspacing="0" cellpadding="0" width="800" align="center">
+   <table border="0" cellspacing="0" cellpadding="0" width="1000" align="center">
     <tr> 
       <td  align="left" width="2%"><input class="button2a" type="button" value="Search" onclick="setAction('Search', 'default');"/> 
       <td valign="top" width="1%">&nbsp;</td>

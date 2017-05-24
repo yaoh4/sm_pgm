@@ -16,6 +16,7 @@ public class FormatSortCriteria extends TagSupport {
   private String formName;
   private RetrieveGrantsForm mForm;
 
+  public static String REFERRAL_COMMENTS = "RO Comments, ";
   public static String CANCER_ACTIVITY = "Cancer Activity, ";
   public static String ORGANIZATION = "Institution, ";
   public static String PD_LAST_NAME = "PD, ";
@@ -58,7 +59,9 @@ public class FormatSortCriteria extends TagSupport {
       if (mSortColumn.equalsIgnoreCase(ApplicationConstants.CANCER_ACTIVITY_SORT)) {
 		  mResults = CANCER_ACTIVITY + FULL_GRANT_NUMBER;
 	  }
-
+      if (mSortColumn.equalsIgnoreCase(ApplicationConstants.REFERRAL_COMMENTS_SORT)) {
+		  mResults = REFERRAL_COMMENTS + FULL_GRANT_NUMBER;
+	  }
       if (mSortColumn.equalsIgnoreCase(ApplicationConstants.ORGANIZATION_SORT)) {
 		  mResults = ORGANIZATION + FULL_GRANT_NUMBER;
 	  }
