@@ -4,7 +4,7 @@ package gov.nih.nci.iscs.oracle.pgm.actions;
 
 import org.springframework.context.ApplicationContext;
 
-
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import  gov.nih.nci.iscs.oracle.pgm.actions.NciPgmAction;
 import  gov.nih.nci.iscs.oracle.pgm.forms.RetrieveGrantsForm;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
@@ -17,7 +17,7 @@ import gov.nih.nci.iscs.oracle.pgm.hibernate.ReportsVw;
 
 
 import org.apache.struts.action.ActionMessages;
-
+import org.apache.log4j.Logger;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -30,6 +30,9 @@ import javax.servlet.http.HttpServletResponse;
 
 
 public class CrystalReportAction extends NciPgmAction    {
+	
+static Logger logger = Logger.getLogger(CrystalReportAction.class);
+	
 
  private HttpSession oSession;
  private ServletContext oServletContext;
@@ -84,9 +87,15 @@ public class CrystalReportAction extends NciPgmAction    {
 		   return mapping.findForward(mContinueForward);
 	  }
 
-
       ReportSelectorServiceImpl mReportSelectorServiceImpl =  new ReportSelectorServiceImpl(oApplicationContext);
       ReportsVw mReportsVw = mReportSelectorServiceImpl.getReportDetails(new Long(mReportSelected), new Long(mReportFormat));
+      
+      //Log the info  
+      NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
+      logger.info("Report: " + mReportsVw.getReportName() + ", Module: " + mReportsVw.getModuleName()
+  		+ ", Type: " + mReportsVw.getFormatType() + ", Requested by: " + mNciUser.getFullName() + " [" + mNciUser.getUserId() + "]");
+  
+      
       mReportSelectorServiceImpl.deleteDataForReport(oSession.getId(), reportType, mReportsVw.getCrystalId());
       mReportSelectorServiceImpl.insertDataForReport(mSortedList, reportType, oSession.getId(), mReportsVw.getCrystalId());
       oSession.setAttribute("reportDetails", mReportsVw);
