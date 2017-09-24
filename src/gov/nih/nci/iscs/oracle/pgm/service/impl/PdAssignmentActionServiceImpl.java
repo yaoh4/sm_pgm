@@ -75,7 +75,12 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
 				 }
 
 			 }
-         } catch (Exception ex) {
+         } 
+ 		catch(ServiceDeniedException ex) {
+ 			  throw new ServiceDeniedException();
+ 			  
+ 		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("PdAssignmentActionServiceImpl", "performPdAssignment", "An exception occurred in PD Assignment process!!! " + ex.toString());
  	     }
 
