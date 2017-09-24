@@ -48,9 +48,9 @@ public abstract class GrantServiceFactory {
      * @retrun ReferalActionService - Concrete Implenetation of ReferalActionService
      * @param ArrayList - List of grants for Refrral Action
      */
-     public static ReferralActionService getReferralActionService(Map referralActionGrants, ApplicationContext aApplicationContext, String aUserId) {
+     public static ReferralActionService getReferralActionService(Map referralActionGrants, ApplicationContext aApplicationContext, String aUserId,String readOnly) {
 
-             return new ReferralActionServiceImpl(referralActionGrants, (Object) aApplicationContext, aUserId);
+             return new ReferralActionServiceImpl(referralActionGrants, (Object) aApplicationContext, aUserId,readOnly);
 
 
 
@@ -63,9 +63,9 @@ public abstract class GrantServiceFactory {
      * @retrun PdAssignmentActionService - Concrete Implenetation of PdAssignmentActionService
      * @param ArrayList - List of grants for AdAssignments Action
      */
-     public static PdAssignmentActionService getPdAssignmentActionService(Map PdAssignmentActionGrants, ApplicationContext aApplicationContext, String aUserId) {
+     public static PdAssignmentActionService getPdAssignmentActionService(Map PdAssignmentActionGrants, ApplicationContext aApplicationContext, String aUserId,String readOnly) {
 
-             return new PdAssignmentActionServiceImpl(PdAssignmentActionGrants, (Object) aApplicationContext, aUserId);
+             return new PdAssignmentActionServiceImpl(PdAssignmentActionGrants, (Object) aApplicationContext, aUserId,readOnly);
 
 
 

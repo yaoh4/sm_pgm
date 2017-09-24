@@ -25,7 +25,7 @@ public class RejectReferalTest {
 		   oGrantReferal = (RejectReferalCommand)  InitContext.getBean("rejectReferalCommandDao");
 		   //oGrantReferal.setApplId(aAppliId);
 		   //oGrantReferal.setComments(aComments);
-           mResults = (String) oGrantReferal.execute(aAppliId, aComments, "");
+           mResults = (String) oGrantReferal.execute(aAppliId, aComments, "","");
 
        } catch (Exception ex) {
 		   logger.error("**** exceptions  is ****" + ex.toString() );

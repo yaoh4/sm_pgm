@@ -20,9 +20,10 @@ public class NciPeopleVw implements Serializable {
     private java.lang.String firstName;
     private java.lang.String emailAddress;
     private java.util.Date inactiveDate;
-    private java.lang.String activeFlag;   
+    private java.lang.String activeFlag;
+    private java.lang.String parentNedOrgPath;
 
-   /**
+/**
     * Default Constructor
     */
     public NciPeopleVw(){    	
@@ -193,6 +194,15 @@ public NciPeopleVw(Long npnId, String nihNetworkId, String oracleId, String last
 	 */
 	public void setActiveFlag(java.lang.String activeFlag) {
 		this.activeFlag = activeFlag;
+	}
+	
+
+	public java.lang.String getParentNedOrgPath() {
+		return parentNedOrgPath;
+    }
+
+	public void setParentNedOrgPath(java.lang.String parentNedOrgPath) {
+		this.parentNedOrgPath = parentNedOrgPath;
 	}
 
 

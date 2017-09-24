@@ -73,7 +73,11 @@ public class AssignPDAction extends NciPgmAction {
        if( mAction.equalsIgnoreCase(ApplicationConstants.SORT_LIST_ACTION ))
            return sortList(mapping, form, request, response);
 
-	  } catch (Exception ex) {
+	  } catch(ServiceDeniedException ex) {
+		  throw new ServiceDeniedException();
+		  
+	  }
+        catch (Exception ex) {
 		  throw new PDAssignmentException("AssignPDAction", "executeAction", ex.toString(), request.getSession(), ex);
 	  }
 
@@ -121,7 +125,7 @@ public class AssignPDAction extends NciPgmAction {
 	   }
 
 	   NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
-	   PdAssignmentActionService mPdAssignmentActionService = GrantServiceFactory.getPdAssignmentActionService(mAssignmentActionObjects, oApplicationContext, mNciUser.getOracleId() );
+	   PdAssignmentActionService mPdAssignmentActionService = GrantServiceFactory.getPdAssignmentActionService(mAssignmentActionObjects, oApplicationContext, mNciUser.getOracleId(),(String)mNciUser.getAttribute("readOnly") );
 	   boolean mResults = mPdAssignmentActionService.performPdAssignment("assign");
 
 	   if(!mResults) {

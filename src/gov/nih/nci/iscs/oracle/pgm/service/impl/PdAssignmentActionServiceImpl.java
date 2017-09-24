@@ -42,8 +42,8 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
      * @param Object - oContextFactory
      * @throws SQLException
      */
-    public PdAssignmentActionServiceImpl(Map pdAssignmentActionGrants, Object oContextFactory, String aUserId ) {
-		super(oContextFactory, aUserId);
+    public PdAssignmentActionServiceImpl(Map pdAssignmentActionGrants, Object oContextFactory, String aUserId,String readOnly ) {
+		super(oContextFactory, aUserId,readOnly);
 		this.pdAssignmentActionGrants = pdAssignmentActionGrants;
 		this.pdAssignmentActionObject = new PdAssignmentActionObject();
 	}
@@ -97,7 +97,7 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
    			                         new String(pdAssignmentActionObject.getAssignmentCA()),
    			                         pdAssignmentActionObject.getAssignmentDate(),
    			                         pdAssignmentActionObject.getPdTransferCode(),
-   			                         super.getUserId());
+   			                         super.getUserId(),super.getReadOnly());
 			 if (actionResult != null && actionResult.contains("is not a program director")) {
 				String pdName = actionResult.substring(actionResult.indexOf('(') + 1, actionResult.indexOf(')') - 1);
 				actionResult = "The Program Director " + pdName
@@ -107,7 +107,11 @@ public class PdAssignmentActionServiceImpl extends BaseServiceImpl implements Pd
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
 			 }
-         } catch (Exception ex) {
+         } 
+ 		catch(ServiceDeniedException ex) {
+ 			  throw new ServiceDeniedException();
+ 		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("PdAssignmentActionServiceImpl", "assign", "An exception occurred in Assign PD process!!! " + ex.toString());
  	     }
 

@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate.SessionFactoryUtils;
 import net.sf.hibernate.Session;
 
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ReReferReferalCommand;
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
@@ -30,7 +31,7 @@ public class ReReferReferalCommandDao extends ActionCommandDao implements  ReRef
 
     private String oReferalMessage = null;
     private List interceptorNames;
-
+    private NciUser nciUser;
    /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
 
@@ -42,7 +43,11 @@ public class ReReferReferalCommandDao extends ActionCommandDao implements  ReRef
      * Executes the Re-refer activity.
      * @return String  - pass/fail
      */
-    public Object execute(Long oApplId, String oCancerActicityCode, String oComments, String oUserId) {
+    public Object execute(Long oApplId, String oCancerActicityCode, String oComments, String oUserId,String readOnly) {
+    	
+    	if(("true").equalsIgnoreCase(readOnly)) {
+    		throw new ServiceDeniedException();
+    	}
 
        boolean mReferalPassed = false;
        String params = null;

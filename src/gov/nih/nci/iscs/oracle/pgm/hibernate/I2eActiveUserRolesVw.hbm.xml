@@ -1,0 +1,211 @@
+<?xml version="1.0"?>					
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+
+<hibernate-mapping>
+<class 
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.I2eActiveUserRolesVw" 
+    table="I2E_ACTIVE_USER_ROLES_VW"
+>
+    <meta attribute="class-description" inherit="false">
+       @hibernate.class
+        table="I2E_ACTIVE_USER_ROLES_VW"
+    </meta>
+
+    <id
+        name="oracleId"
+        type="java.lang.String"
+        column="ORACLE_ID"
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property            
+            type="java.lang.String"
+            column="ORACLE_ID"
+        </meta>        
+    </id>
+             
+  <property
+        name="nciLdapCn"
+        type="java.lang.String"
+        column="NCI_LDAP_CN"       
+        length="30"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NCI_LDAP_CN"
+            length="30"           
+        </meta>    
+    </property>
+    
+     <property
+        name="npnId"
+        type="java.lang.Long"
+        column="NPN_ID"       
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NPN_ID"
+            length="10"           
+        </meta>    
+    </property>
+    
+    <property
+        name="npeId"
+        type="java.lang.Long"
+        column="NPE_ID"       
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="NPE_ID"
+            length="10"           
+        </meta>    
+    </property>
+    
+     <property
+        name="roleCode"
+        type="java.lang.String"
+        column="ROLE_CODE"       
+        length="8"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ROLE_CODE"
+            length="8"           
+        </meta>    
+    </property>
+    
+     <property
+        name="roleName"
+        type="java.lang.String"
+        column="ROLE_NAME"       
+        length="50"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ROLE_NAME"
+            length="50"           
+        </meta>    
+    </property>   
+    
+    <property
+        name="roleCreatedDate"
+        type="java.sql.Timestamp"
+        column="ROLE_CREATED_DATE"
+        length="7"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ROLE_CREATED_DATE"
+            length="7"
+        </meta>    
+    </property>
+    
+    <property
+        name="roleCreatedByFullName"
+        type="java.lang.String"
+        column="ROLE_CREATED_BY_FULL_NAME"       
+        length="62"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ROLE_CREATED_BY_FULL_NAME"
+            length="62"           
+        </meta>    
+    </property> 
+    
+     <property
+        name="orgId"
+        type="java.lang.Long"
+        column="ORG_ID"       
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ORG_ID"
+            length="10"           
+        </meta>    
+    </property>
+    
+     <property
+        name="orgAbbrev"
+        type="java.lang.String"
+        column="ORG_ABBREV"       
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="ORG_ABBREV"
+            length="10"           
+        </meta>    
+    </property>
+    
+      <property
+        name="docAbbrev"
+        type="java.lang.String"
+        column="DOC_ABBREV"       
+        length="4000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="DOC_ABBREV"
+            length="4000"           
+        </meta>    
+    </property>
+    
+      <property
+        name="fullOrgPathAbbrev"
+        type="java.lang.String"
+        column="FULL_ORG_PATH_ABBREV"       
+        length="4000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="FULL_ORG_PATH_ABBREV"
+            length="4000"           
+        </meta>    
+    </property>
+    
+    <property
+        name="fullOrgPathDescription"
+        type="java.lang.String"
+        column="FULL_ORG_PATH_DESCRIPTION"       
+        length="4000"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="FULL_ORG_PATH_DESCRIPTION"
+            length="4000"           
+        </meta>    
+    </property>
+    
+    <property
+        name="ldapRoleName"
+        type="java.lang.String"
+        column="LDAP_ROLE_NAME"       
+        length="20"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="LDAP_ROLE_NAME"
+            length="20"           
+        </meta>    
+    </property>
+    
+    <property
+        name="ogaBranchId"
+        type="java.lang.Long"
+        column="OGA_BRANCH_ID"       
+        length="10"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="OGA_BRANCH_ID"
+            length="10"           
+        </meta>    
+    </property>
+</class>
+</hibernate-mapping>

@@ -114,5 +114,17 @@
             length="1"           
         </meta>    
     </property> 
+      <property
+        name="parentNedOrgPath"
+        type="java.lang.String"
+        column="PARENT_NED_ORG_PATH"       
+        length="1004"
+    >
+        <meta attribute="field-description">
+           @hibernate.property
+            column="PARENT_NED_ORG_PATH"
+            length="1004"           
+        </meta>    
+    </property> 
 </class>
 </hibernate-mapping>

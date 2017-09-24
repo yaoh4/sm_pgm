@@ -88,7 +88,7 @@ public class RejectReferralAction extends NciPgmAction {
 	   }
 
 	   NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
-	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId() );
+	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId(),(String)mNciUser.getAttribute("readOnly") );
 	   boolean mResults = mReferralActionService.performReferral("reject");
 
 	   if(!mResults) {

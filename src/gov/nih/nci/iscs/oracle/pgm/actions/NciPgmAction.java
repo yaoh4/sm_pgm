@@ -2,8 +2,11 @@ package gov.nih.nci.iscs.oracle.pgm.actions;
 
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUserImpl;
+import gov.nih.nci.iscs.oracle.common.helper.ApplicationInfo;
 import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
+import gov.nih.nci.iscs.oracle.pgm.exceptions.NotAuthorizedException;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.UserLoginException;
+import gov.nih.nci.iscs.oracle.pgm.hibernate.I2eActiveUserRolesVw;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
 
 import java.util.Iterator;
@@ -79,10 +82,58 @@ public abstract class NciPgmAction extends Action {
                }
 
             }
+            // setting the remote_user in a session variable.
+    		if(!StringUtils.isEmpty(remoteUser)) {
+              session.setAttribute(ApplicationConstants.REMOTE_USER, remoteUser);
+    		}
+    		
+    		//getting the remote user from session if it is null.
+    		if(StringUtils.isEmpty(remoteUser)) {
+    			remoteUser = (String) session.getAttribute(ApplicationConstants.REMOTE_USER);
+    		}
+    		
             if(StringUtils.isNotEmpty(remoteUser)) {
-            	return isUserValid(request, response, remoteUser);
+
+            	if(isUserValid(request, response, remoteUser)) {
+            		
+	            	nu = getUser(request);
+	            	nu.setAttribute("readOnly", "false");
+	            	
+	            	if(session.getAttribute("changeUser") != null && !isI2eDeveloper(nu)) {
+	            		throw new NotAuthorizedException();
+	            	}
+	            	
+	            	//If logged on user is I2E developer
+	            	if(isI2eDeveloper(nu)) {          		
+	            		session.setAttribute("devRole","Y");
+	            		//If changeUser is set, validate and replace new user in session
+	            		if(session.getAttribute("changeUser") != null) {
+	            			String changeUser = (String)session.getAttribute("changeUser");
+	            			if(isUserValid(request, response, changeUser)) {
+	            					nu = getUser(request);
+	            					if(!verifyUserForApp(request,response)) {
+	            						session.removeAttribute(NciUser.NCI_USER);
+	            						throw new NotAuthorizedException();
+	            					}
+	            					logger.info("Remote User" + remoteUser);
+		            				logger.info("Change User to: "+nu.getFullName());
+	            			}
+	            			else {
+	            				throw new NotAuthorizedException();
+	            	        }
+
+	            	  }
+	            		if(isProdEnv(request)) {
+	            			nu.setAttribute("readOnly", "true");
+	            			request.getSession().setAttribute(NciUser.NCI_USER, nu);
+	            		}
+	            		return true;
+	            	}
+	            		
+	            	return verifyUserForApp(request,response);
+	            }
             }
-            else{
+            else {
             	throw new Exception("Site Minder did not pass the SM User.");
             }
         }
@@ -115,6 +166,12 @@ public abstract class NciPgmAction extends Action {
 			errorReason = "I2E Account is not Active.";
 		}   
 		
+        Object mApplicationContext = getAppAttribute(request, ApplicationConstants.PGM_CONTEXT_FACTORY);
+        UserServiceImpl mUserServiceImpl =  new UserServiceImpl(mApplicationContext, remoteUser);
+        if(mUserServiceImpl.isRestrictedUser(nciUser.getOracleId())) {
+          	 errorReason = "User has Restricted access.";
+        }
+        
 		//If User is Inactive, then navigate the user to Login Error page.
 		if(StringUtils.isNotEmpty(errorReason)){
 			logger.error(accessError + errorReason);
@@ -123,11 +180,37 @@ public abstract class NciPgmAction extends Action {
 		}
     	
         nciUser.setAttribute("dbRoles", getUserDbRoles(request, (String)nciUser.getAttribute("nciOracleId")));
+        nciUser.setAttribute("appRoles", mUserServiceImpl.getUserAppRoles(nciUser.getUserId()));
         HttpSession session = request.getSession(true);
         session.setAttribute("nciuser", nciUser);
-    	return verifyUserForApp(request, response);
+    	return true;
     }
     
+    
+	public boolean isI2eDeveloper(NciUser nciUser) {
+    	@SuppressWarnings("unchecked")
+		List<I2eActiveUserRolesVw> appRoles = (List<I2eActiveUserRolesVw>) nciUser.getAttribute("appRoles");
+    	if(appRoles != null) {
+    	 for(I2eActiveUserRolesVw role: appRoles) {
+    		if(ApplicationConstants.APP_ROLE_CODE_I2E_DEVELOPER.equals(role.getRoleCode())) {
+    			return true;
+    		}
+    	 }
+    	}
+    	
+    	return false;
+    }
+
+    public boolean isProdEnv(HttpServletRequest request) {
+    	HttpSession session = request.getSession(true);
+    	ApplicationInfo appInfo = (ApplicationInfo)session.getServletContext().getAttribute("applicationInfo");
+        String env = appInfo.getApplicationKey("ENVIRONMENT_INSTANCE");
+        
+    	if("Local Development".equalsIgnoreCase(env) || "Development".equalsIgnoreCase(env)) {
+    		return true;
+    	}
+    	return false;
+    }
     
     public abstract ActionForward executeAction(ActionMapping actionmapping, ActionForm actionform, HttpServletRequest httpservletrequest, HttpServletResponse httpservletresponse)
         throws Exception;

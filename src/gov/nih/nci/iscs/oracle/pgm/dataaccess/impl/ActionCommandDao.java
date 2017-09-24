@@ -5,6 +5,7 @@ import java.sql.*;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.ActionCommand;
 import net.sf.hibernate.Session;
 import net.sf.hibernate.HibernateException;
@@ -102,6 +103,13 @@ public abstract class ActionCommandDao implements  ActionCommand {
  		logger.error("User " + user + ": " + message, ex);
  	}
  	
-    
+ 	 public static boolean isOperationPermitted(NciUser nciUser) {
+     	if(nciUser.getAttribute("readOnly") != null && 
+     			((String)nciUser.getAttribute("readOnly")).equals("true")) {
+     		return false;
+     	}
+     	
+     	return true;
+     }
 
 }

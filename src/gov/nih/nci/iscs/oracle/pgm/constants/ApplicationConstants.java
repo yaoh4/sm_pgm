@@ -130,6 +130,11 @@ public class ApplicationConstants {
     public static final String REFERRAL_REPORT = "referralReport";
     public static final String PD_ASSIGNMENT_REPORT = "pdAssignmentReport";
     public static final String APP_LINK_LIST = "appLinkList";
+    public static final String REMOTE_USER = "remote_user";
+    public static final String NED_USERS_LIST = "neduserslist";
+    //Restricted User
+    public static final String I2E_RESTRICTED_USER = "i2e_restricted_user";
+    public static final String APP_ROLE_CODE_I2E_DEVELOPER ="TECHSUPP";
 
     public static final Date  DEFAULT_DATE() {
 

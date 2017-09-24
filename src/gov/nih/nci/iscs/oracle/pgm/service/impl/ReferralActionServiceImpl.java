@@ -49,8 +49,8 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
      * @param Object - oContextFactory
      * @throws SQLException
      */
-    public ReferralActionServiceImpl(Map referralActionGrants, Object oContextFactory, String aUserId ) {
-		super(oContextFactory, aUserId);
+    public ReferralActionServiceImpl(Map referralActionGrants, Object oContextFactory, String aUserId,String readOnly) {
+		super(oContextFactory, aUserId,readOnly);
 		this.referralActionGrants = referralActionGrants;
 		this.referralActionObject = new ReferralActionObject();
 	}
@@ -68,7 +68,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
  		 boolean mResults = false;
  		 try{
 			 String actionResult = new String();
-   			 actionResult = (String) acceptReferalCommand.execute(referralActionObject.getApplId(), new Long(referralActionObject.getPdId()), super.getUserId() );
+   			 actionResult = (String) acceptReferalCommand.execute(referralActionObject.getApplId(), new Long(referralActionObject.getPdId()), super.getUserId(),super.getReadOnly() );
              if(actionResult != null && actionResult.contains("is not a program director")) {
             	 String pdName = actionResult.substring(actionResult.indexOf('(') + 1, actionResult.indexOf(')') - 1);
             	 actionResult = "The Program Director " + pdName + " is not set up in IMPAC II to be assigned to grants. Please contact the appropriate <a href='https://i2e.nci.nih.gov/documentation/application/EntRoleMaintRep.pdf' target='_blank'>NCI IMPAC II IC Coordinator(s)</a> for assistance.";
@@ -94,7 +94,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
  		 boolean mResults = false;
  		 try{
    		     String actionResult = new String();
-			 actionResult = (String) rejectReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getComments(), super.getUserId());
+			 actionResult = (String) rejectReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getComments(), super.getUserId(),super.getReadOnly());
              referralActionObject.setResults(actionResult);
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
@@ -115,7 +115,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
  		 try{
 
 			 String actionResult = new String();
-			 actionResult = (String) releaseReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getCancerActivity(), super.getUserId());
+			 actionResult = (String) releaseReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getCancerActivity(), super.getUserId(),super.getReadOnly());
              referralActionObject.setResults(actionResult);
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
@@ -190,7 +190,7 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
  		 try{
 
 			 String actionResult = new String();
-			 actionResult = (String) reReferReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getRereferCA(), referralActionObject.getComments(), super.getUserId());
+			 actionResult = (String) reReferReferalCommand.execute(referralActionObject.getApplId(), referralActionObject.getRereferCA(), referralActionObject.getComments(), super.getUserId(),super.getReadOnly());
              referralActionObject.setResults(actionResult);
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
