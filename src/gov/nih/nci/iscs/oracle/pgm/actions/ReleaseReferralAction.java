@@ -54,7 +54,13 @@ public class ReleaseReferralAction extends NciPgmAction {
            return cancelAction(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.SORT_LIST_ACTION ))
            return sortList(mapping, form, request, response);
-	  } catch (Exception ex) {
+	  } 
+	
+	catch(ServiceDeniedException ex) {
+		  throw new ServiceDeniedException();
+		  
+	  }
+	catch (Exception ex) {
 		  throw new ReferralActionException("ReleaseReferralAction", "executeAction", ex.toString(), request.getSession(), ex);
 	  }
 
@@ -78,7 +84,12 @@ public class ReleaseReferralAction extends NciPgmAction {
 	   }
 
 	  request.getSession().setAttribute(ApplicationConstants.REFERRAL_ACTION_HASH, mReferralActionService.getReferralActionGrants() );
-	  } catch (Exception ex) {
+	  } 
+	catch(ServiceDeniedException ex) {
+		  throw new ServiceDeniedException();
+		  
+	  }
+	catch (Exception ex) {
 		  throw new ReferralActionException("ReleaseReferralAction", "executeReferralAction", ex.toString(), request.getSession(), ex);
 	  }
   	  return mapping.findForward("complete");

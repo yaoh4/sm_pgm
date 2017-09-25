@@ -77,7 +77,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
 			 }
-         } catch (NumberFormatException ex) {
+         } 
+ 		catch(ServiceDeniedException ex) {
+			  throw new ServiceDeniedException();
+			  
+		  }
+ 		 catch (NumberFormatException ex) {
 			 logger.error(" Unable to process accept for " + referralActionObject.getApplId() + " " + ex.toString());
 		 } catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "accept", "An exception occurred in Accept Referral process!!! " + ex.toString());
@@ -99,7 +104,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
 			 }
-         } catch (Exception ex) {
+         }
+ 		catch(ServiceDeniedException ex) {
+			  throw new ServiceDeniedException();
+			  
+		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "reject", "An exception occurred in Reject Referral process!!! " + ex.toString());
  	     }
 
@@ -120,7 +130,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
 			 }
-         } catch (Exception ex) {
+         } 
+ 		catch(ServiceDeniedException ex) {
+			  throw new ServiceDeniedException();
+			  
+		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "release", "An exception occurred in Reject Release process!!! " + ex.toString());
  	     }
 
@@ -174,7 +189,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 
 				 }
 			 }
-         } catch (Exception ex) {
+         } 
+ 		catch(ServiceDeniedException ex) {
+			  throw new ServiceDeniedException();
+			  
+		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "performRerefer", "An exception occurred in Rereferal Release process!!! " + ex.toString());
  	     }
 
@@ -195,7 +215,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 			 if(actionResult.trim().equalsIgnoreCase(SUCCESS_LITERAL)){
                 mResults = true;
 			 }
-         } catch (Exception ex) {
+         }
+ 		catch(ServiceDeniedException ex) {
+			  throw new ServiceDeniedException();
+			  
+		  }
+ 		 catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "rerefer", "An exception occurred in Rereferal Release process!!! " + ex.toString());
  	     }
 
@@ -263,7 +288,12 @@ public class ReferralActionServiceImpl extends BaseServiceImpl implements Referr
 	         RetrieveGrantInfoCommand mRetrieveGrantInfoCommand = (RetrieveGrantInfoCommand) getBean("retrieveGrantInfoCommandDao");
 		     QueryPage mQueryPage = mRetrieveGrantInfoCommand.execute(aApplId, cancerActivity, super.getUserId(), oAction);
 		     mList = mQueryPage.getPageList();
-         } catch (Exception ex) {
+         }
+			catch(ServiceDeniedException ex) {
+	 			  throw new ServiceDeniedException();
+	 			  
+	 		  }
+	     catch (Exception ex) {
 			 throw new ServiceImplException("ReferralActionServiceImpl", "requeryGrant", "An exception occurred in the reQuery process!!! " + ex.toString());
  	     }
 
