@@ -184,6 +184,8 @@ public abstract class NciPgmAction extends Action {
         nciUser.setAttribute("appRoles", mUserServiceImpl.getUserAppRoles(nciUser.getUserId()));
         HttpSession session = request.getSession(true);
         session.setAttribute("nciuser", nciUser);
+        
+        //setting the user filter info 
         UserFilterInfo mUserFilterInfo = (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO);
         UserServiceImpl mUserServiceImpl1 =  new UserServiceImpl(mApplicationContext, nciUser.getOracleId());
 	    mUserFilterInfo = mUserServiceImpl1.getUserFilerInfo(nciUser.getOracleId());
@@ -210,10 +212,19 @@ public abstract class NciPgmAction extends Action {
     	HttpSession session = request.getSession(true);
     	ApplicationInfo appInfo = (ApplicationInfo)session.getServletContext().getAttribute("applicationInfo");
         String env = appInfo.getApplicationKey("ENVIRONMENT_INSTANCE");
-        
-    	if("Local Development".equalsIgnoreCase(env) || "Development".equalsIgnoreCase(env)) {
+        if(!"Local Development".equalsIgnoreCase(env) &&
+    			!"Development".equalsIgnoreCase(env) &&
+    			!"Test".equalsIgnoreCase(env) &&
+    			!"Stage".equalsIgnoreCase(env)) {
+    		//This is prod environment, so restrict access
     		return true;
     	}
+    	
+    	
+        /*if("Test".equalsIgnoreCase(env)) {
+    		return true;
+    	}*/
+    	
     	return false;
     }
     
