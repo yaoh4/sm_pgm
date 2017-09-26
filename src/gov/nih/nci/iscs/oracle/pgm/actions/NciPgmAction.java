@@ -7,6 +7,7 @@ import gov.nih.nci.iscs.oracle.pgm.constants.ApplicationConstants;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.NotAuthorizedException;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.UserLoginException;
 import gov.nih.nci.iscs.oracle.pgm.hibernate.I2eActiveUserRolesVw;
+import gov.nih.nci.iscs.oracle.pgm.service.UserFilterInfo;
 import gov.nih.nci.iscs.oracle.pgm.service.impl.UserServiceImpl;
 
 import java.util.Iterator;
@@ -183,6 +184,10 @@ public abstract class NciPgmAction extends Action {
         nciUser.setAttribute("appRoles", mUserServiceImpl.getUserAppRoles(nciUser.getUserId()));
         HttpSession session = request.getSession(true);
         session.setAttribute("nciuser", nciUser);
+        UserFilterInfo mUserFilterInfo = (UserFilterInfo) request.getSession().getAttribute(ApplicationConstants.USER_FILTER_INFO);
+        UserServiceImpl mUserServiceImpl1 =  new UserServiceImpl(mApplicationContext, nciUser.getOracleId());
+	    mUserFilterInfo = mUserServiceImpl1.getUserFilerInfo(nciUser.getOracleId());
+	    request.getSession().setAttribute(ApplicationConstants.USER_FILTER_INFO, mUserFilterInfo);
     	return true;
     }
     
