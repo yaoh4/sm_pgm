@@ -30,6 +30,11 @@ public class ChangeUserAction extends NciPgmAction {
     {   
     	HttpSession session = request.getSession(true);
 
+    	user = request.getParameter("user");
+    	
+    	 if(StringUtils.isEmpty(user) || ("").equalsIgnoreCase(user) || user == null) {
+    		 return mapping.findForward("invalidParameters");
+     	 }
     	 
         if(!verifyUser(request, response)) {
         	session.removeAttribute(NciUser.NCI_USER);
