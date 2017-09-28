@@ -25,10 +25,6 @@ public class ChangeUserReferralAction extends NciPgmAction {
     {   
     	HttpSession session = request.getSession(true);
 
-    	 if(("").equalsIgnoreCase(user) || user == null) {
- 	    	return mapping.findForward("invalidParameters");
- 	    }
-    	
         if(!verifyUser(request, response)) {
         	session.removeAttribute(NciUser.NCI_USER);
            logger.error( "Error verifying the user permissions and roles required for this application.");
