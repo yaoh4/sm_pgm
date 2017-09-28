@@ -194,18 +194,28 @@
             validate="false">
 			<forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
             <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
 	</action>
 	
 	<action path="/ChangeUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserAction"  scope="request"
             validate="false">
 			<forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
             <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
 	</action>
 	
 	<action path="/ChangeCurrentUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserReferralAction"  scope="request"
             validate="false">
 			<forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
             <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
+	</action>
+	
+	<action path="/changeCurrentUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserReferralAction"  scope="request"
+            validate="false">
+			<forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+            <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
 	</action>
 	
 	<action
