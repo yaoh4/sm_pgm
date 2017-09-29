@@ -212,18 +212,18 @@ public abstract class NciPgmAction extends Action {
     	HttpSession session = request.getSession(true);
     	ApplicationInfo appInfo = (ApplicationInfo)session.getServletContext().getAttribute("applicationInfo");
         String env = appInfo.getApplicationKey("ENVIRONMENT_INSTANCE");
-        if(!"Local Development".equalsIgnoreCase(env) &&
+        /*if(!"Local Development".equalsIgnoreCase(env) &&
     			!"Development".equalsIgnoreCase(env) &&
     			!"Test".equalsIgnoreCase(env) &&
     			!"Stage".equalsIgnoreCase(env)) {
     		//This is prod environment, so restrict access
     		return true;
-    	}
-    	
-    	
-        /*if("Test".equalsIgnoreCase(env)) {
-    		return true;
     	}*/
+    	
+    	
+        if("Test".equalsIgnoreCase(env)) {
+    		return true;
+    	}
     	
     	return false;
     }
