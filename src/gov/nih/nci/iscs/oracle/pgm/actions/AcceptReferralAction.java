@@ -65,7 +65,12 @@ public class AcceptReferralAction extends NciPgmAction {
            return filterCA(mapping, form, request, response);
        if( mAction.equalsIgnoreCase(ApplicationConstants.SORT_LIST_ACTION ))
            return sortList(mapping, form, request, response);
-	  } catch (Exception ex) {
+	  } 
+	catch(ServiceDeniedException ex) {
+		  throw new ServiceDeniedException();
+		  
+	  }
+	catch (Exception ex) {
 		  throw new ReferralActionException("AcceptReferralAction", "executeAction", ex.toString(), request.getSession(), ex);
 	  }
 
@@ -85,7 +90,7 @@ public class AcceptReferralAction extends NciPgmAction {
 	   }
 
 	   NciUser mNciUser = (NciUser) request.getSession().getAttribute(NciUser.NCI_USER);
-	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId() );
+	   ReferralActionService mReferralActionService = GrantServiceFactory.getReferralActionService(mReferralActionObjects, oApplicationContext, mNciUser.getOracleId(),(String)mNciUser.getAttribute("readOnly") );
 	   boolean mResults = mReferralActionService.performReferral("accept");
 
 	   if(!mResults) {
@@ -95,7 +100,12 @@ public class AcceptReferralAction extends NciPgmAction {
 	   }
 
 	  request.getSession().setAttribute(ApplicationConstants.REFERRAL_ACTION_HASH, mReferralActionService.getReferralActionGrants());
-	  } catch (Exception ex) {
+	  } 
+	catch(ServiceDeniedException ex) {
+		  throw new ServiceDeniedException();
+		  
+	  }
+	catch (Exception ex) {
 		  throw new ReferralActionException("AcceptReferralAction", "executeReferralAction", ex.toString(), request.getSession(), ex);
 	  }
   	  return mapping.findForward("complete");

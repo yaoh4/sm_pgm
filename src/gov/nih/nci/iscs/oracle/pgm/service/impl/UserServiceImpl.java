@@ -40,8 +40,11 @@ public class UserServiceImpl extends BaseServiceImpl
 		super(oContextFactory, aUserId);
 	}
 
+	public UserServiceImpl(Object oContextFactory) {
+		super(oContextFactory);
+	}
 
-    public HashSet getUserDbRoles(String nciOracleId) {
+	public HashSet getUserDbRoles(String nciOracleId) {
 		  HashSet mRoleSet = new HashSet();
 		  try{
              RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
@@ -58,6 +61,27 @@ public class UserServiceImpl extends BaseServiceImpl
 			 throw new ServiceImplException("UserServiceImpl", "getUserDbRoles", "Unable to obtain User Priviledges from the database!!! " + ex.toString());
 	      }
 	       return mRoleSet;
+    }
+    
+    public List getUserAppRoles(String userId) throws Exception {
+     RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+   	 return oRetrieveUserInfoCommand.getUserAppRoles(userId);
+    }
+    
+    public List<NciPeopleVw> searchUser(String firstName, String lastName) throws Exception{
+    	RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+		return oRetrieveUserInfoCommand.searchUser(firstName, lastName);
+	}
+    
+    /**
+     * This method checks if logged in user is RestrictedUser.
+     * @param  oracleId
+     * @return boolean
+     * @throws Exception 
+     */   
+    public boolean isRestrictedUser(String oracleId) throws Exception{
+    	RetrieveUserInfoCommand oRetrieveUserInfoCommand = (RetrieveUserInfoCommand) getBean("retrieveUserInfoCommandDao");
+    	return oRetrieveUserInfoCommand.isRestrictedUser(oracleId);
     }
 
     public UserFilterInfo getUserFilerInfo(String nciOracleId) throws Exception

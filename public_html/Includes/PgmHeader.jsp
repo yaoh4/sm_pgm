@@ -33,6 +33,24 @@
                       <td nowrap width=10%>&nbsp;</td>
                    <%}%>
                    <td nowrap width=1%>&nbsp;</td>
+                   
+                    <% if(applicationName.equalsIgnoreCase("Referral")){ %>
+                    <% if(session.getAttribute("devRole") != null){ %>
+                     <td nowrap width=10%>
+                   <a href="ChangeI2EUser.do">ChangeUser</a>
+                    </td>
+                    <% } %>
+                    <% } %>
+                   
+                   <% if(applicationName.equalsIgnoreCase("PD")){ %>
+                    <% if(session.getAttribute("devRole") != null){ %>
+                     <td nowrap width=10%>
+                   <a href="ChangeTechnicalUser.do">ChangeUser</a>
+                    </td>
+                    <% } %>
+                    <% } %>
+                    
+                    <td nowrap width=1%>&nbsp;</td>
                    <td nowrap width=10%>Env: <b><%=pgmApplInfo.getApplicationKey("ENVIRONMENT_INSTANCE")%></b></td>
                    <td nowrap width=1%>&nbsp;</td>
                    <td nowrap width=10%>Version: <b><%=pgmApplInfo.getApplicationKey("VERSION")%></b></td>

@@ -109,6 +109,7 @@ properties/training/log4j.properties -text
 properties/training/pgm.properties -text
 public_html/AcceptReferral.jsp -text
 public_html/AcceptReferralComplete.jsp -text
+public_html/AccessDenied.jsp -text
 public_html/ApplCAHist.jsp -text
 public_html/AssignPd.jsp -text
 public_html/AssignPdComplete.jsp -text
@@ -167,6 +168,7 @@ public_html/Includes/searchCriteriaReferral.jsp -text
 public_html/Includes/searchCriteriaRightforPDA.jsp -text
 public_html/Includes/searchCriteriaRightforReferral.jsp -text
 public_html/Includes/selectionButtons.jsp -text
+public_html/InvalidParameters.jsp -text
 public_html/JavascriptFiles.js -text
 public_html/LoginError.jsp -text
 public_html/NextRecordAction.do.jsp -text
@@ -183,6 +185,7 @@ public_html/SearchGrantsForPDA.jsp -text
 public_html/SearchGrantsForReferral.jsp -text
 public_html/SentErrorEmail.jsp -text
 public_html/Status.jsp -text
+public_html/Stylesheets/ChangeUserStylesheet.css -text
 public_html/Stylesheets/PgmStyleSheet.css -text
 public_html/Stylesheets/main.css -text
 public_html/Stylesheets/otherappsmenu.css -text
@@ -203,7 +206,11 @@ public_html/WEB-INF/validator-rules.xml -text
 public_html/WEB-INF/web.xml -text
 public_html/YourGrants.js -text
 public_html/agenda.js -text
+public_html/changeUser.jsp -text
+public_html/changeUserError.jsp -text
+public_html/changeUserReferral.jsp -text
 public_html/date-picker.js -text
+public_html/i2eDeveloperError.jsp -text
 public_html/images/ButtonNOWHome.gif -text
 public_html/images/ButtonNotifications.gif -text
 public_html/images/ButtonWorkbench.gif -text
@@ -281,17 +288,24 @@ src/gov/nih/nci/iscs/oracle/pgm/actions/AcceptReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ApplicationResources.properties -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/AssignPDAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ChangeUserAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/ChangeUserReferralAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/ChangeUserValidAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/ChangeUserValidReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/CrystalReportAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ExternalReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/GrantSearchErrorAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/NavigateToHomeAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/NciPgmAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ProcessGrantsForPDAAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/RejectReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/ReleaseReferralAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/RereferReferralAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/RestoreUserAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/SearchGrantsAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/SearchGrantsForPDAAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/SearchGrantsForReferralAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/SearchUsersAction.java -text
+src/gov/nih/nci/iscs/oracle/pgm/actions/SelectUserAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/StatusAction.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/helper/GrantSearchResultComparator.java -text
 src/gov/nih/nci/iscs/oracle/pgm/actions/helper/SearchGrantsActionHelper.java -text
@@ -379,8 +393,10 @@ src/gov/nih/nci/iscs/oracle/pgm/exceptions/CommandDaoException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/GrantRetrieveException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/GrantSearchException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/InfrastructureException.java -text
+src/gov/nih/nci/iscs/oracle/pgm/exceptions/NotAuthorizedException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/PDAssignmentException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/ReferralActionException.java -text
+src/gov/nih/nci/iscs/oracle/pgm/exceptions/ServiceDeniedException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/ServiceImplException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/exceptions/UserLoginException.java -text
 src/gov/nih/nci/iscs/oracle/pgm/factory/DAOFactory.java -text
@@ -389,6 +405,7 @@ src/gov/nih/nci/iscs/oracle/pgm/factory/HibernateDAOFactory.java -text
 src/gov/nih/nci/iscs/oracle/pgm/factory/InitContext.java -text
 src/gov/nih/nci/iscs/oracle/pgm/factory/InitContext.java1 -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/AcceptReferralForm.java -text
+src/gov/nih/nci/iscs/oracle/pgm/forms/ChangeSelectedUserForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/ErrorEmailForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/ExternalReferralForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/GrantSearchErrorForm.java -text
@@ -400,6 +417,7 @@ src/gov/nih/nci/iscs/oracle/pgm/forms/RereferReferralForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/RetrieveGrantsForPDAForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/RetrieveGrantsForReferralForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/RetrieveGrantsForm.java -text
+src/gov/nih/nci/iscs/oracle/pgm/forms/SearchNedUsersForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/forms/StatusForm.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCaAsgnmtHistoryVw.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/ApplCaAsgnmtHistoryVw.java -text
@@ -432,6 +450,8 @@ src/gov/nih/nci/iscs/oracle/pgm/hibernate/GrantQueriesT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/GrantQueriesT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/GwbLinksT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/GwbLinksT.java -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/I2eActiveUserRolesVw.hbm.xml -text
+src/gov/nih/nci/iscs/oracle/pgm/hibernate/I2eActiveUserRolesVw.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciApplElementsT.hbm.xml -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciApplElementsT.java -text
 src/gov/nih/nci/iscs/oracle/pgm/hibernate/NciOrganizationsT.hbm.xml -text

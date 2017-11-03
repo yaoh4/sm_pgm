@@ -25,7 +25,7 @@ public class AcceptReferalTest {
 		   oGrantReferal = (AcceptReferalCommand)  InitContext.getBean("AcceptReferalCommandDao");
 		   //oGrantReferal.setApplId(aAppliId);
 		   //oGrantReferal.setNpeId(aNpeId);
-           mResults = (String) oGrantReferal.execute(aAppliId, aNpeId, "");
+           mResults = (String) oGrantReferal.execute(aAppliId, aNpeId, "","");
 
 
        } catch (Exception ex) {

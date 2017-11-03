@@ -12,12 +12,22 @@
       <form-bean name="externalReferralSearchForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ExternalReferralForm" dynamic="false"/> 
       <form-bean name="grantSearchErrorForm" type="gov.nih.nci.iscs.oracle.pgm.forms.GrantSearchErrorForm" dynamic="false"/> 
       <form-bean name="statusForm" type="gov.nih.nci.iscs.oracle.pgm.forms.StatusForm" dynamic="false"/> 
+      <form-bean name="searchNedUsersForm"   type="gov.nih.nci.iscs.oracle.pgm.forms.SearchNedUsersForm" dynamic="false"/>
+      <form-bean name="changeSelectedUserForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ChangeSelectedUserForm" dynamic="false"/>
+      <form-bean name="searchNedUsersReferralForm"   type="gov.nih.nci.iscs.oracle.pgm.forms.SearchNedUsersReferralForm" dynamic="false"/>
+      <form-bean name="changeSelectedUserReferralForm" type="gov.nih.nci.iscs.oracle.pgm.forms.ChangeSelectedUserReferralForm" dynamic="false"/>
+      
+        
   </form-beans>
  
   <!-- Global forwards -->
 
 
  <global-exceptions>
+     <exception key=""  type="gov.nih.nci.iscs.oracle.pgm.exceptions.ServiceDeniedException" 
+    path="/AccessDenied.jsp"/>
+  <exception key="errors.serviceDenied"  type="gov.nih.nci.iscs.oracle.pgm.exceptions.NotAuthorizedException" 
+        path="/changeUserError.jsp"/>
   <exception
     type="gov.nih.nci.iscs.oracle.pgm.exceptions.UserLoginException"
     key ="errors.userLoginException"
@@ -38,11 +48,13 @@
     type="gov.nih.nci.iscs.oracle.pgm.exceptions.ServiceImplException"
     key ="errors.grantServiceException"
     path="/GrantSearchError.jsp"/>
- </global-exceptions>
+	</global-exceptions>
  <global-forwards type="org.apache.struts.action.ActionForward">
     <forward name="main" path="/index.jsp" redirect="false"/>
     <forward name="error" path="/GrantSearchErrorPage.jsp" redirect="false"/>  
     <forward name="generateReport" path="/GenerateReportAction.do" />
+    <forward name="unauthorized" path="/i2eDeveloperError.jsp" redirect="false"/> 
+    <forward name="changeUserInvalid" path="/changeuserError.jsp" redirect="false"/> 
   </global-forwards>
 
   
@@ -178,11 +190,122 @@
     </action>
     
     <!--  Change user functionality -->
-    <action path="/ChangeUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserAction"  scope="request"
+    <action path="/changeUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserAction"  scope="request"
             validate="false">
 			<forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
             <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
 	</action>
+	
+	<action path="/ChangeUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserAction"  scope="request"
+            validate="false">
+			<forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
+            <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
+	</action>
+	
+	<action path="/ChangeCurrentUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserReferralAction"  scope="request"
+            validate="false">
+			<forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+            <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
+	</action>
+	
+	<action path="/changeCurrentUser" type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserReferralAction"  scope="request"
+            validate="false">
+			<forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+            <forward name="loginError" path="/LoginError.jsp" />
+            <forward name="invalidParameters" path="/InvalidParameters.jsp" />
+	</action>
+	
+	<action
+	    path="/cancelUser"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.NavigateToHomeAction"
+	    scope="request"
+	    validate="false">
+	    <forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
+        </action>
+        
+       <action
+	    path="/restoreUser"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.RestoreUserAction"
+	    scope="request"
+	    validate="false">
+	    <forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
+        </action>
+        
+       <action
+	    path="/ChangeTechnicalUser"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserValidAction"
+	    scope="request"
+	    validate="false">
+	     <forward name="success" path="/changeUser.jsp" />
+        </action>
+        
+        <action
+	    path="/cancelUserReferral"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.NavigateToHomeAction"
+	    scope="request"
+	    validate="false">
+	    <forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+        </action>
+        
+       <action
+	    path="/restoreUserReferral"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.RestoreUserAction"
+	    scope="request"
+	    validate="false">
+	    <forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+        </action>
+        
+        
+
+
+  <action path="/SearchUsersReferral" name="searchNedUsersForm"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.SearchUsersAction"
+	    scope="request"
+	    input="change.user.search"
+	    validate="true">
+	    <forward name="success" path="/changeUserReferral.jsp" />
+	      <forward name="continue" path="/changeUserReferral.jsp" />
+        </action>
+        
+        <action
+	    path="/ChangeI2EUser"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.ChangeUserValidReferralAction"
+	    scope="request"
+	    validate="false">
+	     <forward name="success" path="/changeUserReferral.jsp" />
+        </action>
+
+        <action path="/SearchUsers" name="searchNedUsersForm"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.SearchUsersAction"
+	    scope="request"
+	    input="change.user.search"
+	    validate="true">
+	    <forward name="success" path="/changeUser.jsp" />
+	    <forward name="continue" path="/changeUser.jsp" />
+        </action>
+        
+        <action
+	    path="/SelectUser" name="changeSelectedUserForm"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.SelectUserAction"
+	    scope="request"
+	    input="change.user.search"
+	    validate="true">
+	    <forward name="success" path="/SearchGrantsForPDA.do" redirect="true"/>
+	     <forward name="continue" path="/changeUser.jsp" />
+        </action>
+
+         <action
+	    path="/SelectUserReferral" name="changeSelectedUserForm"
+	    type="gov.nih.nci.iscs.oracle.pgm.actions.SelectUserAction"
+	    scope="request"
+	    input="change.user.search"
+	    validate="true">
+	     <forward name="success" path="/SearchGrantsForReferral.do" redirect="true"/>
+	    <forward name="continue" path="/changeUserReferral.jsp" />
+        </action>
 
     </action-mappings> 
 

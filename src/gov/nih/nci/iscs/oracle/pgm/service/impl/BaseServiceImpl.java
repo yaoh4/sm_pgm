@@ -17,8 +17,17 @@ public class BaseServiceImpl
 {
     static Logger logger = LogManager.getLogger(UserServiceImpl.class);
     private String oUserId;
+    private String readOnly;
 
-    ApplicationContext oContextFactory = null;
+    public String getReadOnly() {
+		return readOnly;
+	}
+
+	public void setReadOnly(String readOnly) {
+		this.readOnly = readOnly;
+	}
+
+	ApplicationContext oContextFactory = null;
 
     public BaseServiceImpl(Object oContextFactory) {
 		this .oContextFactory = (ApplicationContext) oContextFactory;
@@ -30,6 +39,13 @@ public class BaseServiceImpl
 		this.oUserId = oUserId;
 	}
 
+    public BaseServiceImpl(Object oContextFactory, String oUserId, String readOnly) {
+
+  		this .oContextFactory = (ApplicationContext) oContextFactory;
+  		this.oUserId = oUserId;
+  		this.readOnly = readOnly;
+  	}
+    
     public ApplicationContext getContextFactory() {
 		return oContextFactory;
 	}

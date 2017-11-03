@@ -11,6 +11,7 @@ import org.springframework.orm.hibernate.SessionFactoryUtils;
 import net.sf.hibernate.Session;
 
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.resources.AcceptReferalCommand;
+import gov.nih.nci.iscs.i2e.oracle.common.userlogin.NciUser;
 import gov.nih.nci.iscs.oracle.pgm.dataaccess.impl.helper.*;
 import gov.nih.nci.iscs.oracle.pgm.exceptions.*;
 
@@ -30,6 +31,7 @@ public class AcceptReferalCommandDao extends ActionCommandDao implements  Accept
 
     private String oReferalMessage = null;
     private List interceptorNames;
+    private NciUser nciUser;
 
    /** Logger for this class and subclasses */
     protected final Log logger = LogFactory.getLog(getClass());
@@ -43,7 +45,11 @@ public class AcceptReferalCommandDao extends ActionCommandDao implements  Accept
      * Executes the accept referral.
      * @return String  - pass/fail
      */
-     public Object execute(Long oApplId, Long oNpeId, String oUserId) {
+     public Object execute(Long oApplId, Long oNpeId, String oUserId,String readOnly) {
+    	 
+    	 if(("true").equalsIgnoreCase(readOnly)) {
+     		throw new ServiceDeniedException();
+     	}
 
        boolean mReferalPassed = false;
 

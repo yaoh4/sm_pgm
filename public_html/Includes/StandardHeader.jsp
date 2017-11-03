@@ -4,6 +4,8 @@
           <td nowrap valign="bottom">&nbsp;</td>
           <td nowrap valign="bottom">User: <b><%=nciuser.getFullName()%></b></td>
           <td nowrap valign="bottom">&nbsp;</td>
+           
+           <td nowrap valign="bottom">&nbsp;</td>
           <td nowrap valign="bottom">Env: <b><%=ygApplInfo.getApplicationKey("ENVIRONMENT")%></b></td>
           <td nowrap valign="bottom">&nbsp;</td>
           <td nowrap valign="bottom">Version: <b><%=ygApplInfo.getApplicationKey("VERSION")%></b></td>
