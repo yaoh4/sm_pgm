@@ -6,7 +6,7 @@
 
 <hibernate-mapping>
 <class
-    name="gov.nih.nci.cbiit.oracle.gpmats.hibernate.I2eActiveUserRolesVw"
+    name="gov.nih.nci.iscs.oracle.pgm.hibernate.I2eActiveUserRolesVw"
     table="I2E_ACTIVE_USER_ROLES_VW"
 >
     <meta attribute="class-description" inherit="false">
